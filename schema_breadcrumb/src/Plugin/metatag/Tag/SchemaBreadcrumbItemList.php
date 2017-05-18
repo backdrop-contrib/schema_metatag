@@ -53,6 +53,7 @@ class SchemaBreadcrumbItemList extends SchemaNameBase {
       $element['#attributes']['content'] = [];
       foreach ($breadcrumbs as $item) {
        $element['#attributes']['content'][] = [
+          '@type' => 'ListItem'
           'position' => $key,
           'item' => [
             '@id' => $item->getUrl()->setAbsolute()->toString(),
