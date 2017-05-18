@@ -1,4 +1,4 @@
-name: Scheama.org/BreadcrumbList
+name: Schema.org/BreadcrumbList
 type: module
 description: Adds Schema.org/BreadcrumbList to the JSON LD array.
 core: 8.x
