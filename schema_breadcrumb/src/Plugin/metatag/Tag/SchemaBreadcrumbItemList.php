@@ -48,16 +48,23 @@ class SchemaBreadcrumbItemList extends SchemaNameBase {
     if (!empty($element)) {
       $entity_route = \Drupal::service('current_route_match')->getCurrentRouteMatch();
       $breadcrumbs = \Drupal::service('breadcrumb')->build($entity_route)->getLinks();
-
       $key = 1;
       $element['#attributes']['content'] = [];
       foreach ($breadcrumbs as $item) {
-       $element['#attributes']['content'][] = [
+        // Modules that add the current page to the breadcrumb set it to an
+        // empty path, so an empty path is the current path.
+        $url = $item->getUrl()->setAbsolute()->toString();
+        if (empty($url)) {
+          $url = Url::fromRoute('<current>')->setAbsolute()->toString();
+        }
+        $text = $item->getText();
+        $text = is_object($text) ? $text->render() : $text;
+        $element['#attributes']['content'][] = [
           '@type' => 'ListItem',
           'position' => $key,
           'item' => [
-            '@id' => $item->getUrl()->setAbsolute()->toString(),
-            'name' => $item->getText()->render(),
+            '@id' => $url,
+            'name' => $text,
           ],
         ];
         $key++;
