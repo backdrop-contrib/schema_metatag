@@ -3,6 +3,7 @@
 namespace Drupal\schema_breadcrumb\Plugin\metatag\Tag;
 
 use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
+use \Drupal\Core\Url;
 
 /**
  * Provides a plugin for the 'schema_breadcrumb_item_list' meta tag.
