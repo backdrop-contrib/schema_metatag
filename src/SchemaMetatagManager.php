@@ -27,16 +27,12 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
     $items['@graph'] = [];
     $group_key = 0;
     foreach ($metatag_data as $group_id => $data) {
-      $has_type = FALSE;
       $group = self::groups($group_id);
       if (!empty($group['id'])) {
         foreach ($data as $item) {
           $name = $item[0]['#attributes']['name'];
           $value = $item[0]['#attributes']['content'];
           $items['@graph'][$group_key][$name] = $value;
-          if ($name == '@type') {
-            $has_type = TRUE;
-          }
         }
         $group_key++;
       }
