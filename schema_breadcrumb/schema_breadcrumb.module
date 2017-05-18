@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * @file
+ * Contains Schema Breadcrumb.module.
+ */
+
+use Drupal\schema_metatag\SchemaMetatagManager;
+
+/**
+ * Implements hook_metatag_tags_alter().
+ */
+function schema_breadcrumb_metatag_tags_alter(&$data) {
+  $module_name = basename(__FILE__, '.module');
+  foreach ($data as $key => $value) {
+    if ($value['provider'] == $module_name) {
+      $data[$key]['schema_metatag'] = TRUE;
+    }
+  }
+}
+
+/**
+ * Implements hook_metatag_groups_alter().
+ */
+function schema_breadcrumb_metatag_groups_alter(&$data) {
+  $module_name = basename(__FILE__, '.module');
+  foreach ($data as $key => $value) {
+    if ($value['provider'] == $module_name) {
+      $data[$key]['schema_metatag'] = TRUE;
+    }
+  }
+}

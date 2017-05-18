@@ -1,0 +1,7 @@
+name: Schema: Scheama.org/BreadcrumbList
+type: module
+description: Adds Schema.org/BreadcrumbList to the JSON LD array.
+core: 8.x
+package: SEO
+dependencies:
+  - schema_article

@@ -1,0 +1,7 @@
+name: Schema.org Example
+type: module
+description: Example of how to add more fields and groups to Schema.org.
+core: 8.x
+package: SEO
+dependencies:
+  - schema_article

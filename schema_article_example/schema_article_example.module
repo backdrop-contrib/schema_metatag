@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * @file
+ * Contains Schema Article Example.module.
+ */
+
+/**
+ * Implements hook_help().
+ */
+function schema_article_example_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.schema_article_example':
+      $output = 'Example of how to add more fields to the Schema.org Article group, adds "Typical Age Range" to existing Article group, and creates a new group for Schema.org WebPage with a publisher field.';
+      break;
+  }
+  return $output;
+}
+
+/**
+ * Implements hook_metatag_tags_alter().
+ *
+ * Every module should implement this to add a flag to the fields they create.
+ */
+function schema_article_example_metatag_tags_alter(&$data) {
+  $module_name = basename(__FILE__, '.module');
+  foreach ($data as $key => $value) {
+    if ($value['provider'] == $module_name) {
+      $data[$key]['schema_metatag'] = TRUE;
+    }
+  }
+}
+
+/**
+ * Implements hook_metatag_groups_alter().
+ *
+ * Every module should implement this to add a flag to the groups they create.
+ */
+function schema_article_example_metatag_groups_alter(&$data) {
+  $module_name = basename(__FILE__, '.module');
+  foreach ($data as $key => $value) {
+    if ($value['provider'] == $module_name) {
+      $data[$key]['schema_metatag'] = TRUE;
+    }
+  }
+}
