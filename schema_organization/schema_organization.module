@@ -2,15 +2,17 @@
 
 /**
  * @file
- * Contains Schema Breadcrumb.module.
+ * Contains schema_organization.module.
  */
-
-use Drupal\schema_metatag\SchemaMetatagManager;
 
 /**
  * Implements hook_metatag_tags_alter().
+ *
+ *
+ * Every module should implement this to add a flag to the properties they
+ * create.
  */
-function schema_breadcrumb_metatag_tags_alter(&$data) {
+function schema_organization_metatag_tags_alter(&$data) {
   $module_name = basename(__FILE__, '.module');
   foreach ($data as $key => $value) {
     if ($value['provider'] == $module_name) {
@@ -21,8 +23,11 @@ function schema_breadcrumb_metatag_tags_alter(&$data) {
 
 /**
  * Implements hook_metatag_groups_alter().
+ *
+ * Every module should implement this to add a flag to the object types they
+ * create.
  */
-function schema_breadcrumb_metatag_groups_alter(&$data) {
+function schema_organization_metatag_groups_alter(&$data) {
   $module_name = basename(__FILE__, '.module');
   foreach ($data as $key => $value) {
     if ($value['provider'] == $module_name) {

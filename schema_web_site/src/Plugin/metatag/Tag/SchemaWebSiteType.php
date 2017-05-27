@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\schema_article_example\Plugin\metatag\Tag;
+namespace Drupal\schema_web_site\Plugin\metatag\Tag;
 
 use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
 
@@ -12,37 +12,30 @@ use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
  * - 'group' should match the id of the group that defines the Schema.org type.
  *
  * @MetatagTag(
- *   id = "schema_web_page_type",
- *   label = @Translation("Type"),
- *   description = @Translation("The type of web page."),
+ *   id = "schema_web_site_type",
+ *   label = @Translation("@type"),
+ *   description = @Translation("The type of web site."),
  *   name = "@type",
- *   group = "schema_web_page",
+ *   group = "schema_web_site",
  *   weight = -1,
  *   type = "string",
  *   secure = FALSE,
  *   multiple = FALSE
  * )
  */
-class SchemaWebPageType extends SchemaNameBase {
+class SchemaWebSiteType extends SchemaNameBase {
   /**
    * Generate a form element for this meta tag.
    */
   public function form(array $element = []) {
     $form = [
       '#type' => 'select',
-      '#title' => $this->t('Type'),
       '#title' => $this->label(),
       '#description' => $this->description(),
       '#empty_option' => t('- None -'),
       '#empty_value' => '',
       '#options' => [
-        'WebPage' => $this->t('WebPage'),
-        'AboutPage' => $this->t('AboutPage'),
-        'CheckoutPage' => $this->t('CheckoutPage'),
-        'ContactPage' => $this->t('ContactPage'),
-        'CollectionPage' => $this->t('CollectionPage'),
-        'ProfilePage' => $this->t('ProfilePage'),
-        'SearchResultsPage' => $this->t('SearchResultsPage'),
+        'WebSite' => $this->t('WebSite'),
       ],
       '#default_value' => $this->value(),
    ];

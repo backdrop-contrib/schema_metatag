@@ -1,4 +1,4 @@
-name: Schema.org/Article
+name: Schema.org Article
 type: module
 description: Adds Schema.org/Article to the JSON LD array. Creates Article, BlogPosting, SocialMediaPosting, Report, ScholarlyArticle, TechArticle or APIReference.
 core: 8.x

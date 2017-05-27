@@ -7,9 +7,13 @@ use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
 /**
  * Provides a plugin for the 'headline' meta tag.
  *
+ * - 'id' should be a globally unique id.
+ * - 'name' should match the Schema.org element name.
+ * - 'group' should match the id of the group that defines the Schema.org type.
+ *
  * @MetatagTag(
  *   id = "schema_article_headline",
- *   label = @Translation("Headline"),
+ *   label = @Translation("headline"),
  *   description = @Translation("Headline of the article."),
  *   name = "headline",
  *   group = "schema_article",

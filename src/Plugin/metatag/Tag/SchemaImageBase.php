@@ -27,7 +27,7 @@ abstract class SchemaImageBase extends SchemaNameBase {
 
     $form['url'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Url'),
+      '#title' => $this->t('url'),
       '#default_value' => !empty($value['url']) ? $value['url'] : '',
       '#maxlength' => 255,
       '#attributes' => ['placeholder' => '[node:field_image:entity:url]'],
@@ -36,7 +36,7 @@ abstract class SchemaImageBase extends SchemaNameBase {
     ];
     $form['width'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Width'),
+      '#title' => $this->t('width'),
       '#default_value' => !empty($value['width']) ? $value['width'] : '',
       '#maxlength' => 255,
       '#attributes' => ['placeholder' => '[node:field_image:width]'],
@@ -44,7 +44,7 @@ abstract class SchemaImageBase extends SchemaNameBase {
     ];
     $form['height'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Height'),
+      '#title' => $this->t('height'),
       '#default_value' => !empty($value['height']) ? $value['height'] : '',
       '#maxlength' => 255,
       '#attributes' => ['placeholder' => '[node:field_image:height]'],

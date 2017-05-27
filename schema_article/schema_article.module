@@ -2,11 +2,15 @@
 
 /**
  * @file
- * Contains Schema Article.module.
+ * Contains schema_article.module.
  */
 
 /**
  * Implements hook_metatag_tags_alter().
+ *
+ *
+ * Every module should implement this to add a flag to the properties they
+ * create.
  */
 function schema_article_metatag_tags_alter(&$data) {
   $module_name = basename(__FILE__, '.module');
@@ -19,6 +23,9 @@ function schema_article_metatag_tags_alter(&$data) {
 
 /**
  * Implements hook_metatag_groups_alter().
+ *
+ * Every module should implement this to add a flag to the object types they
+ * create.
  */
 function schema_article_metatag_groups_alter(&$data) {
   $module_name = basename(__FILE__, '.module');

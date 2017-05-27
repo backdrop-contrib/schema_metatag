@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\schema_article_example\Plugin\metatag\Group;
+namespace Drupal\schema_web_page\Plugin\metatag\Group;
 
 use \Drupal\schema_metatag\Plugin\metatag\Group\SchemaGroupBase;
 
@@ -11,7 +11,7 @@ use \Drupal\schema_metatag\Plugin\metatag\Group\SchemaGroupBase;
  *   id = "schema_web_page",
  *   label = @Translation("Schema.org: WebPage"),
  *   description = @Translation("See Schema.org definitions for this Schema type at <a href="":url"">:url</a>.", arguments = { ":url" = "http://schema.org/WebPage"}),
- *   weight = 0,
+ *   weight = 10,
  * )
  */
 class SchemaWebPage extends SchemaGroupBase {

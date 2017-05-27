@@ -7,9 +7,13 @@ use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaImageBase;
 /**
  * Provides a plugin for the 'image' meta tag.
  *
+ * - 'id' should be a globally unique id.
+ * - 'name' should match the Schema.org element name.
+ * - 'group' should match the id of the group that defines the Schema.org type.
+ *
  * @MetatagTag(
  *   id = "schema_article_image",
- *   label = @Translation("Image"),
+ *   label = @Translation("image"),
  *   description = @Translation("The primary image for this item."),
  *   name = "image",
  *   group = "schema_article",

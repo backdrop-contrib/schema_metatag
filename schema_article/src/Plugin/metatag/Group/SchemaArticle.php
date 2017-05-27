@@ -11,7 +11,7 @@ use \Drupal\schema_metatag\Plugin\metatag\Group\SchemaGroupBase;
  *   id = "schema_article",
  *   label = @Translation("Schema.org: Article"),
  *   description = @Translation("See Schema.org definitions for this Schema type at <a href="":url"">:url</a>.", arguments = { ":url" = "http://schema.org/Article"}),
- *   weight = 0,
+ *   weight = 10,
  * )
  */
 class SchemaArticle extends SchemaGroupBase {

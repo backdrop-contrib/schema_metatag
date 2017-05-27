@@ -1,26 +1,30 @@
 <?php
 
-namespace Drupal\schema_breadcrumb\Plugin\metatag\Tag;
+namespace Drupal\schema_web_page\Plugin\metatag\Tag;
 
 use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
 use \Drupal\Core\Url;
 
 /**
- * Provides a plugin for the 'schema_breadcrumb_item_list' meta tag.
+ * Provides a plugin for the 'schema_web_page_breadcrumb' meta tag.
+ *
+ * - 'id' should be a globally unique id.
+ * - 'name' should match the Schema.org element name.
+ * - 'group' should match the id of the group that defines the Schema.org type.
  *
  * @MetatagTag(
- *   id = "schema_breadcrumb_item_list",
- *   label = @Translation("itemListElement"),
- *   description = @Translation("Add the breadcrumb for current web page to Schema.org structured data?"),
- *   name = "itemListElement",
- *   group = "schema_breadcrumb_list",
+ *   id = "schema_web_page_breadcrumb",
+ *   label = @Translation("breadcrumb"),
+ *   description = @Translation("Add the breadcrumb for the current web page to Schema.org structured data?"),
+ *   name = "breadcrumb",
+ *   group = "schema_web_page",
  *   weight = 1,
  *   type = "string",
  *   secure = FALSE,
  *   multiple = FALSE
  * )
  */
-class SchemaBreadcrumbItemList extends SchemaNameBase {
+class SchemaWebPageBreadcrumb extends SchemaNameBase {
 
   /**
    * Generate a form element for this meta tag.
@@ -50,7 +54,10 @@ class SchemaBreadcrumbItemList extends SchemaNameBase {
       $entity_route = \Drupal::service('current_route_match')->getCurrentRouteMatch();
       $breadcrumbs = \Drupal::service('breadcrumb')->build($entity_route)->getLinks();
       $key = 1;
-      $element['#attributes']['content'] = [];
+      $element['#attributes']['content'] = [
+        "@type" => "BreadcrumbList",
+        "itemListElement" => [],
+      ];
       foreach ($breadcrumbs as $item) {
         // Modules that add the current page to the breadcrumb set it to an
         // empty path, so an empty path is the current path.
@@ -60,7 +67,7 @@ class SchemaBreadcrumbItemList extends SchemaNameBase {
         }
         $text = $item->getText();
         $text = is_object($text) ? $text->render() : $text;
-        $element['#attributes']['content'][] = [
+        $element['#attributes']['content']['itemListElement'][] = [
           '@type' => 'ListItem',
           'position' => $key,
           'item' => [

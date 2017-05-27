@@ -13,7 +13,7 @@ use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
  *
  * @MetatagTag(
  *   id = "schema_article_age_range",
- *   label = @Translation("Typical Age Range"),
+ *   label = @Translation("typicalAgeRange"),
  *   description = @Translation("The applicable age range of the item."),
  *   name = "typicalAgeRange",
  *   group = "schema_article",

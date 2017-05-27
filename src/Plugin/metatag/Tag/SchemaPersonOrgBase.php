@@ -24,10 +24,10 @@ abstract class SchemaPersonOrgBase extends SchemaNameBase {
     $form['#open'] = !empty($value['name']);
     $form['#tree'] = TRUE;
     $form['#title'] = $this->label();
-    $form['type'] = [
+    $form['@type'] = [
       '#type' => 'select',
-      '#title' => $this->t('Type'),
-      '#default_value' => !empty($value['type']) ? $value['type'] : '',
+      '#title' => $this->t('@type'),
+      '#default_value' => !empty($value['@type']) ? $value['@type'] : '',
       '#empty_option' => t('- None -'),
       '#empty_value' => '',
       '#options' => [
@@ -37,14 +37,33 @@ abstract class SchemaPersonOrgBase extends SchemaNameBase {
       '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
     ];
 
+    $form['@id'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('@id'),
+      '#default_value' => !empty($value['@id']) ? $value['@id'] : '',
+      '#maxlength' => 255,
+      '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
+      '#description' => $this->t("Globally unique @id of the person or organization, usually a url, used to to link other properties to this object."),
+    ];
+
     $form['name'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Name'),
+      '#title' => $this->t('name'),
       '#default_value' => !empty($value['name']) ? $value['name'] : '',
       '#maxlength' => 255,
       '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
       '#description' => $this->t(" Name of the person or organization."),
       '#attributes' => ['placeholder' => '[node:author:display-name]'],
+    ];
+
+    $form['url'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('url'),
+      '#default_value' => !empty($value['url']) ? $value['url'] : '',
+      '#maxlength' => 255,
+      '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
+      '#description' => $this->t("Absolute URL of the canonical Web page, like the URL of the author's profile page or the organization's official website."),
+      '#attributes' => ['placeholder' => '[node:author:url]'],
     ];
 
     $form['sameAs'] = [
@@ -53,8 +72,7 @@ abstract class SchemaPersonOrgBase extends SchemaNameBase {
       '#default_value' => !empty($value['sameAs']) ? $value['sameAs'] : '',
       '#maxlength' => 255,
       '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
-      '#description' => $this->t("Absolute URL of a reference Web page, like the URL of the author's profile page or the organization's official website."),
-      '#attributes' => ['placeholder' => '[node:author:url]'],
+      '#description' => $this->t("Comma separated list of URLs for the person's or organization's official social media profile page(s)."),
     ];
 
     $form['logo'] = [
@@ -66,7 +84,7 @@ abstract class SchemaPersonOrgBase extends SchemaNameBase {
 
     $form['logo']['url'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Url'),
+      '#title' => $this->t('url'),
       '#default_value' => !empty($value['logo']['url']) ? $value['logo']['url'] : '',
       '#maxlength' => 255,
       '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
@@ -74,14 +92,14 @@ abstract class SchemaPersonOrgBase extends SchemaNameBase {
     ];
     $form['logo']['width'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Width'),
+      '#title' => $this->t('width'),
       '#default_value' => !empty($value['logo']['width']) ? $value['logo']['width'] : '',
       '#maxlength' => 255,
       '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
     ];
     $form['logo']['height'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Height'),
+      '#title' => $this->t('height'),
       '#default_value' => !empty($value['logo']['height']) ? $value['logo']['height'] : '',
       '#maxlength' => 255,
       '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
@@ -94,25 +112,35 @@ abstract class SchemaPersonOrgBase extends SchemaNameBase {
     $element = parent::output();
     if (!empty($element)) {
       $content = $this->unserialize($this->value());
-
       // If there is no value, don't create a tag.
-      if (empty($content['name']) && empty($content['sameAs'])) {
+      $keys = ['@type', '@id', 'name', 'url', 'sameAs'];
+      $empty = TRUE;
+      foreach ($keys as $key) {
+        if (!empty($content[$key])) {
+          $empty = FALSE;
+          break;
+        }
+      }
+      if ($empty) {
         return '';
       }
       $element['#attributes']['group'] = $this->group;
       $element['#attributes']['schema_metatag'] = $this->schema_metatag();
-      $element['#attributes']['content'] = [
-        '@type' => $content['type'],
-        'name' => $content['name'],
-        'sameAs' => $content['sameAs'],
-      ];
+      $element['#attributes']['content'] = [];
+      foreach ($keys as $key) {
+        if (!empty($content[$key])) {
+          if (in_array($key, ['sameAs'])) {
+            $value = explode(',', $content[$key]);
+          }
+          else {
+            $value = $content[$key];
+          }
+          $element['#attributes']['content'][$key] = $value;
+        }
+      }
       if (!empty($content['logo']['url'])) {
-        $element['#attributes']['content']['logo'] = [
-          '@type' => 'ImageObject',
-          'url' => $content['logo']['url'],
-          'width' => $content['logo']['width'],
-          'height' => $content['logo']['height'],
-        ];
+        $element['#attributes']['content']['logo'] = ['@type' => 'ImageObject'];
+        $element['#attributes']['content']['logo'] += $content['logo'];
       }
     }
     return $element;

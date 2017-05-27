@@ -7,9 +7,13 @@ use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaPersonOrgBase;
 /**
  * Provides a plugin for the 'author' meta tag.
  *
+ * - 'id' should be a globally unique id.
+ * - 'name' should match the Schema.org element name.
+ * - 'group' should match the id of the group that defines the Schema.org type.
+ *
  * @MetatagTag(
  *   id = "schema_article_author",
- *   label = @Translation("Author"),
+ *   label = @Translation("author"),
  *   description = @Translation("Author of the article."),
  *   name = "author",
  *   group = "schema_article",
@@ -30,7 +34,7 @@ class SchemaArticleAuthor extends SchemaPersonOrgBase {
   public function form(array $element = []) {
     $form = parent::form($element);
     $form['name']['#attribute']['placeholder'] = '[node:author:display-name]';
-    $form['sameAs']['#attributes']['placeholder'] = '[node:author:url]';
+    $form['url']['#attributes']['placeholder'] = '[node:author:url]';
     return $form;
   }
 

@@ -7,9 +7,13 @@ use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaDateBase;
 /**
  * Provides a plugin for the 'dateModified' meta tag.
  *
+ * - 'id' should be a globally unique id.
+ * - 'name' should match the Schema.org element name.
+ * - 'group' should match the id of the group that defines the Schema.org type.
+ *
  * @MetatagTag(
  *   id = "schema_article_date_modified",
- *   label = @Translation("Date Modified"),
+ *   label = @Translation("dateModified"),
  *   description = @Translation("Date the article was last modified."),
  *   name = "dateModified",
  *   group = "schema_article",

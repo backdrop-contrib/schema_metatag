@@ -1,35 +1,36 @@
 <?php
 
-namespace Drupal\schema_article\Plugin\metatag\Tag;
+namespace Drupal\schema_web_site\Plugin\metatag\Tag;
 
 use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
 
 /**
- * Provides a plugin for the 'schema_article_description' meta tag.
+ * Provides a plugin for the 'schema_web_site_url' meta tag.
  *
  * - 'id' should be a globally unique id.
  * - 'name' should match the Schema.org element name.
  * - 'group' should match the id of the group that defines the Schema.org type.
  *
  * @MetatagTag(
- *   id = "schema_article_description",
- *   label = @Translation("description"),
- *   description = @Translation("A description of the item."),
- *   name = "description",
- *   group = "schema_article",
- *   weight = 1,
+ *   id = "schema_web_site_url",
+ *   label = @Translation("url"),
+ *   description = @Translation("The url of the web site."),
+ *   name = "url",
+ *   group = "schema_web_site",
+ *   weight = 2,
  *   type = "string",
  *   secure = FALSE,
  *   multiple = FALSE
  * )
  */
-class SchemaArticleDescription extends SchemaNameBase {
+class SchemaWebSiteUrl extends SchemaNameBase {
   /**
    * Generate a form element for this meta tag.
    */
   public function form(array $element = []) {
     $form = parent::form($element);
-    $form['#attributes']['placeholder'] = '[node:summary]';
+    $form['#attributes']['placeholder'] = '[site:url]';
     return $form;
   }
+
 }
