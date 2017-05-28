@@ -43,9 +43,9 @@ For instance, the code in the head might end up looking like this:
 }</script>
 </code>
 
-Since the Schema.org list is huge, and growing, this module only provides a small subset of those values. But it is designed to be extensible. There is an included module, Schema.org Article Example, that shows how other modules can add more values to the Article type that is already defined, or add new types (groups) with any number of their own fields.
+Since the Schema.org list is huge, and growing, this module only provides a small subset of those values. But it is designed to be extensible. There is an included module, Schema.org Article Example, that shows how other modules can add more properties to types that are already defined. Several types are included which can be copied to add new types (groups) with any number of their own properties.
 
-The module includes a base group class and several base tag classes that can be extended. Many items are simple key/value pairs that require nothing more than extending the base class and giving them their own ids. Some are more complex, like Person and Org, and they collect multiple values and serialize the results. The included Schema.org/BreadcrumbList is an example of a complex element that can't be represented with string or token values and is computed when the page is rendered.
+The module includes a base group class and several base tag classes that can be extended. Many properties are simple key/value pairs that require nothing more than extending the base class and giving them their own ids. Some are more complex, like Person and Organization, and BreadcrumbList, and they collect multiple values and serialize the results.
 
 For more information and to test the results:
 - https://schema.org/docs/full.html
