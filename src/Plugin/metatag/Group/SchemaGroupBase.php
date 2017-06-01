@@ -14,14 +14,21 @@ abstract class SchemaGroupBase extends GroupBase {
    *
    * @var boolean
    */
-  protected $schema_metatag;
+  protected $schemaMetatag;
 
+  /**
+   * {@inheritdoc}
+   */
   public function __construct(array $configuration, $plugin_id, array $plugin_definition) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->schema_metatag = $plugin_definition['schema_metatag'];
+    $this->schemaMetatag = $plugin_definition['schema_metatag'];
   }
 
-  public function schema_metatag() {
-    return $this->schema_metatag;
+  /**
+   * Returns whether this is structured data.
+   */
+  public function schemaMetatag() {
+    return $this->schemaMetatag;
   }
+
 }

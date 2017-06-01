@@ -2,8 +2,6 @@
 
 namespace Drupal\schema_metatag\Plugin\metatag\Tag;
 
-use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
-
 /**
  * Provides a plugin for the 'schema_name_base' meta tag.
  */
@@ -11,12 +9,12 @@ abstract class SchemaDateBase extends SchemaNameBase {
 
   /**
    * Generate a form element for this meta tag.
-   *
    */
   public function form(array $element = []) {
     $form = parent::form($element);
     $form['#attributes']['placeholder'] = '[node:created:html_datetime]';
-    $form['#description'] .=  $this->t(' To format the date properly, use a token like [node:created:html_datetime].');
+    $form['#description'] .= $this->t('To format the date properly, use a token like [node:created:html_datetime].');
     return $form;
   }
+
 }

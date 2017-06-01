@@ -12,16 +12,21 @@ abstract class SchemaNameBase extends MetaNameBase {
   /**
    * Identifier that this is an item that uses Schema.org definitions.
    */
-  protected $schema_metatag;
+  protected $schemaMetatag;
 
+  /**
+   * {@inheritdoc}
+   */
   public function __construct(array $configuration, $plugin_id, array $plugin_definition) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->schema_metatag = TRUE;
+    $this->schemaMetatag = TRUE;
   }
 
   /**
+   * Retuns whether or not this meta tag has been enabled.
+   *
    * @return bool
-   *   Whether this meta tag has been enabled.
+   *   TRUE if this meta tag has been enabled, FALSE otherwise.
    */
   public function isActive() {
     if ($this->group == 'schema_group_base') {
@@ -38,16 +43,21 @@ abstract class SchemaNameBase extends MetaNameBase {
     $element = parent::output();
     if (!empty($element)) {
       $element['#attributes']['group'] = $this->group;
-      $element['#attributes']['schema_metatag'] = $this->schema_metatag();
+      $element['#attributes']['schema_metatag'] = $this->schemaMetatag();
     }
     return $element;
   }
 
-  public function schema_metatag() {
-    return $this->schema_metatag;
+  /**
+   * Whether or not this item uses Schema.org definitions.
+   */
+  public function schemaMetatag() {
+    return $this->schemaMetatag;
   }
 
   /**
+   * The serialized value for the metatag.
+   *
    * Metatag expects a string value, so use the serialized value
    * without unserializing it. Manually unserialize it when needed.
    */
@@ -69,7 +79,7 @@ abstract class SchemaNameBase extends MetaNameBase {
     if (is_array($value)) {
       // Don't serialize an empty array.
       // Otherwise Metatag won't know the field is empty.
-      if (empty($this->array_trim($value))) {
+      if (empty($this->arrayTrim($value))) {
         return '';
       }
       else {
@@ -86,7 +96,7 @@ abstract class SchemaNameBase extends MetaNameBase {
     if (!is_array($value)) {
       // Fix problems created if token replacements are a different size
       // than the original tokens.
-      $value = $this->recompute_serialized_length($value);
+      $value = $this->recomputeSerializedLength($value);
       $value = unserialize($value);
     }
     return $value;
@@ -97,9 +107,11 @@ abstract class SchemaNameBase extends MetaNameBase {
    *
    * If the result is an empty array, the nested array is completely empty.
    */
-  function array_trim($input) {
+  public function arrayTrim($input) {
     return is_array($input) ? array_filter($input,
-      function (& $value) { return $value = $this->array_trim($value); }
+      function (& $value) {
+        return $value = $this->arrayTrim($value);
+      }
     ) : $input;
   }
 
@@ -109,10 +121,11 @@ abstract class SchemaNameBase extends MetaNameBase {
    * Prevent unserialization error if token replacements are different lengths
    * than the original tokens.
    */
-  protected function recompute_serialized_length($value) {
-    $value = preg_replace_callback ( '!s:(\d+):"(.*?)";!', function($match) {
+  protected function recomputeSerializedLength($value) {
+    $value = preg_replace_callback('!s:(\d+):"(.*?)";!', function ($match) {
       return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
-}, $value);
+    }, $value);
     return $value;
   }
+
 }

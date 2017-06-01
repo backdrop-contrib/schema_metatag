@@ -34,4 +34,5 @@ class SchemaArticlePublisher extends SchemaPersonOrgBase {
     $form['url']['#attributes']['placeholder'] = '[site:url]';
     return $form;
   }
+
 }

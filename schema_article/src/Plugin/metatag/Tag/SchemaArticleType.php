@@ -24,6 +24,7 @@ use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
  * )
  */
 class SchemaArticleType extends SchemaNameBase {
+
   /**
    * Generate a form element for this meta tag.
    */
@@ -45,7 +46,8 @@ class SchemaArticleType extends SchemaNameBase {
         'APIReference' => $this->t('APIReference'),
       ],
       '#default_value' => $this->value(),
-   ];
+    ];
     return $form;
   }
+
 }

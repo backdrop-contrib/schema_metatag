@@ -36,4 +36,5 @@ class SchemaArticleDateModified extends SchemaDateBase {
     $form['#attributes']['placeholder'] = '[node:changed:html_datetime]';
     return $form;
   }
+
 }

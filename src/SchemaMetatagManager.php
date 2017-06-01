@@ -22,7 +22,7 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
    * Multiple groups can be combined under @graph.
    * All groups that have properties filled out will be presented here.
    */
-  static function jsonld($metatag_data, $route_entity = NULL) {
+  public static function jsonld($metatag_data, $route_entity = NULL) {
     $items['@context'] = 'http://schema.org';
     $items['@graph'] = [];
     $group_key = 0;
@@ -51,8 +51,8 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
   /**
    * Utility function to get a single group.
    */
-  static function groups($group_id = NULL) {
-    $filtered_groups = self::all_groups();
+  public static function groups($group_id = NULL) {
+    $filtered_groups = self::allGroups();
     if (!empty($group_id) && array_key_exists($group_id, $filtered_groups)) {
       return $filtered_groups[$group_id];
     }
@@ -67,7 +67,7 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
    *
    * #TODO Add some caching to this operation.
    */
-  static function all_groups() {
+  public static function allGroups() {
     $base_groups = ['schema_group_base'];
     $group_manager = \Drupal::service('plugin.manager.metatag.group');
     $groups = $group_manager->getDefinitions();

@@ -24,6 +24,7 @@ use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
  * )
  */
 class SchemaOrganizationType extends SchemaNameBase {
+
   /**
    * Generate a form element for this meta tag.
    */
@@ -36,10 +37,13 @@ class SchemaOrganizationType extends SchemaNameBase {
       '#empty_value' => '',
       '#options' => $this->types(),
       '#default_value' => $this->value(),
-   ];
+    ];
     return $form;
   }
 
+  /**
+   * Return a list of organization types.
+   */
   private function types() {
     $types = [
       'Organization',
@@ -190,4 +194,5 @@ class SchemaOrganizationType extends SchemaNameBase {
     ];
     return array_combine($types, $types);
   }
+
 }

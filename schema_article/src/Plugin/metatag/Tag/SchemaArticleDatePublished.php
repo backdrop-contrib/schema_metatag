@@ -24,6 +24,7 @@ use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaDateBase;
  * )
  */
 class SchemaArticleDatePublished extends SchemaDateBase {
+
   /**
    * Generate a form element for this meta tag.
    */
@@ -32,4 +33,5 @@ class SchemaArticleDatePublished extends SchemaDateBase {
     $form['#attributes']['placeholder'] = '[node:created:html_datetime]';
     return $form;
   }
+
 }

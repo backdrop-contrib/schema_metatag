@@ -24,6 +24,7 @@ use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
  * )
  */
 class SchemaWebSiteType extends SchemaNameBase {
+
   /**
    * Generate a form element for this meta tag.
    */
@@ -38,7 +39,8 @@ class SchemaWebSiteType extends SchemaNameBase {
         'WebSite' => $this->t('WebSite'),
       ],
       '#default_value' => $this->value(),
-   ];
+    ];
     return $form;
   }
+
 }

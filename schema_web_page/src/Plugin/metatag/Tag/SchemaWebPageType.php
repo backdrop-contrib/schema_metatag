@@ -24,6 +24,7 @@ use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
  * )
  */
 class SchemaWebPageType extends SchemaNameBase {
+
   /**
    * Generate a form element for this meta tag.
    */
@@ -45,7 +46,8 @@ class SchemaWebPageType extends SchemaNameBase {
         'SearchResultsPage' => $this->t('SearchResultsPage'),
       ],
       '#default_value' => $this->value(),
-   ];
+    ];
     return $form;
   }
+
 }

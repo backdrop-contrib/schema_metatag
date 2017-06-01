@@ -2,8 +2,6 @@
 
 namespace Drupal\schema_metatag\Plugin\metatag\Tag;
 
-use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
-
 /**
  * Schema.org Person/Org items should extend this class.
  */
@@ -32,7 +30,7 @@ abstract class SchemaPersonOrgBase extends SchemaNameBase {
       '#empty_value' => '',
       '#options' => [
         'Person' => $this->t('Person'),
-        'Organization' => $this->t('Organization')
+        'Organization' => $this->t('Organization'),
       ],
       '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
     ];
@@ -52,7 +50,7 @@ abstract class SchemaPersonOrgBase extends SchemaNameBase {
       '#default_value' => !empty($value['name']) ? $value['name'] : '',
       '#maxlength' => 255,
       '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
-      '#description' => $this->t(" Name of the person or organization."),
+      '#description' => $this->t("Name of the person or organization."),
       '#attributes' => ['placeholder' => '[node:author:display-name]'],
     ];
 
@@ -108,6 +106,9 @@ abstract class SchemaPersonOrgBase extends SchemaNameBase {
     return $form;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function output() {
     $element = parent::output();
     if (!empty($element)) {
@@ -125,7 +126,7 @@ abstract class SchemaPersonOrgBase extends SchemaNameBase {
         return '';
       }
       $element['#attributes']['group'] = $this->group;
-      $element['#attributes']['schema_metatag'] = $this->schema_metatag();
+      $element['#attributes']['schema_metatag'] = $this->schemaMetatag();
       $element['#attributes']['content'] = [];
       foreach ($keys as $key) {
         if (!empty($content[$key])) {
@@ -145,4 +146,5 @@ abstract class SchemaPersonOrgBase extends SchemaNameBase {
     }
     return $element;
   }
+
 }

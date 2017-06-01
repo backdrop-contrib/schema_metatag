@@ -2,8 +2,6 @@
 
 namespace Drupal\schema_metatag\Plugin\metatag\Tag;
 
-use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
-
 /**
  * Schema.org Image items should extend this class.
  */
@@ -54,6 +52,9 @@ abstract class SchemaImageBase extends SchemaNameBase {
     return $form;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function output() {
     $element = parent::output();
     if (!empty($element)) {
@@ -64,7 +65,7 @@ abstract class SchemaImageBase extends SchemaNameBase {
         return '';
       }
       $element['#attributes']['group'] = $this->group;
-      $element['#attributes']['schema_metatag'] = $this->schema_metatag();
+      $element['#attributes']['schema_metatag'] = $this->schemaMetatag();
       $element['#attributes']['content'] = [
         '@type' => 'ImageObject',
         'url' => $content['url'],
@@ -74,4 +75,5 @@ abstract class SchemaImageBase extends SchemaNameBase {
     }
     return $element;
   }
+
 }

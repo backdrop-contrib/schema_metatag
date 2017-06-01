@@ -24,6 +24,7 @@ use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
  * )
  */
 class SchemaArticleHeadline extends SchemaNameBase {
+
   /**
    * Generate a form element for this meta tag.
    */
@@ -32,4 +33,5 @@ class SchemaArticleHeadline extends SchemaNameBase {
     $form['#attributes']['placeholder'] = '[node:title]';
     return $form;
   }
+
 }

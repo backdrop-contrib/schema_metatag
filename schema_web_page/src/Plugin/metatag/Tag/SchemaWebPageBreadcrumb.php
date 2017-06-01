@@ -29,6 +29,7 @@ class SchemaWebPageBreadcrumb extends SchemaNameBase {
   /**
    * Generate a form element for this meta tag.
    */
+
   /**
    * Generate a form element for this meta tag.
    */
@@ -48,6 +49,9 @@ class SchemaWebPageBreadcrumb extends SchemaNameBase {
     return $form;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function output() {
     $element = parent::output();
     if (!empty($element)) {
@@ -80,4 +84,5 @@ class SchemaWebPageBreadcrumb extends SchemaNameBase {
     }
     return $element;
   }
+
 }

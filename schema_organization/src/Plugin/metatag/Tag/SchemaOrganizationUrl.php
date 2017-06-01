@@ -24,6 +24,7 @@ use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
  * )
  */
 class SchemaOrganizationUrl extends SchemaNameBase {
+
   /**
    * Generate a form element for this meta tag.
    */

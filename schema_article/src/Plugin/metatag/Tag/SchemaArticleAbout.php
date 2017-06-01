@@ -24,6 +24,7 @@ use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
  * )
  */
 class SchemaArticleAbout extends SchemaNameBase {
+
   /**
    * Generate a form element for this meta tag.
    */
@@ -33,12 +34,16 @@ class SchemaArticleAbout extends SchemaNameBase {
     return $form;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function output() {
     $element = parent::output();
     if (!empty($element)) {
-       // Turn comma separated list into array of values.
-       $element['#attributes']['content'] = explode(',', $element['#attributes']['content']);
+      // Turn comma separated list into array of values.
+      $element['#attributes']['content'] = explode(',', $element['#attributes']['content']);
     }
     return $element;
   }
+
 }

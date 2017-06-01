@@ -2,8 +2,6 @@
 
 namespace Drupal\schema_metatag\Plugin\metatag\Tag;
 
-use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
-
 /**
  * Schema.org PostalAddress items should extend this class.
  */
@@ -42,7 +40,7 @@ abstract class SchemaAddressBase extends SchemaNameBase {
       '#default_value' => !empty($value['streetAddress']) ? $value['streetAddress'] : '',
       '#maxlength' => 255,
       '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
-      '#description' => $this->t(" The street address. For example, 1600 Amphitheatre Pkwy."),
+      '#description' => $this->t("The street address. For example, 1600 Amphitheatre Pkwy."),
     ];
 
     $form['addressLocality'] = [
@@ -83,12 +81,22 @@ abstract class SchemaAddressBase extends SchemaNameBase {
     return $form;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function output() {
     $element = parent::output();
     if (!empty($element)) {
       $content = $this->unserialize($this->value());
       // If there is no value, don't create a tag.
-      $keys = ['@type', 'streetAddress', 'addressLocality', 'addressRegion', 'postalCode', 'addressCountry'];
+      $keys = [
+        '@type',
+        'streetAddress',
+        'addressLocality',
+        'addressRegion',
+        'postalCode',
+        'addressCountry',
+      ];
       $empty = TRUE;
       foreach ($keys as $key) {
         if (!empty($content[$key])) {
@@ -100,7 +108,7 @@ abstract class SchemaAddressBase extends SchemaNameBase {
         return '';
       }
       $element['#attributes']['group'] = $this->group;
-      $element['#attributes']['schema_metatag'] = $this->schema_metatag();
+      $element['#attributes']['schema_metatag'] = $this->schemaMetatag();
       $element['#attributes']['content'] = [];
       foreach ($keys as $key) {
         $value = $content[$key];
@@ -111,4 +119,5 @@ abstract class SchemaAddressBase extends SchemaNameBase {
     }
     return $element;
   }
+
 }
