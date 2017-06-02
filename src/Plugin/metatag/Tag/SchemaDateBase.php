@@ -3,7 +3,7 @@
 namespace Drupal\schema_metatag\Plugin\metatag\Tag;
 
 /**
- * Provides a plugin for the 'schema_name_base' meta tag.
+ * Provides a plugin for the 'schema_date_base' meta tag.
  */
 abstract class SchemaDateBase extends SchemaNameBase {
 
