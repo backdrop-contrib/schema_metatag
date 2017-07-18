@@ -35,12 +35,38 @@ class SchemaEventType extends SchemaNameBase {
       '#description' => $this->description(),
       '#empty_option' => t('- None -'),
       '#empty_value' => '',
-      '#options' => [
-        'Event' => $this->t('Event'),
-      ],
+      '#options' => $this->types(),
       '#default_value' => $this->value(),
     ];
     return $form;
   }
 
+
+  /**
+   * Return a list of organization types.
+   */
+  private function types() {
+    $types = [
+      'BusinessEvent',
+      'ChildrensEvent',
+      'ComedyEvent',
+      'CourseInstance',
+      'DanceEvent',
+      'DeliveryEvent',
+      'EducationEvent',
+      'ExhibitionEvent',
+      'Festival',
+      'FoodEvent',
+      'LiteraryEvent',
+      'MusicEvent',
+      'PublicationEvent',
+      'SaleEvent',
+      'ScreeningEvent',
+      'SocialEvent',
+      'SportsEvent',
+      'TheaterEvent',
+      'VisualArtsEvent',
+    ];
+    return array_combine($types, $types);
+  }
 }

@@ -73,6 +73,22 @@ class SchemaEventOffers extends SchemaNameBase {
       '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
       '#description' => $this->t('The URL to the store where the offer can be acquired.'),
     ];
+    $form['availability'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('availability'),
+      '#default_value' => !empty($value['availability']) ? $value['availability'] : '',
+      '#maxlength' => 255,
+      '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
+      '#description' => $this->t('The availability of this item—for example In stock, Out of stock, Pre-order, etc.'),
+    ];
+    $form['validFrom'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('validFrom'),
+      '#default_value' => !empty($value['validFrom']) ? $value['validFrom'] : '',
+      '#maxlength' => 255,
+      '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
+      '#description' => $this->t('The date when the item becomes valid.'),
+    ];
     return $form;
   }
 
