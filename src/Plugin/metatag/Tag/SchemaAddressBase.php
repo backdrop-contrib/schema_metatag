@@ -13,11 +13,12 @@ abstract class SchemaAddressBase extends SchemaNameBase {
    * We need multiple values, so create a tree of values and
    * stored the serialized value as a string.
    */
+
   public function form(array $element = []) {
 
     $value = $this->unserialize($this->value());
 
-    $form['#type'] = 'details';
+    $form['#type'] = 'fieldset';
     $form['#description'] = $this->description();
     $form['#open'] = !empty($value['name']);
     $form['#tree'] = TRUE;
@@ -32,6 +33,17 @@ abstract class SchemaAddressBase extends SchemaNameBase {
         'PostalAddress' => $this->t('PostalAddress'),
       ],
       '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
+      '#states' => [
+        'visible' => [
+          ':input[name="@type"]' => ['value' => 'Place'],
+        ],
+      ],
+    ];
+
+    // Get the id for the nested @type element.
+    $selector = $this->getPluginId() . '[@type]';
+    $postal_address_visibility = ['visible' => [
+      ":input[name='$selector']" => ['value' => 'PostalAddress']]
     ];
 
     $form['streetAddress'] = [
@@ -41,6 +53,7 @@ abstract class SchemaAddressBase extends SchemaNameBase {
       '#maxlength' => 255,
       '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
       '#description' => $this->t("The street address. For example, 1600 Amphitheatre Pkwy."),
+      '#states' => $postal_address_visibility,
     ];
 
     $form['addressLocality'] = [
@@ -50,6 +63,7 @@ abstract class SchemaAddressBase extends SchemaNameBase {
       '#maxlength' => 255,
       '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
       '#description' => $this->t("The locality. For example, Mountain View."),
+      '#states' => $postal_address_visibility,
     ];
 
     $form['addressRegion'] = [
@@ -59,6 +73,7 @@ abstract class SchemaAddressBase extends SchemaNameBase {
       '#maxlength' => 255,
       '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
       '#description' => $this->t("The region. For example, CA."),
+      '#states' => $postal_address_visibility,
     ];
 
     $form['postalCode'] = [
@@ -68,6 +83,7 @@ abstract class SchemaAddressBase extends SchemaNameBase {
       '#maxlength' => 255,
       '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
       '#description' => $this->t('The postal code. For example, 94043.'),
+      '#states' => $postal_address_visibility,
     ];
     $form['addressCountry'] = [
       '#type' => 'textfield',
@@ -76,6 +92,7 @@ abstract class SchemaAddressBase extends SchemaNameBase {
       '#maxlength' => 255,
       '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
       '#description' => $this->t('The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.'),
+      '#states' => $postal_address_visibility,
     ];
 
     return $form;
@@ -86,17 +103,12 @@ abstract class SchemaAddressBase extends SchemaNameBase {
    */
   public function output() {
     $element = parent::output();
+
     if (!empty($element)) {
       $content = $this->unserialize($this->value());
+
       // If there is no value, don't create a tag.
-      $keys = [
-        '@type',
-        'streetAddress',
-        'addressLocality',
-        'addressRegion',
-        'postalCode',
-        'addressCountry',
-      ];
+      $keys = $this->form_keys();
       $empty = TRUE;
       foreach ($keys as $key) {
         if (!empty($content[$key])) {
@@ -111,13 +123,24 @@ abstract class SchemaAddressBase extends SchemaNameBase {
       $element['#attributes']['schema_metatag'] = $this->schemaMetatag();
       $element['#attributes']['content'] = [];
       foreach ($keys as $key) {
-        $value = $content[$key];
+        $value = !empty($content[$key]) ? $content[$key] : '';
         if (!empty($value)) {
           $element['#attributes']['content'][$key] = $value;
         }
       }
     }
     return $element;
+  }
+
+  function form_keys() {
+    return [
+      '@type',
+      'streetAddress',
+      'addressLocality',
+      'addressRegion',
+      'postalCode',
+      'addressCountry',
+    ];
   }
 
 }
