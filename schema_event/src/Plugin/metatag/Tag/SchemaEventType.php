@@ -47,6 +47,7 @@ class SchemaEventType extends SchemaNameBase {
    */
   private function types() {
     $types = [
+      'Event',
       'BusinessEvent',
       'ChildrensEvent',
       'ComedyEvent',
