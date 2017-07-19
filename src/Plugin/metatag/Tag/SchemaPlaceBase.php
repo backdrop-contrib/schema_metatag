@@ -10,6 +10,25 @@ use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaAddressBase;
 abstract class SchemaPlaceBase extends SchemaAddressBase {
 
   /**
+   * Traits provide re-usable form elements, like postal_address.
+   */
+  use SchemaAddressTrait;
+  use SchemaGeoTrait;
+
+  /**
+   * The top level keys on this form.
+   */
+  function form_keys() {
+    return [
+      '@type',
+      'name',
+      'url',
+      'address',
+      'geo',
+    ];
+  }
+
+  /**
    * Generate a form element for this meta tag.
    *
    * We need multiple values, so create a tree of values and
@@ -19,6 +38,12 @@ abstract class SchemaPlaceBase extends SchemaAddressBase {
   public function form(array $element = []) {
 
     $value = $this->unserialize($this->value());
+
+    // Get the id for the nested @type element.
+    $selector = $this->getPluginId() . '[@type]';
+    $place_visibility = ['visible' => [
+      ":input[name='$selector']" => ['value' => 'Place']]
+    ];
 
     $form['#type'] = 'fieldset';
     $form['#description'] = $this->description();
@@ -35,12 +60,6 @@ abstract class SchemaPlaceBase extends SchemaAddressBase {
         'Place' => $this->t('Place'),
       ],
       '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
-    ];
-
-    // Get the id for the nested @type element.
-    $selector = $this->getPluginId() . '[@type]';
-    $place_visibility = ['visible' => [
-      ":input[name='$selector']" => ['value' => 'Place']]
     ];
 
     $form['name'] = [
@@ -62,30 +81,29 @@ abstract class SchemaPlaceBase extends SchemaAddressBase {
       '#states' => $place_visibility,
     ];
 
-    $form['address'] = parent::form($element);
-    $form['address']['#title'] = $this->t('Address');
-
-    // Update values and #states on the nested address form.
-    $selector = $this->getPluginId() . '[address][@type]';
-    $postal_address_visibility = ['visible' => [
-      ":input[name='$selector']" => ['value' => 'PostalAddress']]
+    $input_values = [
+      'title' => $this->t('Address'),
+      'description' => 'The address of the place.',
+      'value' => !empty($value['address']) ? $value['address'] : [],
+      '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
+      'visibility_selector' => $this->getPluginId() . '[address][@type]',
     ];
 
-    $keys = parent::form_keys();
-    foreach ($keys as $key) {
-      $form['address'][$key]['#default_value'] = !empty($value['address'][$key]) ? $value['address'][$key] : '';
-      $form['address'][$key]['#states'] = $postal_address_visibility;
-    }
+    $form['address'] = $this->postal_address_form($input_values);
+    $form['address']['@type']['#states'] = $place_visibility;
+
+    $input_values = [
+      'title' => $this->t('GeoCoordinates'),
+      'description' => 'The geo coordinates of the place.',
+      'value' => !empty($value['geo']) ? $value['geo'] : [],
+      '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
+      'visibility_selector' => $this->getPluginId() . '[geo][@type]',
+    ];
+
+    $form['geo'] = $this->geo_form($input_values);
+    $form['geo']['@type']['#states'] = $place_visibility;
+
     return $form;
   }
 
-
-  function form_keys() {
-    return [
-      '@type',
-      'name',
-      'url',
-      'address',
-    ];
-  }
 }

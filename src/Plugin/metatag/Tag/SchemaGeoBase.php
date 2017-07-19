@@ -8,6 +8,11 @@ namespace Drupal\schema_metatag\Plugin\metatag\Tag;
 abstract class SchemaGeoBase extends SchemaNameBase {
 
   /**
+   * SchemaGeoTrait provides geo_form().
+   */
+  use SchemaGeoTrait;
+
+  /**
    * Generate a form element for this meta tag.
    *
    * We need multiple values, so create a tree of values and
@@ -15,42 +20,15 @@ abstract class SchemaGeoBase extends SchemaNameBase {
    */
   public function form(array $element = []) {
 
-    $value = $this->unserialize($this->value());
-
-    $form['#type'] = 'details';
-    $form['#description'] = $this->description();
-    $form['#open'] = !empty($value['name']);
-    $form['#tree'] = TRUE;
-    $form['#title'] = $this->label();
-    $form['@type'] = [
-      '#type' => 'select',
-      '#title' => $this->t('@type'),
-      '#default_value' => !empty($value['@type']) ? $value['@type'] : '',
-      '#empty_option' => t('- None -'),
-      '#empty_value' => '',
-      '#options' => [
-        'GeoCoordinates' => $this->t('GeoCoordinates'),
-      ],
+    $input_values = [
+      'title' => $this->label(),
+      'description' => $this->description(),
+      'value' => $this->unserialize($this->value()),
       '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
+      'visibility_selector' => $this->getPluginId() . '[@type]',
     ];
 
-    $form['latitude'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('latitude'),
-      '#default_value' => !empty($value['latitude']) ? $value['latitude'] : '',
-      '#maxlength' => 255,
-      '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
-      '#description' => $this->t("The latitude of a location. For example 37.42242 (WGS 84)."),
-    ];
-
-    $form['longitude'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('longitude'),
-      '#default_value' => !empty($value['longitude']) ? $value['longitude'] : '',
-      '#maxlength' => 255,
-      '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
-      '#description' => $this->t("The longitude of a location. For example -122.08585 (WGS 84)."),
-    ];
+    $form = $this->geo_form($input_values);
 
     return $form;
   }
@@ -63,7 +41,7 @@ abstract class SchemaGeoBase extends SchemaNameBase {
     if (!empty($element)) {
       $content = $this->unserialize($this->value());
       // If there is no value, don't create a tag.
-      $keys = ['@type', 'latitude', 'longitude'];
+      $keys = $this->geo_form_keys();
       $empty = TRUE;
       foreach ($keys as $key) {
         if (!empty($content[$key])) {
