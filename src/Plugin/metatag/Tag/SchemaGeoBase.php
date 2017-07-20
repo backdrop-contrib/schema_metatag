@@ -8,7 +8,7 @@ namespace Drupal\schema_metatag\Plugin\metatag\Tag;
 abstract class SchemaGeoBase extends SchemaNameBase {
 
   /**
-   * SchemaGeoTrait provides geo_form().
+   * Traits provide re-usable form elements.
    */
   use SchemaGeoTrait;
 

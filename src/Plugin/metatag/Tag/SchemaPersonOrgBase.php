@@ -8,7 +8,7 @@ namespace Drupal\schema_metatag\Plugin\metatag\Tag;
 abstract class SchemaPersonOrgBase extends SchemaNameBase {
 
   /**
-   * Traits provide re-usable form elements, like postal_address.
+   * Traits provide re-usable form elements.
    */
   use SchemaPersonOrgTrait;
 

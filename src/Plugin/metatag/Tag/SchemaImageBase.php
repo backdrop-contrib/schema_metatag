@@ -8,6 +8,11 @@ namespace Drupal\schema_metatag\Plugin\metatag\Tag;
 abstract class SchemaImageBase extends SchemaNameBase {
 
   /**
+   * Traits provide re-usable form elements.
+   */
+  use SchemaImageTrait;
+
+  /**
    * Generate a form element for this meta tag.
    *
    * We need multiple values, so create a tree of values and
@@ -17,63 +22,17 @@ abstract class SchemaImageBase extends SchemaNameBase {
 
     $value = $this->unserialize($this->value());
 
-    $form['#type'] = 'details';
-    $form['#description'] = $this->description();
-    $form['#open'] = !empty($value['url']);
-    $form['#tree'] = TRUE;
-    $form['#title'] = $this->label();
+    $input_values = [
+      'title' => $this->label(),
+      'description' => $this->description(),
+      'value' => $this->unserialize($this->value()),
+      '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
+      'visibility_selector' => $this->getPluginId() . '[@type]',
+    ];
 
-    $form['url'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('url'),
-      '#default_value' => !empty($value['url']) ? $value['url'] : '',
-      '#maxlength' => 255,
-      '#attributes' => ['placeholder' => '[node:field_image:entity:url]'],
-      '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
-      '#description' => $this->t('Absolute URL of the image, like [node:field_image:entity:url].'),
-    ];
-    $form['width'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('width'),
-      '#default_value' => !empty($value['width']) ? $value['width'] : '',
-      '#maxlength' => 255,
-      '#attributes' => ['placeholder' => '[node:field_image:width]'],
-      '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
-    ];
-    $form['height'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('height'),
-      '#default_value' => !empty($value['height']) ? $value['height'] : '',
-      '#maxlength' => 255,
-      '#attributes' => ['placeholder' => '[node:field_image:height]'],
-      '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
-    ];
+    $form = $this->image_form($input_values);
 
     return $form;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function output() {
-    $element = parent::output();
-    if (!empty($element)) {
-      $content = $this->unserialize($this->value());
-
-      // If there is no value, don't create a tag.
-      if (empty($content['url'])) {
-        return '';
-      }
-      $element['#attributes']['group'] = $this->group;
-      $element['#attributes']['schema_metatag'] = $this->schemaMetatag();
-      $element['#attributes']['content'] = [
-        '@type' => 'ImageObject',
-        'url' => $content['url'],
-        'width' => $content['width'],
-        'height' => $content['height'],
-      ];
-    }
-    return $element;
   }
 
 }

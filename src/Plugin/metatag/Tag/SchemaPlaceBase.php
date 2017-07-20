@@ -10,7 +10,7 @@ use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaAddressBase;
 abstract class SchemaPlaceBase extends SchemaAddressBase {
 
   /**
-   * Traits provide re-usable form elements, like postal_address.
+   * Traits provide re-usable form elements.
    */
   use SchemaAddressTrait;
   use SchemaGeoTrait;
@@ -41,7 +41,7 @@ abstract class SchemaPlaceBase extends SchemaAddressBase {
 
     // Get the id for the nested @type element.
     $selector = $this->getPluginId() . '[@type]';
-    $place_visibility = ['visible' => [
+    $visibility = ['visible' => [
       ":input[name='$selector']" => ['value' => 'Place']]
     ];
 
@@ -69,7 +69,7 @@ abstract class SchemaPlaceBase extends SchemaAddressBase {
       '#maxlength' => 255,
       '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
       '#description' => $this->t('The name of the place'),
-      '#states' => $place_visibility,
+      '#states' => $visibility,
     ];
     $form['url'] = [
       '#type' => 'textfield',
@@ -78,7 +78,7 @@ abstract class SchemaPlaceBase extends SchemaAddressBase {
       '#maxlength' => 255,
       '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
       '#description' => $this->t('The url of the place.'),
-      '#states' => $place_visibility,
+      '#states' => $visibility,
     ];
 
     $input_values = [
@@ -90,7 +90,7 @@ abstract class SchemaPlaceBase extends SchemaAddressBase {
     ];
 
     $form['address'] = $this->postal_address_form($input_values);
-    $form['address']['@type']['#states'] = $place_visibility;
+    $form['address']['#states'] = $visibility;
 
     $input_values = [
       'title' => $this->t('GeoCoordinates'),
@@ -101,7 +101,7 @@ abstract class SchemaPlaceBase extends SchemaAddressBase {
     ];
 
     $form['geo'] = $this->geo_form($input_values);
-    $form['geo']['@type']['#states'] = $place_visibility;
+    $form['geo']['#states'] = $visibility;
 
     return $form;
   }
