@@ -17,7 +17,7 @@ use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
  *   description = @Translation("The type of event (fixed by standard)."),
  *   name = "@type",
  *   group = "schema_event",
- *   weight = -1,
+ *   weight = -5,
  *   type = "string",
  *   secure = FALSE,
  *   multiple = FALSE

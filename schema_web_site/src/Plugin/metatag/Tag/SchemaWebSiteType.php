@@ -17,7 +17,7 @@ use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
  *   description = @Translation("The type of web site."),
  *   name = "@type",
  *   group = "schema_web_site",
- *   weight = -1,
+ *   weight = -5,
  *   type = "string",
  *   secure = FALSE,
  *   multiple = FALSE

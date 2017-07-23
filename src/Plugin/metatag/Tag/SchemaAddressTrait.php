@@ -34,6 +34,7 @@ trait SchemaAddressTrait {
     $form['#title'] = $input_values['title'];
     $form['#description'] = $input_values['description'];
     $form['#tree'] = TRUE;
+
     $form['@type'] = [
       '#type' => 'select',
       '#title' => $this->t('@type'),

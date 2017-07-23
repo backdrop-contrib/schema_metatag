@@ -17,20 +17,4 @@ abstract class SchemaMainEntityOfPageBase extends SchemaNameBase {
     return $form;
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function output() {
-    $element = parent::output();
-    if (!empty($element)) {
-      $element['#attributes']['group'] = $this->group;
-      $element['#attributes']['schema_metatag'] = $this->schemaMetatag();
-      $element['#attributes']['content'] = [
-        '@type' => 'WebPage',
-        '@id' => $this->value(),
-      ];
-    }
-    return $element;
-  }
-
 }

@@ -2,7 +2,7 @@
 
 namespace Drupal\schema_event\Plugin\metatag\Tag;
 
-use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
+use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaOfferBase;
 
 /**
  * Provides a plugin for the 'offers' meta tag.
@@ -20,101 +20,9 @@ use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
  *   weight = 6,
  *   type = "string",
  *   secure = FALSE,
- *   multiple = FALSE
+ *   multiple = TRUE
  * )
  */
-class SchemaEventOffers extends SchemaNameBase {
-
-  /**
-   * Generate a form element for this meta tag.
-   */
-  public function form(array $element = []) {
-    $value = $this->unserialize($this->value());
-
-    $form['#type'] = 'details';
-    $form['#description'] = $this->description();
-    $form['#open'] = !empty($value['@type']);
-    $form['#tree'] = TRUE;
-    $form['#title'] = $this->label();
-
-    $form['@type'] = [
-      '#type' => 'select',
-      '#title' => $this->label(),
-      '#description' => $this->description(),
-      '#empty_option' => t('- None -'),
-      '#empty_value' => '',
-      '#options' => [
-        'Offer' => $this->t('Offer'),
-      ],
-      '#default_value' => !empty($value['@type']) ? $value['@type'] : '',
-    ];
-
-    $form['price'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('price'),
-      '#default_value' => !empty($value['price']) ? $value['price'] : '',
-      '#maxlength' => 255,
-      '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
-      '#description' => $this->t('The numeric price of the offer.'),
-    ];
-    $form['priceCurrency'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('priceCurrency'),
-      '#default_value' => !empty($value['priceCurrency']) ? $value['priceCurrency'] : '',
-      '#maxlength' => 255,
-      '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
-      '#description' => $this->t('The three-letter currency code (e.g. USD) in which the price is displayed.'),
-    ];
-    $form['url'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('url'),
-      '#default_value' => !empty($value['url']) ? $value['url'] : '',
-      '#maxlength' => 255,
-      '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
-      '#description' => $this->t('The URL to the store where the offer can be acquired.'),
-    ];
-    $form['availability'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('availability'),
-      '#default_value' => !empty($value['availability']) ? $value['availability'] : '',
-      '#maxlength' => 255,
-      '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
-      '#description' => $this->t('The availability of this item—for example In stock, Out of stock, Pre-order, etc.'),
-    ];
-    $form['validFrom'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('validFrom'),
-      '#default_value' => !empty($value['validFrom']) ? $value['validFrom'] : '',
-      '#maxlength' => 255,
-      '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
-      '#description' => $this->t('The date when the item becomes valid.'),
-    ];
-    return $form;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function output() {
-    $element = parent::output();
-    if (!empty($element)) {
-      $content = $this->unserialize($this->value());
-
-      // If there is no value, don't create a tag.
-      if (empty($content['price'])) {
-        return '';
-      }
-
-      $element['#attributes']['group'] = $this->group;
-      $element['#attributes']['schema_metatag'] = $this->schemaMetatag();
-      $element['#attributes']['content'] = [];
-      foreach ($content as $key => $value) {
-        if (!empty($value)) {
-          $element['#attributes']['content'][$key] = $value;
-        }
-      }
-    }
-    return $element;
-  }
+class SchemaEventOffers extends SchemaOfferBase {
 
 }

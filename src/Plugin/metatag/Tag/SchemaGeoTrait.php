@@ -4,7 +4,7 @@ namespace Drupal\schema_metatag\Plugin\metatag\Tag;
 
 trait SchemaGeoTrait {
 
- public function geo_form_keys() {
+  public function geo_form_keys() {
     return [
       '@type',
       'latitude',
@@ -31,6 +31,7 @@ trait SchemaGeoTrait {
     $form['#title'] = $input_values['title'];
     $form['#description'] = $input_values['description'];
     $form['#tree'] = TRUE;
+
     $form['@type'] = [
       '#type' => 'select',
       '#title' => $this->t('@type'),

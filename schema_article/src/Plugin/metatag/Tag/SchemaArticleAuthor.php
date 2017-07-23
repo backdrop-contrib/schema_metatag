@@ -20,7 +20,7 @@ use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaPersonOrgBase;
  *   weight = 5,
  *   type = "string",
  *   secure = FALSE,
- *   multiple = FALSE
+ *   multiple = TRUE
  * )
  */
 class SchemaArticleAuthor extends SchemaPersonOrgBase {

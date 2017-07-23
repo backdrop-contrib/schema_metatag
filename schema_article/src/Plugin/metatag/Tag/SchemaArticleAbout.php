@@ -20,7 +20,7 @@ use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaNameBase;
  *   weight = 1,
  *   type = "string",
  *   secure = FALSE,
- *   multiple = FALSE
+ *   multiple = TRUE
  * )
  */
 class SchemaArticleAbout extends SchemaNameBase {
@@ -32,18 +32,6 @@ class SchemaArticleAbout extends SchemaNameBase {
     $form = parent::form($element);
     $form['#attributes']['placeholder'] = '[node:field_tags]';
     return $form;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function output() {
-    $element = parent::output();
-    if (!empty($element)) {
-      // Turn comma separated list into array of values.
-      $element['#attributes']['content'] = explode(',', $element['#attributes']['content']);
-    }
-    return $element;
   }
 
 }

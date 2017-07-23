@@ -17,10 +17,10 @@ use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaPersonOrgBase;
  *   description = @Translation("The actor on the event."),
  *   name = "actor",
  *   group = "schema_event",
- *   weight = 10,
+ *   weight = 11,
  *   type = "string",
  *   secure = FALSE,
- *   multiple = FALSE
+ *   multiple = TRUE
  * )
  */
 class SchemaEventActor extends SchemaPersonOrgBase {
@@ -33,5 +33,4 @@ class SchemaEventActor extends SchemaPersonOrgBase {
     $form['url']['#description'] = $this->t('The URL of the actor\'s website.');
     return $form;
   }
-
 }
