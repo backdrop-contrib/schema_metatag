@@ -44,8 +44,6 @@ abstract class SchemaPersonOrgBase extends SchemaNameBase {
       ]
     ];
 
-    // Totally hide the logo unless this is an organization.
-    $form = $this->person_org_form($input_values);
     return $form;
   }
 
