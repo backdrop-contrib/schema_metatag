@@ -2,6 +2,8 @@
 
 namespace Drupal\schema_metatag\Plugin\metatag\Tag;
 
+use Drupal\schema_metatag\SchemaMetatagManager;
+
 /**
  * Schema.org Geo items should extend this class.
  */
@@ -21,7 +23,7 @@ abstract class SchemaGeoBase extends SchemaNameBase {
    */
   public function form(array $element = []) {
 
-    $value = $this->unserialize($this->value());
+    $value = SchemaMetatagManager::unserialize($this->value());
 
     $input_values = [
       'title' => $this->label(),

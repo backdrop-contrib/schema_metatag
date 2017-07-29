@@ -2,6 +2,7 @@
 
 namespace Drupal\schema_metatag\Plugin\metatag\Tag;
 
+use Drupal\schema_metatag\SchemaMetatagManager;
 use \Drupal\schema_metatag\Plugin\metatag\Tag\SchemaAddressBase;
 
 /**
@@ -37,7 +38,7 @@ abstract class SchemaPlaceBase extends SchemaAddressBase {
 
   public function form(array $element = []) {
 
-    $value = $this->unserialize($this->value());
+    $value = SchemaMetatagManager::unserialize($this->value());
 
     // Get the id for the nested @type element.
     $selector = $this->getPluginId() . '[@type]';

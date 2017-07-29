@@ -5,7 +5,6 @@
  * Contains schema_metatag.module.
  */
 
-use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\schema_metatag\SchemaMetatagManager;
 
 /**
@@ -34,21 +33,12 @@ function schema_metatag_page_attachments_alter(array &$attachments) {
     return;
   }
 
-  // Remove structured data items from metatags array and move to separate
-  // structured data array. This way they will not be rendered as metatags.
-  $schema_metatag = [];
-  foreach ($attachments['#attached']['html_head'] as $key => $item) {
-    if (!empty($item[0]['#attributes']['schema_metatag'])) {
-      $group = $item[0]['#attributes']['group'];
-      // Nest items by the group they are in.
-      $schema_metatag[$group][] = $item;
-      unset($attachments['#attached']['html_head'][$key]);
-    }
-  }
-  // Construct JSON LD from structured data array and add it to head.
-  if (count($schema_metatag) > 0) {
-    $route_entity = metatag_get_route_entity();
-    $jsonld = SchemaMetatagManager::jsonld($schema_metatag, $route_entity);
+  // Collect tags added by Schema Metatag into structured data array.
+  $items = SchemaMetatagManager::parseJsonld($attachments['#attached']['html_head']);
+
+  // Turn the structured data array into JSON LD and add it to page head.
+  if (count($items) > 0) {
+    $jsonld = SchemaMetatagManager::encodeJsonld($items);
     if (!empty($jsonld)) {
       $attachments['#attached']['html_head']['schema_metatag'] = [
         [
