@@ -1,0 +1,5 @@
+name = "Schema.org: Event"
+description = "Adds Schema.org/Event to the JSON-LD array. Creates Event and Offer."
+package = SEO
+core = 7.x
+dependencies[] = schema_metatag

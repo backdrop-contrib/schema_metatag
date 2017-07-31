@@ -1,0 +1,22 @@
+name = Schema.org Metatag
+description = "Provides support for Schema.org JSON LD."
+package = SEO
+core = 7.x
+dependencies[] = metatag:metatag
+
+files[] = src/SchemaMetatagManager.php
+files[] = src/SchemaMetatagManagerInterface.php
+files[] = src/SchemaNameBase.php
+files[] = src/SchemaAddressBase.php
+files[] = src/SchemaAddressTrait.php
+files[] = src/SchemaPersonOrgBase.php
+files[] = src/SchemaPersonOrgTrait.php
+files[] = src/SchemaGeoBase.php
+files[] = src/SchemaGeoTrait.php
+files[] = src/SchemaPlaceBase.php
+files[] = src/SchemaPlaceTrait.php
+files[] = src/SchemaImageBase.php
+files[] = src/SchemaImageTrait.php
+files[] = src/SchemaOfferBase.php
+files[] = src/SchemaPivotTrait.php
+files[] = src/SchemaNameBase.php
