@@ -28,12 +28,17 @@ class SchemaOfferBase extends SchemaNameBase {
     $form = parent::getForm($options);
     $form['value'] = $this->offer_form($input_values);
 
-    $form['value']['pivot'] = $this->pivot_form($value);
-    $form['value']['pivot']['#states'] = ['invisible' => [
-      ':input[name="' . $input_values['visibility_selector'] . '"]' => [
-			  'value' => '']
-      ]
-    ];
+    // Validation from parent::getForm() got wiped out, so add callback.
+    $form['value']['#element_validate'][] = 'schema_metatag_element_validate';
+
+    if (!empty($this->info['multiple'])) {
+      $form['value']['pivot'] = $this->pivot_form($value);
+      $form['value']['pivot']['#states'] = ['invisible' => [
+        ':input[name="' . $input_values['visibility_selector'] . '"]' => [
+			    'value' => '']
+        ]
+      ];
+    }
 
     return $form;
   }

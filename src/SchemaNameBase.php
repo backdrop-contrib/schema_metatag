@@ -33,13 +33,6 @@ class SchemaNameBase extends DrupalTextMetaTag {
   }
 
   /**
-   * The #states visibility selector for the parent @type this element.
-   */
-  protected function visibilitySelectorParent() {
-    return 'metatags[und][' . $this->info['group'] . '.@type][value]';
-  }
-
-  /**
    * {@inheritdoc}
    */
   public function getForm(array $options = array()) {
