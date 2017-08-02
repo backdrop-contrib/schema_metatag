@@ -29,7 +29,14 @@ class SchemaNameBase extends DrupalTextMetaTag {
    * The #states visibility selector for this element.
    */
   protected function visibilitySelector() {
-    return 'metatags[und][' . $this->getPluginId() . ']';
+    return 'metatags[und][' . $this->info['name'] . '][value]';
+  }
+
+  /**
+   * The #states visibility selector for the parent @type this element.
+   */
+  protected function visibilitySelectorParent() {
+    return 'metatags[und][' . $this->info['group'] . '.@type][value]';
   }
 
   /**

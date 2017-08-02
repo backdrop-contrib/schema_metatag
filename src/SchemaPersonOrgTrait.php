@@ -34,7 +34,7 @@ trait SchemaPersonOrgTrait {
     $value = $input_values['value'];
 
     // Get the id for the nested @type element.
-    $selector = $this->getPluginId() . '[@type]';
+    $selector = $input_values['visibility_selector'];
     $visibility = ['invisible' => [
       ":input[name='$selector']" => ['value' => '']]
     ];
@@ -107,7 +107,7 @@ trait SchemaPersonOrgTrait {
       'description' => 'The logo of the organization. For AMP pages, Google requires a image no larger than 600 x 60.',
       'value' => !empty($value['logo']) ? $value['logo'] : [],
       '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
-      'visibility_selector' => $this->getPluginId() . '[logo][@type]',
+      'visibility_selector' => $selector . '[logo][@type]',
     ];
 
     // Display the logo only for Organization.

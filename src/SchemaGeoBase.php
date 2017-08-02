@@ -26,19 +26,20 @@ class SchemaGeoBase extends SchemaNameBase {
       'description' => $this->description(),
       'value' => $value,
       '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
-      'visibility_selector' => $this->getPluginId() . '[@type]',
+      'visibility_selector' => $this->visibilitySelector() . '[@type]',
     ];
 
     $form = parent::getForm($options);
     $form['value'] = $this->geo_form($input_values);
     $form['value']['#element_validate'][] = 'schema_metatag_element_validate';
 
-    $form['pivot'] = $this->pivot_form($value);
-    $form['pivot']['#states'] = ['invisible' => [
+    $form['value']['pivot'] = $this->pivot_form($value);
+    $form['value']['pivot']['#states'] = ['invisible' => [
       ':input[name="' . $input_values['visibility_selector'] . '"]' => [
 			  'value' => '']
       ]
     ];
+
 
     return $form;
   }
