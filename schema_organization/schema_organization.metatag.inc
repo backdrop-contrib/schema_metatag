@@ -70,16 +70,30 @@ function schema_organization_metatag_info() {
     ),
     'weight' => ++$weight,
   ) + $defaults;
+  $info['tags']['schema_organization.sameAs'] = array(
+    'label' => t('sameAs'),
+    'description' => t('Url linked to the web site, such as wikipedia page or social profiles.'),
+    'multiple' => TRUE,
+    'url' => TRUE,
+    'form' => array(
+      '#attributes' => array(
+         'placeholder' => '[site:url]',
+      ),
+    ),
+    'weight' => ++$weight,
+  ) + $defaults;
   $info['tags']['schema_organization.address'] = array(
     'class' => 'SchemaAddressBase',
     'label' => t('address'),
     'description' => t('The address of the organization.'),
+    'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
   $info['tags']['schema_organization.geo'] = array(
     'class' => 'SchemaGeoBase',
     'label' => t('geo'),
     'description' => t('The geographic coordinates of the organization.'),
+    'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
   $info['tags']['schema_organization.mainEntityOfPage'] = array(

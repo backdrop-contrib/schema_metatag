@@ -80,11 +80,13 @@ function schema_event_metatag_info() {
   $info['tags']['schema_event.doorTime'] = array(
     'label' => t('doorTime'),
     'description' => t('The time when admission will commence.'),
+    'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
   $info['tags']['schema_event.startDate'] = array(
     'label' => t('startDate'),
     'description' => t('Date and time when the event starts.'),
+    'multiple' => TRUE,
     'form' => array(
       '#attributes' => array(
          'placeholder' => '[node:field_date:custom:Y-m-d\TH:i:sO]',
@@ -95,6 +97,7 @@ function schema_event_metatag_info() {
   $info['tags']['schema_event.endDate'] = array(
     'label' => t('endDate'),
     'description' => t('Date and time when the event ends.'),
+    'multiple' => TRUE,
     'form' => array(
       '#attributes' => array(
          'placeholder' => '[node:field_date:custom:Y-m-d\TH:i:sO]',
@@ -123,6 +126,8 @@ function schema_event_metatag_info() {
     'class' => 'SchemaPersonOrgBase',
     'label' => t('performer'),
     'description' => t('The performer on the event.'),
+    'multiple' => TRUE,
+    'url' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
 

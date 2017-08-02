@@ -98,6 +98,9 @@ class SchemaPlaceBase extends SchemaAddressBase {
     $form['value']['geo'] = $this->geo_form($input_values);
     $form['value']['geo']['#states'] = $visibility;
 
+    // This form never got processed by parent::getForm(), so add callback.
+    $form['value']['#element_validate'][] = 'schema_metatag_element_validate';
+
     return $form;
   }
 

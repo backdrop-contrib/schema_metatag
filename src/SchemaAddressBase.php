@@ -37,15 +37,18 @@ class SchemaAddressBase extends SchemaNameBase {
 
     $form = parent::getForm($options);
     $form['value'] = $this->postal_address_form($input_values);
+
+    // Validation from parent::getForm() got wiped out, so add callback.
     $form['value']['#element_validate'][] = 'schema_metatag_element_validate';
 
-    $form['value']['pivot'] = $this->pivot_form($value);
-    $form['value']['pivot']['#states'] = ['invisible' => [
-      ':input[name="' . $input_values['visibility_selector'] . '"]' => [
-			  'value' => '']
-      ]
-    ];
-
+    if (!empty($this->info['multiple'])) {
+      $form['value']['pivot'] = $this->pivot_form($value);
+      $form['value']['pivot']['#states'] = ['invisible' => [
+        ':input[name="' . $input_values['visibility_selector'] . '"]' => [
+			    'value' => '']
+        ]
+      ];
+    }
     return $form;
   }
 
