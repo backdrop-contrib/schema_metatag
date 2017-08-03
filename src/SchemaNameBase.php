@@ -73,6 +73,8 @@ class SchemaNameBase extends DrupalTextMetaTag {
         $value = SchemaMetatagManager::pivot($value);
       }
 
+      $value = SchemaMetatagManager::arrayTrim($value);
+
     }
     // Process a simple string.
     else {
@@ -103,13 +105,26 @@ class SchemaNameBase extends DrupalTextMetaTag {
    */
   protected function process_item(&$value, $key = 0) {
 
-    // $this->getValue() processes whatever is in $this->data['value'],
-    // so swap in the individual value being processed, do the processing,
-    // then return to the original value.
-    $backup_value = $this->data['value'];
+    // $this->getValue() will process all subelements of our array
+    // but not all of them need that processing.
+    // Swap in the individual values/info as though they were the only
+    // values, do the processing, then return to the original values.
+    $backup_data = $this->data;
+    $backup_info = $this->info;
+
     $this->data['value'] = $value;
+    if (!empty($this->info['url'])) {
+      $this->info['url'] = $this->info['url'] && in_array($key, ['url', 'sameAs']);
+    }
+    if (!empty($this->info['image'])) {
+      $this->info['image'] = $this->info['image'] && in_array($key, ['url']);
+    }
+
     $value = $this->getValue($this->options);
-    $this->data['value'] = $backup_value;
+
+    // Swap back in the original values.
+    $this->data = $backup_data;
+    $this->info = $backup_info;
 
     if (!empty($this->info['multiple'])) {
       $value = SchemaMetatagManager::explode($value);
