@@ -19,7 +19,7 @@ class SchemaPersonOrgBase extends SchemaNameBase {
   }
 
   /**
-   * Generate a form element for this meta tag.
+   * {@inheritdoc}
    */
   public function getForm(array $options = array()) {
 

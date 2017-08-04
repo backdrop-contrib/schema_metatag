@@ -1,0 +1,5 @@
+name = "Schema.org: WebSite"
+description = "Adds Schema.org/WebSite to the JSON LD array."
+package = SEO
+core = 7.x
+dependencies[] = schema_metatag

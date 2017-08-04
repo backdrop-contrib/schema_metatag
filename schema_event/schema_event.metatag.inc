@@ -38,11 +38,13 @@ function schema_event_metatag_info() {
     'dependencies' => [],
     'weight' => ++$weight,
   ) + $defaults;
+
   $info['tags']['schema_event.@id'] = array(
     'label' => t('@id'),
     'description' => t('Globally unique @id, usually a url, used to to link other properties to this object.'),
     'weight' => ++$weight,
   ) + $defaults;
+
   $info['tags']['schema_event.name'] = array(
     'label' => t('name'),
     'description' => t('The name of the event.'),
@@ -53,6 +55,7 @@ function schema_event_metatag_info() {
     ),
     'weight' => ++$weight,
   ) + $defaults;
+
   $info['tags']['schema_event.image'] = array(
     'class' => 'SchemaImageBase',
     'label' => t('image'),
@@ -66,6 +69,7 @@ function schema_event_metatag_info() {
     ),
     'weight' => ++$weight,
   ) + $defaults;
+
   $info['tags']['schema_event.description'] = array(
     'label' => t('description'),
     'description' => t('A description of the event.'),
@@ -77,12 +81,14 @@ function schema_event_metatag_info() {
     'url' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
+
   $info['tags']['schema_event.doorTime'] = array(
     'label' => t('doorTime'),
     'description' => t('The time when admission will commence.'),
     'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
+
   $info['tags']['schema_event.startDate'] = array(
     'label' => t('startDate'),
     'description' => t('Date and time when the event starts.'),
@@ -94,6 +100,7 @@ function schema_event_metatag_info() {
     ),
     'weight' => ++$weight,
   ) + $defaults;
+
   $info['tags']['schema_event.endDate'] = array(
     'label' => t('endDate'),
     'description' => t('Date and time when the event ends.'),
@@ -105,12 +112,22 @@ function schema_event_metatag_info() {
     ),
     'weight' => ++$weight,
   ) + $defaults;
+
   $info['tags']['schema_event.location'] = array(
     'class' => 'SchemaPlaceBase',
     'label' => t('location'),
     'description' => t('The location of the event.'),
     'weight' => ++$weight,
   ) + $defaults;
+
+  $info['tags']['schema_event.offers'] = array(
+    'class' => 'SchemaOfferBase',
+    'label' => t('offers'),
+    'description' => t('Offers associated with the event.'),
+    'multiple' => TRUE,
+    'weight' => ++$weight,
+  ) + $defaults;
+
   $info['tags']['schema_event.mainEntityOfPage'] = array(
     'label' => t('mainEntityOfPage'),
     'description' => t(''),
@@ -122,6 +139,7 @@ function schema_event_metatag_info() {
     ),
     'weight' => ++$weight,
   ) + $defaults;
+
   $info['tags']['schema_event.performer'] = array(
     'class' => 'SchemaPersonOrgBase',
     'label' => t('performer'),

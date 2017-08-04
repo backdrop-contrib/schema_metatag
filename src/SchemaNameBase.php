@@ -114,21 +114,21 @@ class SchemaNameBase extends DrupalTextMetaTag {
 
     $this->data['value'] = $value;
     if (!empty($this->info['url'])) {
-      $this->info['url'] = $this->info['url'] && in_array($key, ['url', 'sameAs']);
+      $this->info['url'] = $this->info['url'] && in_array($key, ['url', 'sameAs', 'width', 'height']);
     }
     if (!empty($this->info['image'])) {
-      $this->info['image'] = $this->info['image'] && in_array($key, ['url']);
+      $this->info['image'] = $this->info['image'] && in_array($key, ['url', 'width', 'height']);
     }
 
     $value = $this->getValue($this->options);
 
-    // Swap back in the original values.
-    $this->data = $backup_data;
-    $this->info = $backup_info;
-
     if (!empty($this->info['multiple'])) {
       $value = SchemaMetatagManager::explode($value);
     }
+
+    // Swap back in the original values.
+    $this->data = $backup_data;
+    $this->info = $backup_info;
 
   }
 

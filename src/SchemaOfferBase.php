@@ -12,9 +12,9 @@ class SchemaOfferBase extends SchemaNameBase {
   use SchemaPivotTrait;
 
   /**
-   * Generate a form element for this meta tag.
+   * {@inheritdoc}
    */
-  public getForm(array $options = array()) {
+  public function getForm(array $options = array()) {
     $value = SchemaMetatagManager::unserialize($this->value());
 
     $input_values = [

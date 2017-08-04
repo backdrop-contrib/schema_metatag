@@ -18,5 +18,6 @@ files[] = src/SchemaPlaceTrait.php
 files[] = src/SchemaImageBase.php
 files[] = src/SchemaImageTrait.php
 files[] = src/SchemaOfferBase.php
+files[] = src/SchemaOfferTrait.php
 files[] = src/SchemaPivotTrait.php
-files[] = src/SchemaNameBase.php
+files[] = src/SchemaItemListBase.php

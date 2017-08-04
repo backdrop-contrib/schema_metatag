@@ -12,10 +12,7 @@ class SchemaGeoBase extends SchemaNameBase {
   use SchemaPivotTrait;
 
   /**
-   * Generate a form element for this meta tag.
-   *
-   * We need multiple values, so create a tree of values and
-   * stored the serialized value as a string.
+   * {@inheritdoc}
    */
   public function getForm(array $options = array()) {
 

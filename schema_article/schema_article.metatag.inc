@@ -38,6 +38,7 @@ function schema_article_metatag_info() {
     'dependencies' => [],
     'weight' => ++$weight,
   ) + $defaults;
+
   $info['tags']['schema_article.headline'] = array(
     'label' => t('headline'),
     'description' => t('Headline of the article.'),
@@ -48,6 +49,7 @@ function schema_article_metatag_info() {
     ),
     'weight' => ++$weight,
   ) + $defaults;
+
   $info['tags']['schema_article.description'] = array(
     'label' => t('description'),
     'description' => t('A description of the item.'),
@@ -58,6 +60,7 @@ function schema_article_metatag_info() {
     ),
     'weight' => ++$weight,
   ) + $defaults;
+
   $info['tags']['schema_article.author'] = array(
     'class' => 'SchemaPersonOrgBase',
     'label' => t('author'),
@@ -71,6 +74,7 @@ function schema_article_metatag_info() {
     ),
     'weight' => ++$weight,
   ) + $defaults;
+
   $info['tags']['schema_article.publisher'] = array(
     'class' => 'SchemaPersonOrgBase',
     'label' => t('publisher'),
@@ -83,6 +87,7 @@ function schema_article_metatag_info() {
     ),
     'weight' => ++$weight,
   ) + $defaults;
+
   $info['tags']['schema_article.datePublished'] = array(
     'label' => t('datePublished'),
     'description' => t('Date the article was published.'),
@@ -93,6 +98,7 @@ function schema_article_metatag_info() {
     ),
     'weight' => ++$weight,
   ) + $defaults;
+
   $info['tags']['schema_article.dateModified'] = array(
     'label' => t('dateModified'),
     'description' => t('Date the article was last modified.'),
@@ -103,6 +109,7 @@ function schema_article_metatag_info() {
     ),
     'weight' => ++$weight,
   ) + $defaults;
+
   $info['tags']['schema_article.about'] = array(
     'label' => t('about'),
     'description' => t('Comma separated list of what the article is about, for instance taxonomy terms or categories.'),
@@ -114,6 +121,7 @@ function schema_article_metatag_info() {
     ),
     'weight' => ++$weight,
   ) + $defaults;
+
   $info['tags']['schema_article.image'] = array(
     'class' => 'SchemaImageBase',
     'label' => t('image'),
@@ -127,6 +135,7 @@ function schema_article_metatag_info() {
     ),
     'weight' => ++$weight,
   ) + $defaults;
+
   $info['tags']['schema_article.mainEntityOfPage'] = array(
     'label' => t('mainEntityOfPage'),
     'description' => t(''),

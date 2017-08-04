@@ -38,11 +38,13 @@ function schema_organization_metatag_info() {
     'dependencies' => [],
     'weight' => ++$weight,
   ) + $defaults;
+
   $info['tags']['schema_organization.@id'] = array(
     'label' => t('@id'),
     'description' => t('Globally unique @id, usually a url, used to to link other properties to this object.'),
     'weight' => ++$weight,
   ) + $defaults;
+
   $info['tags']['schema_organization.name'] = array(
     'label' => t('name'),
     'description' => t('The name of the organization.'),
@@ -53,12 +55,14 @@ function schema_organization_metatag_info() {
     ),
     'weight' => ++$weight,
   ) + $defaults;
+
   $info['tags']['schema_organization.telephone'] = array(
     'label' => t('telephone'),
     'description' => t('The telephone of the web site.'),
     'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
+
   $info['tags']['schema_organization.url'] = array(
     'label' => t('url'),
     'description' => t('The url of the organization.'),
@@ -70,6 +74,7 @@ function schema_organization_metatag_info() {
     ),
     'weight' => ++$weight,
   ) + $defaults;
+
   $info['tags']['schema_organization.sameAs'] = array(
     'label' => t('sameAs'),
     'description' => t('Url linked to the web site, such as wikipedia page or social profiles.'),
@@ -82,6 +87,7 @@ function schema_organization_metatag_info() {
     ),
     'weight' => ++$weight,
   ) + $defaults;
+
   $info['tags']['schema_organization.address'] = array(
     'class' => 'SchemaAddressBase',
     'label' => t('address'),
@@ -89,6 +95,7 @@ function schema_organization_metatag_info() {
     'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
+
   $info['tags']['schema_organization.geo'] = array(
     'class' => 'SchemaGeoBase',
     'label' => t('geo'),
@@ -96,6 +103,7 @@ function schema_organization_metatag_info() {
     'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
+
   $info['tags']['schema_organization.mainEntityOfPage'] = array(
     'label' => t('mainEntityOfPage'),
     'description' => t(''),
