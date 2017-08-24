@@ -113,7 +113,8 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
     if (is_array($value)) {
       // Don't serialize an empty array.
       // Otherwise Metatag won't know the field is empty.
-      if (empty(self::arrayTrim($value))) {
+      $value = arrayTrim($value);
+      if (empty(self::$value)) {
         return '';
       }
       else {
