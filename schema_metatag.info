@@ -2,6 +2,11 @@ name = Schema.org Metatag
 description = "Provides support for Schema.org JSON LD."
 package = SEO
 core = 7.x
+
+; PHP 5.5 is required in order to simplify maintenance as it allows us to copy
+; some of the D8 module's code as-is.
+php = 5.5
+
 dependencies[] = metatag:metatag
 
 files[] = src/SchemaMetatagManager.php
