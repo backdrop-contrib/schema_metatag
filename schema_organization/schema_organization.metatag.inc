@@ -104,6 +104,41 @@ function schema_organization_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
+  $info['tags']['schema_organization.image'] = array(
+    'class' => 'SchemaImageBase',
+    'label' => t('image'),
+    'description' => t('The primary image for this item.'),
+    'image' => TRUE,
+    'url' => TRUE,
+    'form' => array(
+      '#attributes' => array(
+         'placeholder' => '[node:field_image]',
+      ),
+    ),
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_organization.logo'] = array(
+    'class' => 'SchemaImageBase',
+    'label' => t('logo'),
+    'description' => t('The logo for this organization.'),
+    'image' => TRUE,
+    'url' => TRUE,
+    'form' => array(
+      '#attributes' => array(
+         'placeholder' => '[node:field_image]',
+      ),
+    ),
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_organization.priceRange'] = array(
+    'label' => t('priceRange'),
+    'description' => t('The price range of products of the organization.'),
+    'multiple' => TRUE,
+    'weight' => ++$weight,
+  ) + $defaults;
+
   $info['tags']['schema_organization.mainEntityOfPage'] = array(
     'label' => t('mainEntityOfPage'),
     'description' => t(''),
