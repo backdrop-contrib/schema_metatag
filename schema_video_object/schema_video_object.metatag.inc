@@ -1,14 +1,14 @@
 <?php
 /**
  * @file
- * Metatag integration for the schema_video module.
+ * Metatag integration for the schema_video_object module.
  */
 
 /**
  * Implements hook_metatag_info().
  */
-function schema_video_metatag_info() {
-  $info['groups']['schema_video'] = array(
+function schema_video_object_metatag_info() {
+  $info['groups']['schema_video_object'] = array(
     'label' => t('Schema.org: VideoObject'),
     'description' => t('See Schema.org definitions for this Schema type at <a href="!url">!url</a>.', array('!url' => 'http://schema.org/VideoObject')),
     'form' => array(
@@ -21,25 +21,25 @@ function schema_video_metatag_info() {
   // Basic tags.
   $defaults = array(
     'class' => 'SchemaNameBase',
-    'group' => 'schema_video',
+    'group' => 'schema_video_object',
     'form' => array(
       '#type' => 'textfield',
     ),
   );
 
-  $info['tags']['schema_video.@type'] = array(
+  $info['tags']['schema_video_object.@type'] = array(
     'label' => t('@type'),
     'description' => t('The type of video file.'),
     'form' => array(
       '#type' => 'select',
-      '#options' => _schema_video_type_options(),
+      '#options' => _schema_video_object_type_options(),
       '#empty_option' => t('- None -'),
     ),
     'dependencies' => [],
     'weight' => ++$weight,
   ) + $defaults;
 
-  $info['tags']['schema_video.@id'] = array(
+  $info['tags']['schema_video_object.@id'] = array(
     'label' => t('@id'),
     'description' => t('Globally unique @id, usually a url, used to to link other properties to this object.'),
     'form' => array(
@@ -50,7 +50,7 @@ function schema_video_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
-  $info['tags']['schema_video.name'] = array(
+  $info['tags']['schema_video_object.name'] = array(
     'label' => t('name'),
     'description' => t('Name of the video.'),
     'form' => array(
@@ -61,7 +61,7 @@ function schema_video_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
-  $info['tags']['schema_video.description'] = array(
+  $info['tags']['schema_video_object.description'] = array(
     'label' => t('description'),
     'description' => t('A description of the item.'),
     'form' => array(
@@ -72,7 +72,7 @@ function schema_video_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
-  $info['tags']['schema_video.uploadDate'] = array(
+  $info['tags']['schema_video_object.uploadDate'] = array(
     'label' => t('uploadDate'),
     'description' => t('The date the video was first published, in ISO 8601 format.'),
     'form' => array(
@@ -83,7 +83,7 @@ function schema_video_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
-  $info['tags']['schema_video.expires'] = array(
+  $info['tags']['schema_video_object.expires'] = array(
     'label' => t('expires'),
     'description' => t('If applicable, the date after which the video will no longer be available, in ISO 8601 format. Don't supply this information if your video does not expire.'),
     'form' => array(
@@ -94,7 +94,7 @@ function schema_video_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
-  $info['tags']['schema_video.thumbnailUrl'] = array(
+  $info['tags']['schema_video_object.thumbnailUrl'] = array(
     'class' => 'SchemaImageBase',
     'label' => t('thumbnailUrl'),
     'description' => t('The thumbnail URL of the video.'),
@@ -108,7 +108,7 @@ function schema_video_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
-  $info['tags']['schema_video.contentUrl'] = array(
+  $info['tags']['schema_video_object.contentUrl'] = array(
     'label' => t('contentUrl'),
     'description' => t('A URL pointing to the actual video media file.'),
     'image' => TRUE,
@@ -121,7 +121,7 @@ function schema_video_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
-  $info['tags']['schema_video.embedUrl'] = array(
+  $info['tags']['schema_video_object.embedUrl'] = array(
     'label' => t('embedUrl'),
     'description' => t('A URL pointing to a player for the specific video. Usually this is the information in the src element of an <embed> tag.'),
     'image' => TRUE,
@@ -134,7 +134,7 @@ function schema_video_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
-  $info['tags']['schema_video.mainEntityOfPage'] = array(
+  $info['tags']['schema_video_object.mainEntityOfPage'] = array(
     'label' => t('mainEntityOfPage'),
     'description' => t(''),
     'url' => TRUE,
@@ -146,7 +146,7 @@ function schema_video_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
-  $info['tags']['schema_video.duration'] = array(
+  $info['tags']['schema_video_object.duration'] = array(
     'class' => 'SchemaDurationBase',
     'label' => t('duration'),
     'description' => t('The video duration in seconds or ISO 8601 format.'),
@@ -154,7 +154,7 @@ function schema_video_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
-  $info['tags']['schema_video.interactionCount'] = array(
+  $info['tags']['schema_video_object.interactionCount'] = array(
     'label' => t('interactionCount'),
     'description' => t('The number of times the video has been viewed.'),
     'url' => TRUE,
@@ -167,7 +167,7 @@ function schema_video_metatag_info() {
 /**
  * List the Article 'type' options.
  */
-function _schema_video_type_options() {
+function _schema_video_object_type_options() {
   $options = array(
     'VideoObject' => t('VideoObject'),
   );

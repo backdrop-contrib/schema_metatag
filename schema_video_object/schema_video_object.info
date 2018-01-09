@@ -1,0 +1,5 @@
+name = "Schema.org: Video Object"
+description = "Adds Schema.org/VideoObject to the JSON LD array."
+package = SEO
+core = 7.x
+dependencies[] = schema_metatag
