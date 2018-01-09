@@ -36,6 +36,7 @@ class SchemaNameBase extends DrupalTextMetaTag {
    * {@inheritdoc}
    */
   public function getForm(array $options = array()) {
+
     $form = parent::getForm($options);
 
     // Add a validation callback to serialize nested arrays.

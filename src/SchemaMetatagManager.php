@@ -114,7 +114,7 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
       // Don't serialize an empty array.
       // Otherwise Metatag won't know the field is empty.
       $value = self::arrayTrim($value);
-      if (empty(self::$value)) {
+      if (empty($value)) {
         return '';
       }
       else {
