@@ -85,7 +85,7 @@ function schema_video_object_metatag_info() {
 
   $info['tags']['schema_video_object.expires'] = array(
     'label' => t('expires'),
-    'description' => t('If applicable, the date after which the video will no longer be available, in ISO 8601 format. Don't supply this information if your video does not expire.'),
+    'description' => t("If applicable, the date after which the video will no longer be available, in ISO 8601 format. Don't supply this information if your video does not expire."),
     'form' => array(
       '#attributes' => array(
          'placeholder' => '[file:changed:custom:Y-m-d\TH:i:sO]',
