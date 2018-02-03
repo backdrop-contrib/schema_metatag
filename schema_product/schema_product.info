@@ -1,0 +1,5 @@
+name = "Schema.org Product"
+description = "Adds Schema.org/Product to the JSON LD array. Creates Product."
+package = SEO
+core = 7.x
+dependencies[] = schema_metatag
