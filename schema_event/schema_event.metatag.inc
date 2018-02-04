@@ -28,14 +28,9 @@ function schema_event_metatag_info() {
   );
 
   $info['tags']['schema_event.@type'] = array(
+    'class' => 'SchemaEventType',
     'label' => t('@type'),
     'description' => t('The type of event.'),
-    'form' => array(
-      '#type' => 'select',
-      '#options' => _schema_event_type_options(),
-      '#empty_option' => t('- None -'),
-    ),
-    'dependencies' => [],
     'weight' => ++$weight,
   ) + $defaults;
 
@@ -75,6 +70,7 @@ function schema_event_metatag_info() {
     'description' => t('A description of the event.'),
     'weight' => ++$weight,
   ) + $defaults;
+
   $info['tags']['schema_event.url'] = array(
     'label' => t('url'),
     'description' => t('The url of the event.'),
@@ -90,26 +86,18 @@ function schema_event_metatag_info() {
   ) + $defaults;
 
   $info['tags']['schema_event.startDate'] = array(
+    'class' => 'SchemaDateBase',
     'label' => t('startDate'),
     'description' => t('Date and time when the event starts.'),
     'multiple' => TRUE,
-    'form' => array(
-      '#attributes' => array(
-         'placeholder' => '[node:field_date:custom:Y-m-d\TH:i:sO]',
-      ),
-    ),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_event.endDate'] = array(
+    'class' => 'SchemaDateBase',
     'label' => t('endDate'),
     'description' => t('Date and time when the event ends.'),
     'multiple' => TRUE,
-    'form' => array(
-      '#attributes' => array(
-         'placeholder' => '[node:field_date:custom:Y-m-d\TH:i:sO]',
-      ),
-    ),
     'weight' => ++$weight,
   ) + $defaults;
 
@@ -117,6 +105,39 @@ function schema_event_metatag_info() {
     'class' => 'SchemaPlaceBase',
     'label' => t('location'),
     'description' => t('The location of the event.'),
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_event.mainEntityOfPage'] = array(
+    'class' => 'SchemaMainEntityOfPageBase',
+    'label' => t('mainEntityOfPage'),
+    'description' => t(''),
+    'url' => TRUE,
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_event.actor'] = array(
+    'class' => 'SchemaPersonOrgBase',
+    'label' => t('actor'),
+    'description' => t('The actor in the event.'),
+    'multiple' => TRUE,
+    'url' => TRUE,
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_event.performer'] = array(
+    'class' => 'SchemaPersonOrgBase',
+    'label' => t('performer'),
+    'description' => t('The performer in the event.'),
+    'multiple' => TRUE,
+    'url' => TRUE,
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_event.isAccessibleForFree'] = array(
+    'class' => 'SchemaisAccessibleForFreeBase',
+    'label' => t('isAccessibleForFree'),
+    'description' => t(''),
     'weight' => ++$weight,
   ) + $defaults;
 
@@ -128,55 +149,12 @@ function schema_event_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
-  $info['tags']['schema_event.mainEntityOfPage'] = array(
-    'label' => t('mainEntityOfPage'),
+  $info['tags']['schema_event.aggregateRating'] = array(
+    'class' => 'SchemaAggregateRatingBase',
+    'label' => t('aggregateRating'),
     'description' => t(''),
-    'url' => TRUE,
-    'form' => array(
-      '#attributes' => array(
-         'placeholder' => '[node:url]',
-      ),
-    ),
-    'weight' => ++$weight,
-  ) + $defaults;
-
-  $info['tags']['schema_event.performer'] = array(
-    'class' => 'SchemaPersonOrgBase',
-    'label' => t('performer'),
-    'description' => t('The performer on the event.'),
-    'multiple' => TRUE,
-    'url' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
 
   return $info;
-}
-
-/**
- * List the Article 'type' options.
- */
-function _schema_event_type_options() {
-  $options = array(
-    'Event',
-    'BusinessEvent',
-    'ChildrensEvent',
-    'ComedyEvent',
-    'CourseInstance',
-    'DanceEvent',
-    'DeliveryEvent',
-    'EducationEvent',
-    'ExhibitionEvent',
-    'Festival',
-    'FoodEvent',
-    'LiteraryEvent',
-    'MusicEvent',
-    'PublicationEvent',
-    'SaleEvent',
-    'ScreeningEvent',
-    'SocialEvent',
-    'SportsEvent',
-    'TheaterEvent',
-    'VisualArtsEvent',
-  );
-  return drupal_map_assoc($options);
 }

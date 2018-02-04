@@ -28,38 +28,21 @@ function schema_product_metatag_info() {
   );
 
   $info['tags']['schema_product.@type'] = array(
+    'class' => 'SchemaProductType',
     'label' => t('@type'),
     'description' => t('The type of product (fixed by standard).'),
-    'form' => array(
-      '#type' => 'select',
-      '#options' => array(
-        'Product' => t('Product'),
-      ),
-      '#empty_option' => t('- None -'),
-    ),
-    'dependencies' => [],
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_product.name'] = array(
     'label' => t('name'),
     'description' => t('Name of the product.'),
-    'form' => array(
-      '#attributes' => array(
-        'placeholder' => '[node:title]',
-      ),
-    ),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_product.description'] = array(
     'label' => t('description'),
     'description' => t('A description of the item.'),
-    'form' => array(
-      '#attributes' => array(
-         'placeholder' => '[node:field_description]',
-      ),
-    ),
     'weight' => ++$weight,
   ) + $defaults;
 
@@ -69,22 +52,19 @@ function schema_product_metatag_info() {
     'description' => t('The primary image for this item.'),
     'image' => TRUE,
     'url' => TRUE,
-    'form' => array(
-      '#attributes' => array(
-        'placeholder' => '[image:field_image]',
-      ),
-    ),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_product.offers'] = array(
     'label' => t('offers'),
     'description' => t('Offers associated with the product.'),
-    'form' => array(
-      '#attributes' => array(
-         'placeholder' => '[node:field_special_offers]',
-      ),
-    ),
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_product.aggregateRating'] = array(
+    'class' => 'SchemaAggregateRatingBase',
+    'label' => t('aggregateRating'),
+    'description' => t(''),
     'weight' => ++$weight,
   ) + $defaults;
 

@@ -1,19 +1,17 @@
 <?php
 
 /**
- * Provides a plugin for the 'schema_offer_base' meta tag.
+ * Provides a plugin to extend for the 'aggregateRating' meta tag.
  */
-class SchemaOfferBase extends SchemaNameBase {
+class SchemaAggregateRatingBase extends SchemaNameBase {
 
-  use SchemaOfferTrait;
-  use SchemaPivotTrait;
+  use SchemaAggregateRatingTrait;
 
   /**
    * {@inheritdoc}
    */
   public function getForm(array $options = []) {
     $value = SchemaMetatagManager::unserialize($this->value());
-
     $input_values = [
       'title' => $this->label(),
       'description' => $this->description(),
@@ -22,16 +20,10 @@ class SchemaOfferBase extends SchemaNameBase {
       'visibility_selector' => $this->visibilitySelector() . '[@type]',
     ];
 
-    $form['value'] = $this->offerForm($input_values);
+    $form = parent::getForm($options);
+    $form['value'] = $this->aggregateRatingForm($input_values);
     // Validation from parent::getForm() got wiped out, so add callback.
     $form['value']['#element_validate'][] = 'schema_metatag_element_validate';
-
-    if (!empty($this->info['multiple'])) {
-      $form['value']['pivot'] = $this->pivotForm($value);
-      $selector = ':input[name="' . $input_values['visibility_selector'] . '"]';
-      $form['value']['pivot']['#states'] = ['invisible' => [$selector => ['value' => '']]];
-    }
-
     return $form;
   }
 
@@ -40,11 +32,11 @@ class SchemaOfferBase extends SchemaNameBase {
    */
   public static function testValue() {
     $items = [];
-    $keys = self::offerFormKeys();
+    $keys = ['@type', 'ratingValue', 'ratingCount', 'bestRating', 'worstRating'];
     foreach ($keys as $key) {
       switch ($key) {
         case '@type':
-          $items[$key] = 'Offer';
+          $items[$key] = 'AggregateRating';
           break;
 
         default:
@@ -54,6 +46,13 @@ class SchemaOfferBase extends SchemaNameBase {
       }
     }
     return $items;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function outputValue($input_value) {
+    return $input_value;
   }
 
 }

@@ -1,8 +1,14 @@
 <?php
 
+/**
+ * Schema.org Offer trait.
+ */
 trait SchemaOfferTrait {
 
-  public function offer_form_keys() {
+  /**
+   * Form keys.
+   */
+  public static function offerFormKeys() {
     return [
       '@type',
       'price',
@@ -13,7 +19,10 @@ trait SchemaOfferTrait {
     ];
   }
 
-  public function offer_input_values() {
+  /**
+   * Input values.
+   */
+  public function offerInputValues() {
     return [
       'title' => '',
       'description' => '',
@@ -23,9 +32,12 @@ trait SchemaOfferTrait {
     ];
   }
 
-  public function offer_form($input_values) {
+  /**
+   * The form element.
+   */
+  public function offerForm($input_values) {
 
-    $input_values += $this->offer_input_values();
+    $input_values += $this->offerInputValues();
     $value = $input_values['value'];
 
     $form['#type'] = 'fieldset';
@@ -88,12 +100,9 @@ trait SchemaOfferTrait {
     // Add #states to show/hide the fields based on the value of @type,
     // if a selector was provided.
     if (!empty($input_values['visibility_selector'])) {
-      $keys = $this->offer_form_keys();
-      $visibility = ['visible' => [
-        ':input[name="' . $input_values['visibility_selector'] . '"]' => [
-								  'value' => 'Offer']
-        ]
-      ];
+      $selector = ':input[name="' . $input_values['visibility_selector'] . '"]';
+      $visibility = ['visible' => [$selector => ['value' => 'Offer']]];
+      $keys = self::offerFormKeys();
       foreach ($keys as $key) {
         if ($key != '@type') {
           $form[$key]['#states'] = $visibility;
@@ -102,8 +111,6 @@ trait SchemaOfferTrait {
     }
 
     return $form;
-
   }
-
 
 }

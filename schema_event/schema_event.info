@@ -3,3 +3,5 @@ description = "Adds Schema.org/Event to the JSON-LD array. Creates Event and Off
 package = SEO
 core = 7.x
 dependencies[] = schema_metatag
+
+files[] = src/SchemaEventType.php

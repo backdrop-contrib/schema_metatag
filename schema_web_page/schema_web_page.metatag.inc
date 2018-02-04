@@ -28,59 +28,51 @@ function schema_web_page_metatag_info() {
   );
 
   $info['tags']['schema_web_page.@type'] = array(
+    'class' => 'SchemaWebPageType',
     'label' => t('@type'),
     'description' => t('The type of web page.'),
-    'form' => array(
-      '#type' => 'select',
-      '#options' => _schema_web_page_type_options(),
-      '#empty_option' => t('- None -'),
-    ),
-    'dependencies' => [],
     'weight' => ++$weight,
   ) + $defaults;
+
   $info['tags']['schema_web_page.@id'] = array(
     'label' => t('@id'),
     'description' => t('Globally unique @id, usually a url, used to to link other properties to this object.'),
     'weight' => ++$weight,
   ) + $defaults;
+
   $info['tags']['schema_web_page.name'] = array(
     'label' => t('name'),
     'description' => t('The name of the web page.'),
-    'form' => array(
-      '#attributes' => array(
-         'placeholder' => '[node:title]',
-      ),
-    ),
     'weight' => ++$weight,
   ) + $defaults;
+
   $info['tags']['schema_web_page.url'] = array(
     'label' => t('url'),
     'description' => t('The url of the web page.'),
     'url' => TRUE,
-    'form' => array(
-      '#attributes' => array(
-         'placeholder' => '[node:url]',
-      ),
-    ),
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_web_page.hasPart'] = array(
+    'class' => 'SchemaHasPartBase',
+    'label' => t('hasPart'),
+    'description' => t(''),
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_web_page.isAccessibleForFree'] = array(
+    'class' => 'SchemaIsAccessibleForFreeBase',
+    'label' => t('isAccessibleForFree'),
+    'description' => t(''),
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_web_page.listElementBreadcrumb'] = array(
+    'class' => 'SchemaListElementBreadcrumbBase',
+    'label' => t('breadcrumb'),
+    'description' => t(''),
     'weight' => ++$weight,
   ) + $defaults;
 
   return $info;
-}
-
-/**
- * List the Article 'type' options.
- */
-function _schema_web_page_type_options() {
-  $options = array(
-    'WebPage',
-    'ItemPage',
-    'AboutPage',
-    'CheckoutPage',
-    'ContactPage',
-    'CollectionPage',
-    'ProfilePage',
-    'SearchResultsPage',
-  );
-  return drupal_map_assoc($options);
 }

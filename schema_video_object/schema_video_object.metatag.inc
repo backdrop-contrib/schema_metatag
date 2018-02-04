@@ -28,69 +28,41 @@ function schema_video_object_metatag_info() {
   );
 
   $info['tags']['schema_video_object.@type'] = array(
+    'class' => 'SchemaVideoObjectType',
     'label' => t('@type'),
     'description' => t('The type of video file.'),
-    'form' => array(
-      '#type' => 'select',
-      '#options' => _schema_video_object_type_options(),
-      '#empty_option' => t('- None -'),
-    ),
-    'dependencies' => [],
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_video_object.@id'] = array(
     'label' => t('@id'),
     'description' => t('Globally unique @id, usually a url, used to to link other properties to this object.'),
-    'form' => array(
-      '#attributes' => array(
-         'placeholder' => '[file:description]',
-      ),
-    ),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_video_object.name'] = array(
     'label' => t('name'),
     'description' => t('Name of the video.'),
-    'form' => array(
-      '#attributes' => array(
-         'placeholder' => '[file:name]',
-      ),
-    ),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_video_object.description'] = array(
     'label' => t('description'),
     'description' => t('A description of the item.'),
-    'form' => array(
-      '#attributes' => array(
-         'placeholder' => '[file:description]',
-      ),
-    ),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_video_object.uploadDate'] = array(
+    'class' => 'SchemaDateBase',
     'label' => t('uploadDate'),
     'description' => t('The date the video was first published, in ISO 8601 format.'),
-    'form' => array(
-      '#attributes' => array(
-         'placeholder' => '[file:created:custom:Y-m-d\TH:i:sO]',
-      ),
-    ),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_video_object.expires'] = array(
+    'class' => 'SchemaDateBase',
     'label' => t('expires'),
     'description' => t("If applicable, the date after which the video will no longer be available, in ISO 8601 format. Don't supply this information if your video does not expire."),
-    'form' => array(
-      '#attributes' => array(
-         'placeholder' => '[file:changed:custom:Y-m-d\TH:i:sO]',
-      ),
-    ),
     'weight' => ++$weight,
   ) + $defaults;
 
@@ -100,11 +72,6 @@ function schema_video_object_metatag_info() {
     'description' => t('The thumbnail URL of the video.'),
     'image' => TRUE,
     'url' => TRUE,
-    'form' => array(
-      '#attributes' => array(
-         'placeholder' => '[file:field_image]',
-      ),
-    ),
     'weight' => ++$weight,
   ) + $defaults;
 
@@ -135,14 +102,10 @@ function schema_video_object_metatag_info() {
   ) + $defaults;
 
   $info['tags']['schema_video_object.mainEntityOfPage'] = array(
+    'class' => 'SchemaMainEntityOfPageBase',
     'label' => t('mainEntityOfPage'),
     'description' => t(''),
     'url' => TRUE,
-    'form' => array(
-      '#attributes' => array(
-         'placeholder' => '[file:url]',
-      ),
-    ),
     'weight' => ++$weight,
   ) + $defaults;
 
@@ -161,15 +124,12 @@ function schema_video_object_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
-  return $info;
-}
+  $info['tags']['schema_video_object.aggregateRating'] = array(
+    'class' => 'SchemaAggregateRatingBase',
+    'label' => t('aggregateRating'),
+    'description' => t(''),
+    'weight' => ++$weight,
+  ) + $defaults;
 
-/**
- * List the Article 'type' options.
- */
-function _schema_video_object_type_options() {
-  $options = array(
-    'VideoObject' => t('VideoObject'),
-  );
-  return drupal_map_assoc($options);
+  return $info;
 }

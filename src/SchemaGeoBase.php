@@ -14,7 +14,7 @@ class SchemaGeoBase extends SchemaNameBase {
   /**
    * {@inheritdoc}
    */
-  public function getForm(array $options = array()) {
+  public function getForm(array $options = [])  {
 
     $value = SchemaMetatagManager::unserialize($this->value());
 
@@ -27,21 +27,39 @@ class SchemaGeoBase extends SchemaNameBase {
     ];
 
     $form = parent::getForm($options);
-    $form['value'] = $this->geo_form($input_values);
+    $form['value'] = $this->geoForm($input_values);
 
     // Validation from parent::getForm() got wiped out, so add callback.
     $form['value']['#element_validate'][] = 'schema_metatag_element_validate';
 
     if (!empty($this->info['multiple'])) {
-      $form['value']['pivot'] = $this->pivot_form($value);
-      $form['value']['pivot']['#states'] = ['invisible' => [
-        ':input[name="' . $input_values['visibility_selector'] . '"]' => [
-			    'value' => '']
-        ]
-      ];
-     }
+      $form['value']['pivot'] = $this->pivotForm($value);
+      $selector = ':input[name="' . $input_values['visibility_selector'] . '"]';
+      $form['value']['pivot']['#states'] = ['invisible' => [$selector => ['value' => '']]];
+    }
 
     return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function testValue() {
+    $items = [];
+    $keys = self::geoFormKeys();
+    foreach ($keys as $key) {
+      switch ($key) {
+        case '@type':
+          $items[$key] = 'GeoCoordinates';
+          break;
+
+        default:
+          $items[$key] = parent::testDefaultValue(1, '');
+          break;
+
+      }
+    }
+    return $items;
   }
 
 }

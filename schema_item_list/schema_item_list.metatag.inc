@@ -48,7 +48,7 @@ function schema_item_list_metatag_info() {
   $info['tags']['schema_item_list.itemListElement'] = array(
     'class' => 'SchemaItemListBase',
     'label' => t('itemListElement'),
-    'description' => t('Display the view results as a JSON LD item list'),,
+    'description' => t('Display the view results as a JSON LD item list'),
     'form' => array(
       '#type' => 'select',
       '#options' => ['' => t('No'), 1 => t('Yes')],

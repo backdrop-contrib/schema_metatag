@@ -1,8 +1,14 @@
 <?php
 
+/**
+ * Schema.org Geo trait.
+ */
 trait SchemaGeoTrait {
 
-  public function geo_form_keys() {
+  /**
+   * Form keys.
+   */
+  public static function geoFormKeys() {
     return [
       '@type',
       'latitude',
@@ -10,7 +16,10 @@ trait SchemaGeoTrait {
     ];
   }
 
-  public function geo_input_values() {
+  /**
+   * Input values.
+   */
+  public function geoInputValues() {
     return [
       'title' => '',
       'description' => '',
@@ -20,9 +29,12 @@ trait SchemaGeoTrait {
     ];
   }
 
-  public function geo_form($input_values) {
+  /**
+   * The form element.
+   */
+  public function geoForm($input_values) {
 
-    $input_values += $this->geo_input_values();
+    $input_values += $this->geoInputValues();
     $value = $input_values['value'];
 
     $form['#type'] = 'fieldset';
@@ -63,12 +75,9 @@ trait SchemaGeoTrait {
     // Add #states to show/hide the fields based on the value of @type,
     // if a selector was provided.
     if (!empty($input_values['visibility_selector'])) {
-      $keys = $this->geo_form_keys();
-      $visibility = ['visible' => [
-        ':input[name="' . $input_values['visibility_selector'] . '"]' => [
-								  'value' => 'GeoCoordinates']
-        ]
-      ];
+      $selector = ':input[name="' . $input_values['visibility_selector'] . '"]';
+      $visibility = ['visible' => [$selector => ['value' => 'GeoCoordinates']]];
+      $keys = self::geoFormKeys();
       foreach ($keys as $key) {
         if ($key != '@type') {
           $form[$key]['#states'] = $visibility;
@@ -77,8 +86,6 @@ trait SchemaGeoTrait {
     }
 
     return $form;
-
   }
-
 
 }

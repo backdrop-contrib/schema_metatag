@@ -25,7 +25,7 @@ class SchemaImageBase extends SchemaNameBase {
     ];
 
     $form = parent::getForm($options);
-    $form['value'] = $this->image_form($input_values);
+    $form['value'] = $this->imageForm($input_values);
     $form['value']['#element_validate'][] = 'schema_metatag_element_validate';
 
     return $form;

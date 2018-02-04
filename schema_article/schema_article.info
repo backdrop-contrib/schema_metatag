@@ -3,3 +3,5 @@ description = "Adds Schema.org/Article to the JSON LD array. Creates Article, Bl
 package = SEO
 core = 7.x
 dependencies[] = schema_metatag
+
+files[] = src/SchemaArticleType.php

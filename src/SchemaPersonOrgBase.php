@@ -14,14 +14,14 @@ class SchemaPersonOrgBase extends SchemaNameBase {
   /**
    * The top level keys on this form.
    */
-  function form_keys() {
-    return ['pivot'] + $this->person_org_form_keys();
+  public function formKeys() {
+    return ['pivot'] + self::personOrgFormKeys();
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getForm(array $options = array()) {
+  public function getForm(array $options = []) {
 
     $value = SchemaMetatagManager::unserialize($this->value());
 
@@ -33,21 +33,46 @@ class SchemaPersonOrgBase extends SchemaNameBase {
       'visibility_selector' => $this->visibilitySelector() . '[@type]',
     ];
 
-    $form = parent::getForm($options);
-    $form['value'] = $this->person_org_form($input_values);
+    $form['value'] = $this->personOrgForm($input_values);
 
     // Validation from parent::getForm() got wiped out, so add callback.
     $form['value']['#element_validate'][] = 'schema_metatag_element_validate';
 
     if (!empty($this->info['multiple'])) {
-      $form['value']['pivot'] = $this->pivot_form($value);
-      $form['value']['pivot']['#states'] = ['invisible' => [
-        ':input[name="' . $input_values['visibility_selector'] . '"]' => [
-			    'value' => '']
-        ]
-      ];
+      $form['value']['pivot'] = $this->pivotForm($value);
+      $form['value']['pivot'] = $this->pivotForm($value);
+      $selector = ':input[name="' . $input_values['visibility_selector'] . '"]';
+      $form['value']['pivot']['#states'] = ['invisible' => [$selector => ['value' => '']]];
     }
     return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function testValue() {
+    $items = [];
+    $keys = self::personOrgFormKeys();
+    foreach ($keys as $key) {
+      switch ($key) {
+        case 'pivot':
+          break;
+
+        case 'logo':
+          $items[$key] = SchemaImageBase::testValue();
+          break;
+
+        case '@type':
+          $items[$key] = 'Organization';
+          break;
+
+        default:
+          $items[$key] = parent::testDefaultValue(2, ' ');
+          break;
+
+      }
+    }
+    return $items;
   }
 
 }

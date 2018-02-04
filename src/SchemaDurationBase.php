@@ -6,14 +6,26 @@
 class SchemaDurationBase extends SchemaNameBase {
 
   /**
-   * Process an individual item.
+   * {@inheritdoc}
    */
-  protected function process_item(&$value, $key = 0) {
-
-    $is_integer = ctype_digit($value) || is_int($value);
-    if ($is_integer && $value > 0) {
-      $value = 'PT' . $value . 'S';
+  public function output() {
+    $element = parent::output();
+    if (!empty($element)) {
+      $input_value = $element['#attributes']['content'];
+      $element['#attributes']['content'] = self::outputValue($input_value);
     }
-    parent::process_item($value, $key);
+    return $element;
   }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function outputValue($input_value) {
+    $is_integer = ctype_digit($input_value) || is_int($input_value);
+    if (!empty($element) && $is_integer && $input_value > 0) {
+      return 'PT' . $input_value . 'S';
+    }
+    return $input_value;
+  }
+
 }

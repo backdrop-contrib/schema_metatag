@@ -5,23 +5,20 @@
  */
 class SchemaAddressBase extends SchemaNameBase {
 
-  /**
-   * Traits provide re-usable form elements.
-   */
   use SchemaAddressTrait;
   use SchemaPivotTrait;
 
   /**
    * The top level keys on this form.
    */
-  public function form_keys() {
-    return ['pivot'] + $this->postal_address_form_keys();
+  public static function formKeys() {
+    return ['pivot'] + self::postalAddressFormKeys();
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getForm(array $options = array()) {
+  public function getForm(array $options = []) {
 
     $value = SchemaMetatagManager::unserialize($this->value());
     $input_values = [
@@ -33,20 +30,39 @@ class SchemaAddressBase extends SchemaNameBase {
     ];
 
     $form = parent::getForm($options);
-    $form['value'] = $this->postal_address_form($input_values);
+    $form['value'] = $this->postalAddressForm($input_values);
 
     // Validation from parent::getForm() got wiped out, so add callback.
     $form['value']['#element_validate'][] = 'schema_metatag_element_validate';
 
     if (!empty($this->info['multiple'])) {
-      $form['value']['pivot'] = $this->pivot_form($value);
-      $form['value']['pivot']['#states'] = ['invisible' => [
-        ':input[name="' . $input_values['visibility_selector'] . '"]' => [
-			    'value' => '']
-        ]
-      ];
+      $form['value']['pivot'] = $this->pivotForm($value);
+      $selector = ':input[name="' . $input_values['visibility_selector'] . '"]';
+      $form['value']['pivot']['#states'] = ['invisible' => [$selector => ['value' => '']]];
     }
+
     return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function testValue() {
+    $items = [];
+    $keys = self::postalAddressFormKeys();
+    foreach ($keys as $key) {
+      switch ($key) {
+        case '@type':
+          $items[$key] = 'PostalAddress';
+          break;
+
+        default:
+          $items[$key] = parent::testDefaultValue(2, ' ');
+          break;
+
+      }
+    }
+    return $items;
   }
 
 }
