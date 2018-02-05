@@ -31,4 +31,33 @@ class SchemaImageBase extends SchemaNameBase {
     return $form;
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public static function testValue() {
+    $items = [];
+    $keys = self::imageFormKeys();
+    foreach ($keys as $key) {
+      switch ($key) {
+        case '@type':
+          $items[$key] = 'ImageObject';
+          break;
+
+        case 'representativeOfPage':
+          $items[$key] = 'True';
+          break;
+
+        case 'url':
+          $items[$key] = static::randomUrl();
+          break;
+
+        default:
+          $items[$key] = parent::testDefaultValue(1, '');
+          break;
+
+      }
+    }
+    return $items;
+  }
+
 }

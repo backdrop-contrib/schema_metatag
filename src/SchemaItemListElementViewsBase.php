@@ -34,28 +34,29 @@ class SchemaItemListElementViewsBase extends SchemaItemListElementBase {
       $view_id = $ids[0];
       $display_id = $ids[1];
       // Get the view results.
-      if ($result = views_get_view_result($view_id, $display_id)) {
-        $key = 1;
-        foreach ($result as $item) {
-          // If this is a display that does not provide an entity in the result,
-          // there is really nothing more to do.
-          if (empty($item->_entity)) {
-            return '';
-          }
-          // Get the absolute path to this entity.
-          // The entity that Views returns does not have the toUrl() method
-          // which would be a little cleaner, but this works.
-          $url = $item->_entity->url();
-          $url = Url::fromUri('internal:' . $url)->setAbsolute()->toString();
-          $values[$key] = [
+      $view = $this->options['token data']['view'];
+      $id = $view->base_field;
+      $entity_type = $view->base_table;
+      $key = 1;
+      $value = [];
+      foreach ($view->result as $key => $item) {
+        // If this is a display that does not provide an entity in the result,
+        // there is really nothing more to do.
+        if (!empty($item->$id)) {
+           // Get the absolute path to this entity.
+          $entity = entity_load($entity_type, [$item->$id]);
+          $entity = array_shift($entity);
+          $uri = entity_uri($entity_type, $entity);
+          $url = drupal_get_path_alias($uri['path']);
+          $absolute = url($url, array('absolute' => TRUE));
+          $value[$key] = [
             '@id' => $url,
-            'name' => $item->_entity->label(),
+            'name' => $entity->title,
           ];
-          $key++;
         }
       }
     }
-    return $values;
+    return !empty($values) ? $values : '';
   }
 
 }

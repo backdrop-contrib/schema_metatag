@@ -28,14 +28,9 @@ function schema_item_list_metatag_info() {
   );
 
   $info['tags']['schema_item_list.@type'] = array(
+    'class' => 'SchemaItemListType',
     'label' => t('@type'),
-    'description' => t('The type of web site.'),
-    'form' => array(
-      '#type' => 'select',
-      '#options' => _schema_item_list_type_options(),
-      '#empty_option' => t('- None -'),
-    ),
-    'dependencies' => [],
+    'description' => t('The type of item list.'),
     'weight' => ++$weight,
   ) + $defaults;
 
@@ -46,13 +41,9 @@ function schema_item_list_metatag_info() {
   ) + $defaults;
 
   $info['tags']['schema_item_list.itemListElement'] = array(
-    'class' => 'SchemaItemListBase',
+    'class' => 'SchemaItemListElementViewsBase',
     'label' => t('itemListElement'),
     'description' => t('Display the view results as a JSON LD item list'),
-    'form' => array(
-      '#type' => 'select',
-      '#options' => ['' => t('No'), 1 => t('Yes')],
-    ),
     'weight' => ++$weight,
   ) + $defaults;
 
@@ -69,14 +60,4 @@ function schema_item_list_metatag_info() {
   ) + $defaults;
 
   return $info;
-}
-
-/**
- * List the Article 'type' options.
- */
-function _schema_item_list_type_options() {
-  $options = array(
-    'ItemList',
-  );
-  return drupal_map_assoc($options);
 }

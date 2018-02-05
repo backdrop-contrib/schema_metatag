@@ -66,6 +66,10 @@ class SchemaPersonOrgBase extends SchemaNameBase {
           $items[$key] = 'Organization';
           break;
 
+        case 'url':
+        case 'sameAs':
+          $items[$key] = static::randomUrl();
+
         default:
           $items[$key] = parent::testDefaultValue(2, ' ');
           break;

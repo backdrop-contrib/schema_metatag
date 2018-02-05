@@ -4,3 +4,5 @@ package = SEO
 core = 7.x
 dependencies[] = schema_metatag
 dependencies[] = metatag_views
+
+files[] = src/SchemaItemListType.php

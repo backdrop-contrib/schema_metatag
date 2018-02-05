@@ -1,6 +1,25 @@
 <?php
 
 /**
+ * A generic substitution for Drupal 8 Random utility.
+ */
+class Random {
+
+  public function name($length, $other) {
+    return $this->string($length, $other);
+  }
+  public function string($length, $other) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $randstring = '';
+    for ($i = 0; $i < $length; $i++) {
+      $randstring .= $characters[rand(0, (strlen($characters) - 1))];
+    }
+    return $randstring;
+  }
+
+}
+
+/**
  * Class SchemaMetatagManager.
  *
  * @package Drupal\schema_metatag
@@ -87,14 +106,14 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
   public static function pivot($content) {
     $count = max(array_map('count', $content));
     $pivoted = [];
-    for ($i=0; $i<$count; $i++) {
+    for ($i = 0; $i < $count; $i++) {
       foreach ($content as $key => $item) {
         // Some properties, like @type, may need to repeat the first item,
         // others may have too few values to fill out the array.
         // Make sure all properties have the right number of values.
         if (is_string($item) || count($item) < $count) {
           $content[$key] = [];
-          for ($x=0; $x<$count; $x++) {
+          for ($x = 0; $x < $count; $x++) {
             $content[$key][$x] = $item;
           }
         }
@@ -107,14 +126,28 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
   /**
    * {@inheritdoc}
    */
+  public static function explode($value) {
+    $value = explode(',', $value);
+    $value = array_map('trim', $value);
+    $value = array_unique($value);
+    if (count($value) == 1) {
+      return $value[0];
+    }
+
+    return $value;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public static function serialize($value) {
     // Make sure the same value isn't serialized more than once if this is
     // called multiple times.
     if (is_array($value)) {
       // Don't serialize an empty array.
       // Otherwise Metatag won't know the field is empty.
-      $value = self::arrayTrim($value);
-      if (empty($value)) {
+      $trimmed = self::arrayTrim($value);
+      if (empty($trimmed)) {
         return '';
       }
       else {
@@ -135,7 +168,7 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
       // Fix problems created if token replacements are a different size
       // than the original tokens.
       $value = self::recomputeSerializedLength($value);
-      $value = unserialize($value);
+      $value = self::arrayTrim(unserialize($value));
     }
     return $value;
   }
@@ -144,42 +177,52 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
    * {@inheritdoc}
    */
   public static function isSerialized($value) {
-    // if it isn't a string, it isn't serialized
-    if (!is_string($value)) return false;
+    // If it isn't a string, it isn't serialized.
+    if (!is_string($value)) {
+      return FALSE;
+    }
     $data = trim($value);
-    if ('N;' == $value) return true;
+    if ('N' == $value) {
+      return TRUE;
+    }
     if (!preg_match('/^([adObis]):/', $value, $badions)) {
-      return false;
+      return FALSE;
     }
     switch ($badions[1]) {
       case 'a':
       case 'O':
       case 's':
-        if (preg_match("/^{$badions[1]}:[0-9]+:.*[;}]\$/s", $value))
-          return true;
+        if (preg_match("/^{$badions[1]}:[0-9]+:.*[;}]\$/s", $value)) {
+          return TRUE;
+        }
         break;
+
       case 'b':
       case 'i':
       case 'd':
-        if (preg_match("/^{$badions[1]}:[0-9.E-]+;\$/", $value))
-          return true;
+        if (preg_match("/^{$badions[1]}:[0-9.E-]+;\$/", $value)) {
+          return TRUE;
+        }
         break;
+
     }
-    return false;
+    return FALSE;
   }
 
   /**
-   * {@inheritdoc}
+   * Not used, test to remove empty element from array.
    */
-  public static function explode($value) {
-    $exploded = array_filter(explode(',', $value));
-    if (count($exploded) == 1) {
-      $value = $exploded[0];
-    }
-    else {
-      $value = $exploded;
-    }
-    return $value;
+  public static function test($input) {
+    $iterator = new \RecursiveIteratorIterator(
+      new \RecursiveCallbackFilterIterator(
+        new \RecursiveArrayIterator($input),
+        function ($value) {
+          return trim($value) !== NULL && trim($value) !== '';
+        }
+      ), \RecursiveIteratorIterator::CHILD_FIRST
+    );
+    $result = $iterator->getArrayCopy();
+    return $result;
   }
 
   /**
@@ -201,6 +244,40 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
       return ($match[1] == strlen($match[2])) ? $match[0] : 's:' . strlen($match[2]) . ':"' . $match[2] . '";';
     }, $value);
     return $value;
+  }
+
+  /**
+   * Generates a pseudo-random string of ASCII characters of codes 32 to 126.
+   *
+   * @param int $length
+   *   Length of random string to generate.
+   *
+   * @return string
+   *   Pseudo-randomly generated unique string including special characters.
+   */
+  public static function randomString($length = 8) {
+    $randomGenerator = new Random();
+    if ($length < 4) {
+      return $randomGenerator->string($length, TRUE);
+    }
+    // Swap special characters into the string.
+    $replacement_pos = floor($length / 2);
+    $string = $randomGenerator->string($length - 2, TRUE);
+    return substr_replace($string, '>&', $replacement_pos, 0);
+  }
+
+  /**
+   * Generates a unique random string containing letters and numbers.
+   *
+   * @param int $length
+   *   Length of random string to generate.
+   *
+   * @return string
+   *   Randomly generated unique string.
+   */
+  public static function randomMachineName($length = 8) {
+    $randomGenerator = new Random();
+    return $randomGenerator->name($length, TRUE);
   }
 
 }

@@ -49,9 +49,7 @@ class SchemaNameBase extends DrupalTextMetaTag {
    * {@inheritdoc}
    */
   public function getElement(array $options = array()) {
-
     $this->options = $options;
-
     $value = SchemaMetatagManager::unserialize($this->value());
 
     if (empty($value)) {
@@ -90,7 +88,7 @@ class SchemaNameBase extends DrupalTextMetaTag {
         'schema_metatag' => TRUE,
         'group' => $parts[0],
         'name' => $parts[1],
-        'content' => $value,
+        'content' => static::outputValue($value),
       ]
     ];
     return array(
@@ -131,6 +129,75 @@ class SchemaNameBase extends DrupalTextMetaTag {
     $this->data = $backup_data;
     $this->info = $backup_info;
 
+  }
+
+  /**
+   * Transform input value to its display output.
+   *
+   * Tags that need to transform the output to something different than the
+   * stored value should extend this method and do the transformation here.
+   *
+   * @param mixed $input_value
+   *   Input value, could be either a string or array. This will be the
+   *   unserialized value stored in the tag configuration, after token
+   *   replacement.
+   *
+   * @return mixed
+   *   Return the (possibly expanded) value which will be rendered in JSON-LD.
+   */
+  public static function outputValue($input_value) {
+    return $input_value;
+  }
+
+  /**
+   * Provide a test value for the property that will validate.
+   *
+   * Tags like @type that contain values other than simple strings, for
+   * instance a list of allowed options, should extend this method and return
+   * a valid value.
+   *
+   * @return mixed
+   *   Return the test value, either a string or array, depending on the
+   *   property.
+   */
+  public static function testValue() {
+    return static::testDefaultValue(2, ' ');
+  }
+
+  /**
+   * Random absolute url for testing.
+   *
+   * @return string
+   *   A random absolute url.
+   */
+  public static function randomUrl() {
+    return 'http://google.com/' . static::testDefaultValue(1, '');
+  }
+
+  /**
+   * Provide a random test value.
+   *
+   * A helper function to create a random test value. Use the delimiter to
+   * create comma-separated values, or a few "words" separated by spaces.
+   *
+   * @param int $count
+   *   Number of "words".
+   * @param int $delimiter
+   *   Delimiter used to connect "words".
+   *
+   * @return mixed
+   *   Return the test value, either a string or array, depending on the
+   *   property.
+   */
+  public static function testDefaultValue($count = NULL, $delimiter = NULL) {
+    $items = [];
+    $min = 1;
+    $max = isset($count) ? $count : 2;
+    $delimiter = isset($delimiter) ? $delimiter : ' ';
+    for ($i = $min; $i <= $max; $i++) {
+      $items[] = SchemaMetatagManager::randomMachineName();
+    }
+    return implode($delimiter, $items);
   }
 
 }

@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * Tests that each of the Metatag base tags work correctly.
+ */
+class SchemaMetatagTagsTest extends SchemaMetatagTagsTestBase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Schema Metatag: Base tags',
+      'description' => 'Test the base meta tags.',
+      'group' => 'Schema Metatag',
+      'dependencies' => array('ctools', 'token', 'metatag', 'schema_metatag', 'schema_article'),
+    );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public $moduleName = 'schema_metatag_test';
+
+  /**
+   * {@inheritdoc}
+   */
+  public $schemaTags = [
+    'schema_metatag_test.@type' => 'SchemaArticleType',
+    'schema_metatag_test.address' => 'SchemaAddressBase',
+    'schema_metatag_test.aggregateRating' => 'SchemaAggregateRatingBase',
+    'schema_metatag_test.date' => 'SchemaDateBase',
+    'schema_metatag_test.duration' => 'SchemaDurationBase',
+    'schema_metatag_test.geo' => 'SchemaGeoBase',
+    'schema_metatag_test.hasPart' => 'SchemaHasPartBase',
+    'schema_metatag_test.image' => 'SchemaImageBase',
+    'schema_metatag_test.mainEntityOfPage' => 'SchemaMainEntityOfPageBase',
+    'schema_metatag_test.name' => 'SchemaNameBase',
+    'schema_metatag_test.offer' => 'SchemaOfferBase',
+    'schema_metatag_test.organization' => 'SchemaPersonOrgBase',
+    'schema_metatag_test.place' => 'SchemaPlaceBase',
+  ];
+
+}
