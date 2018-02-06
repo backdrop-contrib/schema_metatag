@@ -90,7 +90,7 @@ abstract class SchemaMetatagTagsTestBase extends SchemaMetatagTestHelper {
         // the output. Store the raw value so we can check that it exists in the
         // config form.
         $test_value = $class_name::testValue();
-        $raw_values[$tag_name] = $test_value;
+        //$raw_values[$tag_name] = is_array($test_value) ? SchemaMetatagManager::serialize($test_value) : $test_value;
         $expected_output_values[$key] = $class_name::outputValue($test_value);
 
         // Rewrite the test values to match the way the form elements are
@@ -129,7 +129,9 @@ abstract class SchemaMetatagTagsTestBase extends SchemaMetatagTestHelper {
           }
         }
       }
+
       //print_r($form_values);
+
       $this->drupalPost(NULL, $form_values, 'Save');
       $this->assertText($save_message);
 
