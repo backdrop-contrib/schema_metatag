@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Metatag integration for the schema_organization module.
@@ -45,7 +46,7 @@ function schema_organization_metatag_info() {
     'description' => t('The name of the organization.'),
     'form' => array(
       '#attributes' => array(
-         'placeholder' => '[node:title]',
+        'placeholder' => '[node:title]',
       ),
     ),
     'weight' => ++$weight,
@@ -64,7 +65,7 @@ function schema_organization_metatag_info() {
     'url' => TRUE,
     'form' => array(
       '#attributes' => array(
-         'placeholder' => '[site:url]',
+        'placeholder' => '[site:url]',
       ),
     ),
     'weight' => ++$weight,
@@ -77,7 +78,7 @@ function schema_organization_metatag_info() {
     'url' => TRUE,
     'form' => array(
       '#attributes' => array(
-         'placeholder' => '[site:url]',
+        'placeholder' => '[site:url]',
       ),
     ),
     'weight' => ++$weight,
@@ -107,7 +108,7 @@ function schema_organization_metatag_info() {
     'url' => TRUE,
     'form' => array(
       '#attributes' => array(
-         'placeholder' => '[node:field_image]',
+        'placeholder' => '[node:field_image]',
       ),
     ),
     'weight' => ++$weight,
@@ -121,7 +122,7 @@ function schema_organization_metatag_info() {
     'url' => TRUE,
     'form' => array(
       '#attributes' => array(
-         'placeholder' => '[node:field_image]',
+        'placeholder' => '[node:field_image]',
       ),
     ),
     'weight' => ++$weight,
@@ -137,7 +138,7 @@ function schema_organization_metatag_info() {
   $info['tags']['schema_organization.mainEntityOfPage'] = array(
     'class' => 'SchemaMainEntityOfPageBase',
     'label' => t('mainEntityOfPage'),
-    'description' => t(''),
+    'description' => '',
     'url' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
@@ -145,7 +146,7 @@ function schema_organization_metatag_info() {
   $info['tags']['schema_organization.aggregateRating'] = array(
     'class' => 'SchemaAggregateRatingBase',
     'label' => t('aggregateRating'),
-    'description' => t(''),
+    'description' => '',
     'weight' => ++$weight,
   ) + $defaults;
 

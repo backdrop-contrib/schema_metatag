@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Metatag integration for the schema_web_page module.
@@ -56,21 +57,21 @@ function schema_web_page_metatag_info() {
   $info['tags']['schema_web_page.hasPart'] = array(
     'class' => 'SchemaHasPartBase',
     'label' => t('hasPart'),
-    'description' => t(''),
+    'description' => '',
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_web_page.isAccessibleForFree'] = array(
     'class' => 'SchemaIsAccessibleForFreeBase',
     'label' => t('isAccessibleForFree'),
-    'description' => t(''),
+    'description' => '',
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_web_page.listElementBreadcrumb'] = array(
     'class' => 'SchemaListElementBreadcrumbBase',
     'label' => t('breadcrumb'),
-    'description' => t(''),
+    'description' => '',
     'weight' => ++$weight,
   ) + $defaults;
 

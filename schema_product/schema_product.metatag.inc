@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Metatag integration for the schema_product module.
@@ -64,7 +65,7 @@ function schema_product_metatag_info() {
   $info['tags']['schema_product.aggregateRating'] = array(
     'class' => 'SchemaAggregateRatingBase',
     'label' => t('aggregateRating'),
-    'description' => t(''),
+    'description' => '',
     'weight' => ++$weight,
   ) + $defaults;
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Metatag integration for the schema_event module.
@@ -45,7 +46,7 @@ function schema_event_metatag_info() {
     'description' => t('The name of the event.'),
     'form' => array(
       '#attributes' => array(
-         'placeholder' => '[node:title]',
+        'placeholder' => '[node:title]',
       ),
     ),
     'weight' => ++$weight,
@@ -59,7 +60,7 @@ function schema_event_metatag_info() {
     'url' => TRUE,
     'form' => array(
       '#attributes' => array(
-         'placeholder' => '[node:field_image]',
+        'placeholder' => '[node:field_image]',
       ),
     ),
     'weight' => ++$weight,
@@ -111,7 +112,7 @@ function schema_event_metatag_info() {
   $info['tags']['schema_event.mainEntityOfPage'] = array(
     'class' => 'SchemaMainEntityOfPageBase',
     'label' => t('mainEntityOfPage'),
-    'description' => t(''),
+    'description' => '',
     'url' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
@@ -137,7 +138,7 @@ function schema_event_metatag_info() {
   $info['tags']['schema_event.isAccessibleForFree'] = array(
     'class' => 'SchemaisAccessibleForFreeBase',
     'label' => t('isAccessibleForFree'),
-    'description' => t(''),
+    'description' => '',
     'weight' => ++$weight,
   ) + $defaults;
 
@@ -152,7 +153,7 @@ function schema_event_metatag_info() {
   $info['tags']['schema_event.aggregateRating'] = array(
     'class' => 'SchemaAggregateRatingBase',
     'label' => t('aggregateRating'),
-    'description' => t(''),
+    'description' => '',
     'weight' => ++$weight,
   ) + $defaults;
 

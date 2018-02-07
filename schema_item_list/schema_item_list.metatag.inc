@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Metatag integration for the schema_item_list module.
@@ -49,11 +50,11 @@ function schema_item_list_metatag_info() {
 
   $info['tags']['schema_item_list.mainEntityOfPage'] = array(
     'label' => t('mainEntityOfPage'),
-    'description' => t(''),
+    'description' => '',
     'url' => TRUE,
     'form' => array(
       '#attributes' => array(
-         'placeholder' => '[node:url]',
+        'placeholder' => '[node:url]',
       ),
     ),
     'weight' => ++$weight,

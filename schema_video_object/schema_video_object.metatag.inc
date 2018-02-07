@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Metatag integration for the schema_video_object module.
@@ -82,7 +83,7 @@ function schema_video_object_metatag_info() {
     'url' => TRUE,
     'form' => array(
       '#attributes' => array(
-         'placeholder' => '[file:uri]',
+        'placeholder' => '[file:uri]',
       ),
     ),
     'weight' => ++$weight,
@@ -95,7 +96,7 @@ function schema_video_object_metatag_info() {
     'url' => TRUE,
     'form' => array(
       '#attributes' => array(
-         'placeholder' => '[file:uri]',
+        'placeholder' => '[file:uri]',
       ),
     ),
     'weight' => ++$weight,
@@ -104,7 +105,7 @@ function schema_video_object_metatag_info() {
   $info['tags']['schema_video_object.mainEntityOfPage'] = array(
     'class' => 'SchemaMainEntityOfPageBase',
     'label' => t('mainEntityOfPage'),
-    'description' => t(''),
+    'description' => '',
     'url' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
@@ -127,7 +128,7 @@ function schema_video_object_metatag_info() {
   $info['tags']['schema_video_object.aggregateRating'] = array(
     'class' => 'SchemaAggregateRatingBase',
     'label' => t('aggregateRating'),
-    'description' => t(''),
+    'description' => '',
     'weight' => ++$weight,
   ) + $defaults;
 

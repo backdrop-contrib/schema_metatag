@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Metatag integration for the schema_article module.
@@ -89,7 +90,7 @@ function schema_article_metatag_info() {
     'multiple' => TRUE,
     'form' => array(
       '#attributes' => array(
-         'placeholder' => '[node:field_tags]',
+        'placeholder' => '[node:field_tags]',
       ),
     ),
     'weight' => ++$weight,
@@ -107,7 +108,7 @@ function schema_article_metatag_info() {
   $info['tags']['schema_article.mainEntityOfPage'] = array(
     'class' => 'SchemaMainEntityOfPageBase',
     'label' => t('mainEntityOfPage'),
-    'description' => t(''),
+    'description' => '',
     'url' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
@@ -115,21 +116,21 @@ function schema_article_metatag_info() {
   $info['tags']['schema_article.hasPart'] = array(
     'class' => 'SchemaHasPartBase',
     'label' => t('hasPart'),
-    'description' => t(''),
+    'description' => '',
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_article.isAccessibleForFree'] = array(
     'class' => 'SchemaIsAccessibleForFreeBase',
     'label' => t('isAccessibleForFree'),
-    'description' => t(''),
+    'description' => '',
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_article.aggregateRating'] = array(
     'class' => 'SchemaAggregateRatingBase',
     'label' => t('aggregateRating'),
-    'description' => t(''),
+    'description' => '',
     'weight' => ++$weight,
   ) + $defaults;
 

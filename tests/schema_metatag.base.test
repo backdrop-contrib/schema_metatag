@@ -47,7 +47,7 @@ abstract class SchemaMetatagTagsTestBase extends SchemaMetatagTestHelper {
   /**
    * {@inheritdoc}
    */
-  function setUp(array $modules = array()) {
+  public function setUp(array $modules = array()) {
     $modules[] = 'schema_metatag_test';
     $modules[] = 'schema_article';
     parent::setUp($modules);
@@ -64,7 +64,6 @@ abstract class SchemaMetatagTagsTestBase extends SchemaMetatagTestHelper {
   public function testTagsInputOutput() {
 
     if (empty($this->schemaTags)) {
-      //$this->markTestSkipped('Not enough information to test.');
       return;
     }
 
@@ -78,7 +77,7 @@ abstract class SchemaMetatagTagsTestBase extends SchemaMetatagTestHelper {
       $this->assertTrue('//input[@type="submit"][@value="Save"]');
 
       // Configure all the tag values and post the results.
-      $expected_output_values = $raw_values = $form_values = [];
+      $expected_output_values = $form_values = [];
       foreach ($this->schemaTags as $tag_name => $class_name) {
 
         // Transform the tag_name to the camelCase key used in the form.
@@ -90,7 +89,6 @@ abstract class SchemaMetatagTagsTestBase extends SchemaMetatagTestHelper {
         // the output. Store the raw value so we can check that it exists in the
         // config form.
         $test_value = $class_name::testValue();
-        //$raw_values[$tag_name] = is_array($test_value) ? SchemaMetatagManager::serialize($test_value) : $test_value;
         $expected_output_values[$key] = $class_name::outputValue($test_value);
 
         // Rewrite the test values to match the way the form elements are
@@ -130,29 +128,22 @@ abstract class SchemaMetatagTagsTestBase extends SchemaMetatagTestHelper {
         }
       }
 
-      //print_r($form_values);
-
       $this->drupalPost(NULL, $form_values, 'Save');
       $this->assertText($save_message);
 
       // Load the config page to confirm the settings got saved.
       $this->drupalGet($config_path);
       $this->assertResponse(200);
-      //print_r($this->drupalGetContent());
       cache_clear_all();
-      //$this->clearAllCaches();
 
       // Load the rendered page to see if the JSON-LD is displayed correctly.
       $this->drupalGet($rendered_path);
       $this->assertResponse(200);
-      //$this->verbose($this->drupalGetContent());
-      //print_r($this->drupalGetContent());
 
       // Make sure JSON-LD is present and can be decoded.
       $elements = $this->xpath('//script[@type="application/ld+json"]');
       $this->assertEqual(count($elements), 1);
       $json = json_decode($elements[0], TRUE);
-      //print_r($json);
       $this->assertTrue($json);
       $output_values = $json['@graph'][0];
 
@@ -196,4 +187,5 @@ abstract class SchemaMetatagTagsTestBase extends SchemaMetatagTestHelper {
       ],
     ];
   }
+
 }

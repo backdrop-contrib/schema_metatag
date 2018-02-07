@@ -1,13 +1,21 @@
 <?php
 
 /**
+ * @file
  * A generic substitution for Drupal 8 Random utility.
  */
 class Random {
 
+  /**
+   * return a random string of a given length.
+   */
   public function name($length, $other) {
     return $this->string($length, $other);
   }
+
+  /**
+   * return a random string of a given length.
+   */
   public function string($length, $other) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $randstring = '';
@@ -94,8 +102,8 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
     if ($items = self::parseJsonld($elements)) {
       // Encode the Schema.org metatags as JSON LD.
       if ($jsonld = self::encodeJsonld($items)) {
-          // Pass back the rendered result.
-          return drupal_render(self::renderArrayJsonLd($jsonld));
+        // Pass back the rendered result.
+        return drupal_render(self::renderArrayJsonLd($jsonld));
       }
     }
   }

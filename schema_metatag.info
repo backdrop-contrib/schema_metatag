@@ -27,7 +27,6 @@ files[] = src/SchemaPersonOrgTrait.php
 files[] = src/SchemaGeoBase.php
 files[] = src/SchemaGeoTrait.php
 files[] = src/SchemaPlaceBase.php
-files[] = src/SchemaPlaceTrait.php
 files[] = src/SchemaImageBase.php
 files[] = src/SchemaImageTrait.php
 files[] = src/SchemaOfferBase.php

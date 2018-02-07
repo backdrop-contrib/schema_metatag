@@ -5,15 +5,12 @@
  */
 class SchemaImageBase extends SchemaNameBase {
 
-  /**
-   * Traits provide re-usable form elements.
-   */
   use SchemaImageTrait;
 
   /**
    * {@inheritdoc}
    */
- public function getForm(array $options = array()) {
+  public function getForm(array $options = array()) {
     $value = SchemaMetatagManager::unserialize($this->value());
 
     $input_values = [

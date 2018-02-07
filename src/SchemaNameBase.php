@@ -7,20 +7,25 @@ class SchemaNameBase extends DrupalTextMetaTag {
 
   /**
    * Wrappers to create D7 methods that match D8 format.
+   *
    * To make it possible to re-use some D8 code.
    */
   public function t($str) {
     return t($str);
   }
+
   public function getPluginId() {
     return $this->info['name'];
   }
+
   public function label() {
     return $this->info['label'];
   }
+
   public function description() {
     return $this->info['description'];
   }
+
   public function value() {
     return !empty($this->data['value']) ? $this->data['value'] : '';
   }
@@ -63,7 +68,7 @@ class SchemaNameBase extends DrupalTextMetaTag {
 
       // If the item is an array of values,
       // walk the array and process the values.
-      array_walk_recursive($value, 'self::process_item');
+      array_walk_recursive($value, 'self::processItem');
 
       // See if any nested items need to be pivoted.
       // If pivot is set to 0, it would have been removed as an empty value.
@@ -77,7 +82,7 @@ class SchemaNameBase extends DrupalTextMetaTag {
     }
     // Process a simple string.
     else {
-      $this->process_item($value);
+      $this->processItem($value);
     }
     $parts = explode('.', $this->info['name']);
     $id = 'schema_metatag_' . $this->info['name'];
@@ -102,7 +107,7 @@ class SchemaNameBase extends DrupalTextMetaTag {
    * This is a copy of the original processing done by Metatag module,
    * but applied to every item on the array of values.
    */
-  protected function process_item(&$value, $key = 0) {
+  protected function processItem(&$value, $key = 0) {
 
     // $this->getValue() will process all subelements of our array
     // but not all of them need that processing.

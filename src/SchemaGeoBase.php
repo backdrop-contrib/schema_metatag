@@ -5,16 +5,13 @@
  */
 class SchemaGeoBase extends SchemaNameBase {
 
-  /**
-   * Traits provide re-usable form elements.
-   */
   use SchemaGeoTrait;
   use SchemaPivotTrait;
 
   /**
    * {@inheritdoc}
    */
-  public function getForm(array $options = [])  {
+  public function getForm(array $options = []) {
 
     $value = SchemaMetatagManager::unserialize($this->value());
 

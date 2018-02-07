@@ -65,4 +65,3 @@ function schema_metatag_extract_value($element) {
   }
   return $value;
 }
-

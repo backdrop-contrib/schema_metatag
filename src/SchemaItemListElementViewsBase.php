@@ -43,7 +43,7 @@ class SchemaItemListElementViewsBase extends SchemaItemListElementBase {
         // If this is a display that does not provide an entity in the result,
         // there is really nothing more to do.
         if (!empty($item->$id)) {
-           // Get the absolute path to this entity.
+          // Get the absolute path to this entity.
           $entity = entity_load($entity_type, [$item->$id]);
           $entity = array_shift($entity);
           $uri = entity_uri($entity_type, $entity);

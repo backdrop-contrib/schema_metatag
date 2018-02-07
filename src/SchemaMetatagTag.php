@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Metatag integration for the Schema.org Metatag module.
@@ -145,6 +146,7 @@ class SchemaMetaTagTag extends DrupalTextMetaTag {
 
     return $value;
   }
+
   /**
    * Get the HTML tag for this meta tag.
    *
@@ -211,4 +213,3 @@ class SchemaMetaTagTag extends DrupalTextMetaTag {
   }
 
 }
-

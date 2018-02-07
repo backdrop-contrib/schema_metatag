@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Schema.org Pivot trait.
+ */
 trait SchemaPivotTrait {
 
   public function pivotForm($value) {
@@ -20,4 +23,5 @@ trait SchemaPivotTrait {
 
     return $form;
   }
+
 }

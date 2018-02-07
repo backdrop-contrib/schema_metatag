@@ -20,7 +20,7 @@ class SchemaItemListBase extends SchemaNameBase {
         // If this is a display that does not provide an entity in the result,
         // there is really nothing more to do.
         if (empty($item->$id)) {
-           return '';
+          return '';
         }
         // Get the absolute path to this entity.
         $entity = entity_load($entity_type, [$item->$id]);

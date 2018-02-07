@@ -6,4 +6,3 @@ core = 7.x
 hidden = TRUE
 
 dependencies[] = schema_metatag:schema_metatag
-

@@ -12,7 +12,8 @@ interface SchemaMetatagManagerInterface {
    *
    * @param array $elements
    *   Array of Metatag values, as formatted for the head of a page.
-   * @return array $schema_metatags
+   *
+   * @return array
    *   Array of Schema metatag tags, ready to be turned into JSON LD.
    */
   public static function parseJsonld(&$elements);
@@ -22,7 +23,8 @@ interface SchemaMetatagManagerInterface {
    *
    * @param $items
    *   Array of Schema metatag tags, ready to be turned into JSON LD.
-   * @return $jsonld
+   *
+   * @return string
    *   Json-encoded representation of the structured data.
    */
   public static function encodeJsonld($items);
@@ -40,6 +42,8 @@ interface SchemaMetatagManagerInterface {
   public static function getRenderedJsonld($entity = NULL, $entity_type = NULL);
 
   /**
+   * Pivot multiple value results.
+   *
    * Complex serialized value that might contain multiple
    * values. In this case we have to pivot the results.
    */

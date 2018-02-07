@@ -95,7 +95,7 @@ Using this module, the code in the head might end up looking like this:
     "@graph": [
         {
             "@type": "Article",
-            "description": "Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Donec sollicitudin molestie malesuada. Donec sollicitudin molestie malesuada. Donec rutrum congue leo eget malesuada. Nulla quis lorem ut libero malesuada feugiat. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.",
+            "description": "Curabitur arcu erat.",
             "datePublished": "2009-11-30T13:04:01-0600",
             "dateModified": "2017-05-17T19:02:01-0500",
             "headline": "Curabitur arcu erat]",

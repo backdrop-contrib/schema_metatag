@@ -5,9 +5,6 @@
  */
 class SchemaPersonOrgBase extends SchemaNameBase {
 
-  /**
-   * Traits provide re-usable form elements.
-   */
   use SchemaPersonOrgTrait;
   use SchemaPivotTrait;
 
