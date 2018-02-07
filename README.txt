@@ -52,9 +52,10 @@ https://www.drupal.org/docs/7/modules/metatag.
 
 Known Issues
 --------------------------------------------------------------------------------
-- The Drupal 7 Zen theme strips out part of the JSON LD element, invalidating
-  the result. Use a different theme or see the Zen issue:
+- The Drupal 7 Zen and Mothership themes strip out part of the JSON LD element,
+  invalidating the result. Use a different theme or see these issues:
   https://www.drupal.org/project/zen/issues/2934644
+  https://www.drupal.org/project/mothership/issues/2942341
 
 - To populate the image width and height properties, use the appropriate tokens.
   It is recommended need to use the Imagecache Token module [2], which provides
