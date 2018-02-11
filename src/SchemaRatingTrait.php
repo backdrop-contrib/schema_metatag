@@ -1,27 +1,27 @@
 <?php
 
 /**
- * Schema.org AggregateRating trait.
+ * Schema.org Rating trait.
  */
-trait SchemaAggregateRatingTrait {
+trait SchemaRatingTrait {
 
   /**
    * Form keys.
    */
-  public static function aggregateRatingFormKeys() {
+  public static function ratingFormKeys() {
     return [
       '@type',
       'ratingValue',
-      'ratingCount',
       'bestRating',
       'worstRating',
+      'ratingCount',
     ];
   }
 
   /**
    * Input values.
    */
-  public function aggregateRatingInputValues() {
+  public function ratingInputValues() {
     return [
       'title' => '',
       'description' => '',
@@ -34,10 +34,14 @@ trait SchemaAggregateRatingTrait {
   /**
    * The form element.
    */
-  public function aggregateRatingForm($input_values) {
+  public function ratingForm($input_values) {
 
-    $input_values += $this->aggregateRatingInputValues();
+    $input_values += $this->ratingInputValues();
     $value = $input_values['value'];
+
+    // Get the id for the nested @type element.
+    $selector = ':input[name=' . $this->visibilitySelector() . '[@type]]';
+    $visibility = ['invisible' => [$selector => ['value' => '']]];
 
     $form['#type'] = 'fieldset';
     $form['#title'] = $input_values['title'];
@@ -50,6 +54,7 @@ trait SchemaAggregateRatingTrait {
       '#empty_option' => t('- None -'),
       '#empty_value' => '',
       '#options' => [
+        'Rating' => $this->t('Rating'),
         'AggregateRating' => $this->t('AggregateRating'),
       ],
       '#default_value' => !empty($value['@type']) ? $value['@type'] : '',
@@ -70,7 +75,7 @@ trait SchemaAggregateRatingTrait {
       '#default_value' => !empty($value['ratingCount']) ? $value['ratingCount'] : '',
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
-      '#description' => $this->t('The number of ratings included.'),
+      '#description' => $this->t('The number of ratings included. Only required for AggregateRating.'),
     ];
 
     $form['bestRating'] = [
@@ -91,16 +96,10 @@ trait SchemaAggregateRatingTrait {
       '#description' => $this->t('The lowest rating value possible.'),
     ];
 
-    // Add #states to show/hide the fields based on the value of @type,
-    // if a selector was provided.
-    if (!empty($input_values['visibility_selector'])) {
-      $selector = ':input[name="' . $input_values['visibility_selector'] . '"]';
-      $visibility = ['visible' => [$selector => ['value' => 'AggregateRating']]];
-      $keys = self::aggregateRatingFormKeys();
-      foreach ($keys as $key) {
-        if ($key != '@type') {
-          $form[$key]['#states'] = $visibility;
-        }
+    $keys = self::ratingFormKeys();
+    foreach ($keys as $key) {
+      if ($key != '@type') {
+        $form[$key]['#states'] = $visibility;
       }
     }
 

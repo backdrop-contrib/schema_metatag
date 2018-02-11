@@ -15,8 +15,6 @@ class SchemaHasPartBase extends SchemaNameBase {
   public function getForm(array $options = []) {
     $form = parent::getForm($options);
     $form['value']['#description'] = $this->t('Comma-separated list of class names of the parts of the web page that are not free. Do NOT surround class names with quotation marks! Also fill out "isAccessibleForFree".');
-    // Validation from parent::getForm() got wiped out, so add callback.
-    $form['value']['#element_validate'][] = 'schema_metatag_element_validate';
     return $form;
   }
 

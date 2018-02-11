@@ -36,9 +36,16 @@ function schema_metatag_test_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
-  $info['tags']['schema_metatag_test.aggregateRating'] = array(
-    'class' => 'SchemaAggregateRatingBase',
-    'label' => t('aggregateRating'),
+  $info['tags']['schema_metatag_test.rating'] = array(
+    'class' => 'SchemaRatingBase',
+    'label' => t('rating'),
+    'description' => '',
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_metatag_test.review'] = array(
+    'class' => 'SchemaReviewBase',
+    'label' => t('review'),
     'description' => '',
     'weight' => ++$weight,
   ) + $defaults;

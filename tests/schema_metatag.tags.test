@@ -34,7 +34,8 @@ class SchemaMetatagTagsTest extends SchemaMetatagTagsTestBase {
   public $schemaTags = [
     'schema_metatag_test.@type' => 'SchemaArticleType',
     'schema_metatag_test.address' => 'SchemaAddressBase',
-    'schema_metatag_test.aggregateRating' => 'SchemaAggregateRatingBase',
+    'schema_metatag_test.rating' => 'SchemaRatingBase',
+    'schema_metatag_test.review' => 'SchemaReviewBase',
     'schema_metatag_test.date' => 'SchemaDateBase',
     'schema_metatag_test.duration' => 'SchemaDurationBase',
     'schema_metatag_test.geo' => 'SchemaGeoBase',

@@ -56,15 +56,26 @@ function schema_service_metatag_info() {
   ) + $defaults;
 
   $info['tags']['schema_service.offers'] = array(
+    'class' => 'SchemaOfferBase',
     'label' => t('offers'),
     'description' => t('Offers associated with the service.'),
+    'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
 
-  $info['tags']['schema_service.aggregateRating'] = array(
-    'class' => 'SchemaAggregateRatingBase',
-    'label' => t('aggregateRating'),
-    'description' => t(''),
+  $info['tags']['schema_service.rating'] = array(
+    'class' => 'SchemaRatingBase',
+    'label' => t('rating'),
+    'description' => '',
+    'multiple' => TRUE,
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_service.review'] = array(
+    'class' => 'SchemaReviewBase',
+    'label' => t('review'),
+    'description' => '',
+    'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
 

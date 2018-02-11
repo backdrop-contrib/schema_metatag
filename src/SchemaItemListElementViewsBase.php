@@ -12,8 +12,6 @@ class SchemaItemListElementViewsBase extends SchemaItemListElementBase {
     $form = parent::getForm($options);
     $form['value']['#attributes']['placeholder'] = 'view_name:display_id';
     $form['value']['#description'] = $this->t('To display a Views list in Schema.org structured data, provide the machine name of the view, and the machine name of the display, separated by a colon.');
-    // Validation from parent::getForm() got wiped out, so add callback.
-    $form['value']['#element_validate'][] = 'schema_metatag_element_validate';
     return $form;
   }
 

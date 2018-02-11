@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Provides a plugin for the 'schema_offer_base' meta tag.
+ * Provides a plugin to extend for the 'Rating' meta tag.
  */
-class SchemaOfferBase extends SchemaNameBase {
+class SchemaRatingBase extends SchemaNameBase {
 
-  use SchemaOfferTrait;
+  use SchemaRatingTrait;
   use SchemaPivotTrait;
 
   /**
@@ -13,7 +13,6 @@ class SchemaOfferBase extends SchemaNameBase {
    */
   public function getForm(array $options = []) {
     $value = SchemaMetatagManager::unserialize($this->value());
-
     $input_values = [
       'title' => $this->label(),
       'description' => $this->description(),
@@ -22,7 +21,8 @@ class SchemaOfferBase extends SchemaNameBase {
       'visibility_selector' => $this->visibilitySelector() . '[@type]',
     ];
 
-    $form['value'] = $this->offerForm($input_values);
+    $form = parent::getForm($options);
+    $form['value'] = $this->ratingForm($input_values);
 
     if (!empty($this->info['multiple'])) {
       $form['value']['pivot'] = $this->pivotForm($value);
@@ -41,11 +41,11 @@ class SchemaOfferBase extends SchemaNameBase {
    */
   public static function testValue() {
     $items = [];
-    $keys = self::offerFormKeys();
+    $keys = static::ratingFormKeys();
     foreach ($keys as $key) {
       switch ($key) {
         case '@type':
-          $items[$key] = 'Offer';
+          $items[$key] = 'Rating';
           break;
 
         default:
@@ -55,6 +55,13 @@ class SchemaOfferBase extends SchemaNameBase {
       }
     }
     return $items;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function outputValue($input_value) {
+    return $input_value;
   }
 
 }

@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @file
+ * Primary hook implementations for Schema.org Metatag.
+ */
+
+/**
+ * Rename AggregateRating tags to Rating.
+ */
+function schema_metatag_update_7000(&$sandbox) {
+  cache_clear_all('*', 'cache_metatag', TRUE);
+  drupal_set_message(t('AggregateRating tags have been replaced with Rating tags. Please update any configuration of AggregateRating.'));
+}

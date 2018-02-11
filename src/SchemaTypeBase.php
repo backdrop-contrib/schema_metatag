@@ -32,8 +32,10 @@ class SchemaTypeBase extends SchemaNameBase {
       '#options' => $this->typeOptions(),
       '#default_value' => $this->value(),
     ];
+
     // Validation from parent::getForm() got wiped out, so add callback.
     $form['value']['#element_validate'][] = 'schema_metatag_element_validate';
+
     return $form;
   }
 

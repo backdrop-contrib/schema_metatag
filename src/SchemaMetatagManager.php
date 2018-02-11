@@ -112,23 +112,48 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
    * {@inheritdoc}
    */
   public static function pivot($content) {
-    $count = max(array_map('count', $content));
+    // Figure out the maximum number of items to include in the pivot.
+    // Nested associative arrays should be excluded, only count numeric arrays.
+    $count = max(array_map('self::countNumericKeys', $content));
     $pivoted = [];
     for ($i = 0; $i < $count; $i++) {
       foreach ($content as $key => $item) {
         // Some properties, like @type, may need to repeat the first item,
         // others may have too few values to fill out the array.
         // Make sure all properties have the right number of values.
-        if (is_string($item) || count($item) < $count) {
+        if (is_string($item) || (!is_string($item) && count($item) < $count)) {
           $content[$key] = [];
+          $prev = '';
           for ($x = 0; $x < $count; $x++) {
-            $content[$key][$x] = $item;
+            if (!is_string($item) && count($item) > $x) {
+              $content[$key][$x] = $item[$x];
+              $prev = $item[$x];
+            } elseif (!is_string($item)) {
+              $content[$key][$x] = $prev;
+            } else {
+              $content[$key][$x] = $item;
+            }
           }
         }
         $pivoted[$i][$key] = $content[$key][$i];
       }
     }
     return $pivoted;
+  }
+
+  /**
+   * If the item is an array with numeric keys, count the keys.
+   */
+  public static function countNumericKeys($item) {
+    if (!is_array($item)) {
+      return FALSE;
+    }
+    foreach (array_keys($item) as $key) {
+      if (!is_numeric($key)) {
+        return FALSE;
+      }
+    }
+    return count($item);
   }
 
   /**

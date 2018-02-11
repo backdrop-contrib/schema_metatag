@@ -127,10 +127,19 @@ function schema_article_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
-  $info['tags']['schema_article.aggregateRating'] = array(
-    'class' => 'SchemaAggregateRatingBase',
-    'label' => t('aggregateRating'),
+  $info['tags']['schema_article.rating'] = array(
+    'class' => 'SchemaRatingBase',
+    'label' => t('rating'),
     'description' => '',
+    'multiple' => TRUE,
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_article.review'] = array(
+    'class' => 'SchemaReviewBase',
+    'label' => t('review'),
+    'description' => '',
+    'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
 

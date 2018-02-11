@@ -1,11 +1,12 @@
 <?php
 
 /**
- * Provides a plugin to extend for the 'aggregateRating' meta tag.
+ * Provides a plugin to extend for the 'Review' meta tag.
  */
-class SchemaAggregateRatingBase extends SchemaNameBase {
+class SchemaReviewBase extends SchemaNameBase {
 
-  use SchemaAggregateRatingTrait;
+  use SchemaReviewTrait;
+  use SchemaPivotTrait;
 
   /**
    * {@inheritdoc}
@@ -21,9 +22,17 @@ class SchemaAggregateRatingBase extends SchemaNameBase {
     ];
 
     $form = parent::getForm($options);
-    $form['value'] = $this->aggregateRatingForm($input_values);
+    $form['value'] = $this->reviewForm($input_values);
+
+    if (!empty($this->info['multiple'])) {
+      $form['value']['pivot'] = $this->pivotForm($value);
+      $selector = ':input[name="' . $input_values['visibility_selector'] . '"]';
+      $form['value']['pivot']['#states'] = ['invisible' => [$selector => ['value' => '']]];
+    }
+
     // Validation from parent::getForm() got wiped out, so add callback.
     $form['value']['#element_validate'][] = 'schema_metatag_element_validate';
+
     return $form;
   }
 
@@ -32,11 +41,25 @@ class SchemaAggregateRatingBase extends SchemaNameBase {
    */
   public static function testValue() {
     $items = [];
-    $keys = ['@type', 'ratingValue', 'ratingCount', 'bestRating', 'worstRating'];
+    $keys = static::reviewFormKeys();
     foreach ($keys as $key) {
       switch ($key) {
         case '@type':
-          $items[$key] = 'AggregateRating';
+          $items[$key] = 'Review';
+          break;
+
+        case 'author':
+          $items[$key] = [
+            '@type' => 'Person',
+            'name' => parent::testDefaultValue(2, ' '),
+          ];
+          break;
+
+       case 'reviewRating':
+          $items[$key] = [
+            '@type' => 'Rating',
+            'ratingValue' => parent::testDefaultValue(2, ' '),
+          ];
           break;
 
         default:

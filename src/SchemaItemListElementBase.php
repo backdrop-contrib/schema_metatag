@@ -11,8 +11,6 @@ class SchemaItemListElementBase extends SchemaNameBase {
   public function getForm(array $options = []) {
     $form = parent::getForm($options);
     $form['value']['#description'] = $this->t('To create a list, provide a token for a multiple value field, or a comma-separated list of values.');
-    // Validation from parent::getForm() got wiped out, so add callback.
-    $form['value']['#element_validate'][] = 'schema_metatag_element_validate';
     return $form;
   }
 
