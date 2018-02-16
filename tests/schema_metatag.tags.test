@@ -46,6 +46,7 @@ class SchemaMetatagTagsTest extends SchemaMetatagTagsTestBase {
     'schema_metatag_test.offer' => 'SchemaOfferBase',
     'schema_metatag_test.organization' => 'SchemaPersonOrgBase',
     'schema_metatag_test.place' => 'SchemaPlaceBase',
+    'schema_metatag_test.url' => 'SchemaUrlBase',
   ];
 
 }

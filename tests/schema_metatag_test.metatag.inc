@@ -123,5 +123,13 @@ function schema_metatag_test_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
+  $info['tags']['schema_metatag_test.url'] = array(
+    'class' => 'SchemaUrlBase',
+    'label' => t('url'),
+    'description' => '',
+    'url' => TRUE,
+    'weight' => ++$weight,
+  ) + $defaults;
+
   return $info;
 }

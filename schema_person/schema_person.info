@@ -1,0 +1,8 @@
+name = "Schema.org: Person"
+description = "Adds Schema.org/Person to the JSON LD array. Creates Person."
+package = SEO
+core = 7.x
+dependencies[] = schema_metatag:schema_metatag
+
+files[] = src/SchemaPersonType.php
+files[] = tests/schema_metatag.schema_person.test
