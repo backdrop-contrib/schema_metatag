@@ -48,6 +48,7 @@ function schema_web_page_metatag_info() {
   ) + $defaults;
 
   $info['tags']['schema_web_page.url'] = array(
+    'class' => 'SchemaUrlBase',
     'label' => t('url'),
     'description' => t('The url of the web page.'),
     'url' => TRUE,

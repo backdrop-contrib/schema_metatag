@@ -60,6 +60,7 @@ function schema_organization_metatag_info() {
   ) + $defaults;
 
   $info['tags']['schema_organization.url'] = array(
+    'class' => 'SchemaUrlBase',
     'label' => t('url'),
     'description' => t('The url of the organization.'),
     'url' => TRUE,
@@ -72,6 +73,7 @@ function schema_organization_metatag_info() {
   ) + $defaults;
 
   $info['tags']['schema_organization.sameAs'] = array(
+    'class' => 'SchemaUrlBase',
     'label' => t('sameAs'),
     'description' => t('Url linked to the web site, such as wikipedia page or social profiles.'),
     'multiple' => TRUE,
@@ -143,7 +145,7 @@ function schema_organization_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
-  $info['tags']['schema_article.rating'] = array(
+  $info['tags']['schema_organization.rating'] = array(
     'class' => 'SchemaRatingBase',
     'label' => t('rating'),
     'description' => '',
@@ -151,7 +153,7 @@ function schema_organization_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
-  $info['tags']['schema_article.review'] = array(
+  $info['tags']['schema_organization.review'] = array(
     'class' => 'SchemaReviewBase',
     'label' => t('review'),
     'description' => '',

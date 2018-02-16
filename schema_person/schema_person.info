@@ -5,4 +5,4 @@ core = 7.x
 dependencies[] = schema_metatag:schema_metatag
 
 files[] = src/SchemaPersonType.php
-files[] = tests/schema_metatag.schema_person.test
+files[] = tests/SchemaMetatagPersonTest.test

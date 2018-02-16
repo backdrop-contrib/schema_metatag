@@ -26,6 +26,15 @@ class SchemaMetatagTagsTest extends SchemaMetatagTagsTestBase {
   /**
    * {@inheritdoc}
    */
+  public function setUp(array $modules = array()) {
+    $modules[] = 'schema_metatag_test';
+    $modules[] = 'schema_article';
+    parent::setUp($modules);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public $moduleName = 'schema_metatag_test';
 
   /**

@@ -5,6 +5,9 @@
  */
 trait SchemaPivotTrait {
 
+  /**
+   * Form keys.
+   */
   public function pivotForm($value) {
 
     $form = [

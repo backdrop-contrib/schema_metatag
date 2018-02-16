@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Metatag integration for the schema_review module.
@@ -57,7 +58,6 @@ function schema_review_metatag_info() {
     'label' => t('author'),
     'description' => t('The author of this review or rating.'),
     'multiple' => TRUE,
-    'url' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
 
@@ -71,7 +71,7 @@ function schema_review_metatag_info() {
   $info['tags']['schema_review.reviewRating'] = array(
     'class' => 'SchemaRatingBase',
     'label' => t('reviewRating'),
-    'description' => t(''),
+    'description' => '',
     'weight' => ++$weight,
   ) + $defaults;
 

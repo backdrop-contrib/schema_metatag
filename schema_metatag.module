@@ -16,7 +16,6 @@ function schema_metatag_ctools_plugin_api($owner, $api) {
 
 /**
  * Implements hook_html_head_alter().
- *
  */
 function schema_metatag_html_head_alter(&$elements) {
 

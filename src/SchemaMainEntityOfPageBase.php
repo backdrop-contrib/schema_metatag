@@ -15,4 +15,11 @@ class SchemaMainEntityOfPageBase extends SchemaNameBase {
     return $form;
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public static function testValue() {
+    return static::randomUrl();
+  }
+
 }

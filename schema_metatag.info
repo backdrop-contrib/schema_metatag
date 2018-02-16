@@ -17,6 +17,7 @@ files[] = src/SchemaAddressTrait.php
 files[] = src/SchemaDateBase.php
 files[] = src/SchemaDurationBase.php
 files[] = src/SchemaHasPartBase.php
+files[] = src/SchemaIsAccessibleForFreeBase.php
 files[] = src/SchemaItemListElementBase.php
 files[] = src/SchemaItemListElementBreadcrumbBase.php
 files[] = src/SchemaItemListElementViewsBase.php

@@ -77,6 +77,7 @@ function schema_video_object_metatag_info() {
   ) + $defaults;
 
   $info['tags']['schema_video_object.contentUrl'] = array(
+    'class' => 'SchemaUrlBase',
     'label' => t('contentUrl'),
     'description' => t('A URL pointing to the actual video media file.'),
     'image' => TRUE,
@@ -90,6 +91,7 @@ function schema_video_object_metatag_info() {
   ) + $defaults;
 
   $info['tags']['schema_video_object.embedUrl'] = array(
+    'class' => 'SchemaUrlBase',
     'label' => t('embedUrl'),
     'description' => t('A URL pointing to a player for the specific video. Usually this is the information in the src element of an <embed> tag.'),
     'image' => TRUE,
@@ -114,18 +116,16 @@ function schema_video_object_metatag_info() {
     'class' => 'SchemaDurationBase',
     'label' => t('duration'),
     'description' => t('The video duration in seconds or ISO 8601 format.'),
-    'url' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_video_object.interactionCount'] = array(
     'label' => t('interactionCount'),
     'description' => t('The number of times the video has been viewed.'),
-    'url' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
 
-  $info['tags']['schema_article.rating'] = array(
+  $info['tags']['schema_video_object.rating'] = array(
     'class' => 'SchemaRatingBase',
     'label' => t('rating'),
     'description' => '',
@@ -133,7 +133,7 @@ function schema_video_object_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
-  $info['tags']['schema_article.review'] = array(
+  $info['tags']['schema_video_object.review'] = array(
     'class' => 'SchemaReviewBase',
     'label' => t('review'),
     'description' => '',

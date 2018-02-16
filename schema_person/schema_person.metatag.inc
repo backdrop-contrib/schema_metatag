@@ -251,7 +251,6 @@ function schema_person_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
-
   return $info;
 
 }

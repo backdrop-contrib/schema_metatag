@@ -73,6 +73,7 @@ function schema_event_metatag_info() {
   ) + $defaults;
 
   $info['tags']['schema_event.url'] = array(
+    'class' => 'SchemaUrlBase',
     'label' => t('url'),
     'description' => t('The url of the event.'),
     'url' => TRUE,
@@ -122,7 +123,6 @@ function schema_event_metatag_info() {
     'label' => t('actor'),
     'description' => t('The actor in the event.'),
     'multiple' => TRUE,
-    'url' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
 
@@ -131,7 +131,6 @@ function schema_event_metatag_info() {
     'label' => t('performer'),
     'description' => t('The performer in the event.'),
     'multiple' => TRUE,
-    'url' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
 
@@ -150,7 +149,7 @@ function schema_event_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
-  $info['tags']['schema_article.rating'] = array(
+  $info['tags']['schema_event.rating'] = array(
     'class' => 'SchemaRatingBase',
     'label' => t('rating'),
     'description' => '',
@@ -158,7 +157,7 @@ function schema_event_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
-  $info['tags']['schema_article.review'] = array(
+  $info['tags']['schema_event.review'] = array(
     'class' => 'SchemaReviewBase',
     'label' => t('review'),
     'description' => '',

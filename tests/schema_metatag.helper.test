@@ -16,10 +16,6 @@ abstract class SchemaMetatagTestHelper extends DrupalWebTestCase {
    * {@inheritdoc}
    */
   function setUp(array $modules = array()) {
-    // Make sure these modules are enabled so that we can use their entity
-    // types later.
-    //$modules[] = 'node';
-    //$modules[] = 'taxonomy';
 
     // Requirements.
     $modules[] = 'ctools';

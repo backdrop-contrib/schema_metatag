@@ -17,4 +17,5 @@ class SchemaReviewType extends SchemaTypeBase {
       'ClaimReview',
     ];
   }
+
 }

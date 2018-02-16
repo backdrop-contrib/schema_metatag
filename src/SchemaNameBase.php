@@ -10,22 +10,38 @@ class SchemaNameBase extends DrupalTextMetaTag {
    *
    * To make it possible to re-use some D8 code.
    */
+
+  /**
+   * {@inheritdoc}
+   */
   public function t($str) {
     return t($str);
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function getPluginId() {
     return $this->info['name'];
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function label() {
     return $this->info['label'];
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function description() {
     return $this->info['description'];
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function value() {
     return !empty($this->data['value']) ? $this->data['value'] : '';
   }

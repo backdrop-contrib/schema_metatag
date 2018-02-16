@@ -58,7 +58,6 @@ function schema_article_metatag_info() {
     'label' => t('author'),
     'description' => t('Author of the article.'),
     'multiple' => TRUE,
-    'url' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
 
@@ -66,7 +65,6 @@ function schema_article_metatag_info() {
     'class' => 'SchemaPersonOrgBase',
     'label' => t('publisher'),
     'description' => t('Publisher of the article.'),
-    'url' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
 

@@ -4,17 +4,21 @@
  * @file
  * A generic substitution for Drupal 8 Random utility.
  */
+
+/**
+ * A class to create random strings for testing.
+ */
 class Random {
 
   /**
-   * return a random string of a given length.
+   * Return a random string of a given length.
    */
   public function name($length, $other) {
     return $this->string($length, $other);
   }
 
   /**
-   * return a random string of a given length.
+   * Return a random string of a given length.
    */
   public function string($length, $other) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -128,9 +132,11 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
             if (!is_string($item) && count($item) > $x) {
               $content[$key][$x] = $item[$x];
               $prev = $item[$x];
-            } elseif (!is_string($item)) {
+            }
+            elseif (!is_string($item)) {
               $content[$key][$x] = $prev;
-            } else {
+            }
+            else {
               $content[$key][$x] = $item;
             }
           }

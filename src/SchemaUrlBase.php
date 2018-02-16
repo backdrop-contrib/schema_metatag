@@ -5,7 +5,6 @@
  */
 class SchemaUrlBase extends SchemaNameBase {
 
-
   /**
    * {@inheritdoc}
    */

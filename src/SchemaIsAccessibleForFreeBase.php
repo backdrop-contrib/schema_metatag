@@ -3,13 +3,13 @@
 /**
  * Provides a plugin for the 'isAccessibleForFree' meta tag.
  */
-abstract class SchemaIsAccessibleForFreeBase extends SchemaNameBase {
+class SchemaIsAccessibleForFreeBase extends SchemaNameBase {
 
   /**
    * {@inheritdoc}
    */
-  public function form(array $element = []) {
-    $form = parent::form($element);
+  public function getForm(array $options = []) {
+    $form = parent::getForm($options);
     $form['value']['#type'] = 'select';
     $form['value']['#empty_option'] = t('True');
     $form['value']['#empty_value'] = '';

@@ -48,8 +48,6 @@ abstract class SchemaMetatagTagsTestBase extends SchemaMetatagTestHelper {
    * {@inheritdoc}
    */
   public function setUp(array $modules = array()) {
-    $modules[] = 'schema_metatag_test';
-    $modules[] = 'schema_article';
     parent::setUp($modules);
 
     // Create an admin user that can manage meta tags.
@@ -115,7 +113,8 @@ abstract class SchemaMetatagTagsTestBase extends SchemaMetatagTestHelper {
                         $keys = implode('][', [$key, $key2, $key3, $key4]);
                         $form_values[$prefix . $tag_name . $suffix . $start . $keys . $end] = $value4;
                       }
-                    } else {
+                    }
+                    else {
                       $keys = implode('][', [$key, $key2, $key3]);
                       $form_values[$prefix . $tag_name . $suffix . $start . $keys . $end] = $value3;
                     }

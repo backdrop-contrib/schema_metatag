@@ -48,6 +48,7 @@ function schema_web_site_metatag_info() {
   ) + $defaults;
 
   $info['tags']['schema_web_site.url'] = array(
+    'class' => 'SchemaUrlBase',
     'label' => t('url'),
     'description' => t('The url of the web site.'),
     'url' => TRUE,
@@ -55,6 +56,7 @@ function schema_web_site_metatag_info() {
   ) + $defaults;
 
   $info['tags']['schema_web_site.sameAs'] = array(
+    'class' => 'SchemaUrlBase',
     'label' => t('sameAs'),
     'description' => t('Url linked to the web site, such as wikipedia page or social profiles.'),
     'multiple' => TRUE,
@@ -63,7 +65,7 @@ function schema_web_site_metatag_info() {
   ) + $defaults;
 
   $info['tags']['schema_web_site.publisher'] = array(
-    'class' => 'SchemaPeopleOrgBase',
+    'class' => 'SchemaPersonOrgBase',
     'label' => t('publisher'),
     'description' => t('The publisher of the web site.'),
     'multiple' => TRUE,

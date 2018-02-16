@@ -55,7 +55,7 @@ class SchemaReviewBase extends SchemaNameBase {
           ];
           break;
 
-       case 'reviewRating':
+        case 'reviewRating':
           $items[$key] = [
             '@type' => 'Rating',
             'ratingValue' => parent::testDefaultValue(2, ' '),
