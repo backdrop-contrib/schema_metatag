@@ -108,6 +108,7 @@ function schema_organization_metatag_info() {
     'description' => t('The primary image for this item.'),
     'image' => TRUE,
     'url' => TRUE,
+    'multiple' => TRUE,
     'form' => array(
       '#attributes' => array(
         'placeholder' => '[node:field_image]',

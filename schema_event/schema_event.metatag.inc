@@ -58,6 +58,7 @@ function schema_event_metatag_info() {
     'description' => t('The primary image for this event.'),
     'image' => TRUE,
     'url' => TRUE,
+    'multiple' => TRUE,
     'form' => array(
       '#attributes' => array(
         'placeholder' => '[node:field_image]',

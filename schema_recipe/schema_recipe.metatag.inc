@@ -53,6 +53,7 @@ function schema_recipe_metatag_info() {
     'description' => t('The primary image for this item.'),
     'image' => TRUE,
     'url' => TRUE,
+    'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
 

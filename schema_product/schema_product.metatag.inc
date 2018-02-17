@@ -53,6 +53,7 @@ function schema_product_metatag_info() {
     'description' => t('The primary image for this item.'),
     'image' => TRUE,
     'url' => TRUE,
+    'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
 
@@ -60,6 +61,7 @@ function schema_product_metatag_info() {
     'class' => 'SchemaOfferBase',
     'label' => t('offers'),
     'description' => t('Offers associated with the product.'),
+    'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
 

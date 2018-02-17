@@ -72,6 +72,7 @@ function schema_review_metatag_info() {
     'class' => 'SchemaRatingBase',
     'label' => t('reviewRating'),
     'description' => '',
+    'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
 

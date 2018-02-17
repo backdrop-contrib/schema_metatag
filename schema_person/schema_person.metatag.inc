@@ -191,6 +191,7 @@ function schema_person_metatag_info() {
     'description' => t('The primary image for the person.'),
     'image' => TRUE,
     'url' => TRUE,
+    'multiple' => TRUE,
     'form' => array(
       '#attributes' => array(
         'placeholder' => '[node:field_image]',
@@ -203,6 +204,7 @@ function schema_person_metatag_info() {
     'class' => 'SchemaPersonOrgBase',
     'label' => t('affiliation'),
     'description' => t('An organization that this person is affiliated with. For example, a school/university, a club, or a team.'),
+    'multiple' => TRUE,
     'form' => array(
       '#attributes' => array(
         'placeholder' => '',
@@ -215,6 +217,7 @@ function schema_person_metatag_info() {
     'class' => 'SchemaPersonOrgBase',
     'label' => t('memberOf'),
     'description' => t('An Organization (or ProgramMembership) to which this Person belongs.'),
+    'multiple' => TRUE,
     'form' => array(
       '#attributes' => array(
         'placeholder' => '',
@@ -227,6 +230,7 @@ function schema_person_metatag_info() {
     'class' => 'SchemaPersonOrgBase',
     'label' => t('worksFor'),
     'description' => t('Organizations that the person works for.'),
+    'multiple' => TRUE,
     'form' => array(
       '#attributes' => array(
         'placeholder' => '',

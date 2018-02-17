@@ -6,6 +6,7 @@
 class SchemaImageBase extends SchemaNameBase {
 
   use SchemaImageTrait;
+  use SchemaPivotTrait;
 
   /**
    * {@inheritdoc}
@@ -23,6 +24,13 @@ class SchemaImageBase extends SchemaNameBase {
 
     $form = parent::getForm($options);
     $form['value'] = $this->imageForm($input_values);
+
+    if (!empty($this->info['multiple'])) {
+      $form['value']['pivot'] = $this->pivotForm($value);
+      $form['value']['pivot'] = $this->pivotForm($value);
+      $selector = ':input[name="' . $input_values['visibility_selector'] . '"]';
+      $form['value']['pivot']['#states'] = ['invisible' => [$selector => ['value' => '']]];
+    }
 
     // Validation from parent::getForm() got wiped out, so add callback.
     $form['value']['#element_validate'][] = 'schema_metatag_element_validate';
