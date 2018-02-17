@@ -47,6 +47,27 @@ function schema_web_page_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
+  $info['tags']['schema_web_page.description'] = array(
+    'label' => t('description'),
+    'description' => t('A description of the web page.'),
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_web_page.author'] = array(
+    'class' => 'SchemaPersonOrgBase',
+    'label' => t('author'),
+    'description' => 'The author of the web page.',
+    'multiple' => TRUE,
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_web_page.publisher'] = array(
+    'class' => 'SchemaPersonOrgBase',
+    'label' => t('publisher'),
+    'description' => 'The publisher of the web page.',
+    'weight' => ++$weight,
+  ) + $defaults;
+
   $info['tags']['schema_web_page.url'] = array(
     'class' => 'SchemaUrlBase',
     'label' => t('url'),
