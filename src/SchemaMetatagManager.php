@@ -319,4 +319,20 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
     return $randomGenerator->name($length, TRUE);
   }
 
+  /**
+   * Default values for input into nested base elements.
+   *
+   * @return array
+   *   An array of default values.
+   */
+  public static function defaultInputValues() {
+    return [
+      'title' => '',
+      'description' => '',
+      'value' => [],
+      '#required' => FALSE,
+      'visibility_selector' => '',
+    ];
+  }
+
 }

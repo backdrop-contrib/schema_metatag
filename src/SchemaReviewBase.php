@@ -18,7 +18,7 @@ class SchemaReviewBase extends SchemaNameBase {
       'description' => $this->description(),
       'value' => $value,
       '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
-      'visibility_selector' => $this->visibilitySelector() . '[@type]',
+      'visibility_selector' => $this->visibilitySelector(),
     ];
 
     $form = parent::getForm($options);
@@ -26,7 +26,7 @@ class SchemaReviewBase extends SchemaNameBase {
 
     if (!empty($this->info['multiple'])) {
       $form['value']['pivot'] = $this->pivotForm($value);
-      $selector = ':input[name="' . $input_values['visibility_selector'] . '"]';
+      $selector = ':input[name="' . $input_values['visibility_selector'] . '[@type]"]';
       $form['value']['pivot']['#states'] = ['invisible' => [$selector => ['value' => '']]];
     }
 

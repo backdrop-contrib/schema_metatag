@@ -22,25 +22,17 @@ trait SchemaReviewTrait {
   }
 
   /**
-   * Input values.
-   */
-  public function reviewInputValues() {
-    return [
-      'title' => '',
-      'description' => '',
-      'value' => [],
-      '#required' => FALSE,
-      'visibility_selector' => '',
-    ];
-  }
-
-  /**
    * The form element.
    */
   public function reviewForm($input_values) {
 
-    $input_values += $this->reviewInputValues();
+    $input_values += SchemaMetatagManager::defaultInputValues();
     $value = $input_values['value'];
+
+    // Get the id for the nested @type element.
+    $visibility_selector = $input_values['visibility_selector'];
+    $selector = ':input[name="' . $visibility_selector . '[@type]"]';
+    $visibility = ['invisible' => [$selector => ['value' => '']]];
 
     $form['#type'] = 'fieldset';
     $form['#title'] = $input_values['title'];
@@ -84,32 +76,26 @@ trait SchemaReviewTrait {
       'title' => $this->t('author'),
       'description' => 'The author of this review.',
       'value' => !empty($value['author']) ? $value['author'] : [],
-      '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
-      'visibility_selector' => $this->getPluginId() . '[author][@type]',
+      '#required' => $input_values['#required'],
+      'visibility_selector' => $visibility_selector . '[author]',
     ];
     $form['author'] = $this->personOrgForm($input_values);
-
-    // Add #states to show/hide the fields based on the value of @type,
-    // if a selector was provided.
-    if (!empty($input_values['visibility_selector'])) {
-      $selector = ':input[name="' . $input_values['visibility_selector'] . '"]';
-      $visibility = ['invisible' => [$selector => ['value' => '']]];
-      $keys = static::reviewFormKeys();
-      foreach ($keys as $key) {
-        if ($key != '@type') {
-          $form[$key]['#states'] = $visibility;
-        }
-      }
-    }
 
     $input_values = [
       'title' => $this->t('reviewRating'),
       'description' => 'The rating of this review.',
       'value' => !empty($value['reviewRating']) ? $value['reviewRating'] : [],
-      '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
-      'visibility_selector' => $this->getPluginId() . '[reviewRating][@type]',
+      '#required' => $input_values['#required'],
+      'visibility_selector' => $visibility_selector . '[reviewRating]',
     ];
     $form['reviewRating'] = $this->ratingForm($input_values);
+
+    $keys = static::reviewFormKeys();
+    foreach ($keys as $key) {
+      if ($key != '@type') {
+        $form[$key]['#states'] = $visibility;
+      }
+    }
 
     return $form;
   }

@@ -17,25 +17,16 @@ trait SchemaGeoTrait {
   }
 
   /**
-   * Input values.
-   */
-  public function geoInputValues() {
-    return [
-      'title' => '',
-      'description' => '',
-      'value' => [],
-      '#required' => FALSE,
-      'visibility_selector' => '',
-    ];
-  }
-
-  /**
    * The form element.
    */
   public function geoForm($input_values) {
 
-    $input_values += $this->geoInputValues();
+    $input_values += SchemaMetatagManager::defaultInputValues();
     $value = $input_values['value'];
+
+    // Get the id for the nested @type element.
+    $selector = ':input[name="' . $this->visibilitySelector() . '[@type]"]';
+    $visibility = ['invisible' => [$selector => ['value' => '']]];
 
     $form['#type'] = 'fieldset';
     $form['#title'] = $input_values['title'];
@@ -72,16 +63,10 @@ trait SchemaGeoTrait {
       '#description' => $this->t("The longitude of a location. For example -122.08585 (WGS 84)."),
     ];
 
-    // Add #states to show/hide the fields based on the value of @type,
-    // if a selector was provided.
-    if (!empty($input_values['visibility_selector'])) {
-      $selector = ':input[name="' . $input_values['visibility_selector'] . '"]';
-      $visibility = ['visible' => [$selector => ['value' => 'GeoCoordinates']]];
-      $keys = self::geoFormKeys();
-      foreach ($keys as $key) {
-        if ($key != '@type') {
-          $form[$key]['#states'] = $visibility;
-        }
+    $keys = static::geoFormKeys();
+    foreach ($keys as $key) {
+      if ($key != '@type') {
+        $form[$key]['#states'] = $visibility;
       }
     }
 

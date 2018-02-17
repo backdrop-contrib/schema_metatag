@@ -1,5 +1,5 @@
 name = "Schema.org: Organization"
-description = "Adds Schema.org/Organization to the JSON LD array. Creates Article, BlogPosting, SocialMediaPosting, Report, ScholarlyArticle, TechArticle or APIReference."
+description = "Adds Schema.org/Organization to the JSON LD array."
 package = SEO
 core = 7.x
 dependencies[] = schema_metatag

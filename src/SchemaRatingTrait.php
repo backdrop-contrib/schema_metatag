@@ -19,28 +19,15 @@ trait SchemaRatingTrait {
   }
 
   /**
-   * Input values.
-   */
-  public function ratingInputValues() {
-    return [
-      'title' => '',
-      'description' => '',
-      'value' => [],
-      '#required' => FALSE,
-      'visibility_selector' => '',
-    ];
-  }
-
-  /**
    * The form element.
    */
   public function ratingForm($input_values) {
 
-    $input_values += $this->ratingInputValues();
+    $input_values += SchemaMetatagManager::defaultInputValues();
     $value = $input_values['value'];
 
     // Get the id for the nested @type element.
-    $selector = ':input[name=' . $this->visibilitySelector() . '[@type]]';
+    $selector = ':input[name="' . $input_values['visibility_selector'] . '[@type]"]';
     $visibility = ['invisible' => [$selector => ['value' => '']]];
 
     $form['#type'] = 'fieldset';
@@ -96,7 +83,7 @@ trait SchemaRatingTrait {
       '#description' => $this->t('The lowest rating value possible.'),
     ];
 
-    $keys = self::ratingFormKeys();
+    $keys = static::ratingFormKeys();
     foreach ($keys as $key) {
       if ($key != '@type') {
         $form[$key]['#states'] = $visibility;
