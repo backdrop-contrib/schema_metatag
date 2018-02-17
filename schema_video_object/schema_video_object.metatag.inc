@@ -125,6 +125,12 @@ function schema_video_object_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
+  $info['tags']['schema_video_object.transcript'] = array(
+    'label' => t('transcript'),
+    'description' => t('The transcript of the video.'),
+    'weight' => ++$weight,
+  ) + $defaults;
+
   $info['tags']['schema_video_object.rating'] = array(
     'class' => 'SchemaRatingBase',
     'label' => t('rating'),
