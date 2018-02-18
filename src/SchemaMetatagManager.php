@@ -148,7 +148,7 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
   }
 
   /**
-   * If the item is an array with numeric keys, count the keys.
+   * {@inheritdoc}
    */
   public static function countNumericKeys($item) {
     if (!is_array($item)) {
@@ -249,30 +249,23 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
   }
 
   /**
-   * Not used, test to remove empty element from array.
-   */
-  public static function test($input) {
-    $iterator = new \RecursiveIteratorIterator(
-      new \RecursiveCallbackFilterIterator(
-        new \RecursiveArrayIterator($input),
-        function ($value) {
-          return trim($value) !== NULL && trim($value) !== '';
-        }
-      ), \RecursiveIteratorIterator::CHILD_FIRST
-    );
-    $result = $iterator->getArrayCopy();
-    return $result;
-  }
-
-  /**
    * {@inheritdoc}
    */
-  public static function arrayTrim($input) {
-    return is_array($input) ? array_filter($input,
-      function (& $value) {
-        return $value = self::arrayTrim($value);
+  public static function arrayTrim($array) {
+    foreach ($array as $key => &$value) {
+      if (empty($value)) {
+        unset($array[$key]);
       }
-    ) : $input;
+      else {
+        if (is_array($value)) {
+          $value = static::arrayTrim($value);
+          if (empty($value)) {
+            unset($array[$key]);
+          }
+        }
+      }
+    }
+    return $array;
   }
 
   /**
@@ -286,13 +279,7 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
   }
 
   /**
-   * Generates a pseudo-random string of ASCII characters of codes 32 to 126.
-   *
-   * @param int $length
-   *   Length of random string to generate.
-   *
-   * @return string
-   *   Pseudo-randomly generated unique string including special characters.
+   * {@inheritdoc}
    */
   public static function randomString($length = 8) {
     $randomGenerator = new Random();
@@ -306,13 +293,7 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
   }
 
   /**
-   * Generates a unique random string containing letters and numbers.
-   *
-   * @param int $length
-   *   Length of random string to generate.
-   *
-   * @return string
-   *   Randomly generated unique string.
+   * {@inheritdoc}
    */
   public static function randomMachineName($length = 8) {
     $randomGenerator = new Random();
@@ -320,10 +301,7 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
   }
 
   /**
-   * Default values for input into nested base elements.
-   *
-   * @return array
-   *   An array of default values.
+   * {@inheritdoc}
    */
   public static function defaultInputValues() {
     return [

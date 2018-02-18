@@ -50,6 +50,11 @@ interface SchemaMetatagManagerInterface {
   public static function pivot($content);
 
   /**
+   * If the item is an array with numeric keys, count the keys.
+   */
+  public static function countNumericKeys($item);
+
+  /**
    * Explode values if this is a multiple value field.
    */
   public static function explode($value);
@@ -74,7 +79,7 @@ interface SchemaMetatagManagerInterface {
    *
    * If the result is an empty array, the nested array is completely empty.
    */
-  public static function arrayTrim($input);
+  public static function arrayTrim($array);
 
   /**
    * Update serialized item length computations.
@@ -83,5 +88,35 @@ interface SchemaMetatagManagerInterface {
    * than the original tokens.
    */
   public static function recomputeSerializedLength($value);
+
+  /**
+   * Generates a pseudo-random string of ASCII characters of codes 32 to 126.
+   *
+   * @param int $length
+   *   Length of random string to generate.
+   *
+   * @return string
+   *   Pseudo-randomly generated unique string including special characters.
+   */
+  public static function randomString($length = 8);
+
+  /**
+   * Generates a unique random string containing letters and numbers.
+   *
+   * @param int $length
+   *   Length of random string to generate.
+   *
+   * @return string
+   *   Randomly generated unique string.
+   */
+  public static function randomMachineName($length = 8);
+
+  /**
+   * Default values for input into nested base elements.
+   *
+   * @return array
+   *   An array of default values.
+   */
+  public static function defaultInputValues();
 
 }

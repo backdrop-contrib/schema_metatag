@@ -39,28 +39,10 @@ function schema_metatag_html_head_alter(&$elements) {
 function schema_metatag_element_validate($element, &$form_state, $form) {
   // For values that are not string values but instead nested arrays,
   // serialize the results into a single string value.
-  if ($value = schema_metatag_extract_value($element)) {
+  $keys = $element['#array_parents'];
+  $value = $form_state['values'][$keys[0]][$keys[1]][$keys[3]][$keys[4]];
+  if (is_array($value)) {
     $value = SchemaMetatagManager::serialize($value);
     form_set_value($element, $value, $form_state);
   }
-}
-
-/**
- * Recurse into $element to retrieve the whole array of values.
- */
-function schema_metatag_extract_value($element) {
-  $value = [];
-  $children = element_children($element);
-  if (is_array($element) && count($children) > 0) {
-    foreach ($children as $key) {
-      $children2 = element_children($element[$key]);
-      if (is_array($element[$key]) && count($children2) > 0) {
-        $value[$key] = schema_metatag_extract_value($element[$key]);
-      }
-      else {
-        $value[$key] = $element[$key]['#value'];
-      }
-    }
-  }
-  return $value;
 }
