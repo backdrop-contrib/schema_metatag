@@ -150,9 +150,9 @@ function schema_event_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
-  $info['tags']['schema_event.rating'] = array(
+  $info['tags']['schema_event.aggregateRating'] = array(
     'class' => 'SchemaRatingBase',
-    'label' => t('rating'),
+    'label' => t('aggregateRating'),
     'description' => '',
     'multiple' => TRUE,
     'weight' => ++$weight,

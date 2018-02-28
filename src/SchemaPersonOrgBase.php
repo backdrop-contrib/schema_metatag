@@ -34,7 +34,6 @@ class SchemaPersonOrgBase extends SchemaNameBase {
 
     if (!empty($this->info['multiple'])) {
       $form['value']['pivot'] = $this->pivotForm($value);
-      $form['value']['pivot'] = $this->pivotForm($value);
       $selector = ':input[name="' . $input_values['visibility_selector'] . '[@type]"]';
       $form['value']['pivot']['#states'] = ['invisible' => [$selector => ['value' => '']]];
     }

@@ -29,8 +29,8 @@ class SchemaPlaceBase extends SchemaAddressBase {
     $value = SchemaMetatagManager::unserialize($this->value());
 
     // Get the id for the nested @type element.
-    $selector = $this->visibilitySelector() . '[@type]';
-    $visibility = ['visible' => [":input[name='$selector']" => ['value' => 'Place']]];
+    $selector = $this->visibilitySelector();
+    $visibility = ['visible' => [':input[name="' . $selector . '[@type]"]' => ['value' => 'Place']]];
 
     $form['value']['#type'] = 'fieldset';
     $form['value']['#description'] = $this->description();
@@ -56,7 +56,6 @@ class SchemaPlaceBase extends SchemaAddressBase {
       '#maxlength' => 255,
       '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
       '#description' => $this->t('The name of the place'),
-      '#states' => $visibility,
     ];
     $form['value']['url'] = [
       '#type' => 'textfield',
@@ -65,15 +64,14 @@ class SchemaPlaceBase extends SchemaAddressBase {
       '#maxlength' => 255,
       '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
       '#description' => $this->t('The url of the place.'),
-      '#states' => $visibility,
     ];
 
     $input_values = [
       'title' => $this->t('Address'),
       'description' => 'The address of the place.',
       'value' => !empty($value['address']) ? $value['address'] : [],
-      '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
-      'visibility_selector' => $this->visibilitySelector() . '[address][@type]',
+      '#required' => $input_values['#required'],
+      'visibility_selector' => $selector . '[address][@type]',
     ];
 
     $form['value']['address'] = $this->postalAddressForm($input_values);
@@ -83,8 +81,8 @@ class SchemaPlaceBase extends SchemaAddressBase {
       'title' => $this->t('GeoCoordinates'),
       'description' => 'The geo coordinates of the place.',
       'value' => !empty($value['geo']) ? $value['geo'] : [],
-      '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
-      'visibility_selector' => $this->visibilitySelector() . '[geo][@type]',
+      '#required' => $input_values['#required'],
+      'visibility_selector' => $selector . '[geo][@type]',
     ];
 
     $form['value']['geo'] = $this->geoForm($input_values);
