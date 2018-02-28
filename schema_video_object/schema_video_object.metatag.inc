@@ -68,7 +68,6 @@ function schema_video_object_metatag_info() {
   ) + $defaults;
 
   $info['tags']['schema_video_object.thumbnailUrl'] = array(
-    'class' => 'SchemaImageBase',
     'label' => t('thumbnailUrl'),
     'description' => t('The thumbnail URL of the video.'),
     'image' => TRUE,
