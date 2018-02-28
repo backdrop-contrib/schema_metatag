@@ -17,7 +17,6 @@ trait SchemaPivotTrait {
       '#empty_option' => t('- None -'),
       '#empty_value' => '',
       '#options' => [
-        0 => 'Normal',
         1 => 'Pivot',
       ],
       '#weight' => 50,
