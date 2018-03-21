@@ -26,6 +26,7 @@ class SchemaPlaceBase extends SchemaAddressBase {
    */
   public function getForm(array $options = []) {
 
+    $input_values = SchemaMetatagManager::defaultInputValues();
     $value = SchemaMetatagManager::unserialize($this->value());
 
     // Get the id for the nested @type element.

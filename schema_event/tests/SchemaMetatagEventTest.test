@@ -56,7 +56,7 @@ class SchemaMetatagEventTest extends SchemaMetatagTagsTestBase {
     'schema_event.performer' => 'SchemaPersonOrgBase',
     'schema_event.isAccessibleForFree' => 'SchemaIsAccessibleForFreeBase',
     'schema_event.offers' => 'SchemaOfferBase',
-    'schema_event.rating' => 'SchemaRatingBase',
+    'schema_event.aggregateRating' => 'SchemaRatingBase',
     'schema_event.review' => 'SchemaReviewBase',
   ];
 
