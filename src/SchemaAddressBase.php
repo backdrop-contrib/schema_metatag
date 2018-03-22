@@ -6,7 +6,6 @@
 class SchemaAddressBase extends SchemaNameBase {
 
   use SchemaAddressTrait;
-  use SchemaPivotTrait;
 
   /**
    * The top level keys on this form.
@@ -25,17 +24,14 @@ class SchemaAddressBase extends SchemaNameBase {
       'title' => $this->label(),
       'description' => $this->description(),
       'value' => $value,
-      '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
-      'visibility_selector' => $this->visibilitySelector() . '[@type]',
+      '#required' => isset($options['#required']) ? $options['#required'] : FALSE,
+      'visibility_selector' => $this->visibilitySelector(),
     ];
 
-    $form = parent::getForm($options);
     $form['value'] = $this->postalAddressForm($input_values);
 
-    if (!empty($this->info['multiple'])) {
-      $form['value']['pivot'] = $this->pivotForm($value);
-      $selector = ':input[name="' . $input_values['visibility_selector'] . '"]';
-      $form['value']['pivot']['#states'] = ['invisible' => [$selector => ['value' => '']]];
+    if (empty($this->multiple())) {
+      unset($form['value']['pivot']);
     }
 
     // Validation from parent::getForm() got wiped out, so add callback.

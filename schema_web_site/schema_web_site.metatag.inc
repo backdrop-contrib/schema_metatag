@@ -72,5 +72,13 @@ function schema_web_site_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
+  $info['tags']['schema_web_site.potentialAction'] = array(
+    'class' => 'SchemaWebSitePotentialAction',
+    'label' => t('potentialAction'),
+    'description' => t('Potential action that can be accomplished on this site, like SearchAction.'),
+    'multiple' => TRUE,
+    'weight' => ++$weight,
+  ) + $defaults;
+
   return $info;
 }

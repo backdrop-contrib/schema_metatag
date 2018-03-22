@@ -10,7 +10,7 @@ class SchemaDateBase extends SchemaNameBase {
    */
   public function getForm(array $options = []) {
     $form = parent::getForm($options);
-    $form['value']['#description'] .= ' ' . $this->t('To format the date properly, use a token like [node:created:custom:Y-m-d\TH:i:sO].');
+    $form['value']['#description'] .= ' ' . $this->t('Use a token like [node:created:html_datetime].');
     return $form;
   }
 

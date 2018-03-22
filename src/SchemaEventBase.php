@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Schema.org Place items should extend this class.
+ * Schema.org Event items should extend this class.
  */
-class SchemaPlaceBase extends SchemaAddressBase {
+class SchemaEventBase extends SchemaNameBase {
 
-  use SchemaPlaceTrait;
+  use SchemaEventTrait;
 
   /**
    * {@inheritdoc}
@@ -22,7 +22,7 @@ class SchemaPlaceBase extends SchemaAddressBase {
       'visibility_selector' => $this->visibilitySelector(),
     ];
 
-    $form['value'] = $this->placeForm($input_values);
+    $form['value'] = $this->eventForm($input_values);
 
     if (empty($this->multiple())) {
       unset($form['value']['pivot']);
@@ -39,23 +39,19 @@ class SchemaPlaceBase extends SchemaAddressBase {
    */
   public static function testValue() {
     $items = [];
-    $keys = self::placeFormKeys();
+    $keys = self::eventFormKeys();
     foreach ($keys as $key) {
       switch ($key) {
-        case 'address':
-          $items[$key] = SchemaAddressBase::testValue();
-          break;
-
-        case 'geo':
-          $items[$key] = SchemaGeoBase::testValue();
-          break;
-
         case '@type':
-          $items[$key] = 'Place';
+          $items[$key] = 'PublicationEvent';
+          break;
+
+        case 'location':
+          $items[$key] = SchemaPlaceBase::testValue();
           break;
 
         default:
-          $items[$key] = parent::testDefaultValue(2, ' ');
+          $items[$key] = parent::testDefaultValue(1, '');
           break;
 
       }

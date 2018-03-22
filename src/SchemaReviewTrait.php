@@ -5,8 +5,10 @@
  */
 trait SchemaReviewTrait {
 
-  use SchemaRatingTrait;
-  use SchemaPersonOrgTrait;
+  use SchemaRatingTrait, SchemaPersonOrgTrait, SchemaPivotTrait {
+    SchemaPivotTrait::pivotForm insteadof SchemaRatingTrait;
+    SchemaPivotTrait::pivotForm insteadof SchemaPersonOrgTrait;
+  }
 
   /**
    * Form keys.
@@ -31,13 +33,20 @@ trait SchemaReviewTrait {
 
     // Get the id for the nested @type element.
     $visibility_selector = $input_values['visibility_selector'];
-    $selector = ':input[name="' . $visibility_selector . '[@type]"]';
+    $selector = ':input[name="' . $input_values['visibility_selector'] . '[@type]"]';
     $visibility = ['invisible' => [$selector => ['value' => '']]];
+    $selector2 = SchemaMetatagManager::altSelector($selector);
+    $visibility2 = ['invisible' => [$selector2 => ['value' => '']]];
+    $visibility['invisible'] = [$visibility['invisible'], $visibility2['invisible']];
 
     $form['#type'] = 'fieldset';
     $form['#title'] = $input_values['title'];
     $form['#description'] = $input_values['description'];
     $form['#tree'] = TRUE;
+
+    // Add a pivot option to the form.
+    $form['pivot'] = $this->pivotForm($value);
+    $form['pivot']['#states'] = $visibility;
 
     $form['@type'] = [
       '#type' => 'select',
@@ -52,6 +61,7 @@ trait SchemaReviewTrait {
         'ClaimReview' => $this->t('ClaimReview'),
       ],
       '#default_value' => !empty($value['@type']) ? $value['@type'] : '',
+      '#weight' => -10,
     ];
 
     $form['reviewBody'] = [
@@ -69,7 +79,15 @@ trait SchemaReviewTrait {
       '#default_value' => !empty($value['datePublished']) ? $value['datePublished'] : '',
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
-      '#description' => $this->t('To format the date properly, use a token like [node:created:custom:Y-m-d\TH:i:sO].'),
+      '#description' => $this->t('To format the date properly, use a token like [node:created:html_datetime].'),
+    ];
+
+    $input_values = [
+      'title' => $this->t('author'),
+      'description' => 'The author of this review.',
+      'value' => !empty($value['author']) ? $value['author'] : [],
+      '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
+      'visibility_selector' => $this->getPluginId() . '[author][@type]',
     ];
 
     $input_values = [

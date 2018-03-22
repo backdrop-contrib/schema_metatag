@@ -6,7 +6,6 @@
 class SchemaRatingBase extends SchemaNameBase {
 
   use SchemaRatingTrait;
-  use SchemaPivotTrait;
 
   /**
    * {@inheritdoc}
@@ -17,17 +16,15 @@ class SchemaRatingBase extends SchemaNameBase {
       'title' => $this->label(),
       'description' => $this->description(),
       'value' => $value,
-      '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
+      '#required' => isset($options['#required']) ? $options['#required'] : FALSE,
       'visibility_selector' => $this->visibilitySelector(),
     ];
 
     $form = parent::getForm($options);
     $form['value'] = $this->ratingForm($input_values);
 
-    if (!empty($this->info['multiple'])) {
-      $form['value']['pivot'] = $this->pivotForm($value);
-      $selector = ':input[name="' . $input_values['visibility_selector'] . '[@type]"]';
-      $form['value']['pivot']['#states'] = ['invisible' => [$selector => ['value' => '']]];
+    if (empty($this->multiple())) {
+      unset($form['value']['pivot']);
     }
 
     // Validation from parent::getForm() got wiped out, so add callback.

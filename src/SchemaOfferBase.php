@@ -6,7 +6,6 @@
 class SchemaOfferBase extends SchemaNameBase {
 
   use SchemaOfferTrait;
-  use SchemaPivotTrait;
 
   /**
    * {@inheritdoc}
@@ -18,16 +17,14 @@ class SchemaOfferBase extends SchemaNameBase {
       'title' => $this->label(),
       'description' => $this->description(),
       'value' => $value,
-      '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
+      '#required' => isset($options['#required']) ? $options['#required'] : FALSE,
       'visibility_selector' => $this->visibilitySelector(),
     ];
 
     $form['value'] = $this->offerForm($input_values);
 
-    if (!empty($this->info['multiple'])) {
-      $form['value']['pivot'] = $this->pivotForm($value);
-      $selector = ':input[name="' . $input_values['visibility_selector'] . '"]';
-      $form['value']['pivot']['#states'] = ['invisible' => [$selector => ['value' => '']]];
+    if (empty($this->multiple())) {
+      unset($form['value']['pivot']);
     }
 
     // Validation from parent::getForm() got wiped out, so add callback.
@@ -46,6 +43,11 @@ class SchemaOfferBase extends SchemaNameBase {
       switch ($key) {
         case '@type':
           $items[$key] = 'Offer';
+          break;
+
+        case 'eligibleRegion':
+        case 'ineligibleRegion':
+          $items[$key] = SchemaCountryBase::testValue();
           break;
 
         default:

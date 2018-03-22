@@ -28,7 +28,7 @@ class SchemaMetatagTagsTest extends SchemaMetatagTagsTestBase {
    */
   public function setUp(array $modules = array()) {
     $modules[] = 'schema_metatag_test';
-    $modules[] = 'schema_article';
+    $modules[] = 'schema_web_site';
     parent::setUp($modules);
   }
 
@@ -41,7 +41,7 @@ class SchemaMetatagTagsTest extends SchemaMetatagTagsTestBase {
    * {@inheritdoc}
    */
   public $schemaTags = [
-    'schema_metatag_test.@type' => 'SchemaArticleType',
+    'schema_metatag_test.@type' => 'SchemaWebSiteType',
     'schema_metatag_test.address' => 'SchemaAddressBase',
     'schema_metatag_test.rating' => 'SchemaRatingBase',
     'schema_metatag_test.review' => 'SchemaReviewBase',
@@ -56,6 +56,16 @@ class SchemaMetatagTagsTest extends SchemaMetatagTagsTestBase {
     'schema_metatag_test.organization' => 'SchemaPersonOrgBase',
     'schema_metatag_test.place' => 'SchemaPlaceBase',
     'schema_metatag_test.url' => 'SchemaUrlBase',
+    'schema_metatag_test.action' => 'SchemaWebSitePotentialAction',
+    'schema_metatag_test.country' => 'SchemaCountryBase',
+    'schema_metatag_test.creativeWork' => 'SchemaCreativeWorkBase',
+    'schema_metatag_test.entryPoint' => 'SchemaEntryPointBase',
+    'schema_metatag_test.event' => 'SchemaEventBase',
+    'schema_metatag_test.nutritionInformation' => 'SchemaNutritionInformationBase',
+    'schema_metatag_test.openingHoursSpecification' => 'SchemaOpeningHoursSpecificationBase',
+    'schema_metatag_test.programMembership' => 'SchemaProgramMembershipBase',
+    'schema_metatag_test.thing' => 'SchemaThingBase',
+    'schema_metatag_test.trueFalse' => 'SchemaTrueFalseBase',
   ];
 
 }

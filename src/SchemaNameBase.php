@@ -42,6 +42,13 @@ class SchemaNameBase extends DrupalTextMetaTag {
   /**
    * {@inheritdoc}
    */
+  public function multiple() {
+    return !empty($this->info['multiple']);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function value() {
     return !empty($this->data['value']) ? $this->data['value'] : '';
   }
@@ -73,27 +80,25 @@ class SchemaNameBase extends DrupalTextMetaTag {
     $this->options = $options;
     $value = SchemaMetatagManager::unserialize($this->value());
 
+    // If this is a complex array of value, process the array.
+    if (is_array($value)) {
+
+      // Clean out empty values.
+      $value = SchemaMetatagManager::arrayTrim($value);
+    }
+
     if (empty($value)) {
       return '';
     }
     // If this is a complex array of values, process the array.
     elseif (is_array($value)) {
 
-      // Clean out empty values.
-      $value = array_filter($value);
-
       // If the item is an array of values,
       // walk the array and process the values.
-      array_walk_recursive($value, 'self::processItem');
+      array_walk_recursive($value, 'static::processItem');
 
-      // See if any nested items need to be pivoted.
-      // If pivot is set to 0, it would have been removed as an empty value.
-      if (array_key_exists('pivot', $value)) {
-        unset($value['pivot']);
-        $value = SchemaMetatagManager::pivot($value);
-      }
-
-      $value = SchemaMetatagManager::arrayTrim($value);
+      // Recursively pivot each branch of the array.
+      $value = static::pivotItem($value);
 
     }
     // Process a simple string.
@@ -115,6 +120,24 @@ class SchemaNameBase extends DrupalTextMetaTag {
     return array(
       '#attached' => array('drupal_add_html_head' => array(array($element, $id))),
     );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function pivotItem($array) {
+    // See if any nested items need to be pivoted.
+    // If pivot is set to 0, it would have been removed as an empty value.
+    if (array_key_exists('pivot', $array)) {
+      unset($array['pivot']);
+      $array = SchemaMetatagManager::pivot($array);
+    }
+    foreach ($array as $key => &$value) {
+      if (is_array($value)) {
+        $value = static::pivotItem($value);
+      }
+    }
+    return $array;
   }
 
   /**
@@ -144,6 +167,10 @@ class SchemaNameBase extends DrupalTextMetaTag {
 
     if (!empty($this->info['multiple'])) {
       $value = SchemaMetatagManager::explode($value);
+      // Clean out any empty values that might have been added by explode().
+      if (is_array($value)) {
+        $value = array_filter($value);
+      }
     }
 
     // Swap back in the original values.

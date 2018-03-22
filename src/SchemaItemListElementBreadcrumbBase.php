@@ -21,8 +21,10 @@ class SchemaItemListElementBreadcrumbBase extends SchemaItemListElementBase {
       '#description' => $this->description(),
       '#element_validate' => [[get_class($this), 'validateTag']],
     ];
+
     // Validation from parent::getForm() got wiped out, so add callback.
     $form['value']['#element_validate'][] = 'schema_metatag_element_validate';
+
     return $form;
   }
 
@@ -69,6 +71,7 @@ class SchemaItemListElementBreadcrumbBase extends SchemaItemListElementBase {
         $values[$key] = [
           '@id' => $url,
           'name' => $text,
+          'url' => $url,
         ];
         $key++;
       }

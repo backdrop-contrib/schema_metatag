@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Schema.org Duration items should extend this class.
+ * Provides a plugin for the 'schema_duration_base' meta tag.
  */
 class SchemaDurationBase extends SchemaNameBase {
 

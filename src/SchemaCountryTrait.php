@@ -1,27 +1,26 @@
 <?php
 
 /**
- * Schema.org Geo trait.
+ * Schema.org Country trait.
  */
-trait SchemaGeoTrait {
+trait SchemaCountryTrait {
 
   use SchemaPivotTrait;
 
   /**
    * Form keys.
    */
-  public static function geoFormKeys() {
+  public static function countryFormKeys() {
     return [
       '@type',
-      'latitude',
-      'longitude',
+      'name',
     ];
   }
 
   /**
    * The form element.
    */
-  public function geoForm($input_values) {
+  public function countryForm($input_values) {
 
     $input_values += SchemaMetatagManager::defaultInputValues();
     $value = $input_values['value'];
@@ -49,31 +48,22 @@ trait SchemaGeoTrait {
       '#empty_option' => t('- None -'),
       '#empty_value' => '',
       '#options' => [
-        'GeoCoordinates' => $this->t('GeoCoordinates'),
+        'Country' => $this->t('Country'),
       ],
       '#required' => $input_values['#required'],
       '#weight' => -10,
     ];
 
-    $form['latitude'] = [
+    $form['name'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('latitude'),
-      '#default_value' => !empty($value['latitude']) ? $value['latitude'] : '',
+      '#title' => $this->t('name'),
+      '#default_value' => !empty($value['name']) ? $value['name'] : '',
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
-      '#description' => $this->t("The latitude of a location. For example 37.42242 (WGS 84)."),
+      '#description' => $this->t("The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code."),
     ];
 
-    $form['longitude'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('longitude'),
-      '#default_value' => !empty($value['longitude']) ? $value['longitude'] : '',
-      '#maxlength' => 255,
-      '#required' => $input_values['#required'],
-      '#description' => $this->t("The longitude of a location. For example -122.08585 (WGS 84)."),
-    ];
-
-    $keys = static::geoFormKeys();
+    $keys = static::countryFormKeys();
     foreach ($keys as $key) {
       if ($key != '@type') {
         $form[$key]['#states'] = $visibility;

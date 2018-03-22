@@ -5,6 +5,8 @@
  */
 trait SchemaRatingTrait {
 
+  use SchemaPivotTrait;
+
   /**
    * Form keys.
    */
@@ -29,11 +31,18 @@ trait SchemaRatingTrait {
     // Get the id for the nested @type element.
     $selector = ':input[name="' . $input_values['visibility_selector'] . '[@type]"]';
     $visibility = ['invisible' => [$selector => ['value' => '']]];
+    $selector2 = SchemaMetatagManager::altSelector($selector);
+    $visibility2 = ['invisible' => [$selector2 => ['value' => '']]];
+    $visibility['invisible'] = [$visibility['invisible'], $visibility2['invisible']];
 
     $form['#type'] = 'fieldset';
     $form['#title'] = $input_values['title'];
     $form['#description'] = $input_values['description'];
     $form['#tree'] = TRUE;
+
+    // Add a pivot option to the form.
+    $form['pivot'] = $this->pivotForm($value);
+    $form['pivot']['#states'] = $visibility;
 
     $form['@type'] = [
       '#type' => 'select',
@@ -45,6 +54,7 @@ trait SchemaRatingTrait {
         'AggregateRating' => $this->t('AggregateRating'),
       ],
       '#default_value' => !empty($value['@type']) ? $value['@type'] : '',
+      '#weight' => -10,
     ];
 
     $form['ratingValue'] = [
@@ -83,7 +93,7 @@ trait SchemaRatingTrait {
       '#description' => $this->t('The lowest rating value possible.'),
     ];
 
-    $keys = static::ratingFormKeys();
+    $keys = self::ratingFormKeys();
     foreach ($keys as $key) {
       if ($key != '@type') {
         $form[$key]['#states'] = $visibility;

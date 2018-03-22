@@ -9,12 +9,32 @@
  */
 class SchemaHasPartBase extends SchemaNameBase {
 
+  use SchemaHasPartTrait;
+
   /**
    * {@inheritdoc}
    */
   public function getForm(array $options = []) {
-    $form = parent::getForm($options);
-    $form['value']['#description'] = $this->t('Comma-separated list of class names of the parts of the web page that are not free. Do NOT surround class names with quotation marks! Also fill out "isAccessibleForFree".');
+
+    $value = SchemaMetatagManager::unserialize($this->value());
+
+    $input_values = [
+      'title' => $this->label(),
+      'description' => $this->description(),
+      'value' => $value,
+      '#required' => isset($options['#required']) ? $options['#required'] : FALSE,
+      'visibility_selector' => $this->visibilitySelector(),
+    ];
+
+    $form['value'] = $this->hasPartForm($input_values);
+
+    if (empty($this->multiple())) {
+      unset($form['value']['pivot']);
+    }
+
+    // Validation from parent::getForm() got wiped out, so add callback.
+    $form['value']['#element_validate'][] = 'schema_metatag_element_validate';
+
     return $form;
   }
 
@@ -22,24 +42,26 @@ class SchemaHasPartBase extends SchemaNameBase {
    * {@inheritdoc}
    */
   public static function testValue() {
-    return parent::testDefaultValue(3, ',');
-  }
+    $items = [];
+    $keys = self::hasPartFormKeys();
+    foreach ($keys as $key) {
+      switch ($key) {
 
-  /**
-   * {@inheritdoc}
-   */
-  public static function outputValue($input_value) {
-    if (is_string($input_value)) {
-      $input_value = SchemaMetatagManager::explode($input_value);
+        case '@type':
+          $items[$key] = 'WebPageElement';
+          break;
+
+        case 'potentialAction':
+          $items[$key] = SchemaActionBase::testValue();
+          break;
+
+        default:
+          $items[$key] = parent::testDefaultValue(1, '');
+          break;
+
+      }
     }
-    foreach ((array) $input_value as $class_name) {
-      $items[] = [
-        '@type' => 'WebPageElement',
-        'isAccessibleForFree' => 'False',
-        'cssSelector' => '.' . $class_name,
-      ];
-    }
-    return !empty($items) ? $items : '';
+    return $items;
   }
 
 }

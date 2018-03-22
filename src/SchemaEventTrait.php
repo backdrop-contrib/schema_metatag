@@ -1,46 +1,43 @@
 <?php
 
 /**
- * Schema.org Person/Organization trait.
+ * Schema.org Event trait.
  */
-trait SchemaPersonOrgTrait {
+trait SchemaEventTrait {
 
-  use SchemaImageTrait, SchemaPivotTrait {
-    SchemaPivotTrait::pivotForm insteadof SchemaImageTrait;
+  use SchemaPlaceTrait, SchemaPivotTrait {
+    SchemaPivotTrait::pivotForm insteadof SchemaPlaceTrait;
   }
 
   /**
    * Form keys.
    */
-  public static function personOrgFormKeys() {
+  public static function eventFormKeys() {
     return [
       '@type',
       '@id',
       'name',
       'url',
-      'sameAs',
-      'logo',
+      'startDate',
+      'location',
     ];
   }
 
   /**
    * The form element.
    */
-  public function personOrgForm($input_values) {
+  public function eventForm($input_values) {
 
     $input_values += SchemaMetatagManager::defaultInputValues();
     $value = $input_values['value'];
 
     // Get the id for the nested @type element.
-    $selector = ':input[name="' . $input_values['visibility_selector'] . '[@type]"]';
+    $visibility_selector = $input_values['visibility_selector'];
+    $selector = ':input[name="' . $visibility_selector . '[@type]"]';
     $visibility = ['invisible' => [$selector => ['value' => '']]];
     $selector2 = SchemaMetatagManager::altSelector($selector);
     $visibility2 = ['invisible' => [$selector2 => ['value' => '']]];
     $visibility['invisible'] = [$visibility['invisible'], $visibility2['invisible']];
-
-    $org_visibility = ['visible' => [$selector => ['value' => 'Organization']]];
-    $org_visibility2 = ['visible' => [$selector2 => ['value' => 'Organization']]];
-    $org_visibility['visible'] = [$org_visibility['visible'], $org_visibility2['visible']];
 
     $form['#type'] = 'fieldset';
     $form['#title'] = $input_values['title'];
@@ -58,8 +55,8 @@ trait SchemaPersonOrgTrait {
       '#empty_option' => t('- None -'),
       '#empty_value' => '',
       '#options' => [
-        'Person' => $this->t('Person'),
-        'Organization' => $this->t('Organization'),
+        'Event' => $this->t('Event'),
+        'PublicationEvent' => $this->t('PublicationEvent'),
       ],
       '#required' => $input_values['#required'],
       '#weight' => -10,
@@ -71,7 +68,7 @@ trait SchemaPersonOrgTrait {
       '#default_value' => !empty($value['@id']) ? $value['@id'] : '',
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
-      '#description' => $this->t("Globally unique @id of the person or organization, usually a url, used to to link other properties to this object."),
+      '#description' => $this->t("Globally unique @id of the Event, usually a url, used to to link other properties to this object."),
     ];
 
     $form['name'] = [
@@ -80,7 +77,7 @@ trait SchemaPersonOrgTrait {
       '#default_value' => !empty($value['name']) ? $value['name'] : '',
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
-      '#description' => $this->t("Name of the person or organization, i.e. [node:author:display-name]."),
+      '#description' => $this->t("Name of the Event."),
     ];
 
     $form['url'] = [
@@ -89,36 +86,33 @@ trait SchemaPersonOrgTrait {
       '#default_value' => !empty($value['url']) ? $value['url'] : '',
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
-      '#description' => $this->t("Absolute URL of the canonical Web page, like the URL of the author's profile page or the organization's official website, i.e. [node:author:url]."),
+      '#description' => $this->t("Absolute URL of the canonical Web page for the Event."),
     ];
 
-    $form['sameAs'] = [
+    $form['startDate'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('sameAs'),
-      '#default_value' => !empty($value['sameAs']) ? $value['sameAs'] : '',
+      '#title' => $this->t('startDate'),
+      '#default_value' => !empty($value['startDate']) ? $value['startDate'] : '',
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
-      '#description' => $this->t("Comma separated list of URLs for the person's or organization's official social media profile page(s)."),
+      '#description' => $this->t("Start date of the Event."),
     ];
 
-    $keys = static::personOrgFormKeys();
+    $input_values = [
+      'title' => $this->t('Location'),
+      'description' => "The location of the event.",
+      'value' => !empty($value['location']) ? $value['location'] : [],
+      '#required' => $input_values['#required'],
+      'visibility_selector' => $visibility_selector . '[location]',
+    ];
+    $form['location'] = static::placeForm($input_values);
+
+    $keys = static::eventFormKeys();
     foreach ($keys as $key) {
       if ($key != '@type') {
         $form[$key]['#states'] = $visibility;
       }
     }
-
-    $input_values = [
-      'title' => $this->t('Logo'),
-      'description' => 'The logo of the organization. For AMP pages, Google requires a image no larger than 600 x 60.',
-      'value' => !empty($value['logo']) ? $value['logo'] : [],
-      '#required' => $input_values['#required'],
-      'visibility_selector' => $input_values['visibility_selector'] . '[logo]',
-    ];
-
-    // Display the logo only for Organization.
-    $form['logo'] = $this->imageForm($input_values);
-    $form['logo']['#states'] = $org_visibility;
 
     return $form;
   }

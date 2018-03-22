@@ -5,6 +5,8 @@
  */
 trait SchemaImageTrait {
 
+  use SchemaPivotTrait;
+
   /**
    * Form keys.
    */
@@ -29,11 +31,18 @@ trait SchemaImageTrait {
     // Get the id for the nested @type element.
     $selector = ':input[name="' . $input_values['visibility_selector'] . '[@type]"]';
     $visibility = ['invisible' => [$selector => ['value' => '']]];
+    $selector2 = SchemaMetatagManager::altSelector($selector);
+    $visibility2 = ['invisible' => [$selector2 => ['value' => '']]];
+    $visibility['invisible'] = [$visibility['invisible'], $visibility2['invisible']];
 
     $form['#type'] = 'fieldset';
     $form['#title'] = $input_values['title'];
     $form['#description'] = $input_values['description'];
     $form['#tree'] = TRUE;
+
+    // Add a pivot option to the form.
+    $form['pivot'] = $this->pivotForm($value);
+    $form['pivot']['#states'] = $visibility;
 
     $form['@type'] = [
       '#type' => 'select',
@@ -45,6 +54,7 @@ trait SchemaImageTrait {
         'ImageObject' => $this->t('ImageObject'),
       ],
       '#required' => $input_values['#required'],
+      '#weight' => -10,
     ];
 
     $form['representativeOfPage'] = [
@@ -64,7 +74,7 @@ trait SchemaImageTrait {
       '#default_value' => !empty($value['url']) ? $value['url'] : '',
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
-      '#description' => $this->t('Absolute URL of the image. If using tokens include the image preset name, and the URL attribute. [node:field_name:image_preset_name:url]. If using referenced entities like Media or Paragraphs, your token would look like [node:field_name:entity:field_name:image_preset_name:url].'),
+      '#description' => $this->t('Absolute URL of the image, i.e. [node:field_name:image_preset_name:url].'),
     ];
 
     $form['width'] = [

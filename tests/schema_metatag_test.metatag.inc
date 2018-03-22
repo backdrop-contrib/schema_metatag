@@ -23,7 +23,7 @@ function schema_metatag_test_metatag_info() {
   );
 
   $info['tags']['schema_metatag_test.@type'] = array(
-    'class' => 'SchemaArticleType',
+    'class' => 'SchemaWebSiteType',
     'label' => t('@type'),
     'description' => t('The type of article.'),
     'weight' => ++$weight,
@@ -67,13 +67,6 @@ function schema_metatag_test_metatag_info() {
   $info['tags']['schema_metatag_test.geo'] = array(
     'class' => 'SchemaGeoBase',
     'label' => t('geo'),
-    'description' => '',
-    'weight' => ++$weight,
-  ) + $defaults;
-
-  $info['tags']['schema_metatag_test.hasPart'] = array(
-    'class' => 'SchemaHasPartBase',
-    'label' => t('hasPart'),
     'description' => '',
     'weight' => ++$weight,
   ) + $defaults;
@@ -128,6 +121,83 @@ function schema_metatag_test_metatag_info() {
     'label' => t('url'),
     'description' => '',
     'url' => TRUE,
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_metatag_test.action'] = array(
+    'class' => 'SchemaWebSitePotentialAction',
+    'label' => t('action'),
+    'description' => '',
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_metatag_test.country'] = array(
+    'class' => 'SchemaCountryBase',
+    'label' => t('country'),
+    'description' => '',
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_metatag_test.creativeWork'] = array(
+    'class' => 'SchemaCreativeWorkBase',
+    'label' => t('creativeWork'),
+    'description' => '',
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_metatag_test.entryPoint'] = array(
+    'class' => 'SchemaEntryPointBase',
+    'label' => t('entryPoint'),
+    'description' => '',
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_metatag_test.event'] = array(
+    'class' => 'SchemaEventBase',
+    'label' => t('event'),
+    'description' => '',
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_metatag_test.hasPart'] = array(
+    'class' => 'SchemaHasPartBase',
+    'label' => t('hasPart'),
+    'description' => '',
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_metatag_test.nutritionInformation'] = array(
+    'class' => 'SchemaNutritionInformationBase',
+    'label' => t('nutritionInformation'),
+    'description' => '',
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_metatag_test.openingHoursSpecification'] = array(
+    'class' => 'SchemaOpeningHoursSpecificationBase',
+    'label' => t('openingHoursSpecification'),
+    'description' => '',
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_metatag_test.programMembership'] = array(
+    'class' => 'SchemaProgramMembershipBase',
+    'label' => t('programMembership'),
+    'description' => '',
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_metatag_test.thing'] = array(
+    'class' => 'SchemaThingBase',
+    'label' => t('thing'),
+    'description' => '',
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_metatag_test.trueFalse'] = array(
+    'class' => 'SchemaTrueFalseBase',
+    'label' => t('trueFalse'),
+    'description' => '',
     'weight' => ++$weight,
   ) + $defaults;
 

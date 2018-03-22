@@ -5,4 +5,5 @@ core = 7.x
 dependencies[] = schema_metatag
 
 files[] = src/SchemaWebSiteType.php
+files[] = src/SchemaWebSitePotentialAction.php
 files[] = tests/SchemaMetatagWebSiteTest.test

@@ -116,47 +116,60 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
    * {@inheritdoc}
    */
   public static function pivot($content) {
+    if (!is_array($content) || empty($content)) {
+      return $content;
+    }
     // Figure out the maximum number of items to include in the pivot.
     // Nested associative arrays should be excluded, only count numeric arrays.
-    $count = max(array_map('self::countNumericKeys', $content));
+    $count = max(array_map([__CLASS__, 'countNumericKeys'], $content));
     $pivoted = [];
+    $exploded = [];
+    $keys = array_keys($content);
     for ($i = 0; $i < $count; $i++) {
       foreach ($content as $key => $item) {
+        // If a lower array is pivoted, pivot that first.
+        if (is_array($item) && array_key_exists('pivot', $item)) {
+          unset($item['pivot']);
+          $item = self::pivot($item);
+        }
         // Some properties, like @type, may need to repeat the first item,
         // others may have too few values to fill out the array.
         // Make sure all properties have the right number of values.
-        if (is_string($item) || (!is_string($item) && count($item) < $count)) {
-          $content[$key] = [];
+        if (is_string($item) || (!is_string($item) && self::countNumericKeys($item) <= $count)) {
+          $exploded[$key] = [];
           $prev = '';
           for ($x = 0; $x < $count; $x++) {
-            if (!is_string($item) && count($item) > $x) {
-              $content[$key][$x] = $item[$x];
+            if (!is_string($item) && self::countNumericKeys($item) > $x) {
+              $exploded[$key][$x] = $item[$x];
               $prev = $item[$x];
             }
-            elseif (!is_string($item)) {
-              $content[$key][$x] = $prev;
+            elseif (!is_string($item) && self::countNumericKeys($item) > 0) {
+              $exploded[$key][$x] = $prev;
             }
             else {
-              $content[$key][$x] = $item;
+              $exploded[$key][$x] = $item;
             }
           }
+          $pivoted[$i][$key] = $exploded[$key][$i];
         }
-        $pivoted[$i][$key] = $content[$key][$i];
+        else {
+          $pivoted[$i][$key] = $item;
+        }
       }
     }
     return $pivoted;
   }
 
   /**
-   * {@inheritdoc}
+   * If the item is an array with numeric keys, count the keys.
    */
   public static function countNumericKeys($item) {
     if (!is_array($item)) {
-      return FALSE;
+      return 0;
     }
     foreach (array_keys($item) as $key) {
       if (!is_numeric($key)) {
-        return FALSE;
+        return 0;
       }
     }
     return count($item);
@@ -168,7 +181,7 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
   public static function explode($value) {
     $value = explode(',', $value);
     $value = array_map('trim', $value);
-    $value = array_unique($value);
+    //$value = array_unique($value);
     if (count($value) == 1) {
       return $value[0];
     }
@@ -190,7 +203,7 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
         return '';
       }
       else {
-        $value = serialize($value);
+        $value = serialize($trimmed);
       }
     }
     return $value;
@@ -204,10 +217,20 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
     // the same value isn't unserialized more than once if this is called
     // multiple times.
     if (self::isSerialized($value)) {
+      // If a line break made it into the serialized array, it can't be
+      // unserialized.
+      $value = str_replace("\n", "", $value);
       // Fix problems created if token replacements are a different size
       // than the original tokens.
       $value = self::recomputeSerializedLength($value);
-      $value = self::arrayTrim(unserialize($value));
+      // Keep broken unserialization from throwing errors on the page.
+      if ($value = @unserialize($value)) {
+        $value = self::arrayTrim($value);
+      }
+      else {
+        // Fail safe if unserialization is broken.
+        $value = '';
+      }
     }
     return $value;
   }
@@ -265,7 +288,18 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
         }
       }
     }
-    return $array;
+    // If all that's left is the pivot, return empty.
+    if ($array == ['pivot' => 1]) {
+      return '';
+    }
+    // If all that's left is @type, return empty.
+    elseif (count($array) == 1 && key($array) == '@type') {
+      return '';
+    }
+    // Otherwise return the cleaned up array.
+    else {
+      return $array;
+    }
   }
 
   /**
@@ -310,7 +344,32 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
       'value' => [],
       '#required' => FALSE,
       'visibility_selector' => '',
+      'actionTypes' => [],
+      'actions' => [],
     ];
+  }
+
+  /**
+   * Alternate visibility selector for the field element.
+   *
+   * This is necessary because the form elements on the general configuration
+   * form have different parents than the form elements in the metatags field
+   * widget. This function makes is possible to convert the #states visibility
+   * selectors for the general configuration form into the right pattern
+   * so they will work on the field widget.
+   *
+   * @param string $selector
+   *   The selector constructed for the main metatag form.
+   * @param string $group
+   *   The group this part of the form belongs in.
+   * @param string $id
+   *   The id of the individual element.
+   *
+   * @return string
+   *   A rewritten selector that will work in the field form.
+   */
+  public static function altSelector($selector) {
+    return $selector;
   }
 
 }
