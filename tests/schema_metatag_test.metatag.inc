@@ -201,5 +201,12 @@ function schema_metatag_test_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
+  $info['tags']['schema_metatag_test.monetaryAmount'] = array(
+    'class' => 'SchemaMonetaryAmountBase',
+    'label' => t('monetaryAmount'),
+    'description' => '',
+    'weight' => ++$weight,
+  ) + $defaults;
+
   return $info;
 }

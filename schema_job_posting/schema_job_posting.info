@@ -1,0 +1,9 @@
+name = "Schema.org: JobPosting"
+description = "Adds Schema.org/JobPosting to the JSON LD array."
+package = SEO
+core = 7.x
+dependencies[] = schema_metatag
+
+files[] = src/SchemaJobPostingType.php
+files[] = src/SchemaJobPostingEmploymentType.php
+files[] = tests/SchemaMetatagJobPostingTest.test

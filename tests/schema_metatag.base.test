@@ -30,17 +30,15 @@ abstract class SchemaMetatagTagsTestBase extends SchemaMetatagTestHelper {
    *   The key used in the JSON array for this tag.
    */
   public function getKey($tag_name) {
-    $replace = [
-      '.type' => '.@type',
-      '.id' => '.@id',
-    ];
-    $key = strtr($tag_name, $replace);
-    $key = str_replace($this->moduleName . '.', '', $key);
+    $key = str_replace($this->moduleName . '.', '', $tag_name);
     $parts = explode('_', $key);
     foreach ($parts as $i => $part) {
       $parts[$i] = $i > 0 ? ucfirst($part) : $part;
     }
     $key = implode($parts);
+    if (in_array($key, ['type', 'id'])) {
+      $key = '@' . $key;
+    }
     return $key;
   }
 

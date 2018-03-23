@@ -66,6 +66,7 @@ class SchemaMetatagTagsTest extends SchemaMetatagTagsTestBase {
     'schema_metatag_test.programMembership' => 'SchemaProgramMembershipBase',
     'schema_metatag_test.thing' => 'SchemaThingBase',
     'schema_metatag_test.trueFalse' => 'SchemaTrueFalseBase',
+    'schema_metatag_test.monetaryAmount' => 'SchemaMonetaryAmountBase',
   ];
 
 }

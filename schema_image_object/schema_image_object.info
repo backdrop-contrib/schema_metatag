@@ -1,4 +1,4 @@
-name = "Schema.org: Image Object"
+name = "Schema.org: ImageObject"
 description = "Adds Schema.org/ImageObject to the JSON LD array."
 package = SEO
 core = 7.x
