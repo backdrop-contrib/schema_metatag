@@ -1,0 +1,8 @@
+name = "Schema.org Book"
+description = "Adds Schema.org/Book to the JSON LD array."
+package = SEO
+core = 7.x
+dependencies[] = schema_metatag
+
+files[] = src/SchemaBookType.php
+files[] = tests/SchemaMetatagBookTest.test
