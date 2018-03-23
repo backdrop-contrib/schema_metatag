@@ -11,7 +11,7 @@
 function schema_article_metatag_info() {
   $info['groups']['schema_article'] = array(
     'label' => t('Schema.org: Article'),
-    'description' => t('See Schema.org definitions for this Schema type at <a href="!url">!url</a>.', array('!url' => 'http://schema.org/Article')),
+    'description' => t('See Schema.org definitions for this Schema type at <a href="!url">!url</a>, Google\'s recommendations at <a href="!google_url">!google_url</a>.', ['!url' => 'http://schema.org/Article', '!google_url' => 'https://developers.google.com/search/docs/data-types/article']),
     'form' => array(
       '#weight' => 10,
     ),
@@ -31,13 +31,13 @@ function schema_article_metatag_info() {
   $info['tags']['schema_article.@type'] = array(
     'class' => 'SchemaArticleType',
     'label' => t('@type'),
-    'description' => t('The type of article.'),
+    'description' => t('REQUIRED. The type of article.'),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_article.headline'] = array(
     'label' => t('headline'),
-    'description' => t('Headline of the article.'),
+    'description' => t('REQUIRED BY GOOGLE. Headline of the article.'),
     'weight' => ++$weight,
   ) + $defaults;
 
@@ -49,14 +49,14 @@ function schema_article_metatag_info() {
 
   $info['tags']['schema_article.description'] = array(
     'label' => t('description'),
-    'description' => t('A description of the item.'),
+    'description' => t('RECOMMENDED BY GOOGLE. A description of the item.'),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_article.author'] = array(
     'class' => 'SchemaPersonOrgBase',
     'label' => t('author'),
-    'description' => t('Author of the article.'),
+    'description' => t('REQUIRED BY GOOGLE. Author of the article.'),
     'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
@@ -64,40 +64,28 @@ function schema_article_metatag_info() {
   $info['tags']['schema_article.publisher'] = array(
     'class' => 'SchemaPersonOrgBase',
     'label' => t('publisher'),
-    'description' => t('Publisher of the article.'),
+    'description' => t('REQUIRED BY GOOGLE. Publisher of the article.'),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_article.datePublished'] = array(
     'class' => 'SchemaDateBase',
     'label' => t('datePublished'),
-    'description' => t('Date the article was published.'),
+    'description' => t('REQUIRED BY GOOGLE. Date the article was published.'),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_article.dateModified'] = array(
     'class' => 'SchemaDateBase',
     'label' => t('dateModified'),
-    'description' => t('Date the article was last modified.'),
-    'weight' => ++$weight,
-  ) + $defaults;
-
-  $info['tags']['schema_article.about'] = array(
-    'label' => t('about'),
-    'description' => t('Comma separated list of what the article is about, for instance taxonomy terms or categories.'),
-    'multiple' => TRUE,
-    'form' => array(
-      '#attributes' => array(
-        'placeholder' => '[node:field_tags]',
-      ),
-    ),
+    'description' => t('RECOMMENDED BY GOOGLE. Date the article was last modified.'),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_article.image'] = array(
     'class' => 'SchemaImageBase',
     'label' => t('image'),
-    'description' => t('The primary image for this item.'),
+    'description' => t('REQUIRED BY GOOGLE. The primary image for this item.'),
     'image' => TRUE,
     'url' => TRUE,
     'multiple' => TRUE,
@@ -107,7 +95,7 @@ function schema_article_metatag_info() {
   $info['tags']['schema_article.mainEntityOfPage'] = array(
     'class' => 'SchemaMainEntityOfPageBase',
     'label' => t('mainEntityOfPage'),
-    'description' => '',
+    'description' => 'RECOMMENDED BY GOOGLE. The canonical URL of the article page. Specify mainEntityOfPage when the article is the primary topic of the article page.',
     'url' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
@@ -115,20 +103,27 @@ function schema_article_metatag_info() {
   $info['tags']['schema_article.hasPart'] = array(
     'class' => 'SchemaHasPartBase',
     'label' => t('hasPart'),
-    'description' => '',
+    'description' => t('RECOMMENDED BY GOOGLE. Use for <a href="!url">Paywalled content</a>', ['!url' => 'https://developers.google.com/search/docs/data-types/paywalled-content']),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_article.isAccessibleForFree'] = array(
     'class' => 'SchemaIsAccessibleForFreeBase',
     'label' => t('isAccessibleForFree'),
-    'description' => '',
+    'description' => t('RECOMMENDED BY GOOGLE. Use for <a href="!url">Paywalled content</a>', ['!url' => 'https://developers.google.com/search/docs/data-types/paywalled-content']),
     'weight' => ++$weight,
   ) + $defaults;
 
-  $info['tags']['schema_article.rating'] = array(
+  $info['tags']['schema_article.about'] = array(
+    'label' => t('about'),
+    'description' => t('Comma separated list of what the article is about, for instance taxonomy terms or categories.'),
+    'multiple' => TRUE,
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_article.aggregateRating'] = array(
     'class' => 'SchemaRatingBase',
-    'label' => t('rating'),
+    'label' => t('aggregateRating'),
     'description' => '',
     'multiple' => TRUE,
     'weight' => ++$weight,

@@ -11,7 +11,7 @@
 function schema_organization_metatag_info() {
   $info['groups']['schema_organization'] = array(
     'label' => t('Schema.org: Organization'),
-    'description' => t('See Schema.org definitions for this Schema type at <a href="!url">!url</a>.', array('!url' => 'http://schema.org/Organization')),
+    'description' => t('See Schema.org definitions for this Schema type at <a href="!url">!url</a>, Google\'s recommendations at <a href="!google_url">!google_url</a>.', ['!url' => 'http://schema.org/Organization', '!google_url' => 'https://developers.google.com/search/docs/data-types/local-business']),
     'form' => array(
       '#weight' => 10,
     ),
@@ -31,65 +31,26 @@ function schema_organization_metatag_info() {
   $info['tags']['schema_organization.@type'] = array(
     'class' => 'SchemaOrganizationType',
     'label' => t('@type'),
-    'description' => t('The type of organization.'),
+    'description' => t('REQUIRED. The type of organization.'),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_organization.@id'] = array(
     'label' => t('@id'),
-    'description' => t('Globally unique @id, usually a url, used to to link other properties to this object.'),
+    'description' => t('REQUIRED BY GOOGLE. Globally unique @id, usually a url, used to to link other properties to this object.'),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_organization.name'] = array(
     'label' => t('name'),
-    'description' => t('The name of the organization.'),
-    'form' => array(
-      '#attributes' => array(
-        'placeholder' => '[node:title]',
-      ),
-    ),
-    'weight' => ++$weight,
-  ) + $defaults;
-
-  $info['tags']['schema_organization.telephone'] = array(
-    'label' => t('telephone'),
-    'description' => t('The telephone of the web site.'),
-    'multiple' => TRUE,
-    'weight' => ++$weight,
-  ) + $defaults;
-
-  $info['tags']['schema_organization.url'] = array(
-    'class' => 'SchemaUrlBase',
-    'label' => t('url'),
-    'description' => t('The url of the organization.'),
-    'url' => TRUE,
-    'form' => array(
-      '#attributes' => array(
-        'placeholder' => '[site:url]',
-      ),
-    ),
-    'weight' => ++$weight,
-  ) + $defaults;
-
-  $info['tags']['schema_organization.sameAs'] = array(
-    'class' => 'SchemaUrlBase',
-    'label' => t('sameAs'),
-    'description' => t('Url linked to the web site, such as wikipedia page or social profiles.'),
-    'multiple' => TRUE,
-    'url' => TRUE,
-    'form' => array(
-      '#attributes' => array(
-        'placeholder' => '[site:url]',
-      ),
-    ),
+    'description' => t('REQUIRED BY GOOGLE. The name of the organization.'),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_organization.address'] = array(
     'class' => 'SchemaAddressBase',
     'label' => t('address'),
-    'description' => t('The address of the organization.'),
+    'description' => t('REQUIRED BY GOOGLE. The address of the organization.'),
     'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
@@ -97,7 +58,56 @@ function schema_organization_metatag_info() {
   $info['tags']['schema_organization.geo'] = array(
     'class' => 'SchemaGeoBase',
     'label' => t('geo'),
-    'description' => t('The geographic coordinates of the organization.'),
+    'description' => t('RECOMMENDED BY GOOGLE. The geographic coordinates of the organization.'),
+    'multiple' => TRUE,
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_organization.telephone'] = array(
+    'label' => t('telephone'),
+    'description' => t('RECOMMENDED BY GOOGLE. The telephone of the organization.'),
+    'multiple' => TRUE,
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_organization.acceptsReservations'] = array(
+    'class' => 'SchemaTrueFalseBase',
+    'label' => t('acceptsReservations'),
+    'description' => t('RECOMMENDED BY GOOGLE FOR Food Establishments.'),
+    'multiple' => FALSE,
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_organization.url'] = array(
+    'class' => 'SchemaUrlBase',
+    'label' => t('url'),
+    'description' => t('RECOMMENDED BY GOOGLE. The url of the organization.'),
+    'url' => TRUE,
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_organization.sameAs'] = array(
+    'class' => 'SchemaUrlBase',
+    'label' => t('sameAs'),
+    'description' => t('Additional urls, such as wikipedia page or social profiles.'),
+    'multiple' => TRUE,
+    'url' => TRUE,
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_organization.menu'] = array(
+    'class' => 'SchemaUrlBase',
+    'label' => t('menu'),
+    'description' => t('RECOMMENDED BY GOOGLE FOR Food Establishments. The url of the menu.'),
+    'url' => TRUE,
+    'multiple' => FALSE,
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_organization.openingHoursSpecification'] = array(
+    'class' => 'SchemaOpeningHoursSpecificationBase',
+    'label' => t('openingHoursSpecification'),
+    'description' => t('RECOMMENDED BY GOOGLE. Hours during which the business location is open.'),
     'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
@@ -105,15 +115,10 @@ function schema_organization_metatag_info() {
   $info['tags']['schema_organization.image'] = array(
     'class' => 'SchemaImageBase',
     'label' => t('image'),
-    'description' => t('The primary image for this item.'),
+    'description' => t('REQUIRED BY GOOGLE. The primary image for this organization.'),
     'image' => TRUE,
     'url' => TRUE,
     'multiple' => TRUE,
-    'form' => array(
-      '#attributes' => array(
-        'placeholder' => '[node:field_image]',
-      ),
-    ),
     'weight' => ++$weight,
   ) + $defaults;
 
@@ -123,11 +128,13 @@ function schema_organization_metatag_info() {
     'description' => t('The logo for this organization.'),
     'image' => TRUE,
     'url' => TRUE,
-    'form' => array(
-      '#attributes' => array(
-        'placeholder' => '[node:field_image]',
-      ),
-    ),
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_organization.potentialAction'] = array(
+    'class' => 'SchemaOrganizationPotentialAction',
+    'label' => t('memberOf'),
+    'description' => t('RECOMMENDED BY GOOGLE. Potential action provided by this organization.'),
     'weight' => ++$weight,
   ) + $defaults;
 
@@ -138,18 +145,25 @@ function schema_organization_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
-  $info['tags']['schema_organization.mainEntityOfPage'] = array(
-    'class' => 'SchemaMainEntityOfPageBase',
-    'label' => t('mainEntityOfPage'),
-    'description' => '',
-    'url' => TRUE,
+  $info['tags']['schema_organization.memberOf'] = array(
+    'class' => 'SchemaProgramMembershipBase',
+    'label' => t('memberOf'),
+    'description' => t('An Organization (or ProgramMembership) to which this Organization belongs.'),
     'weight' => ++$weight,
   ) + $defaults;
 
-  $info['tags']['schema_organization.rating'] = array(
+  $info['tags']['schema_organization.aggregateRating'] = array(
     'class' => 'SchemaRatingBase',
-    'label' => t('rating'),
+    'label' => t('aggregateRating'),
     'description' => '',
+    'multiple' => TRUE,
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_organization.starRating'] = array(
+    'class' => 'SchemaRatingBase',
+    'label' => t('starRating'),
+    'description' => t('An official rating for a lodging business or food establishment, e.g. from national associations or standards bodies.'),
     'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;

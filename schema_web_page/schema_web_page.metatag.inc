@@ -31,7 +31,7 @@ function schema_web_page_metatag_info() {
   $info['tags']['schema_web_page.@type'] = array(
     'class' => 'SchemaWebPageType',
     'label' => t('@type'),
-    'description' => t('The type of web page.'),
+    'description' => t('REQUIRED. The type of web page.'),
     'weight' => ++$weight,
   ) + $defaults;
 
@@ -79,21 +79,21 @@ function schema_web_page_metatag_info() {
   $info['tags']['schema_web_page.hasPart'] = array(
     'class' => 'SchemaHasPartBase',
     'label' => t('hasPart'),
-    'description' => '',
+    'description' => t('RECOMMENDED BY GOOGLE. Use for <a href="!url">Paywalled content</a>', ['!url' => 'https://developers.google.com/search/docs/data-types/paywalled-content']),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_web_page.isAccessibleForFree'] = array(
     'class' => 'SchemaIsAccessibleForFreeBase',
     'label' => t('isAccessibleForFree'),
-    'description' => '',
+    'description' => t('RECOMMENDED BY GOOGLE. Use for <a href="!url">Paywalled content</a>', ['!url' => 'https://developers.google.com/search/docs/data-types/paywalled-content']),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_web_page.listElementBreadcrumb'] = array(
     'class' => 'SchemaListElementBreadcrumbBase',
     'label' => t('breadcrumb'),
-    'description' => '',
+    'description' => t('Use for <a href="!url">Breadcrumbs</a>', ['!url' => 'https://developers.google.com/search/docs/data-types/breadcrumb']),
     'weight' => ++$weight,
   ) + $defaults;
 

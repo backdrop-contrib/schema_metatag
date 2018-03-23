@@ -1,17 +1,26 @@
 <?php
 
+/**
+ * Schema.org MonentaryAmount trait.
+ */
 trait SchemaMonetaryAmountTrait {
 
   use SchemaPivotTrait;
 
+  /**
+   * Form keys.
+   */
   public static function monetaryAmountFormKeys() {
     return [
       '@type',
       'currency',
-      'value'
+      'value',
     ];
   }
 
+  /**
+   * Form.
+   */
   public function monetaryAmountForm($input_values) {
 
     $input_values += SchemaMetatagManager::defaultInputValues();
@@ -124,4 +133,5 @@ trait SchemaMonetaryAmountTrait {
 
     return $form;
   }
+
 }

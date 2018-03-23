@@ -31,7 +31,7 @@ function schema_service_metatag_info() {
   $info['tags']['schema_service.@type'] = array(
     'class' => 'SchemaServiceType',
     'label' => t('@type'),
-    'description' => t('The type of service (fixed by standard).'),
+    'description' => t('REQUIRED. The type of service (fixed by standard).'),
     'weight' => ++$weight,
   ) + $defaults;
 
@@ -65,9 +65,9 @@ function schema_service_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
-  $info['tags']['schema_service.rating'] = array(
+  $info['tags']['schema_service.aggregateRating'] = array(
     'class' => 'SchemaRatingBase',
-    'label' => t('rating'),
+    'label' => t('aggregateRating'),
     'description' => '',
     'multiple' => TRUE,
     'weight' => ++$weight,

@@ -31,7 +31,7 @@ function schema_web_site_metatag_info() {
   $info['tags']['schema_web_site.@type'] = array(
     'class' => 'SchemaWebSiteType',
     'label' => t('@type'),
-    'description' => t('The type of web site.'),
+    'description' => t('REQUIRED. The type of web site.'),
     'weight' => ++$weight,
   ) + $defaults;
 

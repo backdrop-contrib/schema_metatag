@@ -11,7 +11,7 @@
 function schema_review_metatag_info() {
   $info['groups']['schema_review'] = array(
     'label' => t('Schema.org: Review'),
-    'description' => t('See Schema.org definitions for this Schema type at <a href="!url">!url</a>.', array('!url' => 'http://schema.org/Review')),
+    'description' => t('See Schema.org definitions for this Schema type at <a href="!url">!url</a>, Google\'s recommendations at <a href="!google_url">!google_url</a>.', ['!url' => 'http://schema.org/Review', '!google_url' => 'https://developers.google.com/search/docs/data-types/review']),
     'form' => array(
       '#weight' => 10,
     ),
@@ -42,21 +42,22 @@ function schema_review_metatag_info() {
   ) + $defaults;
 
   $info['tags']['schema_review.itemReviewed'] = array(
+    'class' => 'SchemaThingBase',
     'label' => t('itemReviewed'),
-    'description' => t('The item that is being reviewed/rated.'),
+    'description' => t('REQUIRED BY GOOGLE. The item that is being reviewed/rated.'),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_review.reviewBody'] = array(
     'label' => t('reviewBody'),
-    'description' => t('The actual body of the review.'),
+    'description' => t('REQUIRED BY GOOGLE. The actual body of the review.'),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_review.author'] = array(
     'class' => 'SchemaPersonOrgBase',
     'label' => t('author'),
-    'description' => t('The author of this review or rating.'),
+    'description' => t('RECOMMENDED BY GOOGLE. The author of this review or rating.'),
     'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
@@ -64,14 +65,14 @@ function schema_review_metatag_info() {
   $info['tags']['schema_review.datePublished'] = array(
     'class' => 'SchemaDateBase',
     'label' => t('datePublished'),
-    'description' => t('Date the review was published.'),
+    'description' => t('REQUIRED BY GOOGLE. Date the review was published.'),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_review.reviewRating'] = array(
     'class' => 'SchemaRatingBase',
     'label' => t('reviewRating'),
-    'description' => '',
+    'description' => t('RECOMMENDED BY GOOGLE. The rating given in this review.'),
     'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;

@@ -1,13 +1,10 @@
 <?php
 
 /**
- * Schema.org MonetaryAmount should extend this class
+ * Schema.org MonetaryAmount should extend this class.
  */
 class SchemaMonetaryAmountBase extends SchemaNameBase {
 
-  /**
-   * Traits provide re-usable form elements
-   */
   use SchemaMonetaryAmountTrait;
 
   /**

@@ -5,4 +5,5 @@ core = 7.x
 dependencies[] = schema_metatag
 
 files[] = src/SchemaOrganizationType.php
+files[] = src/SchemaOrganizationPotentialAction.php
 files[] = tests/SchemaMetatagOrganizationTest.test

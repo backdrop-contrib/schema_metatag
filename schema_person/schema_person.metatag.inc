@@ -44,55 +44,30 @@ function schema_person_metatag_info() {
   $info['tags']['schema_person.name'] = array(
     'label' => t('name'),
     'description' => t('The name of the person.'),
-    'form' => array(
-      '#attributes' => array(
-        'placeholder' => '',
-      ),
-    ),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_person.givenName'] = array(
     'label' => t('givenName'),
     'description' => t('Given name. In the U.S., the first name of a Person. This can be used along with familyName instead of the name property.'),
-    'form' => array(
-      '#attributes' => array(
-        'placeholder' => '',
-      ),
-    ),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_person.familyName'] = array(
     'label' => t('familyName'),
     'description' => t('Family name. In the U.S., the last name of an Person. This can be used along with givenName instead of the name property.'),
-    'form' => array(
-      '#attributes' => array(
-        'placeholder' => '',
-      ),
-    ),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_person.additionalName'] = array(
     'label' => t('additonalName'),
     'description' => t('An additional name for a Person, can be used for a middle name. Multiple values may be used, separated by a comma. Note: Tokens that return multiple values will be handled automatically.'),
-    'form' => array(
-      '#attributes' => array(
-        'placeholder' => '',
-      ),
-    ),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_person.alternateName'] = array(
     'label' => t('alternateName'),
     'description' => t('An alias for the person.'),
-    'form' => array(
-      '#attributes' => array(
-        'placeholder' => '',
-      ),
-    ),
     'weight' => ++$weight,
   ) + $defaults;
 
@@ -100,33 +75,18 @@ function schema_person_metatag_info() {
     'class' => 'SchemaDateBase',
     'label' => t('birthDate'),
     'description' => t('Date of birth of the person in ISO 8601 format, 2017-12-31. To format the date properly, use a token like [node:created:html_datetime].'),
-    'form' => array(
-      '#attributes' => array(
-        'placeholder' => '',
-      ),
-    ),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_person.gender'] = array(
     'label' => t('gender'),
     'description' => t('Gender of the person.'),
-    'form' => array(
-      '#attributes' => array(
-        'placeholder' => '',
-      ),
-    ),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_person.jobTitle'] = array(
     'label' => t('jobTitle'),
     'description' => t('The job title of the person (for example, Financial Manager).'),
-    'form' => array(
-      '#attributes' => array(
-        'placeholder' => '',
-      ),
-    ),
     'weight' => ++$weight,
   ) + $defaults;
 
@@ -135,11 +95,14 @@ function schema_person_metatag_info() {
     'label' => t('url'),
     'description' => t('The url of the person.'),
     'url' => TRUE,
-    'form' => array(
-      '#attributes' => array(
-        'placeholder' => '',
-      ),
-    ),
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_person.sameAs'] = array(
+    'class' => 'SchemaUrlBase',
+    'label' => t('sameAs'),
+    'description' => t('Social links and other urls of the person.'),
+    'url' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
 
@@ -154,11 +117,6 @@ function schema_person_metatag_info() {
   $info['tags']['schema_person.email'] = array(
     'label' => t('email'),
     'description' => t('The email address of the person.'),
-    'form' => array(
-      '#attributes' => array(
-        'placeholder' => '',
-      ),
-    ),
     'weight' => ++$weight,
   ) + $defaults;
 
@@ -166,22 +124,12 @@ function schema_person_metatag_info() {
     'label' => t('telephone'),
     'description' => t('The telephone number of the person. Multiple values may be used, separated by a comma. Note: Tokens that return multiple values will be handled automatically.'),
     'multiple' => TRUE,
-    'form' => array(
-      '#attributes' => array(
-        'placeholder' => '',
-      ),
-    ),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_person.description'] = array(
     'label' => t('description'),
     'description' => t('A description of the person.'),
-    'form' => array(
-      '#attributes' => array(
-        'placeholder' => '',
-      ),
-    ),
     'weight' => ++$weight,
   ) + $defaults;
 
@@ -192,11 +140,6 @@ function schema_person_metatag_info() {
     'image' => TRUE,
     'url' => TRUE,
     'multiple' => TRUE,
-    'form' => array(
-      '#attributes' => array(
-        'placeholder' => '[node:field_image]',
-      ),
-    ),
     'weight' => ++$weight,
   ) + $defaults;
 
@@ -205,24 +148,14 @@ function schema_person_metatag_info() {
     'label' => t('affiliation'),
     'description' => t('An organization that this person is affiliated with. For example, a school/university, a club, or a team.'),
     'multiple' => TRUE,
-    'form' => array(
-      '#attributes' => array(
-        'placeholder' => '',
-      ),
-    ),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_person.memberOf'] = array(
-    'class' => 'SchemaPersonOrgBase',
+    'class' => 'SchemaProgramMembershipBase',
     'label' => t('memberOf'),
     'description' => t('An Organization (or ProgramMembership) to which this Person belongs.'),
     'multiple' => TRUE,
-    'form' => array(
-      '#attributes' => array(
-        'placeholder' => '',
-      ),
-    ),
     'weight' => ++$weight,
   ) + $defaults;
 
@@ -230,27 +163,6 @@ function schema_person_metatag_info() {
     'class' => 'SchemaPersonOrgBase',
     'label' => t('worksFor'),
     'description' => t('Organizations that the person works for.'),
-    'multiple' => TRUE,
-    'form' => array(
-      '#attributes' => array(
-        'placeholder' => '',
-      ),
-    ),
-    'weight' => ++$weight,
-  ) + $defaults;
-
-  $info['tags']['schema_person.rating'] = array(
-    'class' => 'SchemaRatingBase',
-    'label' => t('rating'),
-    'description' => '',
-    'multiple' => TRUE,
-    'weight' => ++$weight,
-  ) + $defaults;
-
-  $info['tags']['schema_person.review'] = array(
-    'class' => 'SchemaReviewBase',
-    'label' => t('review'),
-    'description' => '',
     'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;

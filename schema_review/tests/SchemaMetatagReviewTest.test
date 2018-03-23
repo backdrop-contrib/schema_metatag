@@ -43,7 +43,7 @@ class SchemaMetatagReviewTest extends SchemaMetatagTagsTestBase {
   public $schemaTags = [
     'schema_review.@type' => 'SchemaReviewType',
     'schema_review.name' => 'SchemaNameBase',
-    'schema_review.itemReviewed' => 'SchemaNameBase',
+    'schema_review.itemReviewed' => 'SchemaThingBase',
     'schema_review.reviewBody' => 'SchemaNameBase',
     'schema_review.author' => 'SchemaPersonOrgBase',
     'schema_review.datePublished' => 'SchemaDateBase',

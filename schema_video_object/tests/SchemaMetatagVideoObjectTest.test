@@ -50,11 +50,10 @@ class SchemaMetatagVideoObjectTest extends SchemaMetatagTagsTestBase {
     'schema_video_object.thumbnailUrl' => 'SchemaImageBase',
     'schema_video_object.contentUrl' => 'SchemaUrlBase',
     'schema_video_object.embedUrl' => 'SchemaUrlBase',
-    'schema_video_object.mainEntityOfPage' => 'SchemaMainEntityOfPageBase',
     'schema_video_object.duration' => 'SchemaDurationBase',
     'schema_video_object.interactionCount' => 'SchemaNameBase',
     'schema_video_object.transcript' => 'SchemaNameBase',
-    'schema_video_object.rating' => 'SchemaRatingBase',
+    'schema_video_object.aggregateRating' => 'SchemaRatingBase',
     'schema_video_object.review' => 'SchemaReviewBase',
   ];
 

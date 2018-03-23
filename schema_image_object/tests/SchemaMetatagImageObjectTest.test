@@ -48,7 +48,7 @@ class SchemaMetatagImageObjectTest extends SchemaMetatagTagsTestBase {
     'schema_image_object.url' => 'SchemaUrlBase',
     'schema_image_object.width' => 'SchemaNameBase',
     'schema_image_object.height' => 'SchemaNameBase',
-    'schema_image_object.rating' => 'SchemaRatingBase',
+    'schema_image_object.aggregateRating' => 'SchemaRatingBase',
     'schema_image_object.review' => 'SchemaReviewBase',
   ];
 

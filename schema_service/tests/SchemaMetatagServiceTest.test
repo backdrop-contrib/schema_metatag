@@ -46,7 +46,7 @@ class SchemaMetatagServiceTest extends SchemaMetatagTagsTestBase {
     'schema_service.description' => 'SchemaNameBase',
     'schema_service.image' => 'SchemaImageBase',
     'schema_service.offers' => 'SchemaOfferBase',
-    'schema_service.rating' => 'SchemaRatingBase',
+    'schema_service.aggregateRating' => 'SchemaRatingBase',
     'schema_service.review' => 'SchemaReviewBase',
   ];
 

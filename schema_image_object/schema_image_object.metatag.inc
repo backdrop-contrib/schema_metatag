@@ -31,7 +31,7 @@ function schema_image_object_metatag_info() {
   $info['tags']['schema_image_object.@type'] = array(
     'class' => 'SchemaImageObjectType',
     'label' => t('@type'),
-    'description' => t('The type of video file.'),
+    'description' => t('REQUIRED. The type of video file.'),
     'weight' => ++$weight,
   ) + $defaults;
 
@@ -74,9 +74,9 @@ function schema_image_object_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
-  $info['tags']['schema_image_object.rating'] = array(
+  $info['tags']['schema_image_object.aggregateRating'] = array(
     'class' => 'SchemaRatingBase',
-    'label' => t('rating'),
+    'label' => t('aggregateRating'),
     'description' => '',
     'multiple' => TRUE,
     'weight' => ++$weight,

@@ -11,7 +11,7 @@
 function schema_event_metatag_info() {
   $info['groups']['schema_event'] = array(
     'label' => t('Schema.org: Event'),
-    'description' => t('See Schema.org definitions for this Schema type at <a href="!url">!url</a>.', array('!url' => 'http://schema.org/Event')),
+    'description' => t('See Schema.org definitions for this Schema type at <a href="!url">!url</a>, Google\'s recommendations at <a href="!google_url">!google_url</a>.', ['!url' => 'http://schema.org/Event', '!google_url' => 'https://developers.google.com/search/docs/data-types/event']),
     'form' => array(
       '#weight' => 10,
     ),
@@ -31,7 +31,7 @@ function schema_event_metatag_info() {
   $info['tags']['schema_event.@type'] = array(
     'class' => 'SchemaEventType',
     'label' => t('@type'),
-    'description' => t('The type of event.'),
+    'description' => t('REQUIRED. The type of event.'),
     'weight' => ++$weight,
   ) + $defaults;
 
@@ -43,33 +43,62 @@ function schema_event_metatag_info() {
 
   $info['tags']['schema_event.name'] = array(
     'label' => t('name'),
-    'description' => t('The name of the event.'),
-    'form' => array(
-      '#attributes' => array(
-        'placeholder' => '[node:title]',
-      ),
-    ),
+    'description' => t('REQUIRED BY GOOGLE. The name of the event.'),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_event.image'] = array(
     'class' => 'SchemaImageBase',
     'label' => t('image'),
-    'description' => t('The primary image for this event.'),
+    'description' => t('RECOMMENDED BY GOOGLE. The primary image for this event.'),
     'image' => TRUE,
     'url' => TRUE,
     'multiple' => TRUE,
-    'form' => array(
-      '#attributes' => array(
-        'placeholder' => '[node:field_image]',
-      ),
-    ),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_event.description'] = array(
     'label' => t('description'),
-    'description' => t('A description of the event.'),
+    'description' => t('RECOMMENDED BY GOOGLE. A description of the event.'),
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_event.startDate'] = array(
+    'class' => 'SchemaDateBase',
+    'label' => t('startDate'),
+    'description' => t('REQUIRED BY GOOGLE. Date and time when the event starts.'),
+    'multiple' => TRUE,
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_event.endDate'] = array(
+    'class' => 'SchemaDateBase',
+    'label' => t('endDate'),
+    'description' => t('RECOMMENDED BY GOOGLE. Date and time when the event ends.'),
+    'multiple' => TRUE,
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_event.location'] = array(
+    'class' => 'SchemaPlaceBase',
+    'label' => t('location'),
+    'description' => t('REQUIRED BY GOOGLE. The location of the event.'),
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_event.performer'] = array(
+    'class' => 'SchemaPersonOrgBase',
+    'label' => t('performer'),
+    'description' => t('RECOMMENDED BY GOOGLE. The performer(s) in the event.'),
+    'multiple' => TRUE,
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_event.offers'] = array(
+    'class' => 'SchemaOfferBase',
+    'label' => t('offers'),
+    'description' => t('RECOMMENDED BY GOOGLE. Offers associated with the event.'),
+    'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
 
@@ -84,68 +113,6 @@ function schema_event_metatag_info() {
   $info['tags']['schema_event.doorTime'] = array(
     'label' => t('doorTime'),
     'description' => t('The time when admission will commence.'),
-    'multiple' => TRUE,
-    'weight' => ++$weight,
-  ) + $defaults;
-
-  $info['tags']['schema_event.startDate'] = array(
-    'class' => 'SchemaDateBase',
-    'label' => t('startDate'),
-    'description' => t('Date and time when the event starts.'),
-    'multiple' => TRUE,
-    'weight' => ++$weight,
-  ) + $defaults;
-
-  $info['tags']['schema_event.endDate'] = array(
-    'class' => 'SchemaDateBase',
-    'label' => t('endDate'),
-    'description' => t('Date and time when the event ends.'),
-    'multiple' => TRUE,
-    'weight' => ++$weight,
-  ) + $defaults;
-
-  $info['tags']['schema_event.location'] = array(
-    'class' => 'SchemaPlaceBase',
-    'label' => t('location'),
-    'description' => t('The location of the event.'),
-    'weight' => ++$weight,
-  ) + $defaults;
-
-  $info['tags']['schema_event.mainEntityOfPage'] = array(
-    'class' => 'SchemaMainEntityOfPageBase',
-    'label' => t('mainEntityOfPage'),
-    'description' => '',
-    'url' => TRUE,
-    'weight' => ++$weight,
-  ) + $defaults;
-
-  $info['tags']['schema_event.actor'] = array(
-    'class' => 'SchemaPersonOrgBase',
-    'label' => t('actor'),
-    'description' => t('The actor in the event.'),
-    'multiple' => TRUE,
-    'weight' => ++$weight,
-  ) + $defaults;
-
-  $info['tags']['schema_event.performer'] = array(
-    'class' => 'SchemaPersonOrgBase',
-    'label' => t('performer'),
-    'description' => t('The performer in the event.'),
-    'multiple' => TRUE,
-    'weight' => ++$weight,
-  ) + $defaults;
-
-  $info['tags']['schema_event.isAccessibleForFree'] = array(
-    'class' => 'SchemaisAccessibleForFreeBase',
-    'label' => t('isAccessibleForFree'),
-    'description' => '',
-    'weight' => ++$weight,
-  ) + $defaults;
-
-  $info['tags']['schema_event.offers'] = array(
-    'class' => 'SchemaOfferBase',
-    'label' => t('offers'),
-    'description' => t('Offers associated with the event.'),
     'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;

@@ -54,7 +54,8 @@ class SchemaMetatagRecipeTest extends SchemaMetatagTagsTestBase {
     'schema_recipe.recipeIngredient' => 'SchemaNameBase',
     'schema_recipe.recipeInstructions' => 'SchemaNameBase',
     'schema_recipe.recipeYield' => 'SchemaNameBase',
-    'schema_recipe.rating' => 'SchemaRatingBase',
+    'schema_recipe.nutrition' => 'SchemaNutritionInformationBase',
+    'schema_recipe.aggregateRating' => 'SchemaRatingBase',
     'schema_recipe.review' => 'SchemaReviewBase',
   ];
 

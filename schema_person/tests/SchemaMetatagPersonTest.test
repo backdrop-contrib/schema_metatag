@@ -52,16 +52,15 @@ class SchemaMetatagPersonTest extends SchemaMetatagTagsTestBase {
     'schema_person.gender' => 'SchemaNameBase',
     'schema_person.jobTitle' => 'SchemaNameBase',
     'schema_person.url' => 'SchemaUrlBase',
+    'schema_person.sameAs' => 'SchemaUrlBase',
     'schema_person.address' => 'SchemaAddressBase',
     'schema_person.email' => 'SchemaNameBase',
     'schema_person.telephone' => 'SchemaNameBase',
     'schema_person.description' => 'SchemaNameBase',
     'schema_person.image' => 'SchemaImageBase',
     'schema_person.affiliation' => 'SchemaPersonOrgBase',
-    'schema_person.memberOf' => 'SchemaPersonOrgBase',
+    'schema_person.memberOf' => 'SchemaProgramMembershipBase',
     'schema_person.worksFor' => 'SchemaPersonOrgBase',
-    'schema_person.rating' => 'SchemaRatingBase',
-    'schema_person.review' => 'SchemaReviewBase',
   ];
 
 }
