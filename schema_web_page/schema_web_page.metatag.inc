@@ -68,6 +68,13 @@ function schema_web_page_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
+  $info['tags']['schema_web_page.breadcrumb'] = array(
+    'class' => 'SchemaItemListElementBreadcrumbBase',
+    'label' => t('breadcrumb'),
+    'description' => t('The breadcrumb of the web page.'),
+    'weight' => ++$weight,
+  ) + $defaults;
+
   $info['tags']['schema_web_page.url'] = array(
     'class' => 'SchemaUrlBase',
     'label' => t('url'),

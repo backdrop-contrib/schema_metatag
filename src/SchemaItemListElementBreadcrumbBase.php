@@ -19,7 +19,6 @@ class SchemaItemListElementBreadcrumbBase extends SchemaItemListElementBase {
         'Yes' => $this->t('Yes'),
       ],
       '#description' => $this->description(),
-      '#element_validate' => [[get_class($this), 'validateTag']],
     ];
 
     // Validation from parent::getForm() got wiped out, so add callback.
@@ -56,24 +55,29 @@ class SchemaItemListElementBreadcrumbBase extends SchemaItemListElementBase {
   public static function getItems($input_value) {
     $values = [];
     if (!empty($input_value)) {
-      $entity_route = \Drupal::service('current_route_match')->getCurrentRouteMatch();
-      $breadcrumbs = \Drupal::service('breadcrumb')->build($entity_route)->getLinks();
+      $breadcrumbs = drupal_get_breadcrumb();
+
+      // Methods on DrupalDefaultMetaTag can't be called statically, and we
+      // can't use $this from a static method, so create an empty instance.
+      $data = $info = [];
+      $processor = new DrupalDefaultMetaTag($data, $info);
       $key = 1;
       foreach ($breadcrumbs as $item) {
-        // Modules that add the current page to the breadcrumb set it to an
-        // empty path, so an empty path is the current path.
-        $url = $item->getUrl()->setAbsolute()->toString();
-        if (empty($url)) {
-          $url = Url::fromRoute('<current>')->setAbsolute()->toString();
+        $text = strip_tags($item);
+        $url = '';
+        $matches = [];
+        if (preg_match('/href="([^"]*)"/', $item, $matches)) {
+          if (!empty($matches[1])) {
+            $url = $matches[1];
+            $url = $processor->convertUrlToAbsolute($url);
+          }
         }
-        $text = $item->getText();
-        $text = is_object($text) ? $text->render() : $text;
         $values[$key] = [
           '@id' => $url,
           'name' => $text,
           'url' => $url,
         ];
-        $key++;
+         $key++;
       }
     }
     return $values;
