@@ -115,7 +115,7 @@ class SchemaNameBase extends DrupalTextMetaTag {
         'group' => $parts[0],
         'name' => $parts[1],
         'content' => static::outputValue($value),
-      ]
+      ],
     ];
     return array(
       '#attached' => array('drupal_add_html_head' => array(array($element, $id))),

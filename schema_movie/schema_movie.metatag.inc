@@ -10,7 +10,7 @@
  */
 function schema_movie_metatag_info() {
   $info['groups']['schema_movie'] = array(
-    'label' => t('Schema.org: Movie'),
+    'label' => t('Schema.org: Movie and TV'),
     'description' => t('See Schema.org definitions for this Schema type at <a href="!url">!url</a>, <a href="!url2">!url2</a>, <a href="!url3">!url3</a>, <a href="!url4">!url4</a>, and Google\'s recommendations at <a href="!google_url">!google_url</a>.', [
       '!url' => 'http://schema.org/Movie',
       '!url2' => 'http://schema.org/TVSeries',
@@ -88,7 +88,7 @@ function schema_movie_metatag_info() {
   $info['tags']['schema_movie.hasPart'] = array(
     'class' => 'SchemaMovieHasPart',
     'label' => t('hasPart'),
-    'description' => t(''),
+    'description' => t('RECOMMENDED BY GOOGLE. Short videos related to the Movie (use Clip), TVEpisode, TVSeries or TVSeason (use TVClip).'),
     'url' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
@@ -96,7 +96,7 @@ function schema_movie_metatag_info() {
   $info['tags']['schema_movie.url'] = array(
     'class' => 'SchemaUrlBase',
     'label' => t('review'),
-    'description' => t('Url of the movie.'),
+    'description' => t("RECOMMENDED BY GOOGLE. URL to partner's landing page for the work."),
     'url' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
@@ -104,7 +104,7 @@ function schema_movie_metatag_info() {
   $info['tags']['schema_movie.sameAs'] = array(
     'class' => 'SchemaUrlBase',
     'label' => t('sameAs'),
-    'description' => t('Social links and other Urls.'),
+    'description' => t("RECOMMENDED BY GOOGLE. URL to a reference web page that unambiguously identifies the work. Example: IMDB, Wikipedia."),
     'url' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
@@ -112,32 +112,25 @@ function schema_movie_metatag_info() {
   $info['tags']['schema_movie.duration'] = array(
     'class' => 'SchemaDurationBase',
     'label' => t('duration'),
-    'description' => t('Duration of the movie.'),
-    'weight' => ++$weight,
-  ) + $defaults;
-
-  $info['tags']['schema_movie.duration'] = array(
-    'class' => 'SchemaDurationBase',
-    'label' => t('duration'),
-    'description' => t('Duration of the movie.'),
+    'description' => t("RECOMMENDED for Movie. Runtime of the work in ISO 8601 format (for example, 'PT2H22M' (142 minutes))."),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_movie.dateCreated'] = array(
     'class' => 'SchemaDateBase',
-    'label' => t('dateCreated'),
+    'label' => t("RECOMMENDED BY GOOGLE. The date on which the work was created or was added to a DataFeed."),
     'description' => t(''),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_movie.seasonNumber'] = array(
-    'label' => t('seasonNumber'),
+    'label' => t("REQUIRED BY GOOGLE for TVSeason."),
     'description' => t(''),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_movie.episodeNumber'] = array(
-    'label' => t('episodeNumber'),
+    'label' => t("REQUIRED BY GOOGLE for TVEpisode."),
     'description' => t(''),
     'weight' => ++$weight,
   ) + $defaults;
@@ -145,28 +138,28 @@ function schema_movie_metatag_info() {
   $info['tags']['schema_movie.partOfSeries'] = array(
     'class' => 'SchemaCreativeWorkBase',
     'label' => t('partOfSeries'),
-    'description' => t(''),
+    'description' => t("REQUIRED BY GOOGLE for TVEpisode, TVSeason."),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_movie.partOfSeason'] = array(
     'class' => 'SchemaCreativeWorkBase',
     'label' => t('partOfSeason'),
-    'description' => t(''),
+    'description' => t("REQUIRED BY GOOGLE for TVEpisode."),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_movie.releasedEvent'] = array(
     'class' => 'SchemaEventBase',
     'label' => t('releasedEvent'),
-    'description' => t(''),
+    'description' => t("RECOMMENDED BY GOOGLE. Details about the original release of the work. Google expects only the country of the location."),
     'weight' => ++$weight,
   ) + $defaults;
 
   $info['tags']['schema_movie.actor'] = array(
     'class' => 'SchemaPersonOrgBase',
     'label' => t('actor'),
-    'description' => t(''),
+    'description' => t("RECOMMENDED BY GOOGLE. The names of Actors."),
     'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
@@ -174,7 +167,7 @@ function schema_movie_metatag_info() {
   $info['tags']['schema_movie.director'] = array(
     'class' => 'SchemaPersonOrgBase',
     'label' => t('director'),
-    'description' => t(''),
+    'description' => t("RECOMMENDED BY GOOGLE. The name of Director."),
     'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
@@ -182,7 +175,7 @@ function schema_movie_metatag_info() {
   $info['tags']['schema_movie.musicBy'] = array(
     'class' => 'SchemaPersonOrgBase',
     'label' => t('musicBy'),
-    'description' => t(''),
+    'description' => t("The composer of the work."),
     'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
@@ -190,7 +183,7 @@ function schema_movie_metatag_info() {
   $info['tags']['schema_movie.producer'] = array(
     'class' => 'SchemaPersonOrgBase',
     'label' => t('producer'),
-    'description' => t(''),
+    'description' => t("The producer of the work."),
     'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
@@ -198,7 +191,7 @@ function schema_movie_metatag_info() {
   $info['tags']['schema_movie.productionCompany'] = array(
     'class' => 'SchemaPersonOrgBase',
     'label' => t('productionCompany'),
-    'description' => t(''),
+    'description' => t("The production company or studio that made the work."),
     'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;

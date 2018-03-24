@@ -5,7 +5,7 @@
  */
 class SchemaMovieHasPart extends SchemaHasPartBase {
 
- /**
+  /**
   * Generate a form element for this meta tag.
   */
   public function getForm(array $options = []) {

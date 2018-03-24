@@ -231,12 +231,12 @@ trait SchemaActionTrait {
    *
    * @param array $element
    *   The form element to process.
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   * @param array $form_state
    *   The form state.
-   * @param array $complete_form
+   * @param array $form
    *   The complete form structure.
    */
-  public static function actionValidation($element, &$form_state, $form) {
+  public static function actionValidation(array $element, array &$form_state, array $form) {
     $input_exists = NULL;
     $value = drupal_array_get_nested_value($form_state['input'], $element['#parents'], $input_exists);
     if ($action = $value['actionType']) {

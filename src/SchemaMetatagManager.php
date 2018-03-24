@@ -360,10 +360,6 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
    *
    * @param string $selector
    *   The selector constructed for the main metatag form.
-   * @param string $group
-   *   The group this part of the form belongs in.
-   * @param string $id
-   *   The id of the individual element.
    *
    * @return string
    *   A rewritten selector that will work in the field form.

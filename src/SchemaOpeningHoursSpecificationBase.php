@@ -10,7 +10,7 @@ class SchemaOpeningHoursSpecificationBase extends SchemaNameBase {
   /**
    * {@inheritdoc}
    */
-  public function getForm(array $options = [])  {
+  public function getForm(array $options = []) {
 
     $value = SchemaMetatagManager::unserialize($this->value());
 
