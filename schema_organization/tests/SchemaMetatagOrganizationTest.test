@@ -61,6 +61,7 @@ class SchemaMetatagOrganizationTest extends SchemaMetatagTagsTestBase {
     'schema_organization.aggregateRating' => 'SchemaRatingBase',
     'schema_organization.starRating' => 'SchemaRatingBase',
     'schema_organization.review' => 'SchemaReviewBase',
+    'schema_organization.contactPoint' => 'SchemaContactPointBase',
   ];
 
 }

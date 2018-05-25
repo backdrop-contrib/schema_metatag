@@ -208,5 +208,12 @@ function schema_metatag_test_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
+  $info['tags']['schema_metatag_test.contactPoint'] = array(
+    'class' => 'SchemaContactPointBase',
+    'label' => t('contactPoint'),
+    'description' => '',
+    'weight' => ++$weight,
+  ) + $defaults;
+
   return $info;
 }

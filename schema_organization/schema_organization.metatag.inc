@@ -72,7 +72,14 @@ function schema_organization_metatag_info() {
 
   $info['tags']['schema_organization.telephone'] = array(
     'label' => t('telephone'),
-    'description' => t('RECOMMENDED BY GOOGLE. The telephone of the organization.'),
+    'description' => t("RECOMMENDED BY GOOGLE. A business phone number meant to be the primary contact method for customers. Be sure to include the country code and area code in the phone number."),
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_organization.contactPoint'] = array(
+    'class' => 'SchemaContactPointBase',
+    'label' => t('contactPoint'),
+    'description' => t("Telephone and other contact point information. See <a href=\":url\">Google Corporate Contact</a>.", [":url" => "https://developers.google.com/search/docs/data-types/corporate-contact"]),
     'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;

@@ -62,6 +62,8 @@ files[] = src/SchemaThingTrait.php
 files[] = src/SchemaTrueFalseBase.php
 files[] = src/SchemaMonetaryAmountBase.php
 files[] = src/SchemaMonetaryAmountTrait.php
+files[] = src/SchemaContactPointBase.php
+files[] = src/SchemaContactPointTrait.php
 
 files[] = tests/schema_metatag.base.test
 files[] = tests/schema_metatag.helper.test

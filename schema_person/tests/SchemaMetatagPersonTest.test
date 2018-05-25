@@ -61,6 +61,7 @@ class SchemaMetatagPersonTest extends SchemaMetatagTagsTestBase {
     'schema_person.affiliation' => 'SchemaPersonOrgBase',
     'schema_person.memberOf' => 'SchemaProgramMembershipBase',
     'schema_person.worksFor' => 'SchemaPersonOrgBase',
+    'schema_person.contactPoint' => 'SchemaContactPointBase',
   ];
 
 }

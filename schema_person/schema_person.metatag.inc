@@ -122,7 +122,15 @@ function schema_person_metatag_info() {
 
   $info['tags']['schema_person.telephone'] = array(
     'label' => t('telephone'),
-    'description' => t('The telephone number of the person. Multiple values may be used, separated by a comma. Note: Tokens that return multiple values will be handled automatically.'),
+    'description' => t('The primary telephone number of the person.'),
+    'multiple' => FALSE,
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_person.contactPoint'] = array(
+    'class' => 'SchemaContactPointBase',
+    'label' => t('contactPoint'),
+    'description' => t("Telephone and other contact point information. See <a href=\":url\">ContactPoint</a>.", [":url" => "https://schema.org/ContactPoint"]),
     'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
