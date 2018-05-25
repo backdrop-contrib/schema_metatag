@@ -35,6 +35,13 @@ function schema_organization_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
+  $info['tags']['schema_organization.additionalType'] = array(
+    'class' => 'SchemaOrganizationType',
+    'label' => t('additionalType'),
+    'description' => t(" An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in."),
+    'weight' => ++$weight,
+  ) + $defaults;
+
   $info['tags']['schema_organization.@id'] = array(
     'label' => t('@id'),
     'description' => t('REQUIRED BY GOOGLE. Globally unique @id, usually a url, used to to link other properties to this object.'),

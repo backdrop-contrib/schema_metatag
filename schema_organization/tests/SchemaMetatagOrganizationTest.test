@@ -42,6 +42,7 @@ class SchemaMetatagOrganizationTest extends SchemaMetatagTagsTestBase {
    */
   public $schemaTags = [
     'schema_organization.@type' => 'SchemaOrganizationType',
+    'schema_organization.additionalType' => 'SchemaOrganizationType',
     'schema_organization.@id' => 'SchemaNameBase',
     'schema_organization.name' => 'SchemaNameBase',
     'schema_organization.acceptsReservations' => 'SchemaTrueFalseBase',
