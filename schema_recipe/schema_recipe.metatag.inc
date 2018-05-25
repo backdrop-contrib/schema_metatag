@@ -113,6 +113,13 @@ function schema_recipe_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
+  $info['tags']['schema_recipe.recipeCuisine'] = array(
+    'label' => t('recipeCuisine'),
+    'description' => t("RECOMMENDED BY GOOGLE. The region associated with your recipe. For example, 'French Mediterranean', or 'American'."),
+    'multiple' => FALSE,
+    'weight' => ++$weight,
+  ) + $defaults;
+
   $info['tags']['schema_recipe.recipeInstructions'] = array(
     'label' => t('recipeInstructions'),
     'description' => t('RECOMMENDED BY GOOGLE. Steps in making the recipe, in the form of a single item (document, video, etc.) or an ordered list with HowToStep and/or HowToSection items.'),
