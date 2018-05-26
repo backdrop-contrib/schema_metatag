@@ -141,12 +141,29 @@ class SchemaNameBase extends DrupalTextMetaTag {
   }
 
   /**
+   * Nested elements that cannot be exploded.
+   *
+   * @return array
+   *   Array of keys that might contain commas, or otherwise cannot be exploded.
+   */
+  public static function neverExplode() {
+    return [
+      'streetAddress',
+      'reviewBody',
+      'recipeInstructions',
+    ];
+  }
+
+
+  /**
    * Process an individual item.
    *
    * This is a copy of the original processing done by Metatag module,
    * but applied to every item on the array of values.
    */
   protected function processItem(&$value, $key = 0) {
+
+    $explode = $key === 0 ? $this->multiple() : !in_array($key, static::neverExplode());
 
     // $this->getValue() will process all subelements of our array
     // but not all of them need that processing.
@@ -165,7 +182,7 @@ class SchemaNameBase extends DrupalTextMetaTag {
 
     $value = $this->getValue($this->options);
 
-    if (!empty($this->info['multiple'])) {
+    if ($explode) {
       $value = SchemaMetatagManager::explode($value);
       // Clean out any empty values that might have been added by explode().
       if (is_array($value)) {
@@ -198,7 +215,7 @@ class SchemaNameBase extends DrupalTextMetaTag {
   }
 
   /**
-   * Provide a test value for the property that will validate.
+   * Provide a test input value for the property that will validate.
    *
    * Tags like @type that contain values other than simple strings, for
    * instance a list of allowed options, should extend this method and return
@@ -210,6 +227,45 @@ class SchemaNameBase extends DrupalTextMetaTag {
    */
   public static function testValue() {
     return static::testDefaultValue(2, ' ');
+  }
+
+  /**
+   * Provide a test output value for the input value.
+   *
+   * Tags that return values in a different format than the input, like
+   * values that are exploded, should extend this method and return
+   * a valid value.
+   *
+   * @param mixed $items
+   *   The input value, either a string or an array.
+   *
+   * @return mixed
+   *   Return the correct output value.
+   */
+  public static function processedTestValue($items) {
+    return $items;
+  }
+
+  /**
+   * Explode a test value.
+   *
+   * For test values, emulates the extra processing a multiple value would get.
+   *
+   * @param array $items
+   *   The input value, either a string or an array.
+   *
+   * @return mixed
+   *   Return the correct output value.
+   */
+  public static function processTestExplodeValue($items) {
+    if (!is_array($items)) {
+      $items = SchemaMetatagManager::explode($items);
+      // Clean out any empty values that might have been added by explode().
+      if (is_array($items)) {
+        $value = array_filter($items);
+      }
+    }
+    return $items;
   }
 
   /**

@@ -64,4 +64,24 @@ class SchemaProgramMembershipBase extends SchemaNameBase {
     return $items;
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public static function processedTestValue($items) {
+    foreach ($items as $key => $value) {
+      switch ($key) {
+        case 'hostingOrganization':
+        case 'member':
+          $items[$key] = SchemaPersonOrgBase::processedTestValue($items[$key]);
+          break;
+
+        case 'image':
+          $items[$key] = SchemaImageBase::processedTestValue($items[$key]);
+          break;
+
+      }
+    }
+    return $items;
+  }
+
 }

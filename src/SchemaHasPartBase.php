@@ -64,4 +64,19 @@ class SchemaHasPartBase extends SchemaNameBase {
     return $items;
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public static function processedTestValue($items) {
+    foreach ($items as $key => $value) {
+      switch ($key) {
+        case 'potentialAction':
+          $items[$key] = SchemaActionBase::processedTestValue($items[$key]);
+          break;
+
+      }
+    }
+    return $items;
+  }
+
 }

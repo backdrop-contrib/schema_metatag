@@ -74,7 +74,7 @@ abstract class SchemaMetatagTagsTestBase extends SchemaMetatagTestHelper {
 
       // Configure all the tag values and post the results.
       $expected_output_values = $form_values = [];
-      foreach ($this->schemaTags as $tag_name => $class_name) {
+      foreach ($this->schemaTags as $tag_name => $class) {
 
         // Transform the tag_name to the camelCase key used in the form.
         $key = $this->getKey($tag_name);
@@ -84,8 +84,11 @@ abstract class SchemaMetatagTagsTestBase extends SchemaMetatagTestHelper {
         // should look like. Store the rendered value so we can compare it to
         // the output. Store the raw value so we can check that it exists in the
         // config form.
-        $test_value = $class_name::testValue();
-        $expected_output_values[$key] = $class_name::outputValue($test_value);
+        $test_value = $class::testValue();
+        // Adjust the input value as necessary to transform it to the
+        // expected output value, and store that.
+        $processed_value = $class::processedTestValue($test_value);
+        $expected_output_values[$key] = $class::outputValue($processed_value);
 
         // Rewrite the test values to match the way the form elements are
         // structured.

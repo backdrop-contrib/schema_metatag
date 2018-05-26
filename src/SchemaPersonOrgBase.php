@@ -62,10 +62,30 @@ class SchemaPersonOrgBase extends SchemaNameBase {
 
         case 'url':
         case 'sameAs':
-          $items[$key] = static::randomUrl();
+          $items[$key] = static::randomUrl() . ',' . static::randomUrl() . ',' . static::randomUrl();
 
         default:
           $items[$key] = parent::testDefaultValue(2, ' ');
+          break;
+
+      }
+    }
+    return $items;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function processedTestValue($items) {
+    foreach ($items as $key => $value) {
+      switch ($key) {
+        case 'url':
+        case 'sameAs':
+          $items[$key] = static::processTestExplodeValue($items[$key]);
+          break;
+
+        case 'logo':
+          $items[$key] = SchemaImageBase::processedTestValue($items[$key]);
           break;
 
       }
