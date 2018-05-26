@@ -42,6 +42,7 @@ function schema_product_metatag_info() {
   ) + $defaults;
 
   $info['tags']['schema_product.brand'] = array(
+    'class' => 'SchemaBrandBase',
     'label' => t('brand'),
     'description' => t('REQUIRED BY GOOGLE. The brand of the product.'),
     'weight' => ++$weight,

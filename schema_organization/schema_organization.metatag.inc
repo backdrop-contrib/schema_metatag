@@ -84,14 +84,6 @@ function schema_organization_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
-  $info['tags']['schema_organization.acceptsReservations'] = array(
-    'class' => 'SchemaTrueFalseBase',
-    'label' => t('acceptsReservations'),
-    'description' => t('RECOMMENDED BY GOOGLE FOR Food Establishments.'),
-    'multiple' => FALSE,
-    'weight' => ++$weight,
-  ) + $defaults;
-
   $info['tags']['schema_organization.url'] = array(
     'class' => 'SchemaUrlBase',
     'label' => t('url'),
@@ -106,6 +98,21 @@ function schema_organization_metatag_info() {
     'description' => t('Additional urls, such as wikipedia page or social profiles.'),
     'multiple' => TRUE,
     'url' => TRUE,
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_organization.brand'] = array(
+    'class' => 'SchemaBrandBase',
+    'label' => t('brand'),
+    'description' => t('The brand of the organization.'),
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_organization.acceptsReservations'] = array(
+    'class' => 'SchemaTrueFalseBase',
+    'label' => t('acceptsReservations'),
+    'description' => t('RECOMMENDED BY GOOGLE FOR Food Establishments.'),
+    'multiple' => FALSE,
     'weight' => ++$weight,
   ) + $defaults;
 

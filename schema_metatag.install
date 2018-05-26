@@ -52,3 +52,13 @@ function schema_metatag_update_7002(&$sandbox) {
     metatag_update_delete_config($tag_name);
   }
 }
+
+/**
+ * Update the schema_product_brand tag.
+ */
+function schema_metatag_update_7003(&$sandbox) {
+  module_load_include('install', 'metatag');
+  metatag_update_delete_config('schema_product.brand');
+  drupal_set_message(t('Product brand tag options have been changed and expanded, and brand options have been added to Organization and Person. Please reconfigure any Product brand tags.'));
+}
+

@@ -43,7 +43,7 @@ class SchemaMetatagProductTest extends SchemaMetatagTagsTestBase {
   public $schemaTags = [
     'schema_product.@type' => 'SchemaProductType',
     'schema_product.name' => 'SchemaNameBase',
-    'schema_product.brand' => 'SchemaNameBase',
+    'schema_product.brand' => 'SchemaBrandBase',
     'schema_product.description' => 'SchemaNameBase',
     'schema_product.image' => 'SchemaImageBase',
     'schema_product.offers' => 'SchemaOfferBase',

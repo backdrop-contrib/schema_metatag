@@ -151,6 +151,13 @@ function schema_person_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
+  $info['tags']['schema_person.brand'] = array(
+    'class' => 'SchemaBrandBase',
+    'label' => t('brand'),
+    'description' => t('The brand of the person.'),
+    'weight' => ++$weight,
+  ) + $defaults;
+
   $info['tags']['schema_person.affiliation'] = array(
     'class' => 'SchemaPersonOrgBase',
     'label' => t('affiliation'),
