@@ -18,6 +18,7 @@ trait SchemaContactPointTrait {
       'areaServed',
       'availableLanguage',
       'contactType',
+      'contactOption',
       'email',
       'faxnumber',
       'productSupported',
@@ -94,6 +95,16 @@ trait SchemaContactPointTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t('One of the following: customer service, technical support, billing support, bill payment, sales, reservations, credit card support, emergency, baggage tracking, roadside assistance, package tracking.'),
+      '#states' => $visibility,
+    ];
+
+    $form['contactOption'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('contactOption'),
+      '#default_value' => !empty($value['contactOption']) ? $value['contactOption'] : '',
+      '#maxlength' => 255,
+      '#required' => $input_values['#required'],
+      '#description' => $this->t('One of the following: HearingImpairedSupported, TollFree.'),
       '#states' => $visibility,
     ];
 
