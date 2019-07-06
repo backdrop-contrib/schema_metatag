@@ -5,5 +5,4 @@ core = 7.x
 dependencies[] = schema_metatag
 
 files[] = src/SchemaJobPostingType.php
-files[] = src/SchemaJobPostingEmploymentType.php
 files[] = tests/SchemaMetatagJobPostingTest.test

@@ -47,7 +47,7 @@ class SchemaMetatagJobPostingTest extends SchemaMetatagTagsTestBase {
     'schema_job_posting.baseSalary' => 'SchemaMonetaryAmountBase',
     'schema_job_posting.datePosted' => 'SchemaDateBase',
     'schema_job_posting.validThrough' => 'SchemaDateBase',
-    'schema_job_posting.employmentType' => 'SchemaJobPostingEmploymentType',
+    'schema_job_posting.employmentType' => 'SchemaNameBase',
     'schema_job_posting.hiringOrganization' => 'SchemaPersonOrgBase',
     'schema_job_posting.jobLocation' => 'SchemaPlaceBase',
     'schema_job_posting.identifier' => 'SchemaNameBase',

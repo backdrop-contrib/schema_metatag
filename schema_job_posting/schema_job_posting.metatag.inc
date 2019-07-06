@@ -69,9 +69,9 @@ function schema_job_posting_metatag_info() {
   ) + $defaults;
 
   $info['tags']['schema_job_posting.employmentType'] = array(
-    'class' => 'SchemaJobPostingEmploymentType',
     'label' => t('employmentType'),
-    'description' => t('REQUIRED BY GOOGLE. Type of employment.'),
+    'description' => t('RECOMMENDED BY GOOGLE. The employment type of the jobPosting. Should be one of FULL_TIME, PART_TIME, CONTRACTOR, TEMPORARY, INTERN, VOLUNTEER, PER_DIEM, OTHER.'),
+    'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
 
