@@ -87,6 +87,7 @@ function schema_web_page_metatag_info() {
     'class' => 'SchemaHasPartBase',
     'label' => t('hasPart'),
     'description' => t('RECOMMENDED BY GOOGLE. Use for <a href="!url">Paywalled content</a>', ['!url' => 'https://developers.google.com/search/docs/data-types/paywalled-content']),
+    'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
 
