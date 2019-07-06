@@ -50,7 +50,7 @@ class SchemaMetatagRecipeTest extends SchemaMetatagTagsTestBase {
     'schema_recipe.prepTime' => 'SchemaDurationBase',
     'schema_recipe.totalTime' => 'SchemaDurationBase',
     'schema_recipe.datePublished' => 'SchemaDateBase',
-    'schema_recipe.category' => 'SchemaNameBase',
+    'schema_recipe.recipeCategory' => 'SchemaNameBase',
     'schema_recipe.recipeIngredient' => 'SchemaNameBase',
     'schema_recipe.recipeInstructions' => 'SchemaNameBase',
     'schema_recipe.recipeCuisine' => 'SchemaNameBase',

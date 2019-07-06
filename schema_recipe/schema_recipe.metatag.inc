@@ -99,8 +99,8 @@ function schema_recipe_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
-  $info['tags']['schema_recipe.category'] = array(
-    'label' => t('category'),
+  $info['tags']['schema_recipe.recipeCategory'] = array(
+    'label' => t('recipeCategory'),
     'description' => t('RECOMMENDED BY GOOGLE. The category of the recipe—for example, appetizer, entree, etc.'),
     'multiple' => TRUE,
     'weight' => ++$weight,
