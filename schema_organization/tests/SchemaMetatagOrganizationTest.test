@@ -54,6 +54,7 @@ class SchemaMetatagOrganizationTest extends SchemaMetatagTagsTestBase {
     'schema_organization.image' => 'SchemaImageBase',
     'schema_organization.logo' => 'SchemaImageBase',
     'schema_organization.telephone' => 'SchemaNameBase',
+    'schema_organization.description' => 'SchemaNameBase',
     'schema_organization.openingHoursSpecification' => 'SchemaOpeningHoursSpecificationBase',
     'schema_organization.priceRange' => 'SchemaNameBase',
     'schema_organization.memberOf' => 'SchemaProgramMembershipBase',

@@ -101,6 +101,12 @@ function schema_organization_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
+  $info['tags']['schema_organization.description'] = array(
+    'label' => t('description'),
+    'description' => t('RECOMMENDED BY GOOGLE. A description of the item.'),
+    'weight' => ++$weight,
+  ) + $defaults;
+
   $info['tags']['schema_organization.brand'] = array(
     'class' => 'SchemaBrandBase',
     'label' => t('brand'),
