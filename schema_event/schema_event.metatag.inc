@@ -63,6 +63,12 @@ function schema_event_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
+  $info['tags']['schema_event.isAccessibleForFree'] = array(
+    'label' => t('isAccessibleForFree'),
+    'description' => t('RECOMMENDED BY GOOGLE. Use for <a href="!url">Paywalled content</a>', ['!url' => 'https://developers.google.com/search/docs/data-types/paywalled-content']),
+    'weight' => ++$weight,
+  ) + $defaults;
+
   $info['tags']['schema_event.startDate'] = array(
     'class' => 'SchemaDateBase',
     'label' => t('startDate'),

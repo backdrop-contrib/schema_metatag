@@ -48,6 +48,7 @@ class SchemaMetatagEventTest extends SchemaMetatagTagsTestBase {
     'schema_event.description' => 'SchemaNameBase',
     'schema_event.url' => 'SchemaUrlBase',
     'schema_event.doorTime' => 'SchemaNameBase',
+    'schema_event.isAccessibleForFree' => 'SchemaIsAccessibleForFreeBase',
     'schema_event.startDate' => 'SchemaDateBase',
     'schema_event.endDate' => 'SchemaDateBase',
     'schema_event.location' => 'SchemaPlaceBase',
