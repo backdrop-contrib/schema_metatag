@@ -54,6 +54,7 @@ class SchemaMetatagArticleTest extends SchemaMetatagTagsTestBase {
     'schema_article.mainEntityOfPage' => 'SchemaMainEntityOfPageBase',
     'schema_article.hasPart' => 'SchemaHasPartBase',
     'schema_article.isAccessibleForFree' => 'SchemaIsAccessibleForFreeBase',
+    'schema_article.speakable' => 'SchemaSpeakableBase',
     'schema_article.aggregateRating' => 'SchemaRatingBase',
     'schema_article.review' => 'SchemaReviewBase',
   ];

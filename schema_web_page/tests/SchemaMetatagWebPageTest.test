@@ -50,6 +50,7 @@ class SchemaMetatagWebPageTest extends SchemaMetatagTagsTestBase {
     'schema_web_page.url' => 'SchemaUrlBase',
     'schema_web_page.hasPart' => 'SchemaHasPartBase',
     'schema_web_page.isAccessibleForFree' => 'SchemaIsAccessibleForFreeBase',
+    'schema_web_page.speakable' => 'SchemaSpeakableBase',
   ];
 
 }

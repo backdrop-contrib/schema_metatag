@@ -114,6 +114,13 @@ function schema_article_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
+  $info['tags']['schema_article.speakable'] = array(
+    'class' => 'SchemaSpeakableBase',
+    'label' => t('speakable'),
+    'description' => t('Speakable property.'),
+    'weight' => ++$weight,
+  ) + $defaults;
+
   $info['tags']['schema_article.about'] = array(
     'label' => t('about'),
     'description' => t('Comma separated list of what the article is about, for instance taxonomy terms or categories.'),

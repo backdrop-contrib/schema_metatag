@@ -14,8 +14,8 @@ class SchemaNameBase extends DrupalTextMetaTag {
   /**
    * {@inheritdoc}
    */
-  public function t($str) {
-    return t($str);
+  public function t($str, $args = []) {
+    return t($str, $args);
   }
 
   /**

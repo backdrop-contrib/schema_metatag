@@ -215,5 +215,12 @@ function schema_metatag_test_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
+  $info['tags']['schema_metatag_test.speakable'] = array(
+    'class' => 'SchemaSpeakableBase',
+    'label' => t('speakable'),
+    'description' => '',
+    'weight' => ++$weight,
+  ) + $defaults;
+
   return $info;
 }

@@ -98,6 +98,13 @@ function schema_web_page_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
+  $info['tags']['schema_web_page.speakable'] = array(
+    'class' => 'SchemaSpeakableBase',
+    'label' => t('speakable'),
+    'description' => t('Speakable property.'),
+    'weight' => ++$weight,
+  ) + $defaults;
+
   $info['tags']['schema_web_page.listElementBreadcrumb'] = array(
     'class' => 'SchemaListElementBreadcrumbBase',
     'label' => t('breadcrumb'),
