@@ -59,7 +59,9 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
       if (empty($items)) {
         $items['@context'] = 'http://schema.org';
       }
-      $items['@graph'][] = $data;
+      if (!empty($data)) {
+        $items['@graph'][] = $data;
+      }
     }
     return $items;
   }
@@ -229,7 +231,7 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
       }
       else {
         // Fail safe if unserialization is broken.
-        $value = '';
+        $value = [];
       }
     }
     return $value;
@@ -275,6 +277,10 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
    * {@inheritdoc}
    */
   public static function arrayTrim($array) {
+
+    // See if this is an array or an object.
+    $needs_type = static::isObject($array);
+
     foreach ($array as $key => &$value) {
       if (empty($value)) {
         unset($array[$key]);
@@ -290,16 +296,27 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
     }
     // If all that's left is the pivot, return empty.
     if ($array == ['pivot' => 1]) {
-      return '';
+      return [];
     }
     // If all that's left is @type, return empty.
-    elseif (count($array) == 1 && key($array) == '@type') {
-      return '';
+    if (count($array) == 1 && key($array) == '@type') {
+      return [];
     }
+    // If this is an object but none of the values is @type or @id, return
+    // empty.
+    if ($needs_type && is_array($array) && !array_key_exists('@type', $array) && !array_key_exists('@id', $array)) {
+      return [];
+    }
+
     // Otherwise return the cleaned up array.
-    else {
-      return $array;
-    }
+    return $array;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function isObject($array) {
+    return empty(static::countNumericKeys($array));
   }
 
   /**
