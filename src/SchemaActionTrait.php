@@ -616,6 +616,12 @@ trait SchemaActionTrait {
             'form' => '',
             'description' => "The placeholder for the query, i.e. required name=search_term_string.",
           ],
+          'target' => [
+            'class' => 'SchemaEntryPointBase',
+            'formKeys' => 'entryPointFormKeys',
+            'form' => 'entryPointForm',
+            'description' => "Indicates a target EntryPoint for an Action.",
+          ]
         ];
 
       case 'UpdateAction':

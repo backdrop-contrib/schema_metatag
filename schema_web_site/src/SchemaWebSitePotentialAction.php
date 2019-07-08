@@ -30,6 +30,10 @@ class SchemaWebSitePotentialAction extends SchemaActionBase {
           $items[$key] = 'SearchAction';
           break;
 
+        case 'target':
+          $items[$key] = SchemaEntryPointBase::testValue();
+          break;
+
         default:
           $items[$key] = parent::testDefaultValue(1, '');
           break;
