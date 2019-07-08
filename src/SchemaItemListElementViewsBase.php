@@ -11,7 +11,7 @@ class SchemaItemListElementViewsBase extends SchemaItemListElementBase {
   public function getForm(array $options = []) {
     $form = parent::getForm($options);
     $form['value']['#attributes']['placeholder'] = 'view_name:display_id';
-    $form['value']['#description'] = $this->t("Provide the machine name of the view, and the machine name of the display, separated by a colon, i.e. 'view_name:display_id'. This will create a <a href=':url'>Summary View</a> list, which assumes each list item contains the url to a view page for the entity. The view rows should contain content (like teaser views) rather than fields for this to work correctly.", [':url' => 'https://developers.google.com/search/docs/guides/mark-up-listings']);
+    $form['value']['#description'] = $this->t("Provide the machine name of the view, the machine name of the display, and any argument values, separated by colons, i.e. 'view_name:display_id' or 'view_name:display_id:article.  Use 'view_name:display_id:{{args}}' to pass the page arguments to the view. This will create a <a href=':url'>Summary View</a> list, which assumes each list item contains the url to a view page for the entity. The view rows should contain content (like teaser views) rather than fields for this to work correctly.", [':url' => 'https://developers.google.com/search/docs/guides/mark-up-listings']);
     return $form;
   }
 
@@ -27,14 +27,33 @@ class SchemaItemListElementViewsBase extends SchemaItemListElementBase {
    */
   public static function getItems($input_value) {
     $values = [];
-    $ids = explode(':', $input_value);
-    if (count($ids) == 2) {
-      $view_id = $ids[0];
-      $display_id = $ids[1];
-
+    $args = explode(':', $input_value);
+    if (!empty($args)) {
+      $view_id = count($args) > 0 ? array_shift($args) : '';
       // Get the view results.
       $view = views_get_view($view_id);
+
+      $display_id = count($args) > 0 ? array_shift($args) : '';
       $view->set_display($display_id);
+
+      if (count($args) == 1 && $args[0] == '{{args}}') {
+        $view_path = explode("/", $view->get_path());
+        $query_args = arg();
+
+        $args = [];
+        foreach ($query_args as $index => $arg) {
+          if (in_array($arg, $view_path)) {
+            unset($query_args[$index]);
+          }
+        }
+        if (!empty($query_args)) {
+          $args = array_values($query_args);
+        }
+      }
+
+      if (!empty($args)) {
+        $view->set_arguments($args);
+      }
       $view->pre_execute();
       $view->execute();
 
