@@ -222,5 +222,12 @@ function schema_metatag_test_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
+  $info['tags']['schema_metatag_test.idReference'] = array(
+    'class' => 'SchemaIdReferenceBase',
+    'label' => t('idReference'),
+    'description' => '',
+    'weight' => ++$weight,
+  ) + $defaults;
+
   return $info;
 }

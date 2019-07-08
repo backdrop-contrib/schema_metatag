@@ -51,6 +51,9 @@ class SchemaMetatagWebPageTest extends SchemaMetatagTagsTestBase {
     'schema_web_page.hasPart' => 'SchemaHasPartBase',
     'schema_web_page.isAccessibleForFree' => 'SchemaIsAccessibleForFreeBase',
     'schema_web_page.speakable' => 'SchemaSpeakableBase',
+    'schema_web_page.inLanguage' => 'SchemaNameBase',
+    'schema_web_page.translationOfWork' => 'SchemaIdReferenceBase',
+    'schema_web_page.workTranslation' => 'SchemaIdReferenceBase',
   ];
 
 }

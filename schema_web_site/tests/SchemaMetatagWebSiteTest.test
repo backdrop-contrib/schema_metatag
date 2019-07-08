@@ -47,6 +47,9 @@ class SchemaMetatagWebSiteTest extends SchemaMetatagTagsTestBase {
     'schema_web_site.url' => 'SchemaUrlBase',
     'schema_web_site.sameAs' => 'SchemaUrlBase',
     'schema_web_site.publisher' => 'SchemaPersonOrgBase',
+    'schema_web_site.inLanguage' => 'SchemaNameBase',
+    'schema_web_site.translationOfWork' => 'SchemaIdReferenceBase',
+    'schema_web_site.workTranslation' => 'SchemaIdReferenceBase',
   ];
 
 }

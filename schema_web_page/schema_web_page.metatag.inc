@@ -105,6 +105,27 @@ function schema_web_page_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
+  $info['tags']['schema_web_page.inLanguage'] = array(
+    'label' => t('inLanguage'),
+    'description' => t('The language of the content.'),
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_web_page.translationOfWork'] = array(
+    'class' => 'SchemaIdReferenceBase',
+    'label' => t('translationOfWork'),
+    'description' => t('The website id that this is a direct translation of.'),
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_web_page.workTranslation'] = array(
+    'class' => 'SchemaIdReferenceBase',
+    'label' => t('workTranslation'),
+    'description' => t('Translation(s) of this work'),
+    'multiple' => TRUE,
+    'weight' => ++$weight,
+  ) + $defaults;
+
   $info['tags']['schema_web_page.listElementBreadcrumb'] = array(
     'class' => 'SchemaListElementBreadcrumbBase',
     'label' => t('breadcrumb'),
