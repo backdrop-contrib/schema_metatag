@@ -1,0 +1,8 @@
+name = "Schema.org HowTo"
+description = "Adds Schema.org/HowTo to the JSON LD array. Creates HowTo."
+package = SEO
+core = 7.x
+dependencies[] = schema_metatag
+
+files[] = src/SchemaHowToType.php
+files[] = tests/SchemaMetatagHowToTest.test

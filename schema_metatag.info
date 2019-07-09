@@ -70,6 +70,12 @@ files[] = src/SchemaContactPointBase.php
 files[] = src/SchemaContactPointTrait.php
 files[] = src/SchemaBrandBase.php
 files[] = src/SchemaBrandTrait.php
+files[] = src/SchemaHowToStepBase.php
+files[] = src/SchemaHowToStepTrait.php
+files[] = src/SchemaQuestionBase.php
+files[] = src/SchemaQuestionTrait.php
+files[] = src/SchemaAnswerBase.php
+files[] = src/SchemaAnswerTrait.php
 
 files[] = tests/schema_metatag.base.test
 files[] = tests/schema_metatag.helper.test
