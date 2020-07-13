@@ -57,6 +57,7 @@ trait SchemaPlaceTrait {
       '#empty_value' => '',
       '#options' => [
         'Place' => $this->t('Place'),
+        'VirtualLocation' => $this->t('VirtualLocation'),
         'AdministrativeArea' => $this->t('AdministrativeArea'),
       ],
       '#required' => $input_values['#required'],

@@ -56,6 +56,9 @@ class SchemaMetatagEventTest extends SchemaMetatagTagsTestBase {
     'schema_event.offers' => 'SchemaOfferBase',
     'schema_event.aggregateRating' => 'SchemaRatingBase',
     'schema_event.review' => 'SchemaReviewBase',
+    'schema_event.previousStartDate' => 'SchemaDateBase',
+    'schema_event.eventAttendanceMode' => 'SchemaNameBase',
+    'schema_event.eventStatus' => 'SchemaNameBase',
   ];
 
 }

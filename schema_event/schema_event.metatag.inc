@@ -85,6 +85,25 @@ function schema_event_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
+  $info['tags']['schema_event.previousStartDate'] = array(
+      'class' => 'SchemaDateBase',
+      'label' => t('previousStartDate'),
+      'description' => t('RECOMMENDED BY GOOGLE. The previousStartDate of the event.'),
+      'weight' => ++$weight,
+    ) + $defaults;
+
+  $info['tags']['schema_event.eventAttendanceMode'] = array(
+      'label' => t('eventAttendanceMode'),
+      'description' => t('RECOMMENDED BY GOOGLE. The eventAttendanceMode of the event. Valid values are https://schema.org/OfflineEventAttendanceMode, https://schema.org/MixedEventAttendanceMode, or https://schema.org/OnlineEventAttendanceMode.'),
+      'weight' => ++$weight,
+    ) + $defaults;
+
+  $info['tags']['schema_event.eventStatus'] = array(
+    'label' => t('eventStatus'),
+    'description' => t('RECOMMENDED BY GOOGLE. The status of the event. Valid options are https://schema.org/EventCancelled, https://schema.org/EventMovedOnline, https://schema.org/EventPostponed, https://schema.org/EventRescheduled, or https://schema.org/EventScheduled.'),
+    'weight' => ++$weight,
+  ) + $defaults;
+
   $info['tags']['schema_event.location'] = array(
     'class' => 'SchemaPlaceBase',
     'label' => t('location'),
