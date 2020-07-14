@@ -12,10 +12,6 @@ trait SchemaActionTrait {
     SchemaPlaceTrait::postalAddressForm insteadof SchemaEventTrait;
     SchemaPlaceTrait::geoFormKeys insteadof SchemaEventTrait;
     SchemaPlaceTrait::geoForm insteadof SchemaEventTrait;
-    SchemaPlaceTrait::countryFormKeys insteadof SchemaOfferTrait;
-    SchemaPlaceTrait::countryForm insteadof SchemaOfferTrait;
-    SchemaPlaceTrait::countryFormKeys insteadof SchemaEventTrait;
-    SchemaPlaceTrait::countryForm insteadof SchemaEventTrait;
     SchemaPivotTrait::pivotForm insteadof SchemaPersonOrgTrait;
     SchemaPivotTrait::pivotForm insteadof SchemaOfferTrait;
     SchemaPivotTrait::pivotForm insteadof SchemaThingTrait;
