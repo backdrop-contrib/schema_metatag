@@ -57,7 +57,7 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
     $items = [];
     foreach ($schema_metatags as $data) {
       if (empty($items)) {
-        $items['@context'] = 'http://schema.org';
+        $items['@context'] = 'https://schema.org';
       }
       if (!empty($data)) {
         $items['@graph'][] = $data;
