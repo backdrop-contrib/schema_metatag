@@ -62,7 +62,7 @@ trait SchemaRatingTrait {
       '#title' => $this->t('ratingValue'),
       '#default_value' => !empty($value['ratingValue']) ? $value['ratingValue'] : '',
       '#maxlength' => 255,
-      '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
+      '#required' => $input_values['#required'],
       '#description' => $this->t('The numeric rating of the item.'),
     ];
 

@@ -6,8 +6,8 @@
 class SchemaMovieHasPart extends SchemaHasPartBase {
 
   /**
-  * Generate a form element for this meta tag.
-  */
+   * Generate a form element for this meta tag.
+   */
   public function getForm(array $options = []) {
 
     $form = parent::getForm($options);
@@ -15,7 +15,7 @@ class SchemaMovieHasPart extends SchemaHasPartBase {
     // Limit potential actions to WatchAction.
     $form['value']['potentialAction']['actionType']['#options'] = ['ConsumeAction' => 'ConsumeAction'];
     $form['value']['potentialAction']['ConsumeAction']['@type']['#options'] = [
-      'WatchAction' => 'WatchAction',
+      'WatchAction' => $this->t('WatchAction'),
     ];
     return $form;
 

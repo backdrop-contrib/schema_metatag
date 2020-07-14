@@ -262,7 +262,7 @@ class SchemaNameBase extends DrupalTextMetaTag {
       $items = SchemaMetatagManager::explode($items);
       // Clean out any empty values that might have been added by explode().
       if (is_array($items)) {
-        $value = array_filter($items);
+        array_filter($items);
       }
     }
     return $items;

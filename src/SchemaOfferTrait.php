@@ -81,7 +81,7 @@ trait SchemaOfferTrait {
       '#title' => $this->t('price'),
       '#default_value' => !empty($value['price']) ? $value['price'] : '',
       '#maxlength' => 255,
-      '#required' => isset($element['#required']) ? $element['#required'] : FALSE,
+      '#required' => $input_values['#required'],
       '#description' => $this->t('The numeric price of the offer.'),
     ];
 

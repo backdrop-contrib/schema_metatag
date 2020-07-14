@@ -14,7 +14,7 @@ trait SchemaPivotTrait {
       '#type' => 'select',
       '#title' => 'Pivot',
       '#default_value' => !empty($value['pivot']) ? $value['pivot'] : '',
-      '#empty_option' => t('- None -'),
+      '#empty_option' => $this->t('- None -'),
       '#empty_value' => '',
       '#options' => [
         1 => 'Pivot',
