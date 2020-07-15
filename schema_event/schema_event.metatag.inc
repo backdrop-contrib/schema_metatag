@@ -111,6 +111,13 @@ function schema_event_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
+  $info['tags']['schema_event.organizer'] = array(
+    'class' => 'SchemaPersonOrgBase',
+    'label' => t('performer'),
+    'description' => t('RECOMMENDED BY GOOGLE. The organizer of the event.'),
+    'weight' => ++$weight,
+  ) + $defaults;
+
   $info['tags']['schema_event.performer'] = array(
     'class' => 'SchemaPersonOrgBase',
     'label' => t('performer'),
