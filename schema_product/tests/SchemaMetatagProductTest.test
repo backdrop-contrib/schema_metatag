@@ -51,6 +51,13 @@ class SchemaMetatagProductTest extends SchemaMetatagTagsTestBase {
     'schema_product.review' => 'SchemaReviewBase',
     'schema_product.category' => 'SchemaNameBase',
     'schema_product.url' => 'SchemaNameBase',
+    'schema_product.sku' => 'SchemaNameBase',
+    'schema_product.gtin8' => 'SchemaNameBase',
+    'schema_product.gtin12' => 'SchemaNameBase',
+    'schema_product.gtin13' => 'SchemaNameBase',
+    'schema_product.gtin14' => 'SchemaNameBase',
+    'schema_product.isbn' => 'SchemaNameBase',
+    'schema_product.mpn' => 'SchemaNameBase',
   ];
 
 }
