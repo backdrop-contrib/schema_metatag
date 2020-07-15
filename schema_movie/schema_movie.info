@@ -1,5 +1,5 @@
-name = "Schema.org Movie"
-description = "Adds Schema.org/Movie to the JSON LD array. Creates Movie."
+name = "Schema.org Movie, Series, Season, Episode"
+description = "Adds Schema.org Movie, Series, Season, Episode to the JSON LD array. Creates Movie, Series, Season, and Episode."
 package = SEO
 core = 7.x
 dependencies[] = schema_metatag

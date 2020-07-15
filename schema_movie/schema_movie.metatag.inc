@@ -10,13 +10,13 @@
  */
 function schema_movie_metatag_info() {
   $info['groups']['schema_movie'] = array(
-    'label' => t('Schema.org: Movie and TV'),
+    'label' => t('Schema.org: Movie, Series, Season, Episode'),
     'description' => t('See Schema.org definitions for this Schema type at <a href="!url">!url</a>, <a href="!url2">!url2</a>, <a href="!url3">!url3</a>, <a href="!url4">!url4</a>, and Google\'s recommendations at <a href="!google_url">!google_url</a>.', [
       '!url' => 'http://schema.org/Movie',
-      '!url2' => 'http://schema.org/TVSeries',
-      '!url3' => 'http://schema.org/TVSeason',
-      '!url4' => 'http://schema.org/TVEpisode',
-      '!google_url' => 'https://developers.google.com/search/docs/data-types/tv-movie',
+      '!url2' => 'http://schema.org/Series',
+      '!url3' => 'http://schema.org/CreativeWorkSeason',
+      '!url4' => 'http://schema.org/Episode',
+      '!google_url' => 'https://developers.google.com/search/docs/data-types/movie',
     ]),
     'form' => array(
       '#weight' => 10,
