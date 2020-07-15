@@ -54,6 +54,18 @@ function schema_product_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
+  $info['tags']['schema_product.category'] = array(
+    'label' => t('category'),
+    'description' => t('RECOMMENDED BY GOOGLE. The category of the product.'),
+    'weight' => ++$weight,
+  ) + $defaults;
+
+  $info['tags']['schema_product.url'] = array(
+    'label' => t('url'),
+    'description' => t('RECOMMENDED BY GOOGLE. The url of the product.'),
+    'weight' => ++$weight,
+  ) + $defaults;
+
   $info['tags']['schema_product.image'] = array(
     'class' => 'SchemaImageBase',
     'label' => t('image'),

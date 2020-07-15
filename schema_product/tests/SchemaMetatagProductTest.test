@@ -49,6 +49,8 @@ class SchemaMetatagProductTest extends SchemaMetatagTagsTestBase {
     'schema_product.offers' => 'SchemaOfferBase',
     'schema_product.aggregateRating' => 'SchemaRatingBase',
     'schema_product.review' => 'SchemaReviewBase',
+    'schema_product.category' => 'SchemaNameBase',
+    'schema_product.url' => 'SchemaNameBase',
   ];
 
 }
