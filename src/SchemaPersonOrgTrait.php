@@ -38,9 +38,9 @@ trait SchemaPersonOrgTrait {
     $visibility2 = ['invisible' => [$selector2 => ['value' => '']]];
     $visibility['invisible'] = [$visibility['invisible'], $visibility2['invisible']];
 
-    $org_visibility = ['visible' => [$selector => ['value' => 'Organization']]];
-    $org_visibility2 = ['visible' => [$selector2 => ['value' => 'Organization']]];
-    $org_visibility['visible'] = [$org_visibility['visible'], $org_visibility2['visible']];
+    $org_visibility = ['invisible' => [$selector => ['value' => 'Person']]];
+    $org_visibility2 = ['invisible' => [$selector2 => ['value' => 'Person']]];
+    $org_visibility['invisible'] = [$org_visibility['invisible'], $org_visibility2['invisible']];
 
     $form['#type'] = 'fieldset';
     $form['#title'] = $input_values['title'];
@@ -60,6 +60,9 @@ trait SchemaPersonOrgTrait {
       '#options' => [
         'Person' => $this->t('Person'),
         'Organization' => $this->t('Organization'),
+        'GovernmentOrganization' => $this->t('GovernmentOrganization'),
+        'LocalBusiness' => $this->t('LocalBusiness'),
+        'MedicalOrganization' => $this->t('MedicalOrganization'),
       ],
       '#required' => $input_values['#required'],
       '#weight' => -10,

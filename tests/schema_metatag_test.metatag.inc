@@ -255,5 +255,12 @@ function schema_metatag_test_metatag_info() {
     'weight' => ++$weight,
   ) + $defaults;
 
+  $info['tags']['schema_metatag_test.governmentService'] = array(
+    'class' => 'SchemaGovernmentServiceBase',
+    'label' => t('governmentService'),
+    'description' => '',
+    'weight' => ++$weight,
+  ) + $defaults;
+
   return $info;
 }
