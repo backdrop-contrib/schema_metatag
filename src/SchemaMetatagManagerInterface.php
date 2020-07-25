@@ -195,4 +195,21 @@ interface SchemaMetatagManagerInterface {
    */
   public static function defaultInputValues();
 
+  /**
+   * Alternate visibility selector for the field element.
+   *
+   * This is necessary because the form elements on the general configuration
+   * form have different parents than the form elements in the metatags field
+   * widget. This function makes is possible to convert the #states visibility
+   * selectors for the general configuration form into the right pattern
+   * so they will work on the field widget.
+   *
+   * @param string $selector
+   *   The selector constructed for the main metatag form.
+   *
+   * @return string
+   *   A rewritten selector that will work in the field form.
+   */
+  public static function altSelector($selector);
+
 }

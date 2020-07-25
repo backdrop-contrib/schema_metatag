@@ -44,7 +44,6 @@ function schema_special_announcement_metatag_info() {
   $info['tags']['schema_special_announcement.category'] = array(
     'label' => t('category'),
     'description' => t('The URL that describes the category for the special announcement. Set the category to the Wikipedia page for COVID-19: https://www.wikidata.org/wiki/Q81068910.'),
-    'multiple' => TRUE,
     'weight' => ++$weight,
   ) + $defaults;
 
