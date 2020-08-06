@@ -15,6 +15,14 @@ trait SchemaCreativeWorkTrait {
   }
 
   /**
+   * Return the SchemaMetatagManager.
+   *
+   * @return \Drupal\schema_metatag\SchemaMetatagManager
+   *   The Schema Metatag Manager service.
+   */
+  abstract protected function schemaMetatagManager();
+
+  /**
    * The keys for this form.
    *
    * @param string $object_type
@@ -47,12 +55,12 @@ trait SchemaCreativeWorkTrait {
    */
   public function creativeWorkForm(array $input_values) {
 
-    $input_values += SchemaMetatagManager::defaultInputValues();
+    $input_values += $this->schemaMetatagManager()->defaultInputValues();
     $value = $input_values['value'];
 
     // Get the id for the nested @type element.
     $selector = ':input[name="' . $input_values['visibility_selector'] . '[@type]"]';
-    $selector2 = SchemaMetatagManager::altSelector($selector);
+    $selector2 = $this->schemaMetatagManager()->altSelector($selector);
 
     $visibility = ['invisible' => [$selector => ['value' => '']]];
     $visibility2 = ['invisible' => [$selector2 => ['value' => '']]];

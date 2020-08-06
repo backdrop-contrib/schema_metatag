@@ -11,7 +11,7 @@ class SchemaSpeakableBase extends SchemaNameBase {
    * {@inheritdoc}
    */
   public function getForm(array $options = []) {
-    $value = SchemaMetatagManager::unserialize($this->value());
+    $value = $this->schemaMetatagManager()->unserialize($this->value());
     $input_values = [
       'title' => $this->label(),
       'description' => $this->description(),

@@ -6,6 +6,31 @@
 class SchemaNameBase extends DrupalTextMetaTag {
 
   /**
+   * The schemaMetatagManager service.
+   *
+   * @var \Drupal\schema_metatag\schemaMetatagManager
+   */
+  protected $schemaMetatagManager;
+
+  /**
+   * Constructor.
+   */
+  function __construct(array $info, array $data = NULL) {
+    parent::__construct($info, $data);
+    $this->schemaMetatagManager = new SchemaMetatagManager();
+  }
+
+  /**
+   * Return the SchemaMetatagManager.
+   *
+   * @return \Drupal\schema_metatag\SchemaMetatagManager
+   *   The Schema Metatag Manager service.
+   */
+  protected function schemaMetatagManager() {
+    return $this->schemaMetatagManager;
+  }
+
+  /**
    * Wrappers to create D7 methods that match D8 format.
    *
    * To make it possible to re-use some D8 code.
@@ -78,13 +103,13 @@ class SchemaNameBase extends DrupalTextMetaTag {
    */
   public function getElement(array $options = array()) {
     $this->options = $options;
-    $value = SchemaMetatagManager::unserialize($this->value());
+    $value = $this->schemaMetatagManager()->unserialize($this->value());
 
     // If this is a complex array of value, process the array.
     if (is_array($value)) {
 
       // Clean out empty values.
-      $value = SchemaMetatagManager::arrayTrim($value);
+      $value = $this->schemaMetatagManager()->arrayTrim($value);
     }
 
     if (empty($value)) {
@@ -130,7 +155,7 @@ class SchemaNameBase extends DrupalTextMetaTag {
     // If pivot is set to 0, it would have been removed as an empty value.
     if (array_key_exists('pivot', $array)) {
       unset($array['pivot']);
-      $array = SchemaMetatagManager::pivot($array);
+      $array = $this->schemaMetatagManager()->pivot($array);
     }
     foreach ($array as $key => &$value) {
       if (is_array($value)) {
@@ -183,7 +208,7 @@ class SchemaNameBase extends DrupalTextMetaTag {
     $value = $this->getValue($this->options);
 
     if ($explode) {
-      $value = SchemaMetatagManager::explode($value);
+      $value = $this->schemaMetatagManager()->explode($value);
       // Clean out any empty values that might have been added by explode().
       if (is_array($value)) {
         $value = array_filter($value);

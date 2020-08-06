@@ -21,6 +21,14 @@ trait SchemaActionTrait {
   }
 
   /**
+   * Return the SchemaMetatagManager.
+   *
+   * @return \Drupal\schema_metatag\SchemaMetatagManager
+   *   The Schema Metatag Manager service.
+   */
+  abstract protected function schemaMetatagManager();
+
+  /**
    * The keys for this form.
    *
    * @param string $action_type
@@ -53,7 +61,7 @@ trait SchemaActionTrait {
    */
   public function actionForm(array $input_values) {
 
-    $input_values += SchemaMetatagManager::defaultInputValues();
+    $input_values += $this->schemaMetatagManager()->defaultInputValues();
     $value = $input_values['value'];
 
     $form['#type'] = 'fieldset';
@@ -78,7 +86,7 @@ trait SchemaActionTrait {
     ];
 
     $selector = ':input[name="' . $input_values['visibility_selector'] . '[actionType]"]';
-    $selector2 = SchemaMetatagManager::altSelector($selector);
+    $selector2 = $this->schemaMetatagManager()->altSelector($selector);
 
     $visibility = ['invisible' => [$selector => ['value' => '']]];
     $visibility2 = ['invisible' => [$selector2 => ['value' => '']]];

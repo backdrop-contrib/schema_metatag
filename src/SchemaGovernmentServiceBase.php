@@ -19,7 +19,7 @@ class SchemaGovernmentServiceBase extends SchemaNameBase {
    */
   public function getForm(array $options = []) {
 
-    $value = SchemaMetatagManager::unserialize($this->value());
+    $value = $this->schemaMetatagManager()->unserialize($this->value());
 
     $input_values = [
       'title' => $this->label(),

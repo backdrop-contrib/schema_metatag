@@ -12,7 +12,7 @@ class SchemaImageBase extends SchemaNameBase {
    */
   public function getForm(array $options = array()) {
 
-    $value = SchemaMetatagManager::unserialize($this->value());
+    $value = $this->schemaMetatagManager()->unserialize($this->value());
 
     $input_values = [
       'title' => $this->label(),
