@@ -19,19 +19,6 @@ trait SchemaPlaceTrait {
   abstract protected function schemaMetatagManager();
 
   /**
-   * The top level keys on this form.
-   */
-  public static function placeFormKeys() {
-    return [
-      '@type',
-      'name',
-      'url',
-      'address',
-      'geo',
-    ];
-  }
-
-  /**
    * {@inheritdoc}
    */
   public function placeForm($input_values) {

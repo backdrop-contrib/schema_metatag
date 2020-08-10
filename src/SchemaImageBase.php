@@ -39,7 +39,13 @@ class SchemaImageBase extends SchemaNameBase {
    */
   public static function testValue() {
     $items = [];
-    $keys = self::imageFormKeys();
+    $keys = [
+      '@type',
+      'representativeOfPage',
+      'url',
+      'width',
+      'height',
+    ];
     foreach ($keys as $key) {
       switch ($key) {
         case '@type':

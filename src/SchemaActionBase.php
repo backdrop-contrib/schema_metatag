@@ -8,13 +8,6 @@ class SchemaActionBase extends SchemaNameBase {
   use SchemaActionTrait;
 
   /**
-   * Allowed action types.
-   *
-   * @var array
-   */
-  protected $actionTypes;
-
-  /**
    * Allowed actions.
    *
    * @var array
@@ -26,7 +19,6 @@ class SchemaActionBase extends SchemaNameBase {
    */
   public function __construct(array $info, array $data = NULL) {
     parent::__construct($info, $data);
-    $this->actionTypes = [];
     $this->actions = [];
   }
 
@@ -43,7 +35,6 @@ class SchemaActionBase extends SchemaNameBase {
       'value' => $value,
       '#required' => isset($options['#required']) ? $options['#required'] : FALSE,
       'visibility_selector' => $this->visibilitySelector(),
-      'actionTypes' => $this->actionTypes,
       'actions' => $this->actions,
     ];
 
@@ -64,46 +55,19 @@ class SchemaActionBase extends SchemaNameBase {
    */
   public static function testValue() {
     $items = [];
-    $keys = self::actionFormKeys('TradeAction');
+    $keys = [
+      '@type',
+      'target',
+    ];
     foreach ($keys as $key) {
       switch ($key) {
 
         case '@type':
-          $items[$key] = 'BuyAction';
-          break;
-
-        case 'location':
-        case 'fromLocation':
-        case 'toLocation':
-          $items[$key] = SchemaPlaceBase::testValue();
-          break;
-
-        case 'expectsAcceptanceOf':
-          $items[$key] = SchemaOfferBase::testValue();
-          break;
-
-        case 'event':
-          $items[$key] = SchemaEventBase::testValue();
-          break;
-
-        case 'targetCollection':
-        case 'result':
-        case 'object':
-        case 'error':
-        case 'instrument':
-          $items[$key] = SchemaThingBase::testValue();
+          $items[$key] = 'Action';
           break;
 
         case 'target':
           $items[$key] = SchemaEntryPointBase::testValue();
-          break;
-
-        case 'agent':
-        case 'buyer':
-        case 'seller':
-        case 'recipient':
-        case 'participant':
-          $items[$key] = SchemaPersonOrgBase::testValue();
           break;
 
         default:
@@ -122,38 +86,8 @@ class SchemaActionBase extends SchemaNameBase {
   public static function processedTestValue($items) {
     foreach ($items as $key => $value) {
       switch ($key) {
-        case 'location':
-        case 'fromLocation':
-        case 'toLocation':
-          $items[$key] = SchemaPlaceBase::processedTestValue($items[$key]);
-          break;
-
-        case 'expectsAcceptanceOf':
-          $items[$key] = SchemaOfferBase::processedTestValue($items[$key]);
-          break;
-
-        case 'event':
-          $items[$key] = SchemaEventBase::processedTestValue($items[$key]);
-          break;
-
-        case 'targetCollection':
-        case 'result':
-        case 'object':
-        case 'error':
-        case 'instrument':
-          $items[$key] = SchemaThingBase::processedTestValue($items[$key]);
-          break;
-
         case 'target':
           $items[$key] = SchemaEntryPointBase::processedTestValue($items[$key]);
-          break;
-
-        case 'agent':
-        case 'buyer':
-        case 'seller':
-        case 'recipient':
-        case 'participant':
-          $items[$key] = SchemaPersonOrgBase::processedTestValue($items[$key]);
           break;
 
       }

@@ -18,20 +18,6 @@ trait SchemaPersonOrgTrait {
   abstract protected function schemaMetatagManager();
 
   /**
-   * Form keys.
-   */
-  public static function personOrgFormKeys() {
-    return [
-      '@type',
-      '@id',
-      'name',
-      'url',
-      'sameAs',
-      'logo',
-    ];
-  }
-
-  /**
    * The form element.
    */
   public function personOrgForm($input_values) {
@@ -83,6 +69,7 @@ trait SchemaPersonOrgTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t("Globally unique @id of the person or organization, usually a url, used to to link other properties to this object."),
+      '#states' => $visibility,
     ];
 
     $form['name'] = [
@@ -92,6 +79,7 @@ trait SchemaPersonOrgTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t("Name of the person or organization, i.e. [node:author:display-name]."),
+      '#states' => $visibility,
     ];
 
     $form['url'] = [
@@ -101,6 +89,7 @@ trait SchemaPersonOrgTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t("Absolute URL of the canonical Web page, like the URL of the author's profile page or the organization's official website, i.e. [node:author:url]."),
+      '#states' => $visibility,
     ];
 
     $form['sameAs'] = [
@@ -110,14 +99,8 @@ trait SchemaPersonOrgTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t("Comma separated list of URLs for the person's or organization's official social media profile page(s)."),
+      '#states' => $visibility,
     ];
-
-    $keys = static::personOrgFormKeys();
-    foreach ($keys as $key) {
-      if ($key != '@type') {
-        $form[$key]['#states'] = $visibility;
-      }
-    }
 
     $input_values = [
       'title' => $this->t('Logo'),

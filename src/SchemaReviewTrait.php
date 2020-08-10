@@ -19,19 +19,6 @@ trait SchemaReviewTrait {
   abstract protected function schemaMetatagManager();
 
   /**
-   * Form keys.
-   */
-  public static function reviewFormKeys() {
-    return [
-      '@type',
-      'reviewBody',
-      'datePublished',
-      'author',
-      'reviewRating',
-    ];
-  }
-
-  /**
    * The form element.
    */
   public function reviewForm($input_values) {
@@ -79,6 +66,7 @@ trait SchemaReviewTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t('The actual body of the review.'),
+      '#states' => $visibility,
     ];
 
     $form['datePublished'] = [
@@ -88,14 +76,7 @@ trait SchemaReviewTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t('To format the date properly, use a token like [node:created:html_datetime].'),
-    ];
-
-    $input_values = [
-      'title' => $this->t('author'),
-      'description' => 'The author of this review.',
-      'value' => !empty($value['author']) ? $value['author'] : [],
-      '#required' => $input_values['#required'],
-      'visibility_selector' => $this->getPluginId() . '[author][@type]',
+      '#states' => $visibility,
     ];
 
     $input_values = [
@@ -106,6 +87,7 @@ trait SchemaReviewTrait {
       'visibility_selector' => $visibility_selector . '[author]',
     ];
     $form['author'] = $this->personOrgForm($input_values);
+    $form['author']['#states'] = $visibility;
 
     $input_values = [
       'title' => $this->t('reviewRating'),
@@ -115,13 +97,7 @@ trait SchemaReviewTrait {
       'visibility_selector' => $visibility_selector . '[reviewRating]',
     ];
     $form['reviewRating'] = $this->ratingForm($input_values);
-
-    $keys = static::reviewFormKeys();
-    foreach ($keys as $key) {
-      if ($key != '@type') {
-        $form[$key]['#states'] = $visibility;
-      }
-    }
+    $form['reviewRating']['#states'] = $visibility;
 
     return $form;
   }

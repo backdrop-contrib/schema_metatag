@@ -39,7 +39,23 @@ class SchemaProgramMembershipBase extends SchemaNameBase {
    */
   public static function testValue() {
     $items = [];
-    $keys = self::programMembershipFormKeys();
+    $keys = [
+      '@type',
+      'name',
+      'programName',
+      'alternateName',
+      'hostingOrganization',
+      'member',
+      'membershipNumber',
+      'identifier',
+      'additionalType',
+      'description',
+      'disambiguatingDescription',
+      'image',
+      'mainEntityOfPage',
+      'url',
+      'sameAs',
+    ];
     foreach ($keys as $key) {
       switch ($key) {
         case '@type':

@@ -39,7 +39,13 @@ class SchemaPlaceBase extends SchemaAddressBase {
    */
   public static function testValue() {
     $items = [];
-    $keys = self::placeFormKeys();
+    $keys = [
+      '@type',
+      'name',
+      'url',
+      'address',
+      'geo',
+    ];
     foreach ($keys as $key) {
       switch ($key) {
         case 'address':

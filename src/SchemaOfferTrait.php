@@ -18,31 +18,6 @@ trait SchemaOfferTrait {
   abstract protected function schemaMetatagManager();
 
   /**
-   * Form keys.
-   */
-  public static function offerFormKeys() {
-    return [
-      '@type',
-      '@id',
-      'price',
-      'priceCurrency',
-      'lowPrice',
-      'highPrice',
-      'offerCount',
-      'url',
-      'availability',
-      'availabilityStarts',
-      'availabilityEnds',
-      'itemCondition',
-      'validFrom',
-      'category',
-      'eligibleRegion',
-      'ineligibleRegion',
-      'priceValidUntil',
-    ];
-  }
-
-  /**
    * The form element.
    */
   public function offerForm($input_values) {
@@ -87,6 +62,7 @@ trait SchemaOfferTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t('Globally unique ID of the item in the form of a URL. It does not have to be a working link.'),
+      '#states' => $visibility,
     ];
 
     $form['price'] = [
@@ -96,6 +72,7 @@ trait SchemaOfferTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t('REQUIRED BY GOOGLE for Offer. The numeric price of the offer. Do not include dollar sign.'),
+      '#states' => $visibility,
     ];
 
     $form['offerCount'] = [
@@ -105,6 +82,7 @@ trait SchemaOfferTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t('RECOMMEND BY GOOGLE for AggregateOffer. The number of offers.'),
+      '#states' => $visibility,
     ];
 
     $form['lowPrice'] = [
@@ -114,6 +92,7 @@ trait SchemaOfferTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t('REQUIRED BY GOOGLE for AggregateOffer. The lowest price. Do not include dollar sign.'),
+      '#states' => $visibility,
     ];
 
     $form['highPrice'] = [
@@ -123,6 +102,7 @@ trait SchemaOfferTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t('REQUIRED BY GOOGLE for AggregateOffer. The highest price. Do not include dollar sign.'),
+      '#states' => $visibility,
     ];
 
     $form['priceCurrency'] = [
@@ -132,6 +112,7 @@ trait SchemaOfferTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t('REQUIRED BY GOOGLE. The three-letter currency code (i.e. USD) in which the price is displayed.'),
+      '#states' => $visibility,
     ];
 
     $form['url'] = [
@@ -141,6 +122,7 @@ trait SchemaOfferTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t('The URL where the offer can be acquired.'),
+      '#states' => $visibility,
     ];
 
     $form['itemCondition'] = [
@@ -150,6 +132,7 @@ trait SchemaOfferTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t('RECOMMENDED BY GOOGLE for Product Offer. The condition of this item. Valid options are https://schema.org/DamagedCondition, https://schema.org/NewCondition, https://schema.org/RefurbishedCondition, https://schema.org/UsedCondition.'),
+      '#states' => $visibility,
     ];
 
     $form['availability'] = [
@@ -159,6 +142,7 @@ trait SchemaOfferTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t('REQUIRED BY GOOGLE for Product Offer. The availability of this item. Valid options are https://schema.org/Discontinued, https://schema.org/InStock, https://schema.org/InStoreOnly, https://schema.org/LimitedAvailability, https://schema.org/OnlineOnly, https://schema.org/OutOfStock, https://schema.org/PreOrder, https://schema.org/PreSale, https://schema.org/SoldOut.'),
+      '#states' => $visibility,
     ];
 
     $form['availabilityStarts'] = [
@@ -168,6 +152,7 @@ trait SchemaOfferTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t('The end of the availability of the product or service included in the offer, in ISO 8601 format, i.e. 2024-05-21T12:00.'),
+      '#states' => $visibility,
     ];
 
     $form['availabilityEnds'] = [
@@ -177,6 +162,7 @@ trait SchemaOfferTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t('Date after which the item is no longer available, in ISO 8601 format, i.e. 2024-05-21T12:00.'),
+      '#states' => $visibility,
     ];
 
     $form['validFrom'] = [
@@ -186,6 +172,7 @@ trait SchemaOfferTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t('The date when the item becomes valid, i.e. 2024-05-21T12:00.'),
+      '#states' => $visibility,
     ];
 
     $form['priceValidUntil'] = [
@@ -195,6 +182,7 @@ trait SchemaOfferTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t('The date after which the price will no longer be available, in ISO 8601 format, i.e. 2024-05-21T12:00.'),
+      '#states' => $visibility,
     ];
 
     $form['category'] = [
@@ -205,6 +193,7 @@ trait SchemaOfferTrait {
       '#required' => $input_values['#required'],
       '#description' => $this->t("Values like: 'rental', 'purchase', 'subscription', 'externalSubscription', 'free'."),
       '#multiple' => TRUE,
+      '#states' => $visibility,
     ];
 
     $input_values = [
@@ -214,12 +203,13 @@ trait SchemaOfferTrait {
       '#required' => $input_values['#required'],
       'visibility_selector' => $visibility_selector . '[eligibleRegion]',
     ];
-    $form['eligibleRegion'] = static::countryForm($input_values);
+    $form['eligibleRegion'] = $this->countryForm($input_values);
 
     // Pivot the country element.
     $form['eligibleRegion']['pivot'] = $this->pivotForm($value);
     $selector = ':input[name="' . $visibility_selector . '[eligibleRegion][@type]"]';
     $form['eligibleRegion']['pivot']['#states'] = ['invisible' => [$selector => ['value' => '']]];
+    $form['eligibleRegion']['#states'] = $visibility;
 
     $input_values = [
       'title' => $this->t('ineligibleRegion'),
@@ -228,21 +218,13 @@ trait SchemaOfferTrait {
       '#required' => $input_values['#required'],
       'visibility_selector' => $visibility_selector . '[ineligibleRegion]',
     ];
-    $form['ineligibleRegion'] = static::countryForm($input_values);
+    $form['ineligibleRegion'] = $this->countryForm($input_values);
+    $form['ineligibleRegion']['#states'] = $visibility;
 
     // Pivot the country element.
     $form['ineligibleRegion']['pivot'] = $this->pivotForm($value);
     $selector = ':input[name="' . $visibility_selector . '[ineligibleRegion][@type]"]';
     $form['ineligibleRegion']['pivot']['#states'] = ['invisible' => [$selector => ['value' => '']]];
-
-    $keys = static::offerFormKeys();
-    foreach ($keys as $key) {
-      if ($key != '@type') {
-        if (!isset($form[$key]['#states'])) {
-          $form[$key]['#states'] = $visibility;
-        }
-      }
-    }
 
     return $form;
   }

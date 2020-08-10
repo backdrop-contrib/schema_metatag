@@ -39,7 +39,10 @@ class SchemaCountryBase extends SchemaNameBase {
    */
   public static function testValue() {
     $items = [];
-    $keys = self::countryFormKeys();
+    $keys = [
+      '@type',
+      'name',
+    ];
     foreach ($keys as $key) {
       switch ($key) {
         case '@type':

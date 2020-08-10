@@ -16,16 +16,6 @@ trait SchemaCountryTrait {
   abstract protected function schemaMetatagManager();
 
   /**
-   * Form keys.
-   */
-  public static function countryFormKeys() {
-    return [
-      '@type',
-      'name',
-    ];
-  }
-
-  /**
    * The form element.
    */
   public function countryForm($input_values) {
@@ -69,14 +59,9 @@ trait SchemaCountryTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t("The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code."),
+      '#states' => $visibility,
     ];
 
-    $keys = static::countryFormKeys();
-    foreach ($keys as $key) {
-      if ($key != '@type') {
-        $form[$key]['#states'] = $visibility;
-      }
-    }
     return $form;
   }
 

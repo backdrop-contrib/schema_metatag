@@ -39,7 +39,14 @@ class SchemaEventBase extends SchemaNameBase {
    */
   public static function testValue() {
     $items = [];
-    $keys = self::eventFormKeys();
+    $keys = [
+      '@type',
+      '@id',
+      'name',
+      'url',
+      'startDate',
+      'location',
+    ];
     foreach ($keys as $key) {
       switch ($key) {
         case '@type':

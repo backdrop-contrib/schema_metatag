@@ -38,7 +38,13 @@ class SchemaReviewBase extends SchemaNameBase {
    */
   public static function testValue() {
     $items = [];
-    $keys = static::reviewFormKeys();
+    $keys = [
+      '@type',
+      'reviewBody',
+      'datePublished',
+      'author',
+      'reviewRating',
+    ];
     foreach ($keys as $key) {
       switch ($key) {
         case '@type':

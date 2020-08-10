@@ -39,7 +39,11 @@ class SchemaGeoBase extends SchemaNameBase {
    */
   public static function testValue() {
     $items = [];
-    $keys = self::geoFormKeys();
+    $keys = [
+      '@type',
+      'latitude',
+      'longitude',
+    ];
     foreach ($keys as $key) {
       switch ($key) {
         case '@type':

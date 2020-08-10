@@ -16,18 +16,6 @@ trait SchemaEntryPointTrait {
   abstract protected function schemaMetatagManager();
 
   /**
-   * Form keys.
-   */
-  public static function entryPointFormKeys() {
-    return [
-      '@type',
-      'urlTemplate',
-      'actionPlatform',
-      'inLanguage',
-    ];
-  }
-
-  /**
    * The form element.
    */
   public function entryPointForm($input_values) {
@@ -71,6 +59,7 @@ trait SchemaEntryPointTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t("An url template (RFC6570) that will be used to construct the target of the execution of the action, i.e. http://www.example.com/forrest_gump?autoplay=true."),
+      '#states' => $visibility,
     ];
 
     $form['actionPlatform'] = [
@@ -80,6 +69,7 @@ trait SchemaEntryPointTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t("Comma-separated list of the high level platform(s) where the Action can be performed for the given URL. Examples: http://schema.org/DesktopWebPlatform, http://schema.org/MobileWebPlatform, http://schema.org/IOSPlatform, http://schema.googleapis.com/GoogleVideoCast."),
+      '#states' => $visibility,
     ];
 
     $form['inLanguage'] = [
@@ -89,14 +79,8 @@ trait SchemaEntryPointTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t("The BCP-47 language code of this item, e.g. 'ja' is Japanese, or 'en-US' for American English."),
+      '#states' => $visibility,
     ];
-
-    $keys = static::entryPointFormKeys();
-    foreach ($keys as $key) {
-      if ($key != '@type') {
-        $form[$key]['#states'] = $visibility;
-      }
-    }
 
     return $form;
   }

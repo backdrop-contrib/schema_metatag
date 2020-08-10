@@ -17,20 +17,6 @@ trait SchemaOpeningHoursSpecificationTrait {
   abstract protected function schemaMetatagManager();
 
   /**
-   * Form keys.
-   */
-  public static function openingHoursSpecificationFormKeys() {
-    return [
-      '@type',
-      'dayOfWeek',
-      'opens',
-      'closes',
-      'validFrom',
-      'validThrough',
-    ];
-  }
-
-  /**
    * The form element.
    */
   public function openingHoursSpecificationForm($input_values) {
@@ -75,6 +61,7 @@ trait SchemaOpeningHoursSpecificationTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t("Comma-separated list of the names of the days of the week."),
+      '#states' => $visibility,
     ];
 
     $form['opens'] = [
@@ -84,6 +71,7 @@ trait SchemaOpeningHoursSpecificationTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t("Matching comma-separated list of the time the business location opens each day, in hh:mm:ss format."),
+      '#states' => $visibility,
     ];
 
     $form['closes'] = [
@@ -93,6 +81,7 @@ trait SchemaOpeningHoursSpecificationTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t("Matching comma-separated list of the time the business location closes each day, in hh:mm:ss format."),
+      '#states' => $visibility,
     ];
 
     $form['validFrom'] = [
@@ -102,6 +91,7 @@ trait SchemaOpeningHoursSpecificationTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t("The date of a seasonal business closure, in YYYY-MM-DD format."),
+      '#states' => $visibility,
     ];
 
     $form['validThrough'] = [
@@ -111,14 +101,8 @@ trait SchemaOpeningHoursSpecificationTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t("The date of a seasonal business closure, in YYYY-MM-DD format."),
+      '#states' => $visibility,
     ];
-
-    $keys = static::openingHoursSpecificationFormKeys();
-    foreach ($keys as $key) {
-      if ($key != '@type') {
-        $form[$key]['#states'] = $visibility;
-      }
-    }
 
     return $form;
   }

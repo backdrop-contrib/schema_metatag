@@ -38,7 +38,13 @@ class SchemaRatingBase extends SchemaNameBase {
    */
   public static function testValue() {
     $items = [];
-    $keys = static::ratingFormKeys();
+    $keys = [
+      '@type',
+      'ratingValue',
+      'bestRating',
+      'worstRating',
+      'ratingCount',
+    ];
     foreach ($keys as $key) {
       switch ($key) {
         case '@type':

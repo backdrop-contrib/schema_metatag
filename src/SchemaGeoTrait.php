@@ -16,17 +16,6 @@ trait SchemaGeoTrait {
   abstract protected function schemaMetatagManager();
 
   /**
-   * Form keys.
-   */
-  public static function geoFormKeys() {
-    return [
-      '@type',
-      'latitude',
-      'longitude',
-    ];
-  }
-
-  /**
    * The form element.
    */
   public function geoForm($input_values) {
@@ -70,6 +59,7 @@ trait SchemaGeoTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t("The latitude of a location. For example 37.42242 (WGS 84)."),
+      '#states' => $visibility,
     ];
 
     $form['longitude'] = [
@@ -79,14 +69,9 @@ trait SchemaGeoTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t("The longitude of a location. For example -122.08585 (WGS 84)."),
+      '#states' => $visibility,
     ];
 
-    $keys = static::geoFormKeys();
-    foreach ($keys as $key) {
-      if ($key != '@type') {
-        $form[$key]['#states'] = $visibility;
-      }
-    }
     return $form;
   }
 

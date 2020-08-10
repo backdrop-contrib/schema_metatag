@@ -16,20 +16,6 @@ trait SchemaAddressTrait {
   abstract protected function schemaMetatagManager();
 
   /**
-   * Form keys.
-   */
-  public static function postalAddressFormKeys() {
-    return [
-      '@type',
-      'streetAddress',
-      'addressLocality',
-      'addressRegion',
-      'postalCode',
-      'addressCountry',
-    ];
-  }
-
-  /**
    * The form element.
    */
   public function postalAddressForm($input_values) {
@@ -73,6 +59,7 @@ trait SchemaAddressTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t("The street address. For example, 1600 Amphitheatre Pkwy."),
+      '#states' => $visibility,
     ];
 
     $form['addressLocality'] = [
@@ -82,6 +69,7 @@ trait SchemaAddressTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t("The locality. For example, Mountain View."),
+      '#states' => $visibility,
     ];
 
     $form['addressRegion'] = [
@@ -91,6 +79,7 @@ trait SchemaAddressTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t("The region. For example, CA."),
+      '#states' => $visibility,
     ];
 
     $form['postalCode'] = [
@@ -100,6 +89,7 @@ trait SchemaAddressTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t('The postal code. For example, 94043.'),
+      '#states' => $visibility,
     ];
 
     $form['addressCountry'] = [
@@ -109,14 +99,8 @@ trait SchemaAddressTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t('The country. For example, USA. You can also provide the two-letter ISO 3166-1 alpha-2 country code.'),
+      '#states' => $visibility,
     ];
-
-    $keys = static::postalAddressFormKeys();
-    foreach ($keys as $key) {
-      if ($key != '@type') {
-        $form[$key]['#states'] = $visibility;
-      }
-    }
 
     return $form;
   }

@@ -39,7 +39,13 @@ class SchemaHowToStepBase extends SchemaNameBase {
    */
   public static function testValue() {
     $items = [];
-    $keys = self::howToStepFormKeys();
+    $keys = [
+      '@type',
+      'name',
+      'text',
+      'url',
+      'image',
+    ];
     foreach ($keys as $key) {
       switch ($key) {
         case '@type':

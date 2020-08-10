@@ -39,7 +39,9 @@ class SchemaIdReferenceBase extends SchemaNameBase {
    */
   public static function testValue() {
     $items = [];
-    $keys = self::idFormKeys();
+    $keys = [
+      '@id',
+    ];
     foreach ($keys as $key) {
       switch ($key) {
         case 'pivot':

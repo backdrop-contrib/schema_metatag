@@ -6,9 +6,7 @@
 trait SchemaCreativeWorkTrait {
 
   use SchemaPersonOrgTrait, SchemaActionTrait, SchemaPivotTrait {
-    SchemaPersonOrgTrait::personOrgFormKeys insteadof SchemaActionTrait;
     SchemaPersonOrgTrait::personOrgForm insteadof SchemaActionTrait;
-    SchemaPersonOrgTrait::imageFormKeys insteadof SchemaActionTrait;
     SchemaPersonOrgTrait::imageForm insteadof SchemaActionTrait;
     SchemaPivotTrait::pivotForm insteadof SchemaPersonOrgTrait;
     SchemaPivotTrait::pivotForm insteadof SchemaActionTrait;
@@ -21,28 +19,6 @@ trait SchemaCreativeWorkTrait {
    *   The Schema Metatag Manager service.
    */
   abstract protected function schemaMetatagManager();
-
-  /**
-   * The keys for this form.
-   *
-   * @param string $object_type
-   *   Optional, limit the keys to those that are required for a specific
-   *   object type.
-   *
-   * @return array
-   *   Return an array of the form keys.
-   */
-  public static function creativeWorkFormKeys($object_type = NULL) {
-    $list = ['@type'];
-    $types = static::creativeWorkObjects();
-    foreach ($types as $type) {
-      if ($type == $object_type || empty($object_type)) {
-        $list = array_merge(array_keys(static::creativeWorkProperties($type)), $list);
-      }
-    }
-    $list = array_merge(array_keys(static::creativeWorkProperties('All')), $list);
-    return $list;
-  }
 
   /**
    * Create the form element.
@@ -96,7 +72,7 @@ trait SchemaCreativeWorkTrait {
       $properties = static::creativeWorkProperties('All');
       foreach ($properties as $key => $property) {
 
-        if (empty($property['formKeys'])) {
+        if (empty($property['form'])) {
           $form[$key] = [
             '#type' => 'textfield',
             '#title' => $key,
@@ -115,7 +91,6 @@ trait SchemaCreativeWorkTrait {
             'value' => !empty($value[$key]) ? $value[$key] : [],
             '#required' => $input_values['#required'],
             'visibility_selector' => $input_values['visibility_selector'] . '[' . $key . ']',
-            'actionTypes' => !empty($property['actionTypes']) ? $property['actionTypes'] : [],
             'actions' => !empty($property['actions']) ? $property['actions'] : [],
           ];
           $method = $property['form'];
@@ -131,7 +106,7 @@ trait SchemaCreativeWorkTrait {
         $property_visibility2 = ['visible' => [$selector2 => ['value' => $type]]];
         $property_visibility['visible'] = [$property_visibility['visible'], $property_visibility2['visible']];
 
-        if (empty($property['formKeys'])) {
+        if (empty($property['form'])) {
           $form[$key] = [
             '#type' => 'textfield',
             '#title' => $key,
@@ -150,7 +125,6 @@ trait SchemaCreativeWorkTrait {
             'value' => !empty($value[$key]) ? $value[$key] : [],
             '#required' => $input_values['#required'],
             'visibility_selector' => $input_values['visibility_selector'] . '[' . $key . ']',
-            'actionTypes' => !empty($property['actionTypes']) ? $property['actionTypes'] : [],
             'actions' => !empty($property['actions']) ? $property['actions'] : [],
           ];
           $method = $property['form'];
@@ -210,35 +184,29 @@ trait SchemaCreativeWorkTrait {
         return [
           'isbn' => [
             'class' => 'SchemaNameBase',
-            'formKeys' => '',
             'form' => '',
             'description' => "The ISBN of the book.",
           ],
           'bookEdition' => [
             'class' => 'SchemaNameBase',
-            'formKeys' => '',
             'form' => '',
             'description' => "The edition of the book.",
           ],
           'bookFormat' => [
             'class' => 'SchemaNameBase',
-            'formKeys' => '',
             'form' => '',
             'description' => "The format of the book (comma-separated), i.e. https://schema.org/Hardcover,https://schema.org/Paperback,https://schema.org/EBook",
           ],
           'author' => [
             'class' => 'SchemaPersonOrgBase',
-            'formKeys' => 'personOrgFormKeys',
             'form' => 'personOrgForm',
             'description' => "The author of the work.",
           ],
           'potentialAction' => [
             'class' => 'SchemaActionBase',
-            'formKeys' => 'actionFormKeys',
             'form' => 'actionForm',
             'description' => "Potential action for the work, like a ReadAction.",
-            'actionTypes' => ['ConsumeAction'],
-            'actions' => ['ReadAction'],
+            'actions' => ['Action', 'ConsumeAction', 'ReadAction'],
           ],
         ];
 
@@ -247,7 +215,6 @@ trait SchemaCreativeWorkTrait {
         return [
           'seasonNumber' => [
             'class' => 'SchemaNameBase',
-            'formKeys' => '',
             'form' => '',
             'description' => "The number of the season.",
           ],
@@ -257,31 +224,26 @@ trait SchemaCreativeWorkTrait {
         return [
           '@id' => [
             'class' => 'SchemaNameBase',
-            'formKeys' => '',
             'form' => '',
             'description' => "Globally unique @id of the thing, usually a url, used to to link other properties to this object.",
           ],
           'name' => [
             'class' => 'SchemaNameBase',
-            'formKeys' => '',
             'form' => '',
             'description' => "The name of the work.",
           ],
           'url' => [
             'class' => 'SchemaNameBase',
-            'formKeys' => '',
             'form' => '',
             'description' => "Absolute URL of the canonical Web page for the work.",
           ],
           'sameAs' => [
             'class' => 'SchemaNameBase',
-            'formKeys' => '',
             'form' => '',
             'description' => "Urls and social media links, comma-separated list of absolute URLs.",
           ],
           'datePublished' => [
             'class' => 'SchemaNameBase',
-            'formKeys' => '',
             'form' => '',
             'description' => "Publication date.",
           ],

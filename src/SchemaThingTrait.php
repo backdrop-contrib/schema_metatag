@@ -16,18 +16,6 @@ trait SchemaThingTrait {
   abstract protected function schemaMetatagManager();
 
   /**
-   * Form keys.
-   */
-  public static function thingFormKeys() {
-    return [
-      '@type',
-      '@id',
-      'name',
-      'url',
-    ];
-  }
-
-  /**
    * The form element.
    */
   public function thingForm($input_values) {
@@ -51,7 +39,16 @@ trait SchemaThingTrait {
     $form['pivot'] = $this->pivotForm($value);
     $form['pivot']['#states'] = $visibility;
 
-    $options = static::types();
+    $options = [
+      'Thing',
+      'CreativeWork',
+      'Event',
+      'Intangible',
+      'Organization',
+      'Person',
+      'Place',
+      'Product',
+    ];
     $options = array_combine($options, $options);
     $form['@type'] = [
       '#type' => 'select',
@@ -71,6 +68,7 @@ trait SchemaThingTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t("Globally unique @id of the thing, usually a url, used to to link other properties to this object."),
+      '#states' => $visibility,
     ];
 
     $form['name'] = [
@@ -80,6 +78,7 @@ trait SchemaThingTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t("Name of the thing."),
+      '#states' => $visibility,
     ];
 
     $form['url'] = [
@@ -89,32 +88,10 @@ trait SchemaThingTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t("Absolute URL of the canonical Web page for the thing."),
+      '#states' => $visibility,
     ];
-
-    $keys = static::thingFormKeys();
-    foreach ($keys as $key) {
-      if ($key != '@type') {
-        $form[$key]['#states'] = $visibility;
-      }
-    }
 
     return $form;
-  }
-
-  /**
-   * Thing object types.
-   */
-  public static function types() {
-    return [
-      'Thing',
-      'CreativeWork',
-      'Event',
-      'Intangible',
-      'Organization',
-      'Person',
-      'Place',
-      'Product',
-    ];
   }
 
 }

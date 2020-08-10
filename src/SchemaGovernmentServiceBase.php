@@ -47,7 +47,14 @@ class SchemaGovernmentServiceBase extends SchemaNameBase {
    */
   public static function testValue() {
     $items = [];
-    $keys = self::governmentServiceFormKeys();
+    $keys = [
+      '@type',
+      'name',
+      'url',
+      'serviceType',
+      'provider',
+      'audience',
+    ];
     foreach ($keys as $key) {
       switch ($key) {
         case 'provider':

@@ -8,13 +8,6 @@ class SchemaAddressBase extends SchemaNameBase {
   use SchemaAddressTrait;
 
   /**
-   * The top level keys on this form.
-   */
-  public static function formKeys() {
-    return ['pivot'] + self::postalAddressFormKeys();
-  }
-
-  /**
    * {@inheritdoc}
    */
   public function getForm(array $options = []) {
@@ -45,7 +38,14 @@ class SchemaAddressBase extends SchemaNameBase {
    */
   public static function testValue() {
     $items = [];
-    $keys = self::postalAddressFormKeys();
+    $keys = [
+      '@type',
+      'streetAddress',
+      'addressLocality',
+      'addressRegion',
+      'postalCode',
+      'addressCountry',
+    ];
     foreach ($keys as $key) {
       switch ($key) {
         case '@type':

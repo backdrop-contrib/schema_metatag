@@ -39,12 +39,21 @@ class SchemaCreativeWorkBase extends SchemaNameBase {
    */
   public static function testValue() {
     $items = [];
-    $keys = self::creativeWorkFormKeys('CreativeWork');
+    $keys = [
+      '@type',
+      '@id',
+      'name',
+      'url',
+      'sameAs',
+      'datePublished',
+      'author',
+      'potentialAction',
+    ];
     foreach ($keys as $key) {
       switch ($key) {
 
         case '@type':
-          $items[$key] = 'CreativeWork';
+          $items[$key] = 'Book';
           break;
 
         case 'author':

@@ -39,7 +39,14 @@ class SchemaOpeningHoursSpecificationBase extends SchemaNameBase {
    */
   public static function testValue() {
     $items = [];
-    $keys = self::openingHoursSpecificationFormKeys();
+    $keys = [
+      '@type',
+      'dayOfWeek',
+      'opens',
+      'closes',
+      'validFrom',
+      'validThrough',
+    ];
     foreach ($keys as $key) {
       switch ($key) {
         case '@type':

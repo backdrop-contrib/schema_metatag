@@ -39,7 +39,12 @@ class SchemaThingBase extends SchemaNameBase {
    */
   public static function testValue() {
     $items = [];
-    $keys = self::thingFormKeys();
+    $keys = [
+      '@type',
+      '@id',
+      'name',
+      'url',
+    ];
     foreach ($keys as $key) {
       switch ($key) {
         case '@type':

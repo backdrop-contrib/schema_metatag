@@ -39,7 +39,11 @@ class SchemaMonetaryAmountBase extends SchemaNameBase {
    */
   public static function testValue() {
     $items = [];
-    $keys = self::monetaryAmountFormKeys();
+    $keys = [
+      '@type',
+      'currency',
+      'value',
+    ];
     foreach ($keys as $key) {
       switch ($key) {
         case '@type':

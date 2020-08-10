@@ -39,7 +39,21 @@ class SchemaNutritionInformationBase extends SchemaNameBase {
    */
   public static function testValue() {
     $items = [];
-    $keys = self::nutritionInformationFormKeys();
+    $keys = [
+      '@type',
+      'servingSize',
+      'calories',
+      'carbohydrateContent',
+      'cholesterolContent',
+      'fiberContent',
+      'proteinContent',
+      'sodiumContent',
+      'sugarContent',
+      'fatContent',
+      'saturatedFatContent',
+      'unsaturatedFatContent',
+      'transFatContent',
+    ];
     foreach ($keys as $key) {
       switch ($key) {
         case '@type':

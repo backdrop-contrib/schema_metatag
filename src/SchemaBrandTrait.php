@@ -16,21 +16,6 @@ trait SchemaBrandTrait {
   abstract protected function schemaMetatagManager();
 
   /**
-   * Form keys.
-   */
-  public static function brandFormKeys() {
-    return [
-      '@type',
-      '@id',
-      'name',
-      'description',
-      'url',
-      'sameAs',
-      'logo',
-    ];
-  }
-
-  /**
    * The form elements.
    */
   public function brandForm($input_values) {
@@ -70,6 +55,7 @@ trait SchemaBrandTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t("Globally unique @id of the brand, usually a url, used to to link other properties to this object."),
+      '#states' => $visibility,
     ];
 
     $form['name'] = [
@@ -79,6 +65,7 @@ trait SchemaBrandTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t("Name of the brand."),
+      '#states' => $visibility,
     ];
 
     $form['description'] = [
@@ -88,6 +75,7 @@ trait SchemaBrandTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t("Description of the brand."),
+      '#states' => $visibility,
     ];
 
     $form['url'] = [
@@ -97,6 +85,7 @@ trait SchemaBrandTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t("Absolute URL of the canonical Web page, e.g. the URL of the brand's node or term page or brand website."),
+      '#states' => $visibility,
     ];
 
     $form['sameAs'] = [
@@ -106,11 +95,12 @@ trait SchemaBrandTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t("Comma separated list of URLs for the person's or organization's official social media profile page(s)."),
+      '#states' => $visibility,
     ];
 
     $input_values = [
       'title' => $this->t('Logo'),
-      'description' => $this->t('The URL of a logo that is representative of the brand. Review <a href="@logo" target="_blank">Google guidelines.</a>', [
+      'description' => $this->t('The URL of a logo that is representative of the organization, person, product or service. Review <a href="@logo" target="_blank">Google guidelines.</a>', [
         '@logo' => 'https://developers.google.com/search/docs/data-types/logo',
       ]),
       'value' => !empty($value['logo']) ? $value['logo'] : [],
@@ -120,13 +110,7 @@ trait SchemaBrandTrait {
 
     // Display the logo for brand.
     $form['logo'] = $this->imageForm($input_values);
-
-    $keys = static::brandFormKeys();
-    foreach ($keys as $key) {
-      if ($key != '@type') {
-        $form[$key]['#states'] = $visibility;
-      }
-    }
+    $form['logo']['#states'] = $visibility;
 
     return $form;
   }

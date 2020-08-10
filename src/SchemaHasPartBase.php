@@ -43,7 +43,11 @@ class SchemaHasPartBase extends SchemaNameBase {
    */
   public static function testValue() {
     $items = [];
-    $keys = self::hasPartFormKeys();
+    $keys = [
+      '@type',
+      '@id',
+      'name',
+    ];
     foreach ($keys as $key) {
       switch ($key) {
 

@@ -18,29 +18,13 @@ trait SchemaContactPointTrait {
   abstract protected function schemaMetatagManager();
 
   /**
-   * Form keys.
-   */
-  public static function contactPointFormKeys() {
-    return [
-      '@type',
-      'areaServed',
-      'availableLanguage',
-      'contactType',
-      'contactOption',
-      'email',
-      'faxnumber',
-      'productSupported',
-      'telephone',
-      'url',
-    ];
-  }
-
-  /**
    * Form element.
    *
    * @param array $input_values
+   *   Array of default values.
    *
-   * @return mixed
+   * @return array
+   *   A form element.
    */
   public function contactPointForm(array $input_values) {
 
@@ -94,6 +78,7 @@ trait SchemaContactPointTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t('URL of place, organization'),
+      '#states' => $visibility,
     ];
 
     $form['availableLanguage'] = [
@@ -126,17 +111,6 @@ trait SchemaContactPointTrait {
       '#states' => $visibility,
     ];
 
-    $input_values = [
-      'title' => $this->t('areaServed'),
-      'description' => 'The geographical region served by the number, specified as a AdministrativeArea. If omitted, the number is assumed to be global.',
-      'value' => !empty($value['areaServed']) ? $value['areaServed'] : [],
-      '#required' => $input_values['#required'],
-      'visibility_selector' => $visibility_selector . '[areaServed]',
-    ];
-
-    $form['areaServed'] = $this->placeForm($input_values);
-    $form['areaServed']['#states'] = $visibility;
-
     $form['email'] = [
       '#type' => 'textfield',
       '#title' => $this->t('email'),
@@ -163,9 +137,20 @@ trait SchemaContactPointTrait {
       '#default_value' => !empty($value['productSupported']) ? $value['productSupported'] : '',
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
-      '#states' => $visibility,
       '#description' => $this->t('The product or service this support contact point is related to (such as product support for a particular product line). This can be a specific product or product line (e.g. "iPhone") or a general category of products or services (e.g. "smartphones").'),
+      '#states' => $visibility,
     ];
+
+    $input_values = [
+      'title' => $this->t('areaServed'),
+      'description' => 'The geographical region served by the number, specified as a AdministrativeArea. If omitted, the number is assumed to be global.',
+      'value' => !empty($value['areaServed']) ? $value['areaServed'] : [],
+      '#required' => $input_values['#required'],
+      'visibility_selector' => $visibility_selector . '[areaServed]',
+    ];
+
+    $form['areaServed'] = $this->placeForm($input_values);
+    $form['areaServed']['#states'] = $visibility;
 
     return $form;
 

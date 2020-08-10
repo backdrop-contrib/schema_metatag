@@ -39,7 +39,14 @@ class SchemaAnswerBase extends SchemaNameBase {
    */
   public static function testValue() {
     $items = [];
-    $keys = self::answerFormKeys();
+    $keys = [
+      '@type',
+      'text',
+      'url',
+      'upvoteCount',
+      'dateCreated',
+      'author',
+    ];
     foreach ($keys as $key) {
       switch ($key) {
         case '@type':

@@ -16,15 +16,6 @@ trait SchemaIdReferenceTrait {
   abstract protected function schemaMetatagManager();
 
   /**
-   * Form keys.
-   */
-  public static function idFormKeys() {
-    return [
-      '@id',
-    ];
-  }
-
-  /**
    * The form element.
    */
   public function idForm($input_values) {
@@ -56,13 +47,6 @@ trait SchemaIdReferenceTrait {
       '#required' => $input_values['#required'],
       '#description' => $this->t("Globally unique @id of the related node, usually a url, used to to link other properties to this object."),
     ];
-
-    $keys = static::idFormKeys();
-    foreach ($keys as $key) {
-      if ($key != '@id') {
-        $form[$key]['#states'] = $visibility;
-      }
-    }
 
     return $form;
   }

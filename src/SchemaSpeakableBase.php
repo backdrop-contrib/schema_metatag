@@ -38,7 +38,11 @@ class SchemaSpeakableBase extends SchemaNameBase {
    */
   public static function testValue() {
     $items = [];
-    $keys = self::speakableFormKeys();
+    $keys = [
+      '@type',
+      'xpath',
+      'cssSelector',
+    ];
     foreach ($keys as $key) {
       switch ($key) {
         case 'pivot':

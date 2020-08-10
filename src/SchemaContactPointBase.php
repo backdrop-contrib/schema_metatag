@@ -39,7 +39,18 @@ class SchemaContactPointBase extends SchemaNameBase {
    */
   public static function testValue() {
     $items = [];
-    $keys = self::contactPointFormKeys();
+    $keys = [
+      '@type',
+      'areaServed',
+      'availableLanguage',
+      'contactType',
+      'contactOption',
+      'email',
+      'faxnumber',
+      'productSupported',
+      'telephone',
+      'url',
+    ];
     foreach ($keys as $key) {
       switch ($key) {
         case '@type':

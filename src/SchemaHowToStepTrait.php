@@ -18,19 +18,6 @@ trait SchemaHowToStepTrait {
   abstract protected function schemaMetatagManager();
 
   /**
-   * Form keys.
-   */
-  public static function howToStepFormKeys() {
-    return [
-      '@type',
-      'name',
-      'text',
-      'url',
-      'image',
-    ];
-  }
-
-  /**
    * The form element.
    */
   public function howToStepForm($input_values) {
@@ -75,6 +62,7 @@ trait SchemaHowToStepTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t("RECOMMENDED BY GOOGLE. The word or short phrase summarizing the step (for example, \"Attach wires to post\" or \"Dig\"). Don't use non-descriptive text."),
+      '#states' => $visibility,
     ];
 
     $form['text'] = [
@@ -84,6 +72,7 @@ trait SchemaHowToStepTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t("REQUIRED BY GOOGLE. The full instruction text of this step."),
+      '#states' => $visibility,
     ];
 
     $form['url'] = [
@@ -93,6 +82,7 @@ trait SchemaHowToStepTrait {
       '#maxlength' => 255,
       '#required' => $input_values['#required'],
       '#description' => $this->t('RECOMMENDED BY GOOGLE. A URL that directly links to the step (if one is available). For example, an anchor link fragment.'),
+      '#states' => $visibility,
     ];
 
     // Add nested objects.
@@ -104,14 +94,7 @@ trait SchemaHowToStepTrait {
       'visibility_selector' => $visibility_selector . '[image]',
     ];
     $form['image'] = $this->imageForm($input_values);
-
-    // Add visibility settings to hide fields when the type is empty.
-    $keys = static::howToStepFormKeys();
-    foreach ($keys as $key) {
-      if ($key != '@type') {
-        $form[$key]['#states'] = $visibility;
-      }
-    }
+    $form['image']['#states'] = $visibility;
 
     return $form;
   }

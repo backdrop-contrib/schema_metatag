@@ -38,7 +38,25 @@ class SchemaOfferBase extends SchemaNameBase {
    */
   public static function testValue() {
     $items = [];
-    $keys = self::offerFormKeys();
+    $keys = [
+      '@type',
+      '@id',
+      'price',
+      'priceCurrency',
+      'lowPrice',
+      'highPrice',
+      'offerCount',
+      'url',
+      'availability',
+      'availabilityStarts',
+      'availabilityEnds',
+      'itemCondition',
+      'validFrom',
+      'category',
+      'eligibleRegion',
+      'ineligibleRegion',
+      'priceValidUntil',
+    ];
     foreach ($keys as $key) {
       switch ($key) {
         case '@type':
