@@ -4,3 +4,14 @@
  * @file
  * Metatag integration for the schema_article module.
  */
+
+ /**
+  * Implements hook_autoload_info().
+  */
+  function schema_article_autoload_info() {
+    return array(
+      'SchemaArticleType' => 'src/SchemaArticleType.php',
+      'SchemaMetatagArticleTest' => 'tests/SchemaMetatagArticleTest.test',
+    );
+  }
+  

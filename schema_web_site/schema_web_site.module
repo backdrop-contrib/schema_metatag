@@ -4,3 +4,12 @@
  * @file
  * Metatag integration for the schema_web_site module.
  */
+
+ function schema_web_site_autoload_info() {
+  return array(
+    'SchemaWebSiteType' => 'src/SchemaWebSiteType.php',
+    'SchemaWebSitePotentialAction' => 'src/SchemaWebSitePotentialAction.php',
+    'SchemaMetatagWebSiteTest' => 'tests/SchemaMetatagWebSiteTest.test',
+  );
+ }
+ 

@@ -1,6 +1,15 @@
 <?php
-
 /**
  * @file
  * Contains schema_qa_page.module.
  */
+
+/**
+ * Implements hook_autoload_info().
+ */
+function schema_qa_page_autoload_info() {
+  return array(
+    'SchemaQAPageType' => 'src/SchemaQAPageType.php',
+    'SchemaMetatagQAPageTest' => 'tests/SchemaMetatagQAPageTest.test',    
+  );
+}

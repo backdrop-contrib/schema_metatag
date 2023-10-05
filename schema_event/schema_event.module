@@ -1,6 +1,15 @@
 <?php
-
 /**
  * @file
  * Metatag integration for the schema_event module.
  */
+
+/**
+ * Implements hook_autoload_info().
+ */
+function schema_event_autoload_info() {
+  return array(
+    'SchemaEventType' => 'src/SchemaEventType.php',
+    'SchemaMetatagEventTest' => 'tests/SchemaMetatagEventTest.test',
+  );
+}

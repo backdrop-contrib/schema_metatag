@@ -1,6 +1,15 @@
 <?php
-
 /**
  * @file
  * Contains schema_course.module.
  */
+
+/**
+ * Implements hook_autoload_info().
+ */
+function schema_course_autoload_info() {
+  return array(
+    'SchemaCourseType' => 'src/SchemaCourseType.php',
+    'SchemaMetatagCourseTest' => 'tests/SchemaMetatagCourseTest.test',
+  );
+}

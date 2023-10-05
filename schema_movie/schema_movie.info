@@ -4,8 +4,3 @@ package = SEO
 backdrop = 1.x
 type = module
 dependencies[] = schema_metatag
-
-files[] = src/SchemaMovieType.php
-files[] = src/SchemaMoviePotentialAction.php
-files[] = src/SchemaMovieHasPart.php
-files[] = tests/SchemaMetatagMovieTest.test

@@ -1,7 +1,15 @@
 <?php
-
 /**
  * @file
  * Contains schema_place.module.
  */
 
+/**
+ * Implements hook_autoload_info().
+ */
+function schema_place_autoload_info() {
+  return array(
+    'SchemaPlaceType' => 'src/SchemaPlaceType.php',
+    'SchemaMetatagPlaceTest' => 'tests/SchemaMetatagPlaceTest.test',
+  );
+}

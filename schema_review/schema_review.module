@@ -1,6 +1,15 @@
 <?php
-
 /**
  * @file
  * Contains schema_review.module.
  */
+
+/**
+ * Implements hook_autoload_info().
+ */
+function schema_review_autoload_info() {
+  return array(
+    'SchemaReviewType' => 'src/SchemaReviewType.php',
+    'SchemaMetatagReviewTest' => 'tests/SchemaMetatagReviewTest.test',
+  );
+}

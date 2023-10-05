@@ -4,6 +4,3 @@ package = SEO
 backdrop = 1.x
 type = module
 dependencies[] = schema_metatag
-
-files[] = src/SchemaReviewType.php
-files[] = tests/SchemaMetatagReviewTest.test

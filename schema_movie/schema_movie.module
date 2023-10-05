@@ -1,6 +1,17 @@
 <?php
-
 /**
  * @file
  * Contains schema_movie.module.
  */
+
+/**
+ * Implements hook_autoload_info().
+ */
+function schema_movie_autoload_info() {
+  return array(
+    'SchemaMovieType' => 'src/SchemaMovieType.php',
+    'SchemaMoviePotentialAction' => 'src/SchemaMoviePotentialAction.php',
+    'SchemaMovieHasPart' => 'src/SchemaMovieHasPart.php',
+    'SchemaMetatagMovieTest' => 'tests/SchemaMetatagMovieTest.test',
+  );
+}

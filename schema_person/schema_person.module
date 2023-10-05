@@ -1,6 +1,15 @@
 <?php
-
 /**
  * @file
  * Metatag integration for the schema_person module.
  */
+
+/**
+ * Implements hook_autoload_info().
+ */
+function schema_place_autoload_info() {
+  return array(
+    'SchemaPersonType' => 'src/SchemaPersonType.php',
+    'SchemaMetatagPersonTest' => 'tests/SchemaMetatagPersonTest.test',    
+  );
+}

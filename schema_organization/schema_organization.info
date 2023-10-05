@@ -4,7 +4,3 @@ package = SEO
 backdrop = 1.x
 type = module
 dependencies[] = schema_metatag
-
-files[] = src/SchemaOrganizationType.php
-files[] = src/SchemaOrganizationPotentialAction.php
-files[] = tests/SchemaMetatagOrganizationTest.test

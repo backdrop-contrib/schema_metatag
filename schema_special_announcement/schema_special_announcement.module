@@ -4,3 +4,13 @@
  * @file
  * Contains schema_special_announcement.module.
  */
+
+/**
+ * Implements hook_autoload_info().
+ */
+function schema_special_announcement_autoload_info() {
+  return array(
+    'SchemaSpecialAnnouncementType' => 'src/SchemaSpecialAnnouncementType.php',
+    'SchemaMetatagSpecialAnnouncementTest' => 'tests/SchemaMetatagSpecialAnnouncementTest.test',
+  );
+}

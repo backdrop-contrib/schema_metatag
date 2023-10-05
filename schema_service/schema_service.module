@@ -4,3 +4,13 @@
  * @file
  * Contains schema_service.module.
  */
+
+/**
+ * Implements hook_autoload_info().
+ */
+function schema_service_autoload_info() {
+  return array(
+    'SchemaServiceType' => 'src/SchemaServiceType.php',
+    'SchemaMetatagServiceTest' => 'tests/SchemaMetatagServiceTest.test',
+  );
+}

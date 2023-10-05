@@ -4,3 +4,13 @@
  * @file
  * Metatag integration for the schema_web_page module.
  */
+
+ /**
+ * Implements hook_autoload_info().
+ */
+ function schema_web_page_autoload_info() {
+  return array(
+    'SchemaWebPageType' => 'src/SchemaWebPageType.php',
+    'SchemaMetatagWebPageTest' => 'tests/SchemaMetatagWebPageTest.test',
+  );
+}

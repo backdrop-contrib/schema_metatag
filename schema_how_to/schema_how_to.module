@@ -1,7 +1,15 @@
 <?php
-
 /**
  * @file
  * Contains schema_how_to.module.
  */
 
+/**
+ * Implements hook_autoload_info().
+ */
+function schema_how_to_autoload_info() {
+  return array(
+    'SchemaHowToType' => 'src/SchemaHowToType.php',
+    'SchemaMetatagHowToTest' => 'tests/SchemaMetatagHowToTest.test',
+  );
+}

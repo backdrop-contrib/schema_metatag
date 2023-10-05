@@ -1,6 +1,15 @@
 <?php
-
 /**
  * @file
  * Contains schema_product.module.
  */
+
+/**
+ * Implements hook_autoload_info().
+ */
+function schema_product_autoload_info() {
+  return array(
+    'SchemaProductType' => 'src/SchemaProductType.php',
+    'SchemaMetatagProductTest' => 'tests/SchemaMetatagProductTest.test',    
+  );
+}

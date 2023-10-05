@@ -1,6 +1,15 @@
 <?php
-
 /**
  * @file
  * Contains schema_book.module.
  */
+
+/**
+ * Implements hook_autoload_info().
+ */
+function schema_book_autoload_info() {
+  return array(
+    'SchemaBookType' => 'src/SchemaBookType.php',
+    'SchemaMetatagBookTest' => 'tests/SchemaMetatagBookTest.test',
+  );
+}

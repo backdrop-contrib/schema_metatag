@@ -1,6 +1,15 @@
 <?php
-
 /**
  * @file
  * Contains schema_job_posting.module.
  */
+
+/**
+ * Implements hook_autoload_info().
+ */
+function schema_job_posting_autoload_info() {
+  return array(
+    'SchemaJobPostingType' => 'src/SchemaJobPostingType.php',
+    'SchemaMetatagJobPostingTest' => 'tests/SchemaMetatagJobPostingTest.test',
+  );
+}

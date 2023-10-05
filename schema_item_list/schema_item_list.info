@@ -5,5 +5,3 @@ backdrop = 1.x
 type = module
 dependencies[] = schema_metatag
 dependencies[] = metatag_views
-
-files[] = src/SchemaItemListType.php

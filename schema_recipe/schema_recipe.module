@@ -1,6 +1,15 @@
 <?php
-
 /**
  * @file
  * Contains schema_recipe.module.
  */
+
+/**
+ * Implements hook_autoload_info().
+ */
+function schema__autoload_info() {
+  return array(
+    'SchemaRecipeType' => 'src/SchemaRecipeType.php',
+    'SchemaMetatagRecipeTest' => 'tests/SchemaMetatagRecipeTest.test',
+  );
+}
