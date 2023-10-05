@@ -44,8 +44,7 @@ For more information and to test the results:
 If you are new to structured data you should definitely read the first reference
 carefully.
 
-Known Issues
---------------------------------------------------------------------------------
+### Known Issues
 - Some themes may strip out part of the JSON LD element,
   invalidating the result. Use a different theme.
  
@@ -54,8 +53,7 @@ Known Issues
   the tokens for image dimensions which are missing in Backdrop.
 
 
-Development Instructions
---------------------------------------------------------------------------------
+### Development Instructions
 This module defines Metatag groups that map to Schema.org types, and Metatag
 tags for Schema.org properties, then steps in before the values are rendered as
 metatags, pulls the Schema.org values out of the header created by Metatag, and
@@ -117,14 +115,14 @@ Using this module, the code in the head might end up looking like this:
 </code>
 ```
 
-Credits
---------------------------------------------------------------------------------
-The initial development was by Karen Stevenson [2].
-Port in progress for Backdrop CMS by [argiepiano](https://github.com/argiepiano)
+### Credits
+
+- The initial development was by Karen Stevenson [2].
+- Port in progress for Backdrop CMS by [argiepiano](https://github.com/argiepiano)
 
 
-References
---------------------------------------------------------------------------------
-1: https://schema.org/
-2: https://www.drupal.org/project/imagecache_token
-3: https://www.drupal.org/u/karens
+### References
+1. https://schema.org/
+2. https://www.drupal.org/project/imagecache_token
+3. https://www.drupal.org/u/karens
+
