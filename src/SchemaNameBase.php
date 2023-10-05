@@ -133,7 +133,7 @@ class SchemaNameBase extends BackdropTextMetaTag implements SchemaMetatagTestTag
     $parts = explode('.', $this->info['name']);
     $id = 'schema_metatag_' . $this->info['name'];
     $element = [
-      '#type' => 'html_tag',
+      '#type' => 'head_tag',
       '#tag' => 'meta',
       '#attributes' => [
         'schema_metatag' => TRUE,

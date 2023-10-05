@@ -85,7 +85,7 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
    */
   public static function renderArrayJsonLd($jsonld) {
     return [
-      '#type' => 'html_tag',
+      '#type' => 'head_tag',
       '#tag' => 'script',
       '#value' => $jsonld,
       '#attributes' => ['type' => 'application/ld+json'],

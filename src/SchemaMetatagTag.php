@@ -190,7 +190,7 @@ class SchemaMetaTagTag extends BackdropTextMetaTag {
 
         $parts = explode('.', $this->info['name']);
         $element = $base_element + array(
-          '#type' => 'html_tag',
+          '#type' => 'head_tag',
           '#tag' => 'meta',
           '#id' => $id,
           '#attributes' => [
