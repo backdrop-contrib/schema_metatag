@@ -80,7 +80,7 @@ starting point.
 Examples
 --------------------------------------------------------------------------------
 Using this module, the code in the head might end up looking like this:
-
+```html
 <code>
 <script type="application/ld+json">{
     "@context": "https://schema.org",
@@ -115,7 +115,7 @@ Using this module, the code in the head might end up looking like this:
     ]
 }</script>
 </code>
-
+```
 
 Credits
 --------------------------------------------------------------------------------
