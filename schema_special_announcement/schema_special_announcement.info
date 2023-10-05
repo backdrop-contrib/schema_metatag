@@ -1,7 +1,8 @@
 name = "Schema.org: SpecialAnnouncement"
 description = "Adds Schema.org/SpecialAnnouncement to the JSON LD array."
 package = SEO
-core = 7.x
+backdrop = 1.x
+type = module
 dependencies[] = schema_metatag
 
 files[] = src/SchemaSpecialAnnouncementType.php

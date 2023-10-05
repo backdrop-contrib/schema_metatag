@@ -26,7 +26,7 @@ class SchemaItemListBase extends SchemaNameBase {
         $entity = entity_load($entity_type, [$item->$id]);
         $entity = array_shift($entity);
         $uri = entity_uri($entity_type, $entity);
-        $url = drupal_get_path_alias($uri['path']);
+        $url = backdrop_get_path_alias($uri['path']);
         $absolute = url($url, array('absolute' => TRUE));
         $value[] = [
           '@type' => 'ListItem',
@@ -36,9 +36,9 @@ class SchemaItemListBase extends SchemaNameBase {
         ];
         $key++;
       }
-      foreach ($element['#attached']['drupal_add_html_head'] as $key => $item) {
+      foreach ($element['#attached']['backdrop_add_html_head'] as $key => $item) {
         if ($item[1] == 'schema_metatag_schema_item_list.itemListElement') {
-          $element['#attached']['drupal_add_html_head'][$key][0]['#attributes']['content'] = $value;
+          $element['#attached']['backdrop_add_html_head'][$key][0]['#attributes']['content'] = $value;
         }
       }
     }

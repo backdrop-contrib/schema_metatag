@@ -68,7 +68,7 @@ class SchemaItemListElementViewsBase extends SchemaItemListElementBase {
           $entity = entity_load($entity_type, [$item->$id]);
           $entity = array_shift($entity);
           $uri = entity_uri($entity_type, $entity);
-          $url = drupal_get_path_alias($uri['path']);
+          $url = backdrop_get_path_alias($uri['path']);
           $absolute = url($url, array('absolute' => TRUE));
           $values[$key + 1] = [
             '@id' => $url,

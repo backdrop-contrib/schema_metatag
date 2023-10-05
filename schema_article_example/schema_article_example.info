@@ -1,5 +1,6 @@
 name = "Schema.org Metatag Example"
 description = "Example of how to add more fields to Schema.org."
 package = SEO
-core = 7.x
+backdrop = 1.x
+type = module
 dependencies[] = schema_metatag

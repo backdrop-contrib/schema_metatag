@@ -1,6 +1,6 @@
-Schema.org Metatag
---------------------------------------------------------------------------------
-This project extends Drupal's Metatag module to display structured data as
+# Schema.org Metatag
+
+This project extends Backdrop's Metatag module to display structured data as
 JSON-LD in the head of web pages. Either hard-code properties or identify
 patterns using token replacements. Using the override system in Metatag module
 you can define default structured data values for all content types, override
@@ -9,7 +9,7 @@ everything else on an individual node to provide specific values for that node.
 
 Read more about Schema.org, JSON-LD, and how this module works in an article on
 Lullabot.com:
-Create SEO Juice From JSON LD Structured Data in Drupal
+Create SEO Juice From JSON LD Structured Data in Backdrop
 https://www.lullabot.com/articles/create-seo-juice-by-adding-json-ld-structured-data-to-drupal-8.
 
 Since the Schema.org [1] list is huge, and growing, this module only provides a
@@ -28,16 +28,14 @@ Schema.org/WebPage
 Schema.org/WebSite
 
 
-Requirements
---------------------------------------------------------------------------------
-The Metatag module is required:
-https://www.drupal.org/project/metatag
+## Requirements
 
-This module requires PHP 5.5, it will not work with older versions of PHP.
+The [Metatag](https://backdropcms.org/project/metatag) module is required
+
+This module requires PHP 5.6 or higher. It will not work with older versions of PHP.
 
 
-Validation
---------------------------------------------------------------------------------
+## Validation
 For more information and to test the results:
 - https://developers.google.com/search/docs/guides/intro-structured-data
 - https://schema.org/docs/full.html
@@ -46,20 +44,14 @@ For more information and to test the results:
 If you are new to structured data you should definitely read the first reference
 carefully.
 
-For more information about the Metatag module and how to set it up, see
-https://www.drupal.org/docs/7/modules/metatag.
-
-
 Known Issues
 --------------------------------------------------------------------------------
-- The Drupal 7 Zen and Mothership themes strip out part of the JSON LD element,
-  invalidating the result. Use a different theme or see these issues:
-  https://www.drupal.org/project/zen/issues/2934644
-  https://www.drupal.org/project/mothership/issues/2942341
-
+- Some themes may strip out part of the JSON LD element,
+  invalidating the result. Use a different theme.
+ 
 - To populate the image width and height properties, use the appropriate tokens.
   It is recommended need to use the Imagecache Token module [2], which provides
-  the tokens for image dimensions which are missing in Drupal 7.
+  the tokens for image dimensions which are missing in Backdrop.
 
 
 Development Instructions
@@ -128,6 +120,7 @@ Using this module, the code in the head might end up looking like this:
 Credits
 --------------------------------------------------------------------------------
 The initial development was by Karen Stevenson [2].
+Port in progress for Backdrop CMS by [argiepiano](https://github.com/argiepiano)
 
 
 References

@@ -1,7 +1,8 @@
 name = "Schema.org QAPage"
 description = "Adds Schema.org/QAPage and Schema.org/FAQPage to the JSON LD array. Creates QAPage and FAQPage."
 package = SEO
-core = 7.x
+backdrop = 1.x
+type = module
 dependencies[] = schema_metatag
 
 files[] = src/SchemaQAPageType.php

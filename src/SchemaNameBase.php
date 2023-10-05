@@ -3,12 +3,12 @@
 /**
  * All Schema.org tags should extend this class.
  */
-class SchemaNameBase extends DrupalTextMetaTag implements SchemaMetatagTestTagInterface {
+class SchemaNameBase extends BackdropTextMetaTag implements SchemaMetatagTestTagInterface {
 
   /**
    * The schemaMetatagManager service.
    *
-   * @var \Drupal\schema_metatag\schemaMetatagManager
+   * @var \Backdrop\schema_metatag\schemaMetatagManager
    */
   protected $schemaMetatagManager;
 
@@ -23,7 +23,7 @@ class SchemaNameBase extends DrupalTextMetaTag implements SchemaMetatagTestTagIn
   /**
    * Return the SchemaMetatagManager.
    *
-   * @return \Drupal\schema_metatag\SchemaMetatagManager
+   * @return \Backdrop\schema_metatag\SchemaMetatagManager
    *   The Schema Metatag Manager service.
    */
   protected function schemaMetatagManager() {
@@ -143,7 +143,7 @@ class SchemaNameBase extends DrupalTextMetaTag implements SchemaMetatagTestTagIn
       ],
     ];
     return array(
-      '#attached' => array('drupal_add_html_head' => array(array($element, $id))),
+      '#attached' => array('backdrop_add_html_head' => array(array($element, $id))),
     );
   }
 

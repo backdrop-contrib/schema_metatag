@@ -3,7 +3,7 @@
 /**
  * Interface SchemaMetatagManagerInterface.
  *
- * @package Drupal\schema_metatag
+ * @package Backdrop\schema_metatag
  */
 interface SchemaMetatagManagerInterface {
 

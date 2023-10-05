@@ -2,7 +2,7 @@
 
 /**
  * @file
- * A generic substitution for Drupal 8 Random utility.
+ * A generic substitution for Backdrop 8 Random utility.
  */
 
 /**
@@ -34,7 +34,7 @@ class Random {
 /**
  * Class SchemaMetatagManager.
  *
- * @package Drupal\schema_metatag
+ * @package Backdrop\schema_metatag
  */
 class SchemaMetatagManager implements SchemaMetatagManagerInterface {
 
@@ -109,7 +109,7 @@ class SchemaMetatagManager implements SchemaMetatagManagerInterface {
       // Encode the Schema.org metatags as JSON LD.
       if ($jsonld = self::encodeJsonld($items)) {
         // Pass back the rendered result.
-        return drupal_render(self::renderArrayJsonLd($jsonld));
+        return backdrop_render(self::renderArrayJsonLd($jsonld));
       }
     }
   }

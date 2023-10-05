@@ -8,7 +8,7 @@
 /**
  * Text-based meta tag controller.
  */
-class SchemaMetaTagTag extends DrupalTextMetaTag {
+class SchemaMetaTagTag extends BackdropTextMetaTag {
 
   /**
    * {@inheritdoc}
@@ -59,7 +59,7 @@ class SchemaMetaTagTag extends DrupalTextMetaTag {
 
     // Support for dependencies, using Form API's #states system.
     // @see metatag.api.php.
-    // @see https://api.drupal.org/drupal_process_states
+    // @see https://api.drupal.org/backdrop_process_states
     if (!empty($this->info['dependencies'])) {
       foreach ($this->info['dependencies'] as $specs) {
         $form['value']['#states']['visible'][':input[name*="[' . $specs['dependency'] . '][' . $specs['attribute'] . ']"]'] = array(
@@ -79,7 +79,7 @@ class SchemaMetaTagTag extends DrupalTextMetaTag {
       'token data' => array(),
       // Remove any remaining token after the string is parsed.
       'clear' => TRUE,
-      'sanitize' => variable_get('metatag_token_sanitize', FALSE),
+      'sanitize' => config_get('metatag_settings', 'token_sanitize'),
       'raw' => FALSE,
     );
 
@@ -88,7 +88,7 @@ class SchemaMetaTagTag extends DrupalTextMetaTag {
     if (empty($options['raw'])) {
       // Give other modules the opportunity to use hook_metatag_pattern_alter()
       // to modify defined token patterns and values before replacement.
-      drupal_alter('metatag_pattern', $value, $options['token data'], $this->info['name']);
+      backdrop_alter('metatag_pattern', $value, $options['token data'], $this->info['name']);
       $value = token_replace($value, $options['token data'], $options);
     }
 
@@ -207,7 +207,7 @@ class SchemaMetaTagTag extends DrupalTextMetaTag {
     }
     if (!empty($elements)) {
       return array(
-        '#attached' => array('drupal_add_html_head' => $elements),
+        '#attached' => array('backdrop_add_html_head' => $elements),
       );
     }
   }

@@ -5,7 +5,7 @@
  *
  * Methods that provide test values for SchemaNameBase and its derivatives.
  *
- * @package Drupal\schema_metatag
+ * @package Backdrop\schema_metatag
  */
 interface SchemaMetatagTestTagInterface {
 

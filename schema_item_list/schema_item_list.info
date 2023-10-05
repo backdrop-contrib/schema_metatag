@@ -1,7 +1,8 @@
 name = "Schema.org: ItemList"
 description = "Adds Schema.org/ItemList to the JSON LD array, for Views."
 package = SEO
-core = 7.x
+backdrop = 1.x
+type = module
 dependencies[] = schema_metatag
 dependencies[] = metatag_views
 

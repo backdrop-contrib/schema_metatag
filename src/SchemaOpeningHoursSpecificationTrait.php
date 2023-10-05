@@ -11,7 +11,7 @@ trait SchemaOpeningHoursSpecificationTrait {
   /**
    * Return the SchemaMetatagManager.
    *
-   * @return \Drupal\schema_metatag\SchemaMetatagManager
+   * @return \Backdrop\schema_metatag\SchemaMetatagManager
    *   The Schema Metatag Manager service.
    */
   abstract protected function schemaMetatagManager();

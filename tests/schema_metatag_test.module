@@ -1,15 +1,6 @@
 <?php
 
 /**
- * Implements hook_ctools_plugin_api().
- */
-function schema_metatag_test_ctools_plugin_api($owner, $api) {
-  if ($owner == 'metatag' && $api == 'metatag') {
-    return array('version' => 1);
-  }
-}
-
-/**
  * Implements hook_menu().
  *
  * Provides simple pages to test against.
@@ -62,7 +53,7 @@ function schema_metatag_test_user_page_callback() {
   if (isset($user->name)) {
     $username = $user->name;
   }
-  drupal_set_title('Hello ' . $username);
+  backdrop_set_title('Hello ' . $username);
 
   return t('Test page for user tokens.');
 }

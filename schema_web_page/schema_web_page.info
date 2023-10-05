@@ -1,7 +1,8 @@
 name = "Schema.org: WebPage"
 description = "Adds Schema.org/WebPage to the JSON LD array. Creates WebPage, ItemPage, AboutPage, CheckoutPage, ContactPage, CollectionPage, ProfilePage, SearchResultsPage."
 package = SEO
-core = 7.x
+backdrop = 1.x
+type = module
 dependencies[] = schema_metatag
 
 files[] = src/SchemaWebPageType.php

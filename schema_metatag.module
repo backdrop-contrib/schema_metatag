@@ -5,13 +5,82 @@
  * Primary hook implementations for Schema.org Metatag.
  */
 
-/**
- * Implements hook_ctools_plugin_api().
- */
-function schema_metatag_ctools_plugin_api($owner, $api) {
-  if ($owner == 'metatag' && $api == 'metatag') {
-    return array('version' => 1);
-  }
+ /**
+  * Implements hook_autoload_info().
+  */
+function schema_metatag_autoload_info() {
+  return array(
+    'SchemaMetatagManager' => 'src/SchemaMetatagManager.php',
+    'SchemaMetatagManagerInterface' => 'src/SchemaMetatagManagerInterface.php',
+    'SchemaMetatagTestTagInterface' => 'src/SchemaMetatagTestTagInterface.php',
+    'SchemaNameBase' => 'src/SchemaNameBase.php',
+    'SchemaAddressBase' => 'src/SchemaAddressBase.php',
+    'SchemaAddressTrait' => 'src/SchemaAddressTrait.php',
+    'SchemaDateBase' => 'src/SchemaDateBase.php',
+    'SchemaDurationBase' => 'src/SchemaDurationBase.php',
+    'SchemaIsAccessibleForFreeBase' => 'src/SchemaIsAccessibleForFreeBase.php',
+    'SchemaItemListElementBase' => 'src/SchemaItemListElementBase.php',
+    'SchemaItemListElementBreadcrumbBase' => 'src/SchemaItemListElementBreadcrumbBase.php',
+    'SchemaItemListElementViewsBase' => 'src/SchemaItemListElementViewsBase.php',
+    'SchemaPersonOrgBase' => 'src/SchemaPersonOrgBase.php',
+    'SchemaPersonOrgTrait' => 'src/SchemaPersonOrgTrait.php',
+    'SchemaGeoBase' => 'src/SchemaGeoBase.php',
+    'SchemaGeoTrait' => 'src/SchemaGeoTrait.php',
+    'SchemaIdReferenceBase' => 'src/SchemaIdReferenceBase.php',
+    'SchemaIdReferenceTrait' => 'src/SchemaIdReferenceTrait.php',
+    'SchemaImageBase' => 'src/SchemaImageBase.php',
+    'SchemaImageTrait' => 'src/SchemaImageTrait.php',
+    'SchemaOfferBase' => 'src/SchemaOfferBase.php',
+    'SchemaOfferTrait' => 'src/SchemaOfferTrait.php',
+    'SchemaRatingBase' => 'src/SchemaRatingBase.php',
+    'SchemaRatingTrait' => 'src/SchemaRatingTrait.php',
+    'SchemaReviewBase' => 'src/SchemaReviewBase.php',
+    'SchemaReviewTrait' => 'src/SchemaReviewTrait.php',
+    'SchemaPivotTrait' => 'src/SchemaPivotTrait.php',
+    'SchemaUrlBase' => 'src/SchemaUrlBase.php',
+    'SchemaMainEntityOfPageBase' => 'src/SchemaMainEntityOfPageBase.php',
+    'SchemaTypeBase' => 'src/SchemaTypeBase.php',
+    'SchemaItemListBase' => 'src/SchemaItemListBase.php',
+    'SchemaActionBase' => 'src/SchemaActionBase.php',
+    'SchemaActionTrait' => 'src/SchemaActionTrait.php',
+    'SchemaCountryBase' => 'src/SchemaCountryBase.php',
+    'SchemaCountryTrait' => 'src/SchemaCountryTrait.php',
+    'SchemaCreativeWorkBase' => 'src/SchemaCreativeWorkBase.php',
+    'SchemaCreativeWorkTrait' => 'src/SchemaCreativeWorkTrait.php',
+    'SchemaEntryPointBase' => 'src/SchemaEntryPointBase.php',
+    'SchemaEntryPointTrait' => 'src/SchemaEntryPointTrait.php',
+    'SchemaEventBase' => 'src/SchemaEventBase.php',
+    'SchemaEventTrait' => 'src/SchemaEventTrait.php',
+    'SchemaGovernmentServiceBase' => 'src/SchemaGovernmentServiceBase.php',
+    'SchemaGovernmentServiceTrait' => 'src/SchemaGovernmentServiceTrait.php',
+    'SchemaHasPartBase' => 'src/SchemaHasPartBase.php',
+    'SchemaHasPartTrait' => 'src/SchemaHasPartTrait.php',
+    'SchemaNutritionInformationBase' => 'src/SchemaNutritionInformationBase.php',
+    'SchemaNutritionInformationTrait' => 'src/SchemaNutritionInformationTrait.php',
+    'SchemaOpeningHoursSpecificationBase' => 'src/SchemaOpeningHoursSpecificationBase.php',
+    'SchemaOpeningHoursSpecificationTrait' => 'src/SchemaOpeningHoursSpecificationTrait.php',
+    'SchemaPlaceBase' => 'src/SchemaPlaceBase.php',
+    'SchemaPlaceTrait' => 'src/SchemaPlaceTrait.php',
+    'SchemaProgramMembershipBase' => 'src/SchemaProgramMembershipBase.php',
+    'SchemaProgramMembershipTrait' => 'src/SchemaProgramMembershipTrait.php',
+    'SchemaSpeakableBase' => 'src/SchemaSpeakableBase.php',
+    'SchemaSpeakableTrait' => 'src/SchemaSpeakableTrait.php',
+    'SchemaThingBase' => 'src/SchemaThingBase.php',
+    'SchemaThingTrait' => 'src/SchemaThingTrait.php',
+    'SchemaTrueFalseBase' => 'src/SchemaTrueFalseBase.php',
+    'SchemaMonetaryAmountBase' => 'src/SchemaMonetaryAmountBase.php',
+    'SchemaMonetaryAmountTrait' => 'src/SchemaMonetaryAmountTrait.php',
+    'SchemaContactPointBase' => 'src/SchemaContactPointBase.php',
+    'SchemaContactPointTrait' => 'src/SchemaContactPointTrait.php',
+    'SchemaBrandBase' => 'src/SchemaBrandBase.php',
+    'SchemaBrandTrait' => 'src/SchemaBrandTrait.php',
+    'SchemaHowToStepBase' => 'src/SchemaHowToStepBase.php',
+    'SchemaHowToStepTrait' => 'src/SchemaHowToStepTrait.php',
+    'SchemaQuestionBase' => 'src/SchemaQuestionBase.php',
+    'SchemaQuestionTrait' => 'src/SchemaQuestionTrait.php',
+    'SchemaAnswerBase' => 'src/SchemaAnswerBase.php',
+    'SchemaAnswerTrait' => 'src/SchemaAnswerTrait.php',
+  );
 }
 
 /**

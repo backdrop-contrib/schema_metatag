@@ -55,12 +55,12 @@ class SchemaItemListElementBreadcrumbBase extends SchemaItemListElementBase {
   public static function getItems($input_value) {
     $values = [];
     if (!empty($input_value)) {
-      $breadcrumbs = drupal_get_breadcrumb();
+      $breadcrumbs = backdrop_get_breadcrumb();
 
-      // Methods on DrupalDefaultMetaTag can't be called statically, and we
+      // Methods on BackdropDefaultMetaTag can't be called statically, and we
       // can't use $this from a static method, so create an empty instance.
       $data = $info = [];
-      $processor = new DrupalDefaultMetaTag($data, $info);
+      $processor = new BackdropDefaultMetaTag($data, $info);
       $key = 1;
       foreach ($breadcrumbs as $item) {
         $text = strip_tags($item);

@@ -1,6 +1,7 @@
 name = Schema Meta Tag Test
 description = Helper module for testing schema_metatag.module.
-core = 7.x
+backdrop = 1.x
+type = module
 
 ; Don't show this on the modules admin page.
 hidden = TRUE
