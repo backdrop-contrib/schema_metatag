@@ -1,5 +1,8 @@
 # Schema.org Metatag
 
+IMPORTANT: This module will not work properly until [issue 110 in Metatag](https://github.com/backdrop-contrib/metatag/issues/110) is fixed.
+You may want to manually apply the patch in that issue, then test this module.
+
 This project extends Backdrop's Metatag module to display structured data as
 JSON-LD in the head of web pages. Either hard-code properties or identify
 patterns using token replacements. Using the override system in Metatag module
