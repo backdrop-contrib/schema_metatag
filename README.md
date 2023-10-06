@@ -121,8 +121,12 @@ Using this module, the code in the head might end up looking like this:
 ### Credits
 
 - The initial development was by Karen Stevenson [2].
-- Port in progress for Backdrop CMS by [argiepiano](https://github.com/argiepiano)
+- Ported for Backdrop CMS by [argiepiano](https://github.com/argiepiano)
 
+### Current maintainers for the Backdrop version
+
+- [argiepiano](https://github.com/argiepiano)
+- Seeking co-maintainers
 
 ### References
 1. https://schema.org/
