@@ -131,7 +131,6 @@ class SchemaNameBase extends BackdropTextMetaTag implements SchemaMetatagTestTag
       $this->processItem($value);
     }
     $parts = explode('.', $this->info['name']);
-    $id = 'schema_metatag_' . $this->info['name'];
     $element = [
       '#type' => 'head_tag',
       '#tag' => 'meta',
@@ -142,9 +141,7 @@ class SchemaNameBase extends BackdropTextMetaTag implements SchemaMetatagTestTag
         'content' => static::outputValue($value),
       ],
     ];
-    return array(
-      '#attached' => array('backdrop_add_html_head' => array(array($element, $id))),
-    );
+    return $element;
   }
 
   /**
