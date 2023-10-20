@@ -123,7 +123,7 @@ class SchemaNameBase extends BackdropTextMetaTag implements SchemaMetatagTestTag
       array_walk_recursive($value, 'static::processItem');
 
       // Recursively pivot each branch of the array.
-      $value = static::pivotItem($value);
+      $value = $this->pivotItem($value);
 
     }
     // Process a simple string.
@@ -150,7 +150,7 @@ class SchemaNameBase extends BackdropTextMetaTag implements SchemaMetatagTestTag
   /**
    * {@inheritdoc}
    */
-  public static function pivotItem($array) {
+  public function pivotItem($array) {
     // See if any nested items need to be pivoted.
     // If pivot is set to 0, it would have been removed as an empty value.
     if (array_key_exists('pivot', $array)) {
@@ -159,7 +159,7 @@ class SchemaNameBase extends BackdropTextMetaTag implements SchemaMetatagTestTag
     }
     foreach ($array as $key => &$value) {
       if (is_array($value)) {
-        $value = static::pivotItem($value);
+        $value = $this->pivotItem($value);
       }
     }
     return $array;
