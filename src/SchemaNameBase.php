@@ -148,7 +148,13 @@ class SchemaNameBase extends BackdropTextMetaTag implements SchemaMetatagTestTag
   }
 
   /**
-   * {@inheritdoc}
+   * Pivot nested values.
+   *
+   * @param array $array
+   *   The array with nested values to pivot.
+   *
+   * @return array
+   *   The pivoted array.
    */
   public function pivotItem($array) {
     // See if any nested items need to be pivoted.
