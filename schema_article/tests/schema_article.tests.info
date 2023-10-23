@@ -1,0 +1,5 @@
+[SchemaMetatagArticleTest]
+name = Schema Metatag: Article
+description = Test the schema_article meta tags.
+group = Schema Metatag
+file = SchemaMetatagArticleTest.test

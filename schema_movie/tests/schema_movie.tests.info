@@ -1,0 +1,5 @@
+[SchemaMetatagMovieTest]
+name = Schema Metatag: Movie
+description = Test the schema_movie meta tags.
+group = Schema Metatag
+file = SchemaMetatagMovieTest.test

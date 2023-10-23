@@ -8,24 +8,6 @@ class SchemaMetatagJobPostingTest extends SchemaMetatagTagsTestBase {
   /**
    * {@inheritdoc}
    */
-  public static function getInfo() {
-    return array(
-      'name' => 'Schema Metatag: JobPosting',
-      'description' => 'Test the schema_job_posting meta tags.',
-      'group' => 'Schema Metatag',
-      'dependencies' => [
-        'ctools',
-        'token',
-        'metatag',
-        'schema_metatag',
-        'schema_job_posting',
-      ],
-    );
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function setUp(array $modules = array()) {
     $modules[] = 'schema_job_posting';
     parent::setUp($modules);

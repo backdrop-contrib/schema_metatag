@@ -1,0 +1,5 @@
+[SchemaMetatagPlaceTest]
+name = Schema Metatag: Place
+description = Test the schema_place meta tags.
+group = Schema Metatag
+file = SchemaMetatagPlaceTest.test

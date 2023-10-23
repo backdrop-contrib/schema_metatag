@@ -8,24 +8,6 @@ class SchemaMetatagSpecialAnnouncementTest extends SchemaMetatagTagsTestBase {
   /**
    * {@inheritdoc}
    */
-  public static function getInfo() {
-    return array(
-      'name' => 'Schema Metatag: Special Announcement',
-      'description' => 'Test the schema_special_announcement meta tags.',
-      'group' => 'Schema Metatag',
-      'dependencies' => [
-        'ctools',
-        'token',
-        'metatag',
-        'schema_metatag',
-        'schema_special_announcement',
-      ],
-    );
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function setUp(array $modules = array()) {
     $modules[] = 'schema_special_announcement';
     parent::setUp($modules);

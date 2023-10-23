@@ -1,0 +1,5 @@
+[SchemaMetatagCourseTest]
+name = Schema Metatag: Course
+description = Test the schema_course meta tags.
+group = Schema Metatag
+file = SchemaMetatagCourseTest.test

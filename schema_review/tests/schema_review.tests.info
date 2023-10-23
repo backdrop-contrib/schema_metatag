@@ -1,0 +1,5 @@
+[SchemaMetatagReviewTest]
+name = Schema Metatag: Review
+description = Test the schema_review meta tags.
+group = Schema Metatag
+file = SchemaMetatagReviewTest.test

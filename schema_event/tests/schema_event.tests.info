@@ -1,0 +1,5 @@
+[SchemaMetatagEventTest]
+name = Schema Metatag: Event
+description = Test the schema_event meta tags.
+group = Schema Metatag
+file = SchemaMetatagEventTest.test

@@ -8,24 +8,6 @@ class SchemaMetatagImageObjectTest extends SchemaMetatagTagsTestBase {
   /**
    * {@inheritdoc}
    */
-  public static function getInfo() {
-    return array(
-      'name' => 'Schema Metatag: ImageObject',
-      'description' => 'Test the schema_image_object meta tags.',
-      'group' => 'Schema Metatag',
-      'dependencies' => [
-        'ctools',
-        'token',
-        'metatag',
-        'schema_metatag',
-        'schema_image_object',
-      ],
-    );
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function setUp(array $modules = array()) {
     $modules[] = 'schema_image_object';
     parent::setUp($modules);

@@ -1,0 +1,5 @@
+[SchemaMetatagQAPageTest]
+name = Schema Metatag: QAPage/FAQPage
+description = Test the schema_qa_page meta tags.
+group = Schema Metatag
+file = SchemaMetatagQAPageTest.test

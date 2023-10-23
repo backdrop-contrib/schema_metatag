@@ -1,0 +1,5 @@
+[SchemaMetatagWebPageTest]
+name = Schema Metatag: WebPage
+description = Test the schema_web_page meta tags.
+group = Schema Metatag
+file = SchemaMetatagWebPageTest.test

@@ -8,24 +8,6 @@ class SchemaMetatagMovieTest extends SchemaMetatagTagsTestBase {
   /**
    * {@inheritdoc}
    */
-  public static function getInfo() {
-    return array(
-      'name' => 'Schema Metatag: Movie',
-      'description' => 'Test the schema_movie meta tags.',
-      'group' => 'Schema Metatag',
-      'dependencies' => [
-        'ctools',
-        'token',
-        'metatag',
-        'schema_metatag',
-        'schema_movie',
-      ],
-    );
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function setUp(array $modules = array()) {
     $modules[] = 'schema_movie';
     parent::setUp($modules);

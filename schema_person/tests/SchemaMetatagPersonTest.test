@@ -8,24 +8,6 @@ class SchemaMetatagPersonTest extends SchemaMetatagTagsTestBase {
   /**
    * {@inheritdoc}
    */
-  public static function getInfo() {
-    return array(
-      'name' => 'Schema Metatag: Person',
-      'description' => 'Test the schema_person meta tags.',
-      'group' => 'Schema Metatag',
-      'dependencies' => [
-        'ctools',
-        'token',
-        'metatag',
-        'schema_metatag',
-        'schema_person',
-      ],
-    );
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function setUp(array $modules = array()) {
     $modules[] = 'schema_person';
     parent::setUp($modules);

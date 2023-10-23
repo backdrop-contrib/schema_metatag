@@ -1,0 +1,5 @@
+[SchemaMetatagImageObjectTest]
+name = Schema Metatag: ImageObject
+description = Test the schema_image_object meta tags.
+group = Schema Metatag
+file = SchemaMetatagImageObjectTest.test

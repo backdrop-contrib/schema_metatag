@@ -50,7 +50,7 @@ abstract class SchemaMetatagTagsTestBase extends SchemaMetatagTestHelper {
 
     // Create an admin user that can manage meta tags.
     $account = $this->createAdminUser();
-    $this->drupalLogin($account);
+    $this->backdropLogin($account);
 
   }
 
@@ -63,12 +63,15 @@ abstract class SchemaMetatagTagsTestBase extends SchemaMetatagTestHelper {
       return;
     }
 
+    // Enable needed schema metatags. 
+    $this->enableMetaTags();
+
     $paths = $this->getPaths();
     foreach ($paths as $item) {
       list($config_path, $rendered_path, $save_message) = $item;
 
       // Load the config page.
-      $this->drupalGet($config_path);
+      $this->backdropGet($config_path);
       $this->assertResponse(200);
       $this->assertTrue('//input[@type="submit"][@value="Save"]');
 
@@ -134,16 +137,16 @@ abstract class SchemaMetatagTagsTestBase extends SchemaMetatagTestHelper {
           }
         }
       }
-      $this->drupalPost(NULL, $form_values, 'Save');
+      $this->backdropPost(NULL, $form_values, 'Save');
       $this->assertText($save_message);
 
       // Load the config page to confirm the settings got saved.
-      $this->drupalGet($config_path);
+      $this->backdropGet($config_path);
       $this->assertResponse(200);
-      cache_clear_all();
+      cache_flush('cache_metatag');
 
       // Load the rendered page to see if the JSON-LD is displayed correctly.
-      $this->drupalGet($rendered_path);
+      $this->backdropGet($rendered_path);
       $this->assertResponse(200);
 
       // Make sure JSON-LD is present and can be decoded.
@@ -160,7 +163,7 @@ abstract class SchemaMetatagTagsTestBase extends SchemaMetatagTestHelper {
       }
     }
 
-    $this->drupalLogout();
+    $this->backdropLogout();
   }
 
   /**
@@ -187,11 +190,24 @@ abstract class SchemaMetatagTagsTestBase extends SchemaMetatagTestHelper {
   public function getPaths() {
     return [
       [
-        'admin/config/search/metatags/config/global',
+        // 'admin/config/search/metatags/config/global',
+        'admin/config/metadata/metatags/config/global',
         'moosqueakoinkmeow',
         'The meta tag defaults for Global have been saved.',
       ],
     ];
   }
 
+  /**
+   * Enables the schema metatags needed for test.
+   */
+  public function enableMetaTags() {
+    $edit = array();
+    $prefix = 'enabled_tags[';
+    $suffix = ']';
+    foreach ($this->schemaTags as $tag_name => $class) {
+      $edit[$prefix . $tag_name . $suffix] = TRUE;
+    }
+    $this->backdropPost('admin/config/metadata/metatags/settings', $edit, 'Save configuration');
+  }
 }

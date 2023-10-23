@@ -1,0 +1,5 @@
+[SchemaMetatagJobPostingTest]
+name = Schema Metatag: JobPosting
+description = Test the schema_job_posting meta tags.
+group = Schema Metatag
+file = SchemaMetatagJobPostingTest.test

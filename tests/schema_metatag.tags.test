@@ -5,23 +5,23 @@
  */
 class SchemaMetatagTagsTest extends SchemaMetatagTagsTestBase {
 
-  /**
-   * {@inheritdoc}
-   */
-  public static function getInfo() {
-    return array(
-      'name' => 'Schema Metatag: Base tags',
-      'description' => 'Test the base meta tags.',
-      'group' => 'Schema Metatag',
-      'dependencies' => [
-        'ctools',
-        'token',
-        'metatag',
-        'schema_metatag',
-        'schema_article',
-      ],
-    );
-  }
+  // /**
+  //  * {@inheritdoc}
+  //  */
+  // public static function getInfo() {
+  //   return array(
+  //     'name' => 'Schema Metatag: Base tags',
+  //     'description' => 'Test the base meta tags.',
+  //     'group' => 'Schema Metatag',
+  //     'dependencies' => [
+  //       'ctools',
+  //       'token',
+  //       'metatag',
+  //       'schema_metatag',
+  //       'schema_article',
+  //     ],
+  //   );
+  // }
 
   /**
    * {@inheritdoc}

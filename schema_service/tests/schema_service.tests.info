@@ -1,0 +1,5 @@
+[SchemaMetatagServiceTest]
+name = Schema Metatag: Service
+description = Test the schema_service meta tags.
+group = Schema Metatag
+file = SchemaMetatagServiceTest.test
