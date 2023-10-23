@@ -1,0 +1,5 @@
+[SchemaMetatagSpecialAnnouncementTest]
+name = Schema Metatag: Special Announcement
+description = Test the schema_special_announcement meta tags.
+group = Schema Metatag
+file = SchemaMetatagSpecialAnnouncementTest.test

@@ -1,0 +1,5 @@
+[SchemaMetatagRecipeTest]
+name = Schema Metatag: Recipe
+description = Test the schema_recipe meta tags.
+group = Schema Metatag
+file = SchemaMetatagRecipeTest.test

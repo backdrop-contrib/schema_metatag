@@ -1,0 +1,5 @@
+[SchemaMetatagVideoObjectTest]
+name = Schema Metatag: VideoObject
+description = Test the schema_video_object meta tags.
+group = Schema Metatag
+file = SchemaMetatagVideoObjectTest.test

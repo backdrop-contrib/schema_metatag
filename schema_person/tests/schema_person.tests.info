@@ -1,0 +1,5 @@
+[SchemaMetatagPersonTest]
+name = Schema Metatag: Person
+description = Test the schema_person meta tags.
+group = Schema Metatag
+file = SchemaMetatagPersonTest.test

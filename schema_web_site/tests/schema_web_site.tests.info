@@ -1,0 +1,5 @@
+[SchemaMetatagWebSiteTest]
+name = Schema Metatag: WebSite
+description = Test the schema_web_site meta tags.
+group = Schema Metatag
+file = SchemaMetatagWebSiteTest.test

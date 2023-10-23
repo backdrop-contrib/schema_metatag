@@ -80,6 +80,10 @@ function schema_metatag_autoload_info() {
     'SchemaQuestionTrait' => 'src/SchemaQuestionTrait.php',
     'SchemaAnswerBase' => 'src/SchemaAnswerBase.php',
     'SchemaAnswerTrait' => 'src/SchemaAnswerTrait.php',
+    // Tests.
+    'SchemaMetatagTagsTestBase' => 'tests/schema_metatag.base.test',
+    'SchemaMetatagTestHelper' => 'tests/schema_metatag.helper.test',
+    'SchemaMetatagArticleTest' => 'schema_article/tests/SchemaMetatagArticleTest.test',
   );
 }
 

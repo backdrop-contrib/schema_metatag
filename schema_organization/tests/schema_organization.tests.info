@@ -1,0 +1,5 @@
+[SchemaMetatagOrganizationTest]
+name = Schema Metatag: Organization
+description = Test the schema_organization meta tags.
+group = Schema Metatag
+file = SchemaMetatagOrganizationTest.test

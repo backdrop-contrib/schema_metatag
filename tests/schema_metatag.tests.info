@@ -1,0 +1,5 @@
+[SchemaMetatagTagsTest]
+name = Schema Metatag: Base tags
+description = Test the base meta meta tags.
+group = Schema Metatag
+file = schema_metatag.tags.test

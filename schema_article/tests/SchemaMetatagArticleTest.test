@@ -4,25 +4,6 @@
  * Tests that each of the Metatag schema_article tags work correctly.
  */
 class SchemaMetatagArticleTest extends SchemaMetatagTagsTestBase {
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function getInfo() {
-    return array(
-      'name' => 'Schema Metatag: Article',
-      'description' => 'Test the schema_article meta tags.',
-      'group' => 'Schema Metatag',
-      'dependencies' => [
-        'ctools',
-        'token',
-        'metatag',
-        'schema_metatag',
-        'schema_article',
-      ],
-    );
-  }
-
   /**
    * {@inheritdoc}
    */

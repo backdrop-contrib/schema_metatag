@@ -1,0 +1,5 @@
+[SchemaMetatagHowToTest]
+name = Schema Metatag: HowTo
+description = Test the schema_how_to meta tags.
+group = Schema Metatag
+file = SchemaMetatagHowToTest.test

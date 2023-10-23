@@ -12,15 +12,14 @@ abstract class SchemaMetatagTestHelper extends BackdropWebTestCase {
    */
   protected $adminUser;
 
+  protected $profile = 'minimal';
+
   /**
    * {@inheritdoc}
    */
   function setUp(array $modules = array()) {
 
-    // Requirements.
-    $modules[] = 'ctools';
-    $modules[] = 'token';
-
+    $modules[] = 'node';
     // Metatag modules. Only enable the main module, submodules will be tested
     // separately.
     $modules[] = 'metatag';
@@ -37,7 +36,7 @@ abstract class SchemaMetatagTestHelper extends BackdropWebTestCase {
    */
   function createContentType($machine_name, $label) {
     // Create a content type.
-    $content_type = $this->drupalCreateContentType(array(
+    $content_type = $this->backdropCreateContentType(array(
       'type' => $machine_name,
       'name' => $label,
     ));
@@ -68,11 +67,11 @@ abstract class SchemaMetatagTestHelper extends BackdropWebTestCase {
     );
 
     // Reset the static variable used to identify permissions, otherwise it's
-    // possible the permissions check in drupalCreateUser will fail.
+    // possible the permissions check in backdropCreateUser will fail.
     $this->checkPermissions(array(), TRUE);
     cache_clear_all();
 
-    return $this->drupalCreateUser(array_merge($permissions, $extra_permissions));
+    return $this->backdropCreateUser(array_merge($permissions, $extra_permissions));
   }
 
   /**
@@ -91,11 +90,11 @@ abstract class SchemaMetatagTestHelper extends BackdropWebTestCase {
     );
 
     // Reset the static variable used to identify permissions, otherwise it's
-    // possible the permissions check in drupalCreateUser will fail.
+    // possible the permissions check in backdropCreateUser will fail.
     $this->checkPermissions(array(), TRUE);
     cache_clear_all();
 
-    return $this->drupalCreateUser(array_merge($permissions, $extra_permissions));
+    return $this->backdropCreateUser(array_merge($permissions, $extra_permissions));
   }
 
   /**
