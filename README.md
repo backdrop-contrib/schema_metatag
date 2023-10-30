@@ -7,7 +7,7 @@ you can define default structured data values for all content types, override
 the global content defaults for a particular content type, or even override
 everything else on an individual node to provide specific values for that node.
 
-Read more about Schema.org, JSON-LD, and how this module works in an article on
+Read more about [Schema.org](https://schema.org/), JSON-LD, and how this module works in an article on
 Lullabot.com:
 Create SEO Juice From JSON LD Structured Data in Backdrop
 https://www.lullabot.com/articles/create-seo-juice-by-adding-json-ld-structured-data-to-drupal-8.
@@ -49,9 +49,6 @@ carefully.
   invalidating the result. Use a different theme.
  
 - To populate the image width and height properties, use the appropriate tokens.
-  It is recommended need to use the Imagecache Token module [2], which provides
-  the tokens for image dimensions which are missing in Backdrop.
-
 
 ### Development Instructions
 This module defines Metatag groups that map to Schema.org types, and Metatag
@@ -117,16 +114,10 @@ Using this module, the code in the head might end up looking like this:
 
 ### Credits
 
-- The initial development was by Karen Stevenson [2].
+- The initial development was by [Karen Stevenson](https://www.drupal.org/u/karens).
 - Ported for Backdrop CMS by [argiepiano](https://github.com/argiepiano)
 
 ### Current maintainers for the Backdrop version
 
 - [argiepiano](https://github.com/argiepiano)
 - Seeking co-maintainers
-
-### References
-1. https://schema.org/
-2. https://www.drupal.org/project/imagecache_token
-3. https://www.drupal.org/u/karens
-
