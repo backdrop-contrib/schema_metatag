@@ -12,7 +12,7 @@ Lullabot.com:
 Create SEO Juice From JSON LD Structured Data in Backdrop
 https://www.lullabot.com/articles/create-seo-juice-by-adding-json-ld-structured-data-to-drupal-8.
 
-Since the Schema.org [1] list is huge, and growing, this module only provides a
+Since the Schema.org list is huge, and growing, this module only provides a
 small subset of those values, but it is designed to be extensible. Several types
 are included which can be copied to add new types (groups) with any number of
 their own properties.
