@@ -19,14 +19,52 @@ their own properties.
 
 The module creates the following Schema.org object types:
 
-Schema.org/Article
-Schema.org/Event
-Schema.org/ItemList (for Views)
-Schema.org/Organization
-Schema.org/VideoObject
-Schema.org/WebPage
-Schema.org/WebSite
+- Article
+- Book
+- Course
+- Event
+- FAQPage
+- HowTo
+- ImageObject
+- ItemList (for Views)
+- JobPosting
+- Movie
+- Organization
+- Person
+- Place
+- Product
+- QAPage
+- Recipe
+- Review
+- Service
+- SpecialAnnouncement
+- TVEpisode
+- TVSeason
+- TVSeries
+- VideoObject
+- WebPage
+- WebSite
 
+Many second-level properties are available to use on the above, including:
+
+- Action
+- Address
+- Answer
+- Brand
+- BreadcrumbList
+- Country
+- HowToStep
+- MonetaryAmount
+- NutritionInformation
+- Offer
+- OpeningHoursSpecification
+- Organization
+- Person
+- Place
+- ProgramMembership
+- Question
+- Rating
+- Review
 
 ## Requirements
 
