@@ -52,7 +52,7 @@ class SchemaTypeBase extends SchemaNameBase {
    */
   public static function types() {
     $labels = static::labels();
-    return array_map('static::removePrefix', $labels);
+    return array_map(static::class . '::removePrefix', $labels);
   }
 
   /**

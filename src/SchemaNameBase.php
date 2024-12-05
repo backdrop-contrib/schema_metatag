@@ -3,6 +3,7 @@
 /**
  * All Schema.org tags should extend this class.
  */
+#[AllowDynamicProperties]
 class SchemaNameBase extends BackdropTextMetaTag implements SchemaMetatagTestTagInterface {
 
   /**
@@ -120,7 +121,7 @@ class SchemaNameBase extends BackdropTextMetaTag implements SchemaMetatagTestTag
 
       // If the item is an array of values,
       // walk the array and process the values.
-      array_walk_recursive($value, 'static::processItem');
+      array_walk_recursive($value, array($this, 'processItem'));
 
       // Recursively pivot each branch of the array.
       $value = $this->pivotItem($value);
