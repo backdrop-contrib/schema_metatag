@@ -36,7 +36,7 @@ jobs:
           repository: backdrop/backdrop
 
       - name: Checkout Metatag
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           repository: backdrop-contrib/metatag
           path: modules/metatag
